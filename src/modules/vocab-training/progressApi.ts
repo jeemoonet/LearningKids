@@ -36,16 +36,6 @@ export async function markGroupCompletedOnServer(tierId: string, groupIndex: num
   })
 }
 
-export async function saveTierGroups(
-  tierId: string,
-  groups: Array<{ groupIndex: number; wordIds: number[] }>,
-): Promise<void> {
-  await apiFetch('/progress/tier-groups', {
-    method: 'POST',
-    body: JSON.stringify({ tierId, groups }),
-  })
-}
-
 function readLegacyProgressItems(): VocabProgress[] {
   const rawDb = localStorage.getItem(LEGACY_DB_KEY)
   if (rawDb) {

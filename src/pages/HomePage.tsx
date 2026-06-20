@@ -20,8 +20,8 @@ export function HomePage({
   return (
     <div className="home-page">
       <header className="home-header">
-        <h1>初中数学练习</h1>
-        <p>选择一个模块开始练习</p>
+        <h1>LearningKids</h1>
+        <p>少儿互动学习平台，选择一个模块开始练习</p>
         <div className="home-auth-bar">
           {authLoading ? (
             <span className="home-auth-status">登录状态加载中…</span>

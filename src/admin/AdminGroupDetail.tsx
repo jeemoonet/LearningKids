@@ -7,16 +7,10 @@ import { GroupCoverBadge } from '../components/GroupCoverPreviewModal'
 import { hasGroupCover } from '../modules/vocab-training/groupCover'
 import { splitPassageByWords } from '../modules/vocab-training/passageAudio'
 import { getThreeExamples, formatVerbTensesLine, getNounPlural, getVerbTenses } from '../modules/vocab-training/wordForms'
-import type { VocabPos, VocabTier, VocabTierId, VocabWord } from '../modules/vocab-training/types'
+import type { VocabPos, VocabTier, VocabWord } from '../modules/vocab-training/types'
 import { getWordDisplay } from '../modules/vocab-training/wordFrequency'
 import { getSpeakableWord } from '../modules/vocab-training/VocabWordHeadline'
 import { WordFrequencyTag } from '../modules/vocab-training/WordFrequencyTag'
-
-const TIER_SHORT_LABEL: Record<VocabTierId, string> = {
-  beginner: '初级',
-  intermediate: '中级',
-  advanced: '高级',
-}
 
 function PassageBlock({ text, words }: { text: string; words: string[] }) {
   const segments = useMemo(() => splitPassageByWords(text, words), [text, words])
@@ -39,7 +33,6 @@ function PassageBlock({ text, words }: { text: string; words: string[] }) {
 
 interface AdminWordDetailRowProps {
   word: VocabWord
-  tierLabel: string
   regenerating: boolean
   onEdit: (word: VocabWord) => void
   onRegenerate: (word: VocabWord) => void
@@ -47,7 +40,6 @@ interface AdminWordDetailRowProps {
 
 function AdminWordDetailRow({
   word,
-  tierLabel,
   regenerating,
   onEdit,
   onRegenerate,
@@ -75,10 +67,6 @@ function AdminWordDetailRow({
         <div className="admin-word-detail-field">
           <dt>音标</dt>
           <dd>{word.phonetic || '暂无'}</dd>
-        </div>
-        <div className="admin-word-detail-field">
-          <dt>管理层</dt>
-          <dd>{tierLabel}</dd>
         </div>
         <div className="admin-word-detail-field">
           <dt>词性</dt>
@@ -163,7 +151,6 @@ export function AdminGroupDetail({
     [words],
   )
   const hasPassage = passageEn.trim().length > 0
-  const tierLabel = TIER_SHORT_LABEL[tier.id] ?? tier.label
 
   const syncGroupWords = (nextWords: VocabWord[]) => {
     setWords(nextWords)
@@ -325,7 +312,6 @@ export function AdminGroupDetail({
               <AdminWordDetailRow
                 key={word.id}
                 word={word}
-                tierLabel={tierLabel}
                 regenerating={regeneratingWordId === word.id}
                 onEdit={(item) => {
                   setEditError('')

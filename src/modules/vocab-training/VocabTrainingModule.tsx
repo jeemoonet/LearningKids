@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ModuleHeader } from '../../components/ModuleHeader'
 import { buildQuizOptions, fetchGroups, fetchTiers, fetchWordsByUserGroup } from './db'
-import { importLocalProgressIfNeeded, saveTierGroups } from './progressApi'
+import { importLocalProgressIfNeeded } from './progressApi'
 import {
   applyQuizResult,
   groupProgressSummary,
@@ -22,7 +22,6 @@ import { VocabGroupListPage } from './VocabGroupListPage'
 import { VocabMemoryCard } from './VocabMemoryCard'
 import { VocabQuizCard } from './VocabQuizCard'
 import { VocabQuizResult } from './VocabQuizResult'
-import { VocabTierInitPage } from './VocabTierInitPage'
 import { VocabWordbookPage } from './VocabWordbookPage'
 import { addToWordbook, fetchWordbookIds, removeFromWordbook } from './wordbookApi'
 
@@ -43,9 +42,6 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
   const [quizLoading, setQuizLoading] = useState(false)
   const [progressMap, setProgressMap] = useState<Map<string, VocabProgress>>(() => new Map())
   const [completedGroups, setCompletedGroups] = useState<Set<string>>(() => new Set())
-  const [hasGameGroups, setHasGameGroups] = useState(false)
-  const [initTier, setInitTier] = useState<VocabTier | null>(null)
-  const [customSessionTitle, setCustomSessionTitle] = useState<string | null>(null)
   const [quizTierId, setQuizTierId] = useState<VocabTierId | null>(null)
   const [quizGroupIndex, setQuizGroupIndex] = useState(0)
   const [quizSessionStart, setQuizSessionStart] = useState<number | null>(null)
@@ -125,9 +121,8 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
   useEffect(() => {
     if (!selectedTierId) return
     fetchGroups(selectedTierId)
-      .then(({ groups: groupData, hasGameGroups: gameGroupsEnabled }) => {
+      .then(({ groups: groupData }) => {
         setGroups(groupData)
-        setHasGameGroups(gameGroupsEnabled)
       })
       .catch((err: Error) => setError(err.message))
   }, [selectedTierId])
@@ -162,51 +157,16 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
     }
 
     setError('')
-    setCustomSessionTitle(null)
     setSelectedGroup(group)
     const groupWords = await fetchWordsByUserGroup(group.tierId, group.groupIndex)
     resetSession(groupWords, group.tierId, group.groupIndex)
   }
 
-  const openInitTier = (tier: VocabTier) => {
-    setError('')
-    setInitTier(tier)
-  }
-
-  const openCustomStudy = (studyWordList: VocabWord[], title: string) => {
-    setError('')
-    setInitTier(null)
-    setSelectedGroup(null)
-    setCustomSessionTitle(title)
-    resetSession(studyWordList, studyWordList[0]?.tierId ?? 'beginner', 0)
-  }
-
-  const handleFinishInit = async (chunks: VocabWord[][]) => {
-    if (!initTier) return
-    const payload = chunks.map((chunk, index) => ({
-      groupIndex: index + 1,
-      wordIds: chunk.map((word) => word.id),
-    }))
-    await saveTierGroups(initTier.id, payload)
-    const { groups: nextGroups, hasGameGroups: gameGroupsEnabled } = await fetchGroups(initTier.id)
-    setGroups(nextGroups)
-    setHasGameGroups(gameGroupsEnabled)
-    setInitTier(null)
-  }
-
-  const handleInitProgressChange = (progress: VocabProgress) => {
-    setProgressMap((current) => {
-      const next = new Map(current)
-      next.set(progress.word, progress)
-      return next
-    })
-  }
+  const currentWord = words[cardIndex]
 
   const persistProgress = (progress: VocabProgress) => {
     void saveSingleProgress(progress).catch((err: Error) => setError(err.message))
   }
-
-  const currentWord = words[cardIndex]
 
   const updateProgress = (
     targetWord: VocabWord,
@@ -335,7 +295,6 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
 
   const handleBackToGroups = () => {
     setSelectedGroup(null)
-    setCustomSessionTitle(null)
     setQuizTierId(null)
     setQuizGroupIndex(0)
     setWords([])
@@ -346,10 +305,6 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
     setQuizElapsedSec(0)
     setQuizSessionComplete(false)
     setClozeVariantIndex(0)
-  }
-
-  const handleBackFromInit = () => {
-    setInitTier(null)
   }
 
   const handleOpenWordbook = () => {
@@ -389,19 +344,6 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
     return <VocabWordbookPage onBack={handleBackFromWordbook} />
   }
 
-  if (initTier) {
-    return (
-      <VocabTierInitPage
-        tier={initTier}
-        progressMap={progressMap}
-        onBack={handleBackFromInit}
-        onProgressChange={handleInitProgressChange}
-        onStudyChunk={openCustomStudy}
-        onFinishInit={handleFinishInit}
-      />
-    )
-  }
-
   if (loading) {
     return (
       <div className="module module-vocab-training">
@@ -424,7 +366,7 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
     )
   }
 
-  if (!selectedGroup && !customSessionTitle) {
+  if (!selectedGroup) {
     return (
       <VocabGroupListPage
         tiers={tiers}
@@ -432,11 +374,9 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
         onTierChange={setSelectedTierId}
         groups={groups}
         completedGroups={completedGroups}
-        hasGameGroups={hasGameGroups}
         error={error}
         onBack={onBack}
         onOpenGroup={openGroup}
-        onOpenInit={openInitTier}
         onOpenWordbook={handleOpenWordbook}
         wordbookCount={wordbookIds.size}
       />
@@ -444,13 +384,11 @@ export function VocabTrainingModule({ onBack }: VocabTrainingModuleProps) {
   }
 
   const currentProgress = currentWord ? ensureProgress(progressMap, currentWord.word) : null
-  const sessionTierId = selectedGroup?.tierId ?? quizTierId ?? words[0]?.tierId ?? 'beginner'
-  const sessionGroupIndex = selectedGroup?.groupIndex ?? quizGroupIndex
+  const sessionTierId = selectedGroup.tierId
+  const sessionGroupIndex = selectedGroup.groupIndex
 
-  const sessionTitle = selectedGroup?.title ?? customSessionTitle ?? ''
-  const sessionDescription = selectedGroup
-    ? `${tierLabel(selectedGroup.tierId)} · 完成度 ${summary.percent}%`
-    : `待学分组 · 完成度 ${summary.percent}%`
+  const sessionTitle = selectedGroup.title
+  const sessionDescription = `${tierLabel(selectedGroup.tierId)} · 完成度 ${summary.percent}%`
 
   return (
     <div className="module module-vocab-training">

@@ -1,13 +1,15 @@
 ﻿{
   "$schema": "https://jeemoo.net/schemas/jeemookit-project-v1.json",
-  "name": "初中数学",
+  "name": "LearningKids",
   "deploy": {
-    "serverId": "JeemooApps",
-    "remotePath": "/home/ubuntu/junior-math",
-    "service": "",
-    "port": null,
-    "domain": "",
-    "updateScript": ""
+    "serverId": "OpenClaw1Y",
+    "remotePath": "/home/ubuntu/LearningKids",
+    "staticPath": "/var/www/fx",
+    "service": "learningkids-api",
+    "port": 3006,
+    "apiPort": 3001,
+    "domain": "43.128.98.192",
+    "updateScript": "sudo systemctl restart learningkids-api && sudo rsync -a --delete dist-staging/ /var/www/fx/"
   },
   "permissions": {
     "agentCanDeploy": false,

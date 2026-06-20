@@ -6,8 +6,11 @@
 
 | 字段 | 值 |
 |------|-----|
-| serverId | JeemooApps |
-| remotePath | /home/ubuntu/junior-math |
+| name | LearningKids |
+| serverId | OpenClaw1Y |
+| remotePath | /home/ubuntu/LearningKids |
+| staticPath | /var/www/fx |
+| service | learningkids-api |
 | 构建产物 | `dist/` |
 
 服务器详情见用户目录 `~/.jeemoo/servers.json`，SSH 密钥存放于 `~/.jeemoo/keys/`。
@@ -16,7 +19,7 @@
 
 - Node.js 18+
 - PowerShell 5.1+（Windows）
-- `~/.jeemoo/keys/JeemooApps.pem` 已就位
+- `~/.jeemoo/keys/` 中对应服务器的 SSH 密钥已就位
 
 ## 3. 部署步骤
 
@@ -37,12 +40,16 @@
 
 ```powershell
 npm run build
-scp -i $env:USERPROFILE\.jeemoo\keys\JeemooApps.pem -r dist/* ubuntu@81.70.187.19:/home/ubuntu/junior-math/
+# 将 dist/* 上传到 project.json 中配置的 remotePath
 ```
 
-## 4. Nginx 配置（待办）
+## 4. 服务端更新
 
-部署后需在服务器配置 Nginx 反向代理或静态文件服务，将域名指向 `remotePath`。
+部署静态资源后，可按 `project.json` 中的 `updateScript` 重启 API 并同步到 `staticPath`：
+
+```bash
+sudo systemctl restart learningkids-api && sudo rsync -a --delete dist-staging/ /var/www/fx/
+```
 
 ## 5. 回滚
 

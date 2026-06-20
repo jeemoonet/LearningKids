@@ -16,11 +16,9 @@ interface VocabGroupListPageProps {
   onTierChange: (tierId: VocabTierId) => void
   groups: VocabGroup[]
   completedGroups: Set<string>
-  hasGameGroups: boolean
   error: string
   onBack: () => void
   onOpenGroup: (group: VocabGroup) => void
-  onOpenInit: (tier: VocabTier) => void
   onOpenWordbook: () => void
   wordbookCount: number
 }
@@ -31,11 +29,9 @@ export function VocabGroupListPage({
   onTierChange,
   groups,
   completedGroups,
-  hasGameGroups,
   error,
   onBack,
   onOpenGroup,
-  onOpenInit,
   onOpenWordbook,
   wordbookCount,
 }: VocabGroupListPageProps) {
@@ -51,8 +47,6 @@ export function VocabGroupListPage({
     if (sceneFilter === '全部') return groups
     return groups.filter((group) => parseGroupTheme(group.title) === sceneFilter)
   }, [groups, sceneFilter])
-
-  const selectedTier = tiers.find((tier) => tier.id === selectedTierId)
 
   return (
     <div className="module module-vocab-training">
@@ -93,20 +87,6 @@ export function VocabGroupListPage({
         <div className="vocab-home-center">
         {error && <p className="vocab-inline-error">{error}</p>}
 
-        {selectedTierId && !hasGameGroups && (
-          <div className="vocab-init-entry vocab-init-entry--inline">
-            <button
-              type="button"
-              className="vocab-init-entry-button vocab-init-entry-button--compact"
-              onClick={() => {
-                if (selectedTier) onOpenInit(selectedTier)
-              }}
-            >
-              快速初始化本大组
-            </button>
-          </div>
-        )}
-
         {sceneThemes.length > 0 && (
           <div className="vocab-scene-filters" role="tablist" aria-label="场景筛选">
             <button
@@ -136,9 +116,7 @@ export function VocabGroupListPage({
         <div className="vocab-group-grid vocab-group-grid--five">
           {groups.length === 0 && (
             <p className="vocab-status vocab-status--full">
-              {hasGameGroups
-                ? '本大组暂无可用小组，请联系管理员在后台配置分组。'
-                : '本大组尚未分组，请先点击「快速初始化本大组」标记熟悉度并保存分组。'}
+              本大组暂无可用小组，请联系管理员在后台配置分组。
             </p>
           )}
           {filteredGroups.length === 0 && groups.length > 0 && (

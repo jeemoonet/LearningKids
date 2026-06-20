@@ -1,17 +1,18 @@
-# 初中数学 — 文档索引
+# LearningKids — 文档索引
 
 > Agent 协作规则见根目录 [AGENT.md](../AGENT.md)。
 
 ## 项目简介
 
-初中数学互动练习 Web 应用，当前包含：
+LearningKids 少儿互动学习 Web 应用，当前包含：
 
 | 模块 | 说明 |
 |------|------|
 | 函数图像 | 输入一次函数、二次函数或反比例函数，在同一坐标系中观察图像 |
 | 正负训练营 | 闪卡练习正负号变换：去括号、变号与系数分配 |
+| 单词记忆 | 场景配图、主题短文、闪卡与测验，支持登录同步进度 |
 
-技术栈：React 19 + TypeScript + Vite 8 + mathjs。
+技术栈：React 19 + TypeScript + Vite 8 + Hono + SQLite。
 
 ## 文档目录
 
