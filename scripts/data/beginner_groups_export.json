@@ -1,0 +1,3892 @@
+[
+  {
+    "group_index": 11,
+    "title": "家庭1-房间",
+    "words": [
+      {
+        "group_index": 11,
+        "title": "家庭1-房间",
+        "id": 21,
+        "word": "bed",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 11,
+        "title": "家庭1-房间",
+        "id": 340,
+        "word": "daily",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 11,
+        "title": "家庭1-房间",
+        "id": 435,
+        "word": "clock",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 11,
+        "title": "家庭1-房间",
+        "id": 341,
+        "word": "dish",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 11,
+        "title": "家庭1-房间",
+        "id": 360,
+        "word": "day",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 11,
+        "title": "家庭1-房间",
+        "id": 63,
+        "word": "birth",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 12,
+    "title": "家庭2-三餐",
+    "words": [
+      {
+        "group_index": 12,
+        "title": "家庭2-三餐",
+        "id": 123,
+        "word": "chair",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 12,
+        "title": "家庭2-三餐",
+        "id": 163,
+        "word": "boy",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 12,
+        "title": "家庭2-三餐",
+        "id": 64,
+        "word": "dad",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 12,
+        "title": "家庭2-三餐",
+        "id": 6,
+        "word": "house",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 12,
+        "title": "家庭2-三餐",
+        "id": 66,
+        "word": "end",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 12,
+        "title": "家庭2-三餐",
+        "id": 146,
+        "word": "kid",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 13,
+    "title": "家庭3-家人",
+    "words": [
+      {
+        "group_index": 13,
+        "title": "家庭3-家人",
+        "id": 421,
+        "word": "glass",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 13,
+        "title": "家庭3-家人",
+        "id": 167,
+        "word": "dear",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 13,
+        "title": "家庭3-家人",
+        "id": 28,
+        "word": "girl",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 13,
+        "title": "家庭3-家人",
+        "id": 68,
+        "word": "home",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 13,
+        "title": "家庭3-家人",
+        "id": 249,
+        "word": "hall",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 13,
+        "title": "家庭3-家人",
+        "id": 172,
+        "word": "hour",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 14,
+    "title": "家庭4-家务",
+    "words": [
+      {
+        "group_index": 14,
+        "title": "家庭4-家务",
+        "id": 427,
+        "word": "room",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 14,
+        "title": "家庭4-家务",
+        "id": 94,
+        "word": "mom",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 14,
+        "title": "家庭4-家务",
+        "id": 134,
+        "word": "rice",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 14,
+        "title": "家庭4-家务",
+        "id": 314,
+        "word": "night",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 14,
+        "title": "家庭4-家务",
+        "id": 429,
+        "word": "soup",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 15,
+    "title": "家庭5-客厅",
+    "words": [
+      {
+        "group_index": 15,
+        "title": "家庭5-客厅",
+        "id": 55,
+        "word": "son",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 15,
+        "title": "家庭5-客厅",
+        "id": 175,
+        "word": "meal",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 15,
+        "title": "家庭5-客厅",
+        "id": 216,
+        "word": "tidy",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 15,
+        "title": "家庭5-客厅",
+        "id": 394,
+        "word": "sleep",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 15,
+        "title": "家庭5-客厅",
+        "id": 238,
+        "word": "table",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 16,
+    "title": "家庭6-厨房",
+    "words": [
+      {
+        "group_index": 16,
+        "title": "家庭6-厨房",
+        "id": 259,
+        "word": "uncle",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 16,
+        "title": "家庭6-厨房",
+        "id": 339,
+        "word": "yard",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 16,
+        "title": "家庭6-厨房",
+        "id": 377,
+        "word": "wall",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 16,
+        "title": "家庭6-厨房",
+        "id": 60,
+        "word": "week",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 16,
+        "title": "家庭6-厨房",
+        "id": 140,
+        "word": "tea",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 17,
+    "title": "家庭7-卧室",
+    "words": [
+      {
+        "group_index": 17,
+        "title": "家庭7-卧室",
+        "id": 103,
+        "word": "born",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 17,
+        "title": "家庭7-卧室",
+        "id": 46,
+        "word": "eat",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 17,
+        "title": "家庭7-卧室",
+        "id": 267,
+        "word": "cook",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 17,
+        "title": "家庭7-卧室",
+        "id": 173,
+        "word": "live",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 17,
+        "title": "家庭7-卧室",
+        "id": 174,
+        "word": "lock",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 18,
+    "title": "个人1-外貌",
+    "words": [
+      {
+        "group_index": 18,
+        "title": "个人1-外貌",
+        "id": 81,
+        "word": "brave",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 18,
+        "title": "个人1-外貌",
+        "id": 261,
+        "word": "anger",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 18,
+        "title": "个人1-外貌",
+        "id": 321,
+        "word": "age",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 18,
+        "title": "个人1-外貌",
+        "id": 359,
+        "word": "cause",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 18,
+        "title": "个人1-外貌",
+        "id": 202,
+        "word": "bad",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 18,
+        "title": "个人1-外貌",
+        "id": 43,
+        "word": "blue",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 19,
+    "title": "个人2-性格",
+    "words": [
+      {
+        "group_index": 19,
+        "title": "个人2-性格",
+        "id": 263,
+        "word": "blind",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 19,
+        "title": "个人2-性格",
+        "id": 283,
+        "word": "body",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 19,
+        "title": "个人2-性格",
+        "id": 104,
+        "word": "brown",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 19,
+        "title": "个人2-性格",
+        "id": 224,
+        "word": "color",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 19,
+        "title": "个人2-性格",
+        "id": 244,
+        "word": "crazy",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 19,
+        "title": "个人2-性格",
+        "id": 343,
+        "word": "ease",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 20,
+    "title": "个人3-感受",
+    "words": [
+      {
+        "group_index": 20,
+        "title": "个人3-感受",
+        "id": 125,
+        "word": "hand",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 20,
+        "title": "个人3-感受",
+        "id": 145,
+        "word": "foot",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 20,
+        "title": "个人3-感受",
+        "id": 165,
+        "word": "cheek",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 20,
+        "title": "个人3-感受",
+        "id": 401,
+        "word": "hate",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 20,
+        "title": "个人3-感受",
+        "id": 439,
+        "word": "harm",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 20,
+        "title": "个人3-感受",
+        "id": 266,
+        "word": "care",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 21,
+    "title": "个人4-健康",
+    "words": [
+      {
+        "group_index": 21,
+        "title": "个人4-健康",
+        "id": 306,
+        "word": "eager",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 21,
+        "title": "个人4-健康",
+        "id": 402,
+        "word": "hello",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 21,
+        "title": "个人4-健康",
+        "id": 440,
+        "word": "heavy",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 21,
+        "title": "个人4-健康",
+        "id": 47,
+        "word": "main",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 21,
+        "title": "个人4-健康",
+        "id": 107,
+        "word": "eye",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 21,
+        "title": "个人4-健康",
+        "id": 287,
+        "word": "dream",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 22,
+    "title": "个人5-身体",
+    "words": [
+      {
+        "group_index": 22,
+        "title": "个人5-身体",
+        "id": 8,
+        "word": "lover",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 22,
+        "title": "个人5-身体",
+        "id": 88,
+        "word": "hero",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 22,
+        "title": "个人5-身体",
+        "id": 188,
+        "word": "few",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 22,
+        "title": "个人5-身体",
+        "id": 328,
+        "word": "head",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 22,
+        "title": "个人5-身体",
+        "id": 9,
+        "word": "luck",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 22,
+        "title": "个人5-身体",
+        "id": 109,
+        "word": "goal",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 23,
+    "title": "个人6-情绪",
+    "words": [
+      {
+        "group_index": 23,
+        "title": "个人6-情绪",
+        "id": 269,
+        "word": "face",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 23,
+        "title": "个人6-情绪",
+        "id": 309,
+        "word": "glad",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 23,
+        "title": "个人6-情绪",
+        "id": 10,
+        "word": "man",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 23,
+        "title": "个人6-情绪",
+        "id": 30,
+        "word": "hope",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 23,
+        "title": "个人6-情绪",
+        "id": 150,
+        "word": "poor",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 23,
+        "title": "个人6-情绪",
+        "id": 210,
+        "word": "grey",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 24,
+    "title": "个人7-心理",
+    "words": [
+      {
+        "group_index": 24,
+        "title": "个人7-心理",
+        "id": 310,
+        "word": "kind",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 24,
+        "title": "个人7-心理",
+        "id": 330,
+        "word": "love",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 24,
+        "title": "个人7-心理",
+        "id": 406,
+        "word": "noise",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 24,
+        "title": "个人7-心理",
+        "id": 444,
+        "word": "loss",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 24,
+        "title": "个人7-心理",
+        "id": 31,
+        "word": "host",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 24,
+        "title": "个人7-心理",
+        "id": 151,
+        "word": "rich",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 25,
+    "title": "个人8-状态",
+    "words": [
+      {
+        "group_index": 25,
+        "title": "个人8-状态",
+        "id": 291,
+        "word": "high",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 25,
+        "title": "个人8-状态",
+        "id": 481,
+        "word": "old",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 25,
+        "title": "个人8-状态",
+        "id": 112,
+        "word": "leg",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 25,
+        "title": "个人8-状态",
+        "id": 332,
+        "word": "pride",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 25,
+        "title": "个人8-状态",
+        "id": 73,
+        "word": "nose",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 25,
+        "title": "个人8-状态",
+        "id": 153,
+        "word": "scare",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 26,
+    "title": "个人9-外貌",
+    "words": [
+      {
+        "group_index": 26,
+        "title": "个人9-外貌",
+        "id": 390,
+        "word": "risk",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 26,
+        "title": "个人9-外貌",
+        "id": 484,
+        "word": "self",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 26,
+        "title": "个人9-外貌",
+        "id": 95,
+        "word": "nice",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 26,
+        "title": "个人9-外貌",
+        "id": 235,
+        "word": "quick",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 26,
+        "title": "个人9-外貌",
+        "id": 315,
+        "word": "same",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 26,
+        "title": "个人9-外貌",
+        "id": 36,
+        "word": "much",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 27,
+    "title": "个人10-性格",
+    "words": [
+      {
+        "group_index": 27,
+        "title": "个人10-性格",
+        "id": 76,
+        "word": "pain",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 27,
+        "title": "个人10-性格",
+        "id": 116,
+        "word": "oh",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 27,
+        "title": "个人10-性格",
+        "id": 336,
+        "word": "sound",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 27,
+        "title": "个人10-性格",
+        "id": 355,
+        "word": "style",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 27,
+        "title": "个人10-性格",
+        "id": 117,
+        "word": "okay",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 27,
+        "title": "个人10-性格",
+        "id": 157,
+        "word": "top",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 28,
+    "title": "个人11-感受",
+    "words": [
+      {
+        "group_index": 28,
+        "title": "个人11-感受",
+        "id": 177,
+        "word": "sigh",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 28,
+        "title": "个人11-感受",
+        "id": 277,
+        "word": "rough",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 28,
+        "title": "个人11-感受",
+        "id": 375,
+        "word": "tooth",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 28,
+        "title": "个人11-感受",
+        "id": 469,
+        "word": "truth",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 28,
+        "title": "个人11-感受",
+        "id": 138,
+        "word": "smell",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 29,
+    "title": "个人12-健康",
+    "words": [
+      {
+        "group_index": 29,
+        "title": "个人12-健康",
+        "id": 198,
+        "word": "size",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 29,
+        "title": "个人12-健康",
+        "id": 218,
+        "word": "true",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 29,
+        "title": "个人12-健康",
+        "id": 488,
+        "word": "worth",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 29,
+        "title": "个人12-健康",
+        "id": 80,
+        "word": "wipe",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 29,
+        "title": "个人12-健康",
+        "id": 100,
+        "word": "tall",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 30,
+    "title": "个人13-身体",
+    "words": [
+      {
+        "group_index": 30,
+        "title": "个人13-身体",
+        "id": 302,
+        "word": "big",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 30,
+        "title": "个人13-身体",
+        "id": 147,
+        "word": "lazy",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 30,
+        "title": "个人13-身体",
+        "id": 152,
+        "word": "sad",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 30,
+        "title": "个人13-身体",
+        "id": 237,
+        "word": "rude",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 30,
+        "title": "个人13-身体",
+        "id": 220,
+        "word": "weak",
+        "pos": "other",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 31,
+    "title": "个人14-情绪",
+    "words": [
+      {
+        "group_index": 31,
+        "title": "个人14-情绪",
+        "id": 142,
+        "word": "cry",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 31,
+        "title": "个人14-情绪",
+        "id": 417,
+        "word": "cool",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 31,
+        "title": "个人14-情绪",
+        "id": 361,
+        "word": "feel",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 31,
+        "title": "个人14-情绪",
+        "id": 399,
+        "word": "felt",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 31,
+        "title": "个人14-情绪",
+        "id": 45,
+        "word": "calm",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 32,
+    "title": "个人15-心理",
+    "words": [
+      {
+        "group_index": 32,
+        "title": "个人15-心理",
+        "id": 7,
+        "word": "hurt",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 32,
+        "title": "个人15-心理",
+        "id": 307,
+        "word": "fear",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 32,
+        "title": "个人15-心理",
+        "id": 231,
+        "word": "hug",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 32,
+        "title": "个人15-心理",
+        "id": 450,
+        "word": "tear",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 32,
+        "title": "个人15-心理",
+        "id": 299,
+        "word": "shy",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 33,
+    "title": "食物1-餐厅",
+    "words": [
+      {
+        "group_index": 33,
+        "title": "食物1-餐厅",
+        "id": 162,
+        "word": "bag",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 33,
+        "title": "食物1-餐厅",
+        "id": 222,
+        "word": "bags",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 33,
+        "title": "食物1-餐厅",
+        "id": 282,
+        "word": "bill",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 33,
+        "title": "食物1-餐厅",
+        "id": 223,
+        "word": "cake",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 33,
+        "title": "食物1-餐厅",
+        "id": 473,
+        "word": "favor",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 33,
+        "title": "食物1-餐厅",
+        "id": 44,
+        "word": "box",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 34,
+    "title": "食物2-超市",
+    "words": [
+      {
+        "group_index": 34,
+        "title": "食物2-超市",
+        "id": 164,
+        "word": "buyer",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 34,
+        "title": "食物2-超市",
+        "id": 184,
+        "word": "cap",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 34,
+        "title": "食物2-超市",
+        "id": 304,
+        "word": "diet",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 34,
+        "title": "食物2-超市",
+        "id": 419,
+        "word": "fish",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 34,
+        "title": "食物2-超市",
+        "id": 456,
+        "word": "food",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 35,
+    "title": "食物3-衣物",
+    "words": [
+      {
+        "group_index": 35,
+        "title": "食物3-衣物",
+        "id": 474,
+        "word": "hat",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 35,
+        "title": "食物3-衣物",
+        "id": 105,
+        "word": "candy",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 35,
+        "title": "食物3-衣物",
+        "id": 285,
+        "word": "cost",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 35,
+        "title": "食物3-衣物",
+        "id": 166,
+        "word": "coat",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 35,
+        "title": "食物3-衣物",
+        "id": 186,
+        "word": "chunk",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 36,
+    "title": "食物4-价格",
+    "words": [
+      {
+        "group_index": 36,
+        "title": "食物4-价格",
+        "id": 383,
+        "word": "gift",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 36,
+        "title": "食物4-价格",
+        "id": 209,
+        "word": "grain",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 36,
+        "title": "食物4-价格",
+        "id": 448,
+        "word": "shirt",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 36,
+        "title": "食物4-价格",
+        "id": 373,
+        "word": "price",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 36,
+        "title": "食物4-价格",
+        "id": 430,
+        "word": "sweet",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 37,
+    "title": "食物5-水果",
+    "words": [
+      {
+        "group_index": 37,
+        "title": "食物5-水果",
+        "id": 317,
+        "word": "shoe",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 37,
+        "title": "食物5-水果",
+        "id": 356,
+        "word": "taste",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 37,
+        "title": "食物5-水果",
+        "id": 258,
+        "word": "tray",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 37,
+        "title": "食物5-水果",
+        "id": 278,
+        "word": "salt",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 37,
+        "title": "食物5-水果",
+        "id": 395,
+        "word": "tie",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 38,
+    "title": "食物6-饮料",
+    "words": [
+      {
+        "group_index": 38,
+        "title": "食物6-饮料",
+        "id": 437,
+        "word": "deal",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 38,
+        "title": "食物6-饮料",
+        "id": 24,
+        "word": "buy",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 38,
+        "title": "食物6-饮料",
+        "id": 392,
+        "word": "shop",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 38,
+        "title": "食物6-饮料",
+        "id": 316,
+        "word": "sell",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 38,
+        "title": "食物6-饮料",
+        "id": 98,
+        "word": "pay",
+        "pos": "verb",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 39,
+    "title": "天气1-温度",
+    "words": [
+      {
+        "group_index": 39,
+        "title": "天气1-温度",
+        "id": 397,
+        "word": "dark",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 39,
+        "title": "天气1-温度",
+        "id": 102,
+        "word": "beach",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 39,
+        "title": "天气1-温度",
+        "id": 242,
+        "word": "bird",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 39,
+        "title": "天气1-温度",
+        "id": 322,
+        "word": "camp",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 39,
+        "title": "天气1-温度",
+        "id": 323,
+        "word": "cold",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 39,
+        "title": "天气1-温度",
+        "id": 225,
+        "word": "dog",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 40,
+    "title": "天气2-自然",
+    "words": [
+      {
+        "group_index": 40,
+        "title": "天气2-自然",
+        "id": 245,
+        "word": "deep",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 40,
+        "title": "天气2-自然",
+        "id": 325,
+        "word": "earth",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 40,
+        "title": "天气2-自然",
+        "id": 363,
+        "word": "flat",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 40,
+        "title": "天气2-自然",
+        "id": 457,
+        "word": "hill",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 40,
+        "title": "天气2-自然",
+        "id": 126,
+        "word": "ice",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 40,
+        "title": "天气2-自然",
+        "id": 476,
+        "word": "land",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 41,
+    "title": "天气3-户外",
+    "words": [
+      {
+        "group_index": 41,
+        "title": "天气3-户外",
+        "id": 308,
+        "word": "field",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 41,
+        "title": "天气3-户外",
+        "id": 386,
+        "word": "hole",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 41,
+        "title": "天气3-户外",
+        "id": 90,
+        "word": "horse",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 41,
+        "title": "天气3-户外",
+        "id": 130,
+        "word": "panda",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 41,
+        "title": "天气3-户外",
+        "id": 111,
+        "word": "lake",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 41,
+        "title": "天气3-户外",
+        "id": 408,
+        "word": "sand",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 42,
+    "title": "天气4-季节",
+    "words": [
+      {
+        "group_index": 42,
+        "title": "天气4-季节",
+        "id": 352,
+        "word": "snow",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 42,
+        "title": "天气4-季节",
+        "id": 34,
+        "word": "moon",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 42,
+        "title": "天气4-季节",
+        "id": 372,
+        "word": "past",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 42,
+        "title": "天气4-季节",
+        "id": 115,
+        "word": "ocean",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 42,
+        "title": "天气4-季节",
+        "id": 296,
+        "word": "park",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 42,
+        "title": "天气4-季节",
+        "id": 433,
+        "word": "wave",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 43,
+    "title": "天气5-晴天",
+    "words": [
+      {
+        "group_index": 43,
+        "title": "天气5-晴天",
+        "id": 271,
+        "word": "icy",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 43,
+        "title": "天气5-晴天",
+        "id": 199,
+        "word": "star",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 43,
+        "title": "天气5-晴天",
+        "id": 319,
+        "word": "sky",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 43,
+        "title": "天气5-晴天",
+        "id": 434,
+        "word": "wind",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 43,
+        "title": "天气5-晴天",
+        "id": 120,
+        "word": "sea",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 43,
+        "title": "天气5-晴天",
+        "id": 300,
+        "word": "wild",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 44,
+    "title": "天气6-雨雪",
+    "words": [
+      {
+        "group_index": 44,
+        "title": "天气6-雨雪",
+        "id": 182,
+        "word": "bear",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 44,
+        "title": "天气6-雨雪",
+        "id": 23,
+        "word": "burn",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 44,
+        "title": "天气6-雨雪",
+        "id": 144,
+        "word": "dry",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 44,
+        "title": "天气6-雨雪",
+        "id": 207,
+        "word": "fall",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 44,
+        "title": "天气6-雨雪",
+        "id": 158,
+        "word": "tree",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 45,
+    "title": "运动1-球类",
+    "words": [
+      {
+        "group_index": 45,
+        "title": "运动1-球类",
+        "id": 471,
+        "word": "art",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 45,
+        "title": "运动1-球类",
+        "id": 2,
+        "word": "band",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 45,
+        "title": "运动1-球类",
+        "id": 22,
+        "word": "bike",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 45,
+        "title": "运动1-球类",
+        "id": 398,
+        "word": "drum",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 45,
+        "title": "运动1-球类",
+        "id": 4,
+        "word": "game",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 45,
+        "title": "运动1-球类",
+        "id": 362,
+        "word": "fight",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 46,
+    "title": "运动2-跑步",
+    "words": [
+      {
+        "group_index": 46,
+        "title": "运动2-跑步",
+        "id": 400,
+        "word": "funny",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 46,
+        "title": "运动2-跑步",
+        "id": 205,
+        "word": "coach",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 46,
+        "title": "运动2-跑步",
+        "id": 86,
+        "word": "gym",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 46,
+        "title": "运动2-跑步",
+        "id": 286,
+        "word": "dance",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 46,
+        "title": "运动2-跑步",
+        "id": 247,
+        "word": "fun",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 46,
+        "title": "运动2-跑步",
+        "id": 422,
+        "word": "hobby",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 47,
+    "title": "运动3-游泳",
+    "words": [
+      {
+        "group_index": 47,
+        "title": "运动3-游泳",
+        "id": 268,
+        "word": "cycle",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 47,
+        "title": "运动3-游泳",
+        "id": 347,
+        "word": "film",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 47,
+        "title": "运动3-游泳",
+        "id": 72,
+        "word": "movie",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 47,
+        "title": "运动3-游泳",
+        "id": 351,
+        "word": "ring",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 47,
+        "title": "运动3-游泳",
+        "id": 33,
+        "word": "magic",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 47,
+        "title": "运动3-游泳",
+        "id": 53,
+        "word": "slip",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 48,
+    "title": "运动4-音乐",
+    "words": [
+      {
+        "group_index": 48,
+        "title": "运动4-音乐",
+        "id": 233,
+        "word": "pace",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 48,
+        "title": "运动4-音乐",
+        "id": 214,
+        "word": "photo",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 48,
+        "title": "运动4-音乐",
+        "id": 254,
+        "word": "rider",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 48,
+        "title": "运动4-音乐",
+        "id": 195,
+        "word": "music",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 48,
+        "title": "运动4-音乐",
+        "id": 467,
+        "word": "team",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 48,
+        "title": "运动4-音乐",
+        "id": 256,
+        "word": "step",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 49,
+    "title": "运动5-绘画",
+    "words": [
+      {
+        "group_index": 49,
+        "title": "运动5-绘画",
+        "id": 378,
+        "word": "back",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 49,
+        "title": "运动5-绘画",
+        "id": 62,
+        "word": "be",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 49,
+        "title": "运动5-绘画",
+        "id": 262,
+        "word": "beat",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 49,
+        "title": "运动5-绘画",
+        "id": 77,
+        "word": "race",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 49,
+        "title": "运动5-绘画",
+        "id": 178,
+        "word": "song",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 49,
+        "title": "运动5-绘画",
+        "id": 376,
+        "word": "toy",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 50,
+    "title": "运动6-游戏",
+    "words": [
+      {
+        "group_index": 50,
+        "title": "运动6-游戏",
+        "id": 83,
+        "word": "can",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 50,
+        "title": "运动6-游戏",
+        "id": 143,
+        "word": "down",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 50,
+        "title": "运动6-游戏",
+        "id": 203,
+        "word": "bore",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 50,
+        "title": "运动6-游戏",
+        "id": 342,
+        "word": "do",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 50,
+        "title": "运动6-游戏",
+        "id": 284,
+        "word": "come",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 50,
+        "title": "运动6-游戏",
+        "id": 324,
+        "word": "draw",
+        "pos": "verb",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 51,
+    "title": "运动7-健身",
+    "words": [
+      {
+        "group_index": 51,
+        "title": "运动7-健身",
+        "id": 305,
+        "word": "dig",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 51,
+        "title": "运动7-健身",
+        "id": 382,
+        "word": "get",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 51,
+        "title": "运动7-健身",
+        "id": 246,
+        "word": "full",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 51,
+        "title": "运动7-健身",
+        "id": 27,
+        "word": "fit",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 51,
+        "title": "运动7-健身",
+        "id": 67,
+        "word": "glue",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 51,
+        "title": "运动7-健身",
+        "id": 187,
+        "word": "drop",
+        "pos": "verb",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 52,
+    "title": "运动8-竞技",
+    "words": [
+      {
+        "group_index": 52,
+        "title": "运动8-竞技",
+        "id": 227,
+        "word": "fell",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 52,
+        "title": "运动8-竞技",
+        "id": 365,
+        "word": "go",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 52,
+        "title": "运动8-竞技",
+        "id": 128,
+        "word": "like",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 52,
+        "title": "运动8-竞技",
+        "id": 208,
+        "word": "gan",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 52,
+        "title": "运动8-竞技",
+        "id": 228,
+        "word": "fill",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 52,
+        "title": "运动8-竞技",
+        "id": 288,
+        "word": "feed",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 53,
+    "title": "运动9-球类",
+    "words": [
+      {
+        "group_index": 53,
+        "title": "运动9-球类",
+        "id": 366,
+        "word": "jump",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 53,
+        "title": "运动9-球类",
+        "id": 169,
+        "word": "farm",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 53,
+        "title": "运动9-球类",
+        "id": 70,
+        "word": "lie",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 53,
+        "title": "运动9-球类",
+        "id": 170,
+        "word": "give",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 53,
+        "title": "运动9-球类",
+        "id": 230,
+        "word": "grow",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 53,
+        "title": "运动9-球类",
+        "id": 270,
+        "word": "hear",
+        "pos": "verb",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 54,
+    "title": "运动10-跑步",
+    "words": [
+      {
+        "group_index": 54,
+        "title": "运动10-跑步",
+        "id": 290,
+        "word": "hide",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 54,
+        "title": "运动10-跑步",
+        "id": 387,
+        "word": "lift",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 54,
+        "title": "运动10-跑步",
+        "id": 480,
+        "word": "off",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 54,
+        "title": "运动10-跑步",
+        "id": 51,
+        "word": "play",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 54,
+        "title": "运动10-跑步",
+        "id": 171,
+        "word": "hit",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 54,
+        "title": "运动10-跑步",
+        "id": 191,
+        "word": "free",
+        "pos": "verb",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 55,
+    "title": "运动11-游泳",
+    "words": [
+      {
+        "group_index": 55,
+        "title": "运动11-游泳",
+        "id": 331,
+        "word": "post",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 55,
+        "title": "运动11-游泳",
+        "id": 350,
+        "word": "pull",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 55,
+        "title": "运动11-游泳",
+        "id": 252,
+        "word": "pair",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 55,
+        "title": "运动11-游泳",
+        "id": 312,
+        "word": "long",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 55,
+        "title": "运动11-游泳",
+        "id": 446,
+        "word": "may",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 55,
+        "title": "运动11-游泳",
+        "id": 428,
+        "word": "seem",
+        "pos": "verb",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 56,
+    "title": "运动12-音乐",
+    "words": [
+      {
+        "group_index": 56,
+        "title": "运动12-音乐",
+        "id": 465,
+        "word": "push",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 56,
+        "title": "运动12-音乐",
+        "id": 154,
+        "word": "take",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 56,
+        "title": "运动12-音乐",
+        "id": 410,
+        "word": "sing",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 56,
+        "title": "运动12-音乐",
+        "id": 466,
+        "word": "put",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 56,
+        "title": "运动12-音乐",
+        "id": 75,
+        "word": "own",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 56,
+        "title": "运动12-音乐",
+        "id": 135,
+        "word": "set",
+        "pos": "verb",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 57,
+    "title": "运动13-绘画",
+    "words": [
+      {
+        "group_index": 57,
+        "title": "运动13-绘画",
+        "id": 255,
+        "word": "run",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 57,
+        "title": "运动13-绘画",
+        "id": 335,
+        "word": "show",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 57,
+        "title": "运动13-绘画",
+        "id": 449,
+        "word": "stay",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 57,
+        "title": "运动13-绘画",
+        "id": 16,
+        "word": "see",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 57,
+        "title": "运动13-绘画",
+        "id": 136,
+        "word": "sit",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 57,
+        "title": "运动13-绘画",
+        "id": 276,
+        "word": "nod",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 58,
+    "title": "运动14-游戏",
+    "words": [
+      {
+        "group_index": 58,
+        "title": "运动14-游戏",
+        "id": 374,
+        "word": "rise",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 58,
+        "title": "运动14-游戏",
+        "id": 431,
+        "word": "talk",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 58,
+        "title": "运动14-游戏",
+        "id": 468,
+        "word": "tend",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 58,
+        "title": "运动14-游戏",
+        "id": 486,
+        "word": "urge",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 58,
+        "title": "运动14-游戏",
+        "id": 37,
+        "word": "must",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 58,
+        "title": "运动14-游戏",
+        "id": 487,
+        "word": "win",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 59,
+    "title": "运动15-健身",
+    "words": [
+      {
+        "group_index": 59,
+        "title": "运动15-健身",
+        "id": 118,
+        "word": "out",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 59,
+        "title": "运动15-健身",
+        "id": 298,
+        "word": "save",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 59,
+        "title": "运动15-健身",
+        "id": 338,
+        "word": "tap",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 59,
+        "title": "运动15-健身",
+        "id": 19,
+        "word": "turn",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 59,
+        "title": "运动15-健身",
+        "id": 99,
+        "word": "send",
+        "pos": "verb",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 60,
+    "title": "运动16-竞技",
+    "words": [
+      {
+        "group_index": 60,
+        "title": "运动16-竞技",
+        "id": 119,
+        "word": "putt",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 60,
+        "title": "运动16-竞技",
+        "id": 139,
+        "word": "swim",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 60,
+        "title": "运动16-竞技",
+        "id": 358,
+        "word": "walk",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 60,
+        "title": "运动16-竞技",
+        "id": 20,
+        "word": "up",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 60,
+        "title": "运动16-竞技",
+        "id": 260,
+        "word": "want",
+        "pos": "verb",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 61,
+    "title": "旅行1-问路",
+    "words": [
+      {
+        "group_index": 61,
+        "title": "旅行1-问路",
+        "id": 181,
+        "word": "area",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 61,
+        "title": "旅行1-问路",
+        "id": 122,
+        "word": "boat",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 61,
+        "title": "旅行1-问路",
+        "id": 454,
+        "word": "city",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 61,
+        "title": "旅行1-问路",
+        "id": 3,
+        "word": "car",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 61,
+        "title": "旅行1-问路",
+        "id": 5,
+        "word": "guide",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 61,
+        "title": "旅行1-问路",
+        "id": 475,
+        "word": "hurry",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 62,
+    "title": "旅行2-交通工具",
+    "words": [
+      {
+        "group_index": 62,
+        "title": "旅行2-交通工具",
+        "id": 226,
+        "word": "far",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 62,
+        "title": "旅行2-交通工具",
+        "id": 326,
+        "word": "east",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 62,
+        "title": "旅行2-交通工具",
+        "id": 364,
+        "word": "gate",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 62,
+        "title": "旅行2-交通工具",
+        "id": 458,
+        "word": "hotel",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 62,
+        "title": "旅行2-交通工具",
+        "id": 477,
+        "word": "last",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 62,
+        "title": "旅行2-交通工具",
+        "id": 442,
+        "word": "law",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 63,
+    "title": "旅行3-景点",
+    "words": [
+      {
+        "group_index": 63,
+        "title": "旅行3-景点",
+        "id": 69,
+        "word": "km",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 63,
+        "title": "旅行3-景点",
+        "id": 149,
+        "word": "plane",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 63,
+        "title": "旅行3-景点",
+        "id": 348,
+        "word": "lead",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 63,
+        "title": "旅行3-景点",
+        "id": 11,
+        "word": "mile",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 63,
+        "title": "旅行3-景点",
+        "id": 274,
+        "word": "low",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 63,
+        "title": "旅行3-景点",
+        "id": 353,
+        "word": "spain",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 64,
+    "title": "旅行4-酒店",
+    "words": [
+      {
+        "group_index": 64,
+        "title": "旅行4-酒店",
+        "id": 391,
+        "word": "rush",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 64,
+        "title": "旅行4-酒店",
+        "id": 411,
+        "word": "south",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 64,
+        "title": "旅行4-酒店",
+        "id": 485,
+        "word": "side",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 64,
+        "title": "旅行4-酒店",
+        "id": 96,
+        "word": "north",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 64,
+        "title": "旅行4-酒店",
+        "id": 393,
+        "word": "sight",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 64,
+        "title": "旅行4-酒店",
+        "id": 17,
+        "word": "sign",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 65,
+    "title": "旅行5-地图",
+    "words": [
+      {
+        "group_index": 65,
+        "title": "旅行5-地图",
+        "id": 38,
+        "word": "rate",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 65,
+        "title": "旅行5-地图",
+        "id": 58,
+        "word": "trip",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 65,
+        "title": "旅行5-地图",
+        "id": 39,
+        "word": "safe",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 65,
+        "title": "旅行5-地图",
+        "id": 415,
+        "word": "way",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 65,
+        "title": "旅行5-地图",
+        "id": 40,
+        "word": "scale",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 65,
+        "title": "旅行5-地图",
+        "id": 240,
+        "word": "town",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 66,
+    "title": "旅行6-方向",
+    "words": [
+      {
+        "group_index": 66,
+        "title": "旅行6-方向",
+        "id": 189,
+        "word": "fly",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 66,
+        "title": "旅行6-方向",
+        "id": 405,
+        "word": "near",
+        "pos": "verb",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 66,
+        "title": "旅行6-方向",
+        "id": 251,
+        "word": "map",
+        "pos": "verb",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 66,
+        "title": "旅行6-方向",
+        "id": 219,
+        "word": "wait",
+        "pos": "verb",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 66,
+        "title": "旅行6-方向",
+        "id": 280,
+        "word": "unit",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 67,
+    "title": "其他1-常用",
+    "words": [
+      {
+        "group_index": 67,
+        "title": "其他1-常用",
+        "id": 141,
+        "word": "chang",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 67,
+        "title": "其他1-常用",
+        "id": 161,
+        "word": "ac",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 67,
+        "title": "其他1-常用",
+        "id": 201,
+        "word": "adam",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 67,
+        "title": "其他1-常用",
+        "id": 183,
+        "word": "bias",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 67,
+        "title": "其他1-常用",
+        "id": 303,
+        "word": "boss",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 67,
+        "title": "其他1-常用",
+        "id": 380,
+        "word": "final",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 68,
+    "title": "其他2-补充",
+    "words": [
+      {
+        "group_index": 68,
+        "title": "其他2-补充",
+        "id": 418,
+        "word": "ea",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 68,
+        "title": "其他2-补充",
+        "id": 84,
+        "word": "co",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 68,
+        "title": "其他2-补充",
+        "id": 204,
+        "word": "chi",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 68,
+        "title": "其他2-补充",
+        "id": 264,
+        "word": "bolt",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 68,
+        "title": "其他2-补充",
+        "id": 381,
+        "word": "forth",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 68,
+        "title": "其他2-补充",
+        "id": 65,
+        "word": "due",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 69,
+    "title": "其他3-综合",
+    "words": [
+      {
+        "group_index": 69,
+        "title": "其他3-综合",
+        "id": 185,
+        "word": "cd",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 69,
+        "title": "其他3-综合",
+        "id": 265,
+        "word": "br",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 69,
+        "title": "其他3-综合",
+        "id": 344,
+        "word": "eight",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 69,
+        "title": "其他3-综合",
+        "id": 420,
+        "word": "four",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 69,
+        "title": "其他3-综合",
+        "id": 87,
+        "word": "hag",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 69,
+        "title": "其他3-综合",
+        "id": 384,
+        "word": "half",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 70,
+    "title": "其他4-基础",
+    "words": [
+      {
+        "group_index": 70,
+        "title": "其他4-基础",
+        "id": 403,
+        "word": "job",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 70,
+        "title": "其他4-基础",
+        "id": 441,
+        "word": "hua",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 70,
+        "title": "其他4-基础",
+        "id": 48,
+        "word": "metal",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 70,
+        "title": "其他4-基础",
+        "id": 248,
+        "word": "gps",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 70,
+        "title": "其他4-基础",
+        "id": 385,
+        "word": "helen",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 70,
+        "title": "其他4-基础",
+        "id": 460,
+        "word": "lucy",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 71,
+    "title": "其他5-拓展",
+    "words": [
+      {
+        "group_index": 71,
+        "title": "其他5-拓展",
+        "id": 229,
+        "word": "five",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 71,
+        "title": "其他5-拓展",
+        "id": 424,
+        "word": "jean",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 71,
+        "title": "其他5-拓展",
+        "id": 443,
+        "word": "lily",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 71,
+        "title": "其他5-拓展",
+        "id": 461,
+        "word": "lung",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 71,
+        "title": "其他5-拓展",
+        "id": 50,
+        "word": "none",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 71,
+        "title": "其他5-拓展",
+        "id": 190,
+        "word": "frame",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 72,
+    "title": "其他6-虚词",
+    "words": [
+      {
+        "group_index": 72,
+        "title": "其他6-虚词",
+        "id": 250,
+        "word": "li",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 72,
+        "title": "其他6-虚词",
+        "id": 425,
+        "word": "lot",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 72,
+        "title": "其他6-虚词",
+        "id": 462,
+        "word": "mrs",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 72,
+        "title": "其他6-虚词",
+        "id": 131,
+        "word": "paul",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 72,
+        "title": "其他6-虚词",
+        "id": 211,
+        "word": "i",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 72,
+        "title": "其他6-虚词",
+        "id": 445,
+        "word": "mary",
+        "pos": "noun",
+        "freq_label": "中频"
+      }
+    ]
+  },
+  {
+    "group_index": 73,
+    "title": "其他7-名称",
+    "words": [
+      {
+        "group_index": 73,
+        "title": "其他7-名称",
+        "id": 32,
+        "word": "lin",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 73,
+        "title": "其他7-名称",
+        "id": 464,
+        "word": "nine",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 73,
+        "title": "其他7-名称",
+        "id": 193,
+        "word": "matt",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 73,
+        "title": "其他7-名称",
+        "id": 293,
+        "word": "mri",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 73,
+        "title": "其他7-名称",
+        "id": 313,
+        "word": "mr",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 73,
+        "title": "其他7-名称",
+        "id": 447,
+        "word": "one",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 74,
+    "title": "其他8-杂项",
+    "words": [
+      {
+        "group_index": 74,
+        "title": "其他8-杂项",
+        "id": 194,
+        "word": "mike",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 74,
+        "title": "其他8-杂项",
+        "id": 15,
+        "word": "sb",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 74,
+        "title": "其他8-杂项",
+        "id": 35,
+        "word": "ms",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 74,
+        "title": "其他8-杂项",
+        "id": 295,
+        "word": "opus",
+        "pos": "noun",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 74,
+        "title": "其他8-杂项",
+        "id": 354,
+        "word": "sth",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 74,
+        "title": "其他8-杂项",
+        "id": 56,
+        "word": "th",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 75,
+    "title": "其他9-常用",
+    "words": [
+      {
+        "group_index": 75,
+        "title": "其他9-常用",
+        "id": 156,
+        "word": "tom",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 75,
+        "title": "其他9-常用",
+        "id": 236,
+        "word": "re",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 75,
+        "title": "其他9-常用",
+        "id": 412,
+        "word": "stop",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 75,
+        "title": "其他9-常用",
+        "id": 137,
+        "word": "six",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 75,
+        "title": "其他9-常用",
+        "id": 337,
+        "word": "tai",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 75,
+        "title": "其他9-常用",
+        "id": 18,
+        "word": "ton",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 76,
+    "title": "其他10-补充",
+    "words": [
+      {
+        "group_index": 76,
+        "title": "其他10-补充",
+        "id": 78,
+        "word": "rick",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 76,
+        "title": "其他10-补充",
+        "id": 318,
+        "word": "sixty",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 76,
+        "title": "其他10-补充",
+        "id": 357,
+        "word": "ten",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 76,
+        "title": "其他10-补充",
+        "id": 470,
+        "word": "two",
+        "pos": "noun",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 76,
+        "title": "其他10-补充",
+        "id": 159,
+        "word": "un",
+        "pos": "noun",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 76,
+        "title": "其他10-补充",
+        "id": 279,
+        "word": "sam",
+        "pos": "noun",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 77,
+    "title": "其他11-综合",
+    "words": [
+      {
+        "group_index": 77,
+        "title": "其他11-综合",
+        "id": 1,
+        "word": "a",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 77,
+        "title": "其他11-综合",
+        "id": 41,
+        "word": "as",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 77,
+        "title": "其他11-综合",
+        "id": 61,
+        "word": "at",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 77,
+        "title": "其他11-综合",
+        "id": 121,
+        "word": "all",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 77,
+        "title": "其他11-综合",
+        "id": 221,
+        "word": "ago",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 77,
+        "title": "其他11-综合",
+        "id": 320,
+        "word": "yang",
+        "pos": "noun",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 78,
+    "title": "其他12-基础",
+    "words": [
+      {
+        "group_index": 78,
+        "title": "其他12-基础",
+        "id": 241,
+        "word": "app",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 78,
+        "title": "其他12-基础",
+        "id": 281,
+        "word": "any",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 78,
+        "title": "其他12-基础",
+        "id": 301,
+        "word": "amy",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 78,
+        "title": "其他12-基础",
+        "id": 453,
+        "word": "alan",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 78,
+        "title": "其他12-基础",
+        "id": 82,
+        "word": "by",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 78,
+        "title": "其他12-基础",
+        "id": 472,
+        "word": "emma",
+        "pos": "other",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 79,
+    "title": "其他13-拓展",
+    "words": [
+      {
+        "group_index": 79,
+        "title": "其他13-拓展",
+        "id": 124,
+        "word": "fixe",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 79,
+        "title": "其他13-拓展",
+        "id": 25,
+        "word": "dr",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 79,
+        "title": "其他13-拓展",
+        "id": 85,
+        "word": "cute",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 79,
+        "title": "其他13-拓展",
+        "id": 26,
+        "word": "eric",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 79,
+        "title": "其他13-拓展",
+        "id": 106,
+        "word": "dave",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 79,
+        "title": "其他13-拓展",
+        "id": 345,
+        "word": "ever",
+        "pos": "other",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 80,
+    "title": "其他14-虚词",
+    "words": [
+      {
+        "group_index": 80,
+        "title": "其他14-虚词",
+        "id": 327,
+        "word": "else",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 80,
+        "title": "其他14-虚词",
+        "id": 346,
+        "word": "fei",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 80,
+        "title": "其他14-虚词",
+        "id": 459,
+        "word": "it",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 80,
+        "title": "其他14-虚词",
+        "id": 404,
+        "word": "mixe",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 80,
+        "title": "其他14-虚词",
+        "id": 423,
+        "word": "in",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 80,
+        "title": "其他14-虚词",
+        "id": 29,
+        "word": "he",
+        "pos": "other",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 81,
+    "title": "其他15-名称",
+    "words": [
+      {
+        "group_index": 81,
+        "title": "其他15-名称",
+        "id": 89,
+        "word": "his",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 81,
+        "title": "其他15-名称",
+        "id": 129,
+        "word": "no",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 81,
+        "title": "其他15-名称",
+        "id": 329,
+        "word": "jim",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 81,
+        "title": "其他15-名称",
+        "id": 479,
+        "word": "my",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 81,
+        "title": "其他15-名称",
+        "id": 110,
+        "word": "if",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 81,
+        "title": "其他15-名称",
+        "id": 368,
+        "word": "liu",
+        "pos": "other",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 82,
+    "title": "其他16-杂项",
+    "words": [
+      {
+        "group_index": 82,
+        "title": "其他16-杂项",
+        "id": 388,
+        "word": "mine",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 82,
+        "title": "其他16-杂项",
+        "id": 407,
+        "word": "of",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 82,
+        "title": "其他16-杂项",
+        "id": 426,
+        "word": "onto",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 82,
+        "title": "其他16-杂项",
+        "id": 272,
+        "word": "its",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 82,
+        "title": "其他16-杂项",
+        "id": 389,
+        "word": "nor",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 82,
+        "title": "其他16-杂项",
+        "id": 13,
+        "word": "on",
+        "pos": "other",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 83,
+    "title": "其他17-常用",
+    "words": [
+      {
+        "group_index": 83,
+        "title": "其他17-常用",
+        "id": 213,
+        "word": "now",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 83,
+        "title": "其他17-常用",
+        "id": 14,
+        "word": "sara",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 83,
+        "title": "其他17-常用",
+        "id": 54,
+        "word": "so",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 83,
+        "title": "其他17-常用",
+        "id": 74,
+        "word": "or",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 83,
+        "title": "其他17-常用",
+        "id": 114,
+        "word": "not",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 83,
+        "title": "其他17-常用",
+        "id": 294,
+        "word": "non",
+        "pos": "other",
+        "freq_label": "低频"
+      }
+    ]
+  },
+  {
+    "group_index": 84,
+    "title": "其他18-补充",
+    "words": [
+      {
+        "group_index": 84,
+        "title": "其他18-补充",
+        "id": 197,
+        "word": "rin",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 84,
+        "title": "其他18-补充",
+        "id": 217,
+        "word": "tim",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 84,
+        "title": "其他18-补充",
+        "id": 257,
+        "word": "too",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 84,
+        "title": "其他18-补充",
+        "id": 451,
+        "word": "tony",
+        "pos": "other",
+        "freq_label": "中频"
+      },
+      {
+        "group_index": 84,
+        "title": "其他18-补充",
+        "id": 452,
+        "word": "we",
+        "pos": "other",
+        "freq_label": "高频"
+      }
+    ]
+  },
+  {
+    "group_index": 85,
+    "title": "其他19-综合",
+    "words": [
+      {
+        "group_index": 85,
+        "title": "其他19-综合",
+        "id": 59,
+        "word": "upon",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 85,
+        "title": "其他19-综合",
+        "id": 79,
+        "word": "wang",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 85,
+        "title": "其他19-综合",
+        "id": 179,
+        "word": "tina",
+        "pos": "other",
+        "freq_label": "低频"
+      },
+      {
+        "group_index": 85,
+        "title": "其他19-综合",
+        "id": 180,
+        "word": "why",
+        "pos": "other",
+        "freq_label": "高频"
+      },
+      {
+        "group_index": 85,
+        "title": "其他19-综合",
+        "id": 200,
+        "word": "tiny",
+        "pos": "other",
+        "freq_label": "低频"
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+﻿{
+  "tierId": "beginner",
+  "groupIndex": 86,
+  "title": "浠嬭瘝2-鍓嶅悗鏃佷箣闂?,
+  "words": [
+    {
+      "word": "among",
+      "pos": "other"
+    },
+    {
+      "word": "behind",
+      "pos": "other"
+    },
+    {
+      "word": "between",
+      "pos": "other"
+    },
+    {
+      "word": "opposite",
+      "pos": "other"
+    },
+    {
+      "word": "in front of",
+      "pos": "other"
+    },
+    {
+      "word": "beside",
+      "pos": "other"
+    }
+  ],
+  "scene": "鍓嶅悗鏃佷箣闂?,
+  "theme": "浠嬭瘝",
+  "asset": "src/public/images/vocab-groups/beginner/86.png",
+  "prompt": "Educational flat cartoon, 16:9 banner, 2D flat style, gentle shading, bright warm natural light. Scene \"浠嬭瘝2-鍓嶅悗鏃佷箣闂碶" (浠嬭瘝/鍓嶅悗鏃佷箣闂?. Palette: coral, mint, light gray. Anchors: classroom row, blackboard, corridor with pillars. Composition: One classroom + hallway view: student behind pillar (behind), teacher in front of blackboard (in front of), chair beside desk (beside), student between two desks (between), one student among classmates (among), two shops opposite each other across street window (opposite). Visual rules by POS: n=noun鈫抩bject; v=verb鈫抍haracter action; adj=adjective鈫抭uality badge/color cue; adv=adverb鈫抦otion/speed cue; o=other鈫抯ign/icon. Visuals: among[o:student among classmates circle], behind[o:student behind pillar], between[o:student between two desks], opposite[o:two shops opposite across street], in front of[o:teacher in front of blackboard], beside[o:chair beside desk]. Same room, one moment, one visual per word. ONE continuous scene. NO grid, panels, collage, comic strip. Labels MOST prominent: LARGE white pill badge, bold navy sans-serif, leader line+dot. Label once: among, behind, between, opposite, in front of, beside. Teen-friendly cartoon. No Chinese, no extra words."
+}

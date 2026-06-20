@@ -1,0 +1,21 @@
+export const MAX_FUNCTIONS = 3
+
+export const FUNCTION_COLORS = ['#2563eb', '#dc2626', '#16a34a'] as const
+
+export const DEFAULT_X_MIN = -10
+export const DEFAULT_X_MAX = 10
+export const SAMPLE_STEP = 0.05
+export const DEBOUNCE_MS = 300
+export const CANVAS_SIZE = 800
+export const ASYMPTOTE_EPS = 0.05
+export const VIEWPORT_Y_CAP = 50
+export const MIN_VIEWPORT_HALF = 4
+export const MAX_POLYNOMIAL_VIEWPORT_HALF = 18
+export const INVERSE_VIEWPORT_HALF = 8
+export const QUIZ_QUESTION_COUNT = 10
+export const QUIZ_GRAPH_SIZE = 280
+export const SIGN_TRAINING_QUESTION_COUNT = 10
+export const SIGN_TEST_ROUND_COUNT = 10
+export const SIGN_ADVANCED_TEST_ROUND_COUNT = 5
+export const SIGN_TEST_QUESTION_SECONDS = 10
+export const SIGN_ADVANCED_TEST_QUESTION_SECONDS = 20

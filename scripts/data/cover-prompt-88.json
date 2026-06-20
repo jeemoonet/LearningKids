@@ -1,0 +1,35 @@
+﻿{
+  "tierId": "beginner",
+  "groupIndex": 88,
+  "title": "浠嬭瘝4-杩涘嚭涓婁笅鍒?,
+  "words": [
+    {
+      "word": "off",
+      "pos": "other"
+    },
+    {
+      "word": "from",
+      "pos": "other"
+    },
+    {
+      "word": "onto",
+      "pos": "other"
+    },
+    {
+      "word": "into",
+      "pos": "other"
+    },
+    {
+      "word": "to",
+      "pos": "other"
+    },
+    {
+      "word": "out of",
+      "pos": "other"
+    }
+  ],
+  "scene": "杩涘嚭涓婁笅鍒?,
+  "theme": "浠嬭瘝",
+  "asset": "src/public/images/vocab-groups/beginner/88.png",
+  "prompt": "Educational flat cartoon, 16:9 banner, 2D flat style, gentle shading, bright warm natural light. Scene \"浠嬭瘝4-杩涘嚭涓婁笅鍒癨" (浠嬭瘝/杩涘嚭涓婁笅鍒?. Palette: orange, white, wood brown. Anchors: doorway, bed, table, path sign to school. Composition: One bedroom doorway scene: boy walking into room (into), girl running out of room (out of), arrow from city sign (from), cat jumping onto bed (onto), cup falling off table (off), path arrow to school gate (to). Visual rules by POS: n=noun鈫抩bject; v=verb鈫抍haracter action; adj=adjective鈫抭uality badge/color cue; adv=adverb鈫抦otion/speed cue; o=other鈫抯ign/icon. Visuals: off[o:cup falling off table edge], from[o:arrow from city name sign], onto[o:cat jumping onto bed], into[o:boy walking into room], to[o:path arrow to school gate], out of[o:out of sign/icon]. Same room, one moment, one visual per word. ONE continuous scene. NO grid, panels, collage, comic strip. Labels MOST prominent: LARGE white pill badge, bold navy sans-serif, leader line+dot. Label once: off, from, onto, into, to, out of. Teen-friendly cartoon. No Chinese, no extra words."
+}

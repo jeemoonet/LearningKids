@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# SQLite 数据库（含用户数据）
+server/data/*.db
+server/data/*.db-*
+
+# TTS 音频缓存（百炼生成，按需重建）
+server/data/tts-cache/
+
+# 密钥与敏感信息 — 永不提交
+*.pem
+*.key
+secrets.env
+**/secrets.local.json

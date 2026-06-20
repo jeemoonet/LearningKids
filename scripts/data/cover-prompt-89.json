@@ -1,0 +1,35 @@
+﻿{
+  "tierId": "beginner",
+  "groupIndex": 89,
+  "title": "浠嬭瘝5-璺緞鏂瑰悜",
+  "words": [
+    {
+      "word": "along",
+      "pos": "other"
+    },
+    {
+      "word": "past",
+      "pos": "other"
+    },
+    {
+      "word": "through",
+      "pos": "other"
+    },
+    {
+      "word": "towards",
+      "pos": "other"
+    },
+    {
+      "word": "away from",
+      "pos": "other"
+    },
+    {
+      "word": "across",
+      "pos": "other"
+    }
+  ],
+  "scene": "璺緞鏂瑰悜",
+  "theme": "浠嬭瘝",
+  "asset": "src/public/images/vocab-groups/beginner/89.png",
+  "prompt": "Educational flat cartoon, 16:9 banner, 2D flat style, gentle shading, bright warm natural light. Scene \"浠嬭瘝5-璺緞鏂瑰悜\" (浠嬭瘝/璺緞鏂瑰悜). Palette: grass green, road gray, sky blue. Anchors: riverside path, zebra crossing, forest trail, fire warning. Composition: One outdoor path scene: runner towards door (towards), student staying away from fire (away from), walking along river (along), walking past library (past), crossing street (across), walking through forest tunnel (through). Visual rules by POS: n=noun鈫抩bject; v=verb鈫抍haracter action; adj=adjective鈫抭uality badge/color cue; adv=adverb鈫抦otion/speed cue; o=other鈫抯ign/icon. Visuals: along[o:person walking along riverside path], past[o:person walking past library building], through[o:person walking through forest tunnel], towards[o:runner moving towards door], away from[o:away from sign/icon], across[o:person on zebra crossing]. Same room, one moment, one visual per word. ONE continuous scene. NO grid, panels, collage, comic strip. Labels MOST prominent: LARGE white pill badge, bold navy sans-serif, leader line+dot. Label once: along, past, through, towards, away from, across. Teen-friendly cartoon. No Chinese, no extra words."
+}

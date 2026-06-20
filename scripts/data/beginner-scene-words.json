@@ -1,0 +1,4345 @@
+{
+  "cheat": {
+    "meaning_zh": "作弊；欺骗",
+    "example_en": "Don't cheat in the exam.",
+    "example_zh": "考试不要作弊。",
+    "similar1": "cheated",
+    "similar2": "cheating",
+    "similar3": "rule"
+  },
+  "case": {
+    "meaning_zh": "盒子；情况",
+    "example_en": "I have a pencil case on my desk.",
+    "example_zh": "我的课桌上有一个铅笔盒。",
+    "similar1": "cases",
+    "similar2": "pencil case",
+    "similar3": "book"
+  },
+  "club": {
+    "meaning_zh": "俱乐部；社团",
+    "example_en": "I join an English club after school.",
+    "example_zh": "我放学后参加英语社团。",
+    "similar1": "clubs",
+    "similar2": "join a club",
+    "similar3": "school"
+  },
+  "book": {
+    "meaning_zh": "书；书本",
+    "example_en": "I was reading a book in my study.",
+    "example_zh": "我正在书房里看书。",
+    "similar1": "books",
+    "similar2": "read a book",
+    "similar3": "picture book"
+  },
+  "email": {
+    "meaning_zh": "电子邮件",
+    "example_en": "I'm glad to receive your email.",
+    "example_zh": "很高兴收到你的邮件。",
+    "similar1": "emails",
+    "similar2": "send an email",
+    "similar3": "write"
+  },
+  "fact": {
+    "meaning_zh": "事实；知识点",
+    "example_en": "We learn a new fact in class every day.",
+    "example_zh": "我们每天在课堂上学一个新知识点。",
+    "similar1": "facts",
+    "similar2": "in fact",
+    "similar3": "know"
+  },
+  "level": {
+    "meaning_zh": "水平；等级",
+    "example_en": "I have some doubt about math at this level.",
+    "example_zh": "我对这个水平的数学有点疑问。",
+    "similar1": "levels",
+    "similar2": "high level",
+    "similar3": "class"
+  },
+  "form": {
+    "meaning_zh": "表格；形式",
+    "example_en": "We fill in a form at the start of class.",
+    "example_zh": "我们上课开始时填一张表。",
+    "similar1": "forms",
+    "similar2": "fill in a form",
+    "similar3": "name"
+  },
+  "doubt": {
+    "meaning_zh": "疑问；怀疑",
+    "example_en": "I have some doubt about this math problem.",
+    "example_zh": "我对这道数学题有点疑问。",
+    "similar1": "doubts",
+    "similar2": "no doubt",
+    "similar3": "question"
+  },
+  "math": {
+    "meaning_zh": "数学",
+    "example_en": "We read the news and study math in class.",
+    "example_zh": "我们在课上读新闻并学数学。",
+    "similar1": "maths",
+    "similar2": "math class",
+    "similar3": "study"
+  },
+  "news": {
+    "meaning_zh": "新闻；消息",
+    "example_en": "We read the news at the start of class.",
+    "example_zh": "我们上课开始时读新闻。",
+    "similar1": "newspaper",
+    "similar2": "good news",
+    "similar3": "read"
+  },
+  "group": {
+    "meaning_zh": "小组；群体",
+    "example_en": "Our group can help each other after class.",
+    "example_zh": "我们小组下课后可以互相帮助。",
+    "similar1": "groups",
+    "similar2": "work in a group",
+    "similar3": "team"
+  },
+  "idea": {
+    "meaning_zh": "想法；主意",
+    "example_en": "You need a key idea for the exam.",
+    "example_zh": "考试你需要一个关键想法。",
+    "similar1": "ideas",
+    "similar2": "good idea",
+    "similar3": "think"
+  },
+  "mind": {
+    "meaning_zh": "头脑；心思",
+    "example_en": "Keep your mind on the paper.",
+    "example_zh": "把注意力放在试卷上。",
+    "similar1": "minds",
+    "similar2": "keep your mind on",
+    "similar3": "think"
+  },
+  "need": {
+    "meaning_zh": "需要",
+    "example_en": "You need to know the key idea for the exam.",
+    "example_zh": "你需要知道考试的关键想法。",
+    "similar1": "needed",
+    "similar2": "need to",
+    "similar3": "want"
+  },
+  "role": {
+    "meaning_zh": "角色；作用",
+    "example_en": "Know your role in the group work.",
+    "example_zh": "要知道你在小组作业中的角色。",
+    "similar1": "roles",
+    "similar2": "play a role",
+    "similar3": "group"
+  },
+  "limit": {
+    "meaning_zh": "限制；极限",
+    "example_en": "There is a time limit in the exam.",
+    "example_zh": "考试有时间限制。",
+    "similar1": "limits",
+    "similar2": "time limit",
+    "similar3": "rule"
+  },
+  "key": {
+    "meaning_zh": "关键；钥匙",
+    "example_en": "You need the key idea for the exam.",
+    "example_zh": "你需要考试的关键想法。",
+    "similar1": "keys",
+    "similar2": "key idea",
+    "similar3": "answer"
+  },
+  "real": {
+    "meaning_zh": "真正的；真实的",
+    "example_en": "This part of the paper feels real hard.",
+    "example_zh": "试卷这部分真的很难。",
+    "similar1": "really",
+    "similar2": "real hard",
+    "similar3": "true"
+  },
+  "quiet": {
+    "meaning_zh": "安静的",
+    "example_en": "The teacher wants us to be quiet.",
+    "example_zh": "老师要我们保持安静。",
+    "similar1": "quietly",
+    "similar2": "keep quiet",
+    "similar3": "class"
+  },
+  "score": {
+    "meaning_zh": "分数；得分",
+    "example_en": "Follow the rule and you may get a good score.",
+    "example_zh": "遵守规则，你可能会得高分。",
+    "similar1": "scores",
+    "similar2": "high score",
+    "similar3": "mark"
+  },
+  "paper": {
+    "meaning_zh": "试卷；纸",
+    "example_en": "Keep your mind on the paper.",
+    "example_zh": "把注意力放在试卷上。",
+    "similar1": "papers",
+    "similar2": "exam paper",
+    "similar3": "test"
+  },
+  "rule": {
+    "meaning_zh": "规则；规定",
+    "example_en": "Follow the rule and you may get a good score.",
+    "example_zh": "遵守规则，你可能会得高分。",
+    "similar1": "rules",
+    "similar2": "follow the rule",
+    "similar3": "class"
+  },
+  "part": {
+    "meaning_zh": "部分",
+    "example_en": "This part of the paper feels real hard.",
+    "example_zh": "试卷这部分真的很难。",
+    "similar1": "parts",
+    "similar2": "take part",
+    "similar3": "paper"
+  },
+  "shape": {
+    "meaning_zh": "形状",
+    "example_en": "The shape of her work looks nice.",
+    "example_zh": "她作业的形状很好看。",
+    "similar1": "shapes",
+    "similar2": "in shape",
+    "similar3": "round"
+  },
+  "term": {
+    "meaning_zh": "学期；术语",
+    "example_en": "My friend got a prize for a good mark this term.",
+    "example_zh": "我朋友这学期因分数好得了奖。",
+    "similar1": "terms",
+    "similar2": "this term",
+    "similar3": "school"
+  },
+  "proof": {
+    "meaning_zh": "证明",
+    "example_en": "She can print the proof on paper.",
+    "example_zh": "她可以把证明打印在纸上。",
+    "similar1": "prove",
+    "similar2": "proof of",
+    "similar3": "print"
+  },
+  "mark": {
+    "meaning_zh": "分数；标记",
+    "example_en": "My friend got a good mark this term.",
+    "example_zh": "我朋友这学期得了好分数。",
+    "similar1": "marks",
+    "similar2": "full marks",
+    "similar3": "score"
+  },
+  "print": {
+    "meaning_zh": "打印",
+    "example_en": "She can print the proof on paper.",
+    "example_zh": "她可以把证明打印在纸上。",
+    "similar1": "printed",
+    "similar2": "print out",
+    "similar3": "paper"
+  },
+  "prize": {
+    "meaning_zh": "奖品；奖项",
+    "example_en": "My friend got a prize for a good mark.",
+    "example_zh": "我朋友因好分数得了奖。",
+    "similar1": "prizes",
+    "similar2": "win a prize",
+    "similar3": "gift"
+  },
+  "fair": {
+    "meaning_zh": "公平的",
+    "example_en": "The title of our work should be fair to all.",
+    "example_zh": "我们作业的标题应对所有人公平。",
+    "similar1": "fairly",
+    "similar2": "be fair to",
+    "similar3": "rule"
+  },
+  "topic": {
+    "meaning_zh": "话题；主题",
+    "example_en": "Our task is about a new topic this week.",
+    "example_zh": "我们本周的任务是一个新话题。",
+    "similar1": "topics",
+    "similar2": "talk about",
+    "similar3": "task"
+  },
+  "note": {
+    "meaning_zh": "笔记；便条",
+    "example_en": "I use a ruler and write a note in my book.",
+    "example_zh": "我用尺子并在书里做笔记。",
+    "similar1": "notes",
+    "similar2": "take notes",
+    "similar3": "write"
+  },
+  "ruler": {
+    "meaning_zh": "尺子",
+    "example_en": "I use a ruler to draw a line in my book.",
+    "example_zh": "我用尺子在书里画线。",
+    "similar1": "rulers",
+    "similar2": "use a ruler",
+    "similar3": "book"
+  },
+  "task": {
+    "meaning_zh": "任务；作业",
+    "example_en": "Our task is about a new topic this week.",
+    "example_zh": "我们本周的任务是一个新话题。",
+    "similar1": "tasks",
+    "similar2": "do a task",
+    "similar3": "homework"
+  },
+  "title": {
+    "meaning_zh": "标题；题目",
+    "example_en": "The title of our work should be fair to all.",
+    "example_zh": "我们作业的标题应对所有人公平。",
+    "similar1": "titles",
+    "similar2": "write a title",
+    "similar3": "name"
+  },
+  "add": {
+    "meaning_zh": "添加；增加",
+    "example_en": "I add a note once a day.",
+    "example_zh": "我每天加一条笔记。",
+    "similar1": "added",
+    "similar2": "add to",
+    "similar3": "note"
+  },
+  "ask": {
+    "meaning_zh": "问；请求",
+    "example_en": "I ask the teacher to help me use the new word.",
+    "example_zh": "我请老师帮我用这个新词。",
+    "similar1": "asked",
+    "similar2": "ask for",
+    "similar3": "help"
+  },
+  "june": {
+    "meaning_zh": "六月",
+    "example_en": "The library is open in June.",
+    "example_zh": "图书馆六月开放。",
+    "similar1": "July",
+    "similar2": "in June",
+    "similar3": "month"
+  },
+  "once": {
+    "meaning_zh": "一次；曾经",
+    "example_en": "I add a note once a day.",
+    "example_zh": "我每天加一条笔记。",
+    "similar1": "one",
+    "similar2": "once a day",
+    "similar3": "again"
+  },
+  "use": {
+    "meaning_zh": "使用",
+    "example_en": "I ask the teacher to help me use the new word.",
+    "example_zh": "我请老师帮我用这个新词。",
+    "similar1": "used",
+    "similar2": "use a word",
+    "similar3": "word"
+  },
+  "word": {
+    "meaning_zh": "单词；话",
+    "example_en": "I ask the teacher to help me use the new word.",
+    "example_zh": "我请老师帮我用这个新词。",
+    "similar1": "words",
+    "similar2": "new word",
+    "similar3": "learn"
+  },
+  "new": {
+    "meaning_zh": "新的",
+    "example_en": "We meet in class and keep a new list of names.",
+    "example_zh": "我们在课堂见面，保存一份新的姓名名单。",
+    "similar1": "newer",
+    "similar2": "new list",
+    "similar3": "old"
+  },
+  "plan": {
+    "meaning_zh": "计划",
+    "example_en": "Our plan is to learn five words each day.",
+    "example_zh": "我们计划每天学五个单词。",
+    "similar1": "planned",
+    "similar2": "make a plan",
+    "similar3": "list"
+  },
+  "meet": {
+    "meaning_zh": "见面；遇见",
+    "example_en": "We meet in class every morning.",
+    "example_zh": "我们每天早上在课堂见面。",
+    "similar1": "met",
+    "similar2": "meet in class",
+    "similar3": "class"
+  },
+  "list": {
+    "meaning_zh": "列表；清单",
+    "example_en": "We keep a new list of names in class.",
+    "example_zh": "我们在课堂保存一份新的姓名名单。",
+    "similar1": "lists",
+    "similar2": "make a list",
+    "similar3": "name"
+  },
+  "name": {
+    "meaning_zh": "名字；命名",
+    "example_en": "I write my name on the list first.",
+    "example_zh": "我先在名单上写下自己的名字。",
+    "similar1": "named",
+    "similar2": "write your name",
+    "similar3": "list"
+  },
+  "keep": {
+    "meaning_zh": "保持；保存",
+    "example_en": "We keep a new list of names in class.",
+    "example_zh": "我们在课堂保存一份新的姓名名单。",
+    "similar1": "kept",
+    "similar2": "keep a list",
+    "similar3": "save"
+  },
+  "pick": {
+    "meaning_zh": "挑选；采摘",
+    "example_en": "Let me help you pick the right book.",
+    "example_zh": "让我帮你选对的书。",
+    "similar1": "picked",
+    "similar2": "pick up",
+    "similar3": "book"
+  },
+  "help": {
+    "meaning_zh": "帮助",
+    "example_en": "Let me help you pick the right book.",
+    "example_zh": "让我帮你选对的书。",
+    "similar1": "helped",
+    "similar2": "help sb.",
+    "similar3": "ask"
+  },
+  "know": {
+    "meaning_zh": "知道；了解",
+    "example_en": "I know you can pass the test.",
+    "example_zh": "我知道你能通过考试。",
+    "similar1": "knew",
+    "similar2": "know the word",
+    "similar3": "learn"
+  },
+  "pass": {
+    "meaning_zh": "通过；经过",
+    "example_en": "I know you can pass the test.",
+    "example_zh": "我知道你能通过考试。",
+    "similar1": "passed",
+    "similar2": "pass the test",
+    "similar3": "fail"
+  },
+  "let": {
+    "meaning_zh": "让；允许",
+    "example_en": "Let me help you pick the right book.",
+    "example_zh": "让我帮你选对的书。",
+    "similar1": "lets",
+    "similar2": "let sb. do",
+    "similar3": "help"
+  },
+  "miss": {
+    "meaning_zh": "错过；想念",
+    "example_en": "Do not miss class today.",
+    "example_zh": "今天别缺课。",
+    "similar1": "missed",
+    "similar2": "miss class",
+    "similar3": "class"
+  },
+  "look": {
+    "meaning_zh": "看；看起来",
+    "example_en": "Look at the book and say the word out.",
+    "example_zh": "看书，大声说出单词。",
+    "similar1": "looked",
+    "similar2": "look at",
+    "similar3": "see"
+  },
+  "say": {
+    "meaning_zh": "说；讲",
+    "example_en": "Look at the book and say the word out.",
+    "example_zh": "看书，大声说出单词。",
+    "similar1": "said",
+    "similar2": "say out",
+    "similar3": "tell"
+  },
+  "try": {
+    "meaning_zh": "尝试；努力",
+    "example_en": "Try again if you make a mistake.",
+    "example_zh": "说错了就再试一次。",
+    "similar1": "tried",
+    "similar2": "try again",
+    "similar3": "do"
+  },
+  "tell": {
+    "meaning_zh": "告诉；讲述",
+    "example_en": "Tell me when you need help.",
+    "example_zh": "需要帮助就告诉我。",
+    "similar1": "told",
+    "similar2": "tell me",
+    "similar3": "say"
+  },
+  "bed": {
+    "word": "bed",
+    "meaning_zh": "床",
+    "example_en": "I sleep in my bed.",
+    "example_zh": "我睡在我的床上。",
+    "similar1": "room",
+    "similar2": "pillow",
+    "similar3": "get into bed"
+  },
+  "daily": {
+    "word": "daily",
+    "meaning_zh": "日报",
+    "example_en": "My father reads the daily.",
+    "example_zh": "我爸爸读日报。",
+    "similar1": "newspaper",
+    "similar2": "morning",
+    "similar3": "read the daily"
+  },
+  "clock": {
+    "word": "clock",
+    "meaning_zh": "钟",
+    "example_en": "The clock is on the wall.",
+    "example_zh": "钟在墙上。",
+    "similar1": "watch",
+    "similar2": "time",
+    "similar3": "alarm clock"
+  },
+  "dish": {
+    "word": "dish",
+    "meaning_zh": "盘子",
+    "example_en": "She puts food on a dish.",
+    "example_zh": "她把食物放在一个盘子里。",
+    "similar1": "plate",
+    "similar2": "bowl",
+    "similar3": "wash the dish"
+  },
+  "day": {
+    "word": "day",
+    "meaning_zh": "一天",
+    "example_en": "We go to school every day.",
+    "example_zh": "我们每天去上学。",
+    "similar1": "week",
+    "similar2": "morning",
+    "similar3": "one day"
+  },
+  "birth": {
+    "word": "birth",
+    "meaning_zh": "出生",
+    "example_en": "His birth is in June.",
+    "example_zh": "他的出生在六月。",
+    "similar1": "birthday",
+    "similar2": "baby",
+    "similar3": "born"
+  },
+  "chair": {
+    "word": "chair",
+    "meaning_zh": "椅子",
+    "example_en": "We sit on a chair.",
+    "example_zh": "我们坐在椅子上。",
+    "similar1": "table",
+    "similar2": "sit down",
+    "similar3": "desk"
+  },
+  "boy": {
+    "word": "boy",
+    "meaning_zh": "男孩",
+    "example_en": "He is a boy.",
+    "example_zh": "他是个男孩。",
+    "similar1": "girl",
+    "similar2": "kid",
+    "similar3": "student"
+  },
+  "dad": {
+    "word": "dad",
+    "meaning_zh": "爸爸",
+    "example_en": "My dad eats breakfast at home.",
+    "example_zh": "我爸爸在家吃早餐。",
+    "similar1": "mom",
+    "similar2": "family",
+    "similar3": "father"
+  },
+  "house": {
+    "word": "house",
+    "meaning_zh": "房子",
+    "example_en": "We live in a house.",
+    "example_zh": "我们住在一所房子里。",
+    "similar1": "home",
+    "similar2": "room",
+    "similar3": "family"
+  },
+  "end": {
+    "word": "end",
+    "meaning_zh": "末尾",
+    "example_en": "The meal is at the end of the day.",
+    "example_zh": "这顿饭在一天的末尾。",
+    "similar1": "last",
+    "similar2": "finish",
+    "similar3": "beginning"
+  },
+  "kid": {
+    "word": "kid",
+    "meaning_zh": "小孩",
+    "example_en": "She is a kid.",
+    "example_zh": "她是个小孩。",
+    "similar1": "boy",
+    "similar2": "girl",
+    "similar3": "family"
+  },
+  "glass": {
+    "word": "glass",
+    "meaning_zh": "玻璃；玻璃杯",
+    "example_en": "She drinks water from a glass.",
+    "example_zh": "她用玻璃杯喝水。",
+    "similar1": "cup",
+    "similar2": "bottle",
+    "similar3": "plate"
+  },
+  "dear": {
+    "word": "dear",
+    "meaning_zh": "亲爱的",
+    "example_en": "Dear Li, please come home now.",
+    "example_zh": "亲爱的李，请现在回家。",
+    "similar1": "sweet",
+    "similar2": "friend",
+    "similar3": "mom"
+  },
+  "girl": {
+    "word": "girl",
+    "meaning_zh": "女孩",
+    "example_en": "My sister is a kind girl.",
+    "example_zh": "我妹妹是个善良的女孩。",
+    "similar1": "boy",
+    "similar2": "woman",
+    "similar3": "child"
+  },
+  "home": {
+    "word": "home",
+    "meaning_zh": "家",
+    "example_en": "I go home after school.",
+    "example_zh": "我放学后回家。",
+    "similar1": "house",
+    "similar2": "room",
+    "similar3": "bed"
+  },
+  "hall": {
+    "word": "hall",
+    "meaning_zh": "大厅；礼堂",
+    "example_en": "We meet in the school hall every Monday.",
+    "example_zh": "我们每周一在学校大厅集合。",
+    "similar1": "room",
+    "similar2": "gym",
+    "similar3": "library"
+  },
+  "hour": {
+    "word": "hour",
+    "meaning_zh": "小时",
+    "example_en": "We study for one hour every day.",
+    "example_zh": "我们每天学习一小时。",
+    "similar1": "minute",
+    "similar2": "day",
+    "similar3": "week"
+  },
+  "room": {
+    "word": "room",
+    "meaning_zh": "房间",
+    "example_en": "My room is clean.",
+    "example_zh": "我的房间很干净。",
+    "similar1": "bedroom",
+    "similar2": "in the room",
+    "similar3": "clean the room"
+  },
+  "mom": {
+    "word": "mom",
+    "meaning_zh": "妈妈",
+    "example_en": "Mom makes food.",
+    "example_zh": "妈妈做饭。",
+    "similar1": "dad",
+    "similar2": "my mom",
+    "similar3": "Mom is at home"
+  },
+  "rice": {
+    "word": "rice",
+    "meaning_zh": "米饭",
+    "example_en": "We eat rice.",
+    "example_zh": "我们吃米饭。",
+    "similar1": "food",
+    "similar2": "eat rice",
+    "similar3": "cook rice"
+  },
+  "night": {
+    "word": "night",
+    "meaning_zh": "夜晚",
+    "example_en": "It is night.",
+    "example_zh": "现在是夜晚。",
+    "similar1": "day",
+    "similar2": "at night",
+    "similar3": "good night"
+  },
+  "soup": {
+    "word": "soup",
+    "meaning_zh": "汤",
+    "example_en": "She likes soup.",
+    "example_zh": "她喜欢喝汤。",
+    "similar1": "rice",
+    "similar2": "eat soup",
+    "similar3": "hot soup"
+  },
+  "son": {
+    "word": "son",
+    "meaning_zh": "儿子",
+    "example_en": "My son is at home.",
+    "example_zh": "我儿子在家。",
+    "similar1": "daughter",
+    "similar2": "father",
+    "similar3": "family"
+  },
+  "meal": {
+    "word": "meal",
+    "meaning_zh": "一顿饭",
+    "example_en": "We eat one meal at home.",
+    "example_zh": "我们在家吃一顿饭。",
+    "similar1": "food",
+    "similar2": "breakfast",
+    "similar3": "eat a meal"
+  },
+  "tidy": {
+    "word": "tidy",
+    "meaning_zh": "整洁的",
+    "example_en": "The living room is tidy.",
+    "example_zh": "客厅很整洁。",
+    "similar1": "clean",
+    "similar2": "messy",
+    "similar3": "keep tidy"
+  },
+  "sleep": {
+    "word": "sleep",
+    "meaning_zh": "睡眠",
+    "example_en": "Sleep is good for health.",
+    "example_zh": "睡眠对健康有好处。",
+    "similar1": "bed",
+    "similar2": "go to sleep",
+    "similar3": "have sleep"
+  },
+  "table": {
+    "word": "table",
+    "meaning_zh": "桌子",
+    "example_en": "We sit at the table.",
+    "example_zh": "我们坐在桌旁。",
+    "similar1": "chair",
+    "similar2": "on the table",
+    "similar3": "wooden table"
+  },
+  "uncle": {
+    "word": "uncle",
+    "meaning_zh": "叔叔；伯父；舅父",
+    "example_en": "My uncle is in the kitchen.",
+    "example_zh": "我叔叔在厨房里。",
+    "similar1": "aunt",
+    "similar2": "cousin",
+    "similar3": "family"
+  },
+  "yard": {
+    "word": "yard",
+    "meaning_zh": "院子",
+    "example_en": "We play in the yard after school.",
+    "example_zh": "我们放学后在院子里玩。",
+    "similar1": "garden",
+    "similar2": "home",
+    "similar3": "door"
+  },
+  "wall": {
+    "word": "wall",
+    "meaning_zh": "墙",
+    "example_en": "The clock is on the wall.",
+    "example_zh": "钟挂在墙上。",
+    "similar1": "floor",
+    "similar2": "ceiling",
+    "similar3": "door"
+  },
+  "week": {
+    "word": "week",
+    "meaning_zh": "周；星期",
+    "example_en": "We have six classes a week.",
+    "example_zh": "我们每周上六节课。",
+    "similar1": "day",
+    "similar2": "month",
+    "similar3": "year"
+  },
+  "tea": {
+    "word": "tea",
+    "meaning_zh": "茶",
+    "example_en": "I drink tea at home.",
+    "example_zh": "我在家喝茶。",
+    "similar1": "coffee",
+    "similar2": "water",
+    "similar3": "cup"
+  },
+  "born": {
+    "word": "born",
+    "meaning_zh": "出生（于）",
+    "example_en": "I was born in Beijing.",
+    "example_zh": "我出生在北京。",
+    "similar1": "was born",
+    "similar2": "born in",
+    "similar3": "born on"
+  },
+  "eat": {
+    "word": "eat",
+    "meaning_zh": "吃",
+    "example_en": "We eat rice every day.",
+    "example_zh": "我们每天吃米饭。",
+    "similar1": "eat food",
+    "similar2": "eat breakfast",
+    "similar3": "eat lunch"
+  },
+  "cook": {
+    "word": "cook",
+    "meaning_zh": "做饭",
+    "example_en": "My mother cooks dinner at home.",
+    "example_zh": "我妈妈在家做晚饭。",
+    "similar1": "cook food",
+    "similar2": "cook dinner",
+    "similar3": "cook rice"
+  },
+  "live": {
+    "word": "live",
+    "meaning_zh": "住，居住",
+    "example_en": "He lives in a small bedroom.",
+    "example_zh": "他住在一间小卧室里。",
+    "similar1": "live in",
+    "similar2": "live with",
+    "similar3": "live here"
+  },
+  "lock": {
+    "word": "lock",
+    "meaning_zh": "锁上",
+    "example_en": "She locks the door at night.",
+    "example_zh": "她晚上锁门。",
+    "similar1": "lock the door",
+    "similar2": "lock up",
+    "similar3": "lock it"
+  },
+  "brave": {
+    "word": "brave",
+    "meaning_zh": "勇敢的",
+    "example_en": "He is very brave in class.",
+    "example_zh": "他在课堂上很勇敢。",
+    "similar1": "braver",
+    "similar2": "be brave",
+    "similar3": "fear"
+  },
+  "anger": {
+    "word": "anger",
+    "meaning_zh": "愤怒",
+    "example_en": "His face shows anger.",
+    "example_zh": "他的脸上露出愤怒。",
+    "similar1": "angry",
+    "similar2": "feel anger",
+    "similar3": "with anger"
+  },
+  "age": {
+    "word": "age",
+    "meaning_zh": "年龄",
+    "example_en": "Her age is twelve years old.",
+    "example_zh": "她十二岁。",
+    "similar1": "year",
+    "similar2": "old",
+    "similar3": "birthday"
+  },
+  "cause": {
+    "word": "cause",
+    "meaning_zh": "原因",
+    "example_en": "The rain is the cause of the delay.",
+    "example_zh": "下雨是延误的原因。",
+    "similar1": "because",
+    "similar2": "the cause of",
+    "similar3": "no cause"
+  },
+  "bad": {
+    "word": "bad",
+    "meaning_zh": "坏事",
+    "example_en": "He does not do bad.",
+    "example_zh": "他不做坏事。",
+    "similar1": "good",
+    "similar2": "do bad things",
+    "similar3": "a bad thing"
+  },
+  "blue": {
+    "word": "blue",
+    "meaning_zh": "蓝色（颜色）",
+    "example_en": "Her dress is blue.",
+    "example_zh": "她的裙子是蓝色的。",
+    "similar1": "red",
+    "similar2": "blue sky",
+    "similar3": "a blue pen"
+  },
+  "blind": {
+    "word": "blind",
+    "meaning_zh": "盲人（名词）",
+    "example_en": "Li is blind.",
+    "example_zh": "李是盲人。",
+    "similar1": "deaf",
+    "similar2": "see",
+    "similar3": "eyes"
+  },
+  "body": {
+    "word": "body",
+    "meaning_zh": "身体",
+    "example_en": "My body is tired.",
+    "example_zh": "我的身体很累。",
+    "similar1": "head",
+    "similar2": "hand",
+    "similar3": "face"
+  },
+  "brown": {
+    "word": "brown",
+    "meaning_zh": "棕色（名词）",
+    "example_en": "Her hair is brown.",
+    "example_zh": "她的头发是棕色的。",
+    "similar1": "red",
+    "similar2": "blue",
+    "similar3": "color"
+  },
+  "color": {
+    "word": "color",
+    "meaning_zh": "颜色",
+    "example_en": "Red is a color.",
+    "example_zh": "红色是一种颜色。",
+    "similar1": "brown",
+    "similar2": "green",
+    "similar3": "paint"
+  },
+  "crazy": {
+    "word": "crazy",
+    "meaning_zh": "疯子（名词）",
+    "example_en": "He is not crazy.",
+    "example_zh": "他不是疯子。",
+    "similar1": "silly",
+    "similar2": "fool",
+    "similar3": "person"
+  },
+  "ease": {
+    "word": "ease",
+    "meaning_zh": "轻松（名词）",
+    "example_en": "She does it with ease.",
+    "example_zh": "她做这件事很轻松。",
+    "similar1": "help",
+    "similar2": "way",
+    "similar3": "fun"
+  },
+  "hand": {
+    "word": "hand",
+    "meaning_zh": "手",
+    "example_en": "She washes her hands before eating food.",
+    "example_zh": "她吃饭前洗手。",
+    "similar1": "arm",
+    "similar2": "finger",
+    "similar3": "wrist"
+  },
+  "foot": {
+    "word": "foot",
+    "meaning_zh": "脚",
+    "example_en": "I wash my feet every night before bed.",
+    "example_zh": "我每天睡前都洗脚。",
+    "similar1": "leg",
+    "similar2": "toe",
+    "similar3": "shoe"
+  },
+  "cheek": {
+    "word": "cheek",
+    "meaning_zh": "脸颊",
+    "example_en": "She touches her own cheek softly.",
+    "example_zh": "她轻轻摸着自己的脸颊。",
+    "similar1": "nose",
+    "similar2": "eye",
+    "similar3": "mouth"
+  },
+  "hate": {
+    "word": "hate",
+    "meaning_zh": "憎恨；厌恶",
+    "example_en": "She hates cold weather and snow.",
+    "example_zh": "她讨厌寒冷的天气和雪。",
+    "similar1": "dislike",
+    "similar2": "loathe",
+    "similar3": "despise"
+  },
+  "harm": {
+    "word": "harm",
+    "meaning_zh": "伤害；损害",
+    "example_en": "Smoking can harm your health.",
+    "example_zh": "吸烟会损害你的健康。",
+    "similar1": "hurt",
+    "similar2": "risk",
+    "similar3": "pain"
+  },
+  "care": {
+    "word": "care",
+    "meaning_zh": "关心；照料",
+    "example_en": "My mother shows great care for me.",
+    "example_zh": "我妈妈非常关心我。",
+    "similar1": "help",
+    "similar2": "love",
+    "similar3": "support"
+  },
+  "eager": {
+    "word": "eager",
+    "meaning_zh": "渴望的（形容词）",
+    "example_en": "I am eager to learn English.",
+    "example_zh": "我渴望学英语。",
+    "similar1": "excited",
+    "similar2": "want to",
+    "similar3": "look forward to"
+  },
+  "hello": {
+    "word": "hello",
+    "meaning_zh": "你好（问候语）",
+    "example_en": "Hello, Li Hua!",
+    "example_zh": "你好，李华！",
+    "similar1": "hi",
+    "similar2": "good morning",
+    "similar3": "say hello"
+  },
+  "heavy": {
+    "word": "heavy",
+    "meaning_zh": "重的",
+    "example_en": "This bag is heavy.",
+    "example_zh": "这个包很重。",
+    "similar1": "light",
+    "similar2": "carry a heavy bag",
+    "similar3": "feel heavy"
+  },
+  "main": {
+    "word": "main",
+    "meaning_zh": "主要的",
+    "example_en": "Water is the main drink.",
+    "example_zh": "水是主要的饮料。",
+    "similar1": "most important",
+    "similar2": "main food",
+    "similar3": "main idea"
+  },
+  "eye": {
+    "word": "eye",
+    "meaning_zh": "眼睛",
+    "example_en": "My eye hurts today.",
+    "example_zh": "我今天眼睛疼。",
+    "similar1": "eyes",
+    "similar2": "open your eyes",
+    "similar3": "close your eye"
+  },
+  "dream": {
+    "word": "dream",
+    "meaning_zh": "梦想",
+    "example_en": "She has a dream to be a doctor.",
+    "example_zh": "她有一个当医生的梦想。",
+    "similar1": "dreams",
+    "similar2": "have a dream",
+    "similar3": "dream of"
+  },
+  "lover": {
+    "word": "lover",
+    "meaning_zh": "爱好者",
+    "example_en": "He is a music lover.",
+    "example_zh": "他是个音乐爱好者。",
+    "similar1": "fan",
+    "similar2": "like music",
+    "similar3": "hero"
+  },
+  "hero": {
+    "word": "hero",
+    "meaning_zh": "英雄",
+    "example_en": "Li Hua is a hero.",
+    "example_zh": "李华是一位英雄。",
+    "similar1": "heroine",
+    "similar2": "brave person",
+    "similar3": "teacher"
+  },
+  "few": {
+    "word": "few",
+    "meaning_zh": "很少（人/物），表示否定",
+    "example_en": "Few students like math.",
+    "example_zh": "很少有学生喜欢数学。",
+    "similar1": "many",
+    "similar2": "a few",
+    "similar3": "no"
+  },
+  "head": {
+    "word": "head",
+    "meaning_zh": "头",
+    "example_en": "My head hurts.",
+    "example_zh": "我的头疼。",
+    "similar1": "hand",
+    "similar2": "eye",
+    "similar3": "foot"
+  },
+  "luck": {
+    "word": "luck",
+    "meaning_zh": "运气",
+    "example_en": "Good luck is with us.",
+    "example_zh": "好运在我们这边。",
+    "similar1": "good luck",
+    "similar2": "bad luck",
+    "similar3": "hope"
+  },
+  "goal": {
+    "word": "goal",
+    "meaning_zh": "目标",
+    "example_en": "His goal is to pass the exam.",
+    "example_zh": "他的目标是通过考试。",
+    "similar1": "plan",
+    "similar2": "idea",
+    "similar3": "dream"
+  },
+  "face": {
+    "word": "face",
+    "meaning_zh": "脸；表面",
+    "example_en": "She washes her face every morning.",
+    "example_zh": "她每天早上洗脸。",
+    "similar1": "hand",
+    "similar2": "eye",
+    "similar3": "mouth"
+  },
+  "glad": {
+    "word": "glad",
+    "meaning_zh": "高兴的",
+    "example_en": "I am glad to see you today.",
+    "example_zh": "今天见到你我很高兴。",
+    "similar1": "happy",
+    "similar2": "pleased",
+    "similar3": "excited"
+  },
+  "man": {
+    "word": "man",
+    "meaning_zh": "成年男性",
+    "example_en": "The man walks to work every day.",
+    "example_zh": "这位男士每天步行上班。",
+    "similar1": "woman",
+    "similar2": "boy",
+    "similar3": "girl"
+  },
+  "hope": {
+    "word": "hope",
+    "meaning_zh": "希望（名词）",
+    "example_en": "Her hope is to be a teacher.",
+    "example_zh": "她的愿望是当一名老师。",
+    "similar1": "dream",
+    "similar2": "wish",
+    "similar3": "plan"
+  },
+  "poor": {
+    "word": "poor",
+    "meaning_zh": "穷人",
+    "example_en": "Many poor live in that area.",
+    "example_zh": "许多穷人住在那个地区。",
+    "similar1": "homeless",
+    "similar2": "needy",
+    "similar3": "refugee"
+  },
+  "grey": {
+    "word": "grey",
+    "meaning_zh": "灰色",
+    "example_en": "Her coat is soft grey wool.",
+    "example_zh": "她的外套是柔软的灰色羊毛。",
+    "similar1": "gray",
+    "similar2": "silver",
+    "similar3": "ash"
+  },
+  "kind": {
+    "word": "kind",
+    "meaning_zh": "种类，类型",
+    "example_en": "We have three kind of apples.",
+    "example_zh": "我们有三种苹果。",
+    "similar1": "type",
+    "similar2": "sort",
+    "similar3": "kinds of food"
+  },
+  "love": {
+    "word": "love",
+    "meaning_zh": "爱，热爱",
+    "example_en": "She loves her dog.",
+    "example_zh": "她爱她的狗。",
+    "similar1": "like",
+    "similar2": "care about",
+    "similar3": "family love"
+  },
+  "noise": {
+    "word": "noise",
+    "meaning_zh": "噪音",
+    "example_en": "The noise is too loud.",
+    "example_zh": "噪音太大了。",
+    "similar1": "sound",
+    "similar2": "quiet",
+    "similar3": "make noise"
+  },
+  "loss": {
+    "word": "loss",
+    "meaning_zh": "损失",
+    "example_en": "He feels sad after the loss.",
+    "example_zh": "他在损失后感到难过。",
+    "similar1": "lose",
+    "similar2": "win",
+    "similar3": "big loss"
+  },
+  "host": {
+    "word": "host",
+    "meaning_zh": "主人；东道主",
+    "example_en": "Li is the host today.",
+    "example_zh": "李是今天的主人。",
+    "similar1": "guest",
+    "similar2": "br",
+    "similar3": "host a party"
+  },
+  "rich": {
+    "word": "rich",
+    "meaning_zh": "富人",
+    "example_en": "Rich people live in big houses.",
+    "example_zh": "富人住在大房子里。",
+    "similar1": "poor",
+    "similar2": "money",
+    "similar3": "rich family"
+  },
+  "high": {
+    "word": "high",
+    "meaning_zh": "高度；高地",
+    "example_en": "The kite flies high in the sky.",
+    "example_zh": "风筝在天空中飞得很高。",
+    "similar1": "low",
+    "similar2": "tall",
+    "similar3": "long"
+  },
+  "old": {
+    "word": "old",
+    "meaning_zh": "老的；年纪大的",
+    "example_en": "The man is old but kind.",
+    "example_zh": "这位老人很和蔼。",
+    "similar1": "older",
+    "similar2": "young",
+    "similar3": "age"
+  },
+  "leg": {
+    "word": "leg",
+    "meaning_zh": "腿",
+    "example_en": "My leg hurts after the long run.",
+    "example_zh": "长跑后我的腿疼。",
+    "similar1": "arm",
+    "similar2": "foot",
+    "similar3": "knee"
+  },
+  "pride": {
+    "word": "pride",
+    "meaning_zh": "自豪",
+    "example_en": "Her pride shows when she wins.",
+    "example_zh": "她获胜时流露出自豪。",
+    "similar1": "joy",
+    "similar2": "praise",
+    "similar3": "honor"
+  },
+  "nose": {
+    "word": "nose",
+    "meaning_zh": "鼻子",
+    "example_en": "She touches her nose gently.",
+    "example_zh": "她轻轻地摸自己的鼻子。",
+    "similar1": "eye",
+    "similar2": "ear",
+    "similar3": "mouth"
+  },
+  "scare": {
+    "word": "scare",
+    "meaning_zh": "惊吓",
+    "example_en": "The loud noise gives me a scare.",
+    "example_zh": "巨大的噪音吓了我一跳。",
+    "similar1": "shock",
+    "similar2": "fright",
+    "similar3": "surprise"
+  },
+  "risk": {
+    "word": "risk",
+    "meaning_zh": "风险；危险",
+    "example_en": "Smoking is a serious health risk.",
+    "example_zh": "吸烟是一种严重的健康风险。",
+    "similar1": "danger",
+    "similar2": "hazard",
+    "similar3": "threat"
+  },
+  "self": {
+    "word": "self",
+    "meaning_zh": "自身；本人",
+    "example_en": "He believes in himself all the time.",
+    "example_zh": "他一直相信自己。",
+    "similar1": "himself",
+    "similar2": "myself",
+    "similar3": "yourself"
+  },
+  "nice": {
+    "word": "nice",
+    "meaning_zh": "令人愉快的人",
+    "example_en": "She is a really nice at the party.",
+    "example_zh": "她在派对上是个很讨人喜欢的人。",
+    "similar1": "friend",
+    "similar2": "person",
+    "similar3": "guy"
+  },
+  "quick": {
+    "word": "quick",
+    "meaning_zh": "迅速的（形容词）",
+    "example_en": "He is a quick runner.",
+    "example_zh": "他是个跑得很快的人。",
+    "similar1": "fast",
+    "similar2": "slow",
+    "similar3": "easy"
+  },
+  "same": {
+    "word": "same",
+    "meaning_zh": "相同的",
+    "example_en": "We wear the same blue shirt.",
+    "example_zh": "我们穿同一件蓝色衬衫。",
+    "similar1": "equal",
+    "similar2": "identical",
+    "similar3": "different"
+  },
+  "much": {
+    "word": "much",
+    "meaning_zh": "许多（用于不可数名词）",
+    "example_en": "We do not eat much sugar.",
+    "example_zh": "我们不吃太多糖。",
+    "similar1": "little",
+    "similar2": "some",
+    "similar3": "a lot"
+  },
+  "pain": {
+    "word": "pain",
+    "meaning_zh": "疼痛",
+    "example_en": "My head has pain.",
+    "example_zh": "我的头疼。",
+    "similar1": "headache",
+    "similar2": "hurt",
+    "similar3": "feel bad"
+  },
+  "oh": {
+    "word": "oh",
+    "meaning_zh": "哦（表示惊讶或醒悟）",
+    "example_en": "Oh, I see.",
+    "example_zh": "哦，我明白了。",
+    "similar1": "ah",
+    "similar2": "uh-huh",
+    "similar3": "yes"
+  },
+  "sound": {
+    "word": "sound",
+    "meaning_zh": "声音",
+    "example_en": "The dog makes a loud sound.",
+    "example_zh": "狗发出很大的声音。",
+    "similar1": "noise",
+    "similar2": "voice",
+    "similar3": "hear"
+  },
+  "style": {
+    "word": "style",
+    "meaning_zh": "风格",
+    "example_en": "Her clothes show her style.",
+    "example_zh": "她的衣服显示她的风格。",
+    "similar1": "way",
+    "similar2": "look",
+    "similar3": "clothes"
+  },
+  "okay": {
+    "word": "okay",
+    "meaning_zh": "好的（表示同意）",
+    "example_en": "Okay, I go now.",
+    "example_zh": "好的，我现在走。",
+    "similar1": "yes",
+    "similar2": "all right",
+    "similar3": "sure"
+  },
+  "top": {
+    "word": "top",
+    "meaning_zh": "顶部",
+    "example_en": "The book is on the top of the box.",
+    "example_zh": "书在盒子的顶部。",
+    "similar1": "top of",
+    "similar2": "up",
+    "similar3": "on"
+  },
+  "sigh": {
+    "word": "sigh",
+    "meaning_zh": "叹息（声）",
+    "example_en": "She gives a sigh.",
+    "example_zh": "她叹了口气。",
+    "similar1": "breath",
+    "similar2": "yawn",
+    "similar3": "cry"
+  },
+  "rough": {
+    "word": "rough",
+    "meaning_zh": "粗糙的表面",
+    "example_en": "The rock is rough.",
+    "example_zh": "这块石头很粗糙。",
+    "similar1": "smooth",
+    "similar2": "stone",
+    "similar3": "hand"
+  },
+  "tooth": {
+    "word": "tooth",
+    "meaning_zh": "牙齿",
+    "example_en": "My tooth hurts.",
+    "example_zh": "我的牙疼。",
+    "similar1": "teeth",
+    "similar2": "mouth",
+    "similar3": "brush my teeth"
+  },
+  "truth": {
+    "word": "truth",
+    "meaning_zh": "事实；真相",
+    "example_en": "He tells the truth.",
+    "example_zh": "他讲真话。",
+    "similar1": "lie",
+    "similar2": "say",
+    "similar3": "word"
+  },
+  "smell": {
+    "word": "smell",
+    "meaning_zh": "气味",
+    "example_en": "The food has a good smell.",
+    "example_zh": "这食物有香味。",
+    "similar1": "taste",
+    "similar2": "nose",
+    "similar3": "flower"
+  },
+  "size": {
+    "word": "size",
+    "meaning_zh": "尺寸；大小",
+    "example_en": "My shoes are size 38.",
+    "example_zh": "我的鞋是38码。",
+    "similar1": "small",
+    "similar2": "big",
+    "similar3": "measure"
+  },
+  "true": {
+    "word": "true",
+    "meaning_zh": "真实；事实",
+    "example_en": "It is true that he likes apples.",
+    "example_zh": "他喜欢苹果，这是真的。",
+    "similar1": "false",
+    "similar2": "right",
+    "similar3": "fact"
+  },
+  "worth": {
+    "word": "worth",
+    "meaning_zh": "价值；值……钱",
+    "example_en": "This book is worth five yuan.",
+    "example_zh": "这本书值五元。",
+    "similar1": "cost",
+    "similar2": "value",
+    "similar3": "price"
+  },
+  "wipe": {
+    "word": "wipe",
+    "meaning_zh": "擦；擦拭",
+    "example_en": "She wipes the table with a cloth.",
+    "example_zh": "她用布擦桌子。",
+    "similar1": "clean",
+    "similar2": "dry",
+    "similar3": "wash"
+  },
+  "tall": {
+    "word": "tall",
+    "meaning_zh": "高的（指人）",
+    "example_en": "Li Hua is tall and strong.",
+    "example_zh": "李华又高又壮。",
+    "similar1": "short",
+    "similar2": "height",
+    "similar3": "grow"
+  },
+  "big": {
+    "word": "big",
+    "meaning_zh": "大的",
+    "example_en": "This apple is big and red.",
+    "example_zh": "这个苹果又大又红。",
+    "similar1": "large",
+    "similar2": "huge",
+    "similar3": "small"
+  },
+  "lazy": {
+    "word": "lazy",
+    "meaning_zh": "懒惰的",
+    "example_en": "He feels lazy on cold winter mornings.",
+    "example_zh": "他在寒冷的冬日早晨感觉懒洋洋的。",
+    "similar1": "tired",
+    "similar2": "sleepy",
+    "similar3": "slow"
+  },
+  "sad": {
+    "word": "sad",
+    "meaning_zh": "悲伤的",
+    "example_en": "She feels sad when he leaves.",
+    "example_zh": "他离开时她感到悲伤。",
+    "similar1": "upset",
+    "similar2": "glad",
+    "similar3": "tired"
+  },
+  "rude": {
+    "word": "rude",
+    "meaning_zh": "粗鲁的",
+    "example_en": "It is rude to shout at others.",
+    "example_zh": "对别人大喊是粗鲁的。",
+    "similar1": "polite",
+    "similar2": "kind",
+    "similar3": "shy"
+  },
+  "weak": {
+    "word": "weak",
+    "meaning_zh": "虚弱的",
+    "example_en": "She feels weak after the flu.",
+    "example_zh": "她流感后感到虚弱。",
+    "similar1": "tired",
+    "similar2": "sick",
+    "similar3": "feeble"
+  },
+  "cry": {
+    "word": "cry",
+    "meaning_zh": "哭",
+    "example_en": "Babies cry when they feel hungry or tired.",
+    "example_zh": "婴儿饿了或累了就会哭。",
+    "similar1": "laugh",
+    "similar2": "shout",
+    "similar3": "sob"
+  },
+  "cool": {
+    "word": "cool",
+    "meaning_zh": "使变凉；降温",
+    "example_en": "We cool the drink with ice cubes.",
+    "example_zh": "我们用冰块给饮料降温。",
+    "similar1": "chill",
+    "similar2": "freeze",
+    "similar3": "cool down"
+  },
+  "feel": {
+    "word": "feel",
+    "meaning_zh": "感觉",
+    "example_en": "I feel happy when I see my friends.",
+    "example_zh": "见到朋友时我感到开心。",
+    "similar1": "look",
+    "similar2": "seem",
+    "similar3": "sound"
+  },
+  "felt": {
+    "word": "felt",
+    "meaning_zh": "感觉（feel过去式）",
+    "example_en": "I felt happy when I saw my friend.",
+    "example_zh": "我见到朋友时感到开心。",
+    "similar1": "felt",
+    "similar2": "thought",
+    "similar3": "knew"
+  },
+  "calm": {
+    "word": "calm",
+    "meaning_zh": "使平静；使镇定",
+    "example_en": "He calms his nerves before the test.",
+    "example_zh": "他考试前让自己平静下来。",
+    "similar1": "relax",
+    "similar2": "soothe",
+    "similar3": "settle"
+  },
+  "hurt": {
+    "word": "hurt",
+    "meaning_zh": "使受伤；感到疼痛",
+    "example_en": "He hurts his knee playing soccer.",
+    "example_zh": "他踢足球时伤了膝盖。",
+    "similar1": "cut",
+    "similar2": "break",
+    "similar3": "burn"
+  },
+  "fear": {
+    "word": "fear",
+    "meaning_zh": "害怕",
+    "example_en": "He fears loud noises at night.",
+    "example_zh": "他晚上害怕响声。",
+    "similar1": "afraid",
+    "similar2": "scared",
+    "similar3": "worry"
+  },
+  "hug": {
+    "word": "hug",
+    "meaning_zh": "拥抱",
+    "example_en": "She hugs her little brother.",
+    "example_zh": "她拥抱她的小弟弟。",
+    "similar1": "kiss",
+    "similar2": "hold",
+    "similar3": "pat"
+  },
+  "tear": {
+    "word": "tear",
+    "meaning_zh": "撕；扯",
+    "example_en": "Do not tear the book.",
+    "example_zh": "不要撕书。",
+    "similar1": "tore",
+    "similar2": "tear up",
+    "similar3": "book"
+  },
+  "shy": {
+    "word": "shy",
+    "meaning_zh": "害羞的",
+    "example_en": "She feels shy when she meets new people.",
+    "example_zh": "她见到陌生人时会害羞。",
+    "similar1": "quiet",
+    "similar2": "nervous",
+    "similar3": "shy"
+  },
+  "bag": {
+    "word": "bag",
+    "meaning_zh": "袋子",
+    "example_en": "I have a red bag.",
+    "example_zh": "我有一个红色的袋子。",
+    "similar1": "bags",
+    "similar2": "take a bag",
+    "similar3": "food bag"
+  },
+  "bags": {
+    "word": "bags",
+    "meaning_zh": "袋子（复数）",
+    "example_en": "We use paper bags.",
+    "example_zh": "我们用纸袋。",
+    "similar1": "bag",
+    "similar2": "plastic bags",
+    "similar3": "carry bags"
+  },
+  "bill": {
+    "word": "bill",
+    "meaning_zh": "账单",
+    "example_en": "The waiter gives us the bill.",
+    "example_zh": "服务员把账单给我们。",
+    "similar1": "pay the bill",
+    "similar2": "look at the bill",
+    "similar3": "restaurant bill"
+  },
+  "cake": {
+    "word": "cake",
+    "meaning_zh": "蛋糕",
+    "example_en": "She eats a small cake.",
+    "example_zh": "她吃一小块蛋糕。",
+    "similar1": "cakes",
+    "similar2": "birthday cake",
+    "similar3": "eat cake"
+  },
+  "favor": {
+    "word": "favor",
+    "meaning_zh": "帮忙",
+    "example_en": "Can you do me a favor?",
+    "example_zh": "你能帮我个忙吗？",
+    "similar1": "do a favor",
+    "similar2": "ask a favor",
+    "similar3": "favor box"
+  },
+  "box": {
+    "word": "box",
+    "meaning_zh": "盒子",
+    "example_en": "He puts food in a box.",
+    "example_zh": "他把食物放进一个盒子里。",
+    "similar1": "boxes",
+    "similar2": "lunch box",
+    "similar3": "take a box"
+  },
+  "buyer": {
+    "word": "buyer",
+    "meaning_zh": "买主",
+    "example_en": "The buyer pays for the new book.",
+    "example_zh": "买主付钱买了这本新书。",
+    "similar1": "seller",
+    "similar2": "customer",
+    "similar3": "shopper"
+  },
+  "cap": {
+    "word": "cap",
+    "meaning_zh": "帽子；盖子",
+    "example_en": "She wears a red cap on sunny days.",
+    "example_zh": "晴天她戴一顶红色帽子。",
+    "similar1": "hat",
+    "similar2": "shirt",
+    "similar3": "shoes"
+  },
+  "diet": {
+    "word": "diet",
+    "meaning_zh": "饮食",
+    "example_en": "She eats a healthy diet every day.",
+    "example_zh": "她每天吃健康饮食。",
+    "similar1": "food",
+    "similar2": "meal",
+    "similar3": "nutrition"
+  },
+  "fish": {
+    "word": "fish",
+    "meaning_zh": "鱼；鱼类",
+    "example_en": "We eat fish every week.",
+    "example_zh": "我们每周都吃鱼。",
+    "similar1": "meat",
+    "similar2": "egg",
+    "similar3": "rice"
+  },
+  "food": {
+    "word": "food",
+    "meaning_zh": "食物",
+    "example_en": "We eat healthy food daily.",
+    "example_zh": "我们每天吃健康的食物。",
+    "similar1": "fruit",
+    "similar2": "meat",
+    "similar3": "rice"
+  },
+  "hat": {
+    "word": "hat",
+    "meaning_zh": "帽子",
+    "example_en": "I wear a hat in summer.",
+    "example_zh": "夏天我戴一顶帽子。",
+    "similar1": "coat",
+    "similar2": "cap",
+    "similar3": "wear a hat"
+  },
+  "candy": {
+    "word": "candy",
+    "meaning_zh": "糖果",
+    "example_en": "She eats one candy after class.",
+    "example_zh": "她下课后吃一颗糖果。",
+    "similar1": "food",
+    "similar2": "sweet",
+    "similar3": "eat candy"
+  },
+  "cost": {
+    "word": "cost",
+    "meaning_zh": "花费（钱）",
+    "example_en": "This coat costs ten yuan.",
+    "example_zh": "这件外套十元。",
+    "similar1": "costs ten yuan",
+    "similar2": "price",
+    "similar3": "buy"
+  },
+  "coat": {
+    "word": "coat",
+    "meaning_zh": "外套",
+    "example_en": "He puts on his coat in winter.",
+    "example_zh": "冬天他穿上他的外套。",
+    "similar1": "hat",
+    "similar2": "jacket",
+    "similar3": "wear a coat"
+  },
+  "chunk": {
+    "word": "chunk",
+    "meaning_zh": "一大块",
+    "example_en": "There is a chunk of candy on the table.",
+    "example_zh": "桌上有一大块糖果。",
+    "similar1": "piece",
+    "similar2": "bit",
+    "similar3": "big chunk"
+  },
+  "gift": {
+    "word": "gift",
+    "meaning_zh": "礼物",
+    "example_en": "My mother gives me a gift.",
+    "example_zh": "我妈妈送我一份礼物。",
+    "similar1": "present",
+    "similar2": "give a gift",
+    "similar3": "birthday gift"
+  },
+  "grain": {
+    "word": "grain",
+    "meaning_zh": "谷物",
+    "example_en": "Rice is a kind of grain.",
+    "example_zh": "大米是一种谷物。",
+    "similar1": "wheat",
+    "similar2": "corn",
+    "similar3": "food grain"
+  },
+  "shirt": {
+    "word": "shirt",
+    "meaning_zh": "衬衫",
+    "example_en": "He wears a blue shirt.",
+    "example_zh": "他穿一件蓝色衬衫。",
+    "similar1": "T-shirt",
+    "similar2": "wear a shirt",
+    "similar3": "clothes"
+  },
+  "price": {
+    "word": "price",
+    "meaning_zh": "价格",
+    "example_en": "The price is ten yuan.",
+    "example_zh": "价格是十元。",
+    "similar1": "high price",
+    "similar2": "low price",
+    "similar3": "what is the price"
+  },
+  "sweet": {
+    "word": "sweet",
+    "meaning_zh": "糖果",
+    "example_en": "I eat one sweet after lunch.",
+    "example_zh": "我午饭后吃一颗糖果。",
+    "similar1": "candy",
+    "similar2": "eat a sweet",
+    "similar3": "chocolate sweet"
+  },
+  "shoe": {
+    "word": "shoe",
+    "meaning_zh": "鞋子",
+    "example_en": "My left shoe is under the bed.",
+    "example_zh": "我的左脚鞋在床下。",
+    "similar1": "sock",
+    "similar2": "boot",
+    "similar3": "sandals"
+  },
+  "taste": {
+    "word": "taste",
+    "meaning_zh": "味道",
+    "example_en": "This apple has a sweet taste.",
+    "example_zh": "这个苹果有甜味。",
+    "similar1": "smell",
+    "similar2": "sound",
+    "similar3": "feel"
+  },
+  "tray": {
+    "word": "tray",
+    "meaning_zh": "托盘",
+    "example_en": "She carries food on a plastic tray.",
+    "example_zh": "她用一个塑料托盘端食物。",
+    "similar1": "plate",
+    "similar2": "bowl",
+    "similar3": "cup"
+  },
+  "salt": {
+    "word": "salt",
+    "meaning_zh": "盐",
+    "example_en": "We add salt to the food at dinner.",
+    "example_zh": "我们晚餐时往食物里加盐。",
+    "similar1": "sugar",
+    "similar2": "pepper",
+    "similar3": "oil"
+  },
+  "tie": {
+    "word": "tie",
+    "meaning_zh": "平局；打平",
+    "example_en": "The game ends in a tie today.",
+    "example_zh": "今天这场比赛以平局结束。",
+    "similar1": "draw",
+    "similar2": "even",
+    "similar3": "standoff"
+  },
+  "deal": {
+    "word": "deal",
+    "meaning_zh": "处理（问题或事情）",
+    "example_en": "We deal with problems at school.",
+    "example_zh": "我们在学校处理问题。",
+    "similar1": "solve",
+    "similar2": "handle",
+    "similar3": "deal with a problem"
+  },
+  "buy": {
+    "word": "buy",
+    "meaning_zh": "买",
+    "example_en": "I buy food at the shop.",
+    "example_zh": "我在商店买食物。",
+    "similar1": "sell",
+    "similar2": "pay for food",
+    "similar3": "go shopping"
+  },
+  "shop": {
+    "word": "shop",
+    "meaning_zh": "购物",
+    "example_en": "She shops for fruit on Saturday.",
+    "example_zh": "她星期六买水果。",
+    "similar1": "buy",
+    "similar2": "go shopping",
+    "similar3": "shop at the market"
+  },
+  "sell": {
+    "word": "sell",
+    "meaning_zh": "卖",
+    "example_en": "He sells drinks in his shop.",
+    "example_zh": "他在店里卖饮料。",
+    "similar1": "buy",
+    "similar2": "sell food",
+    "similar3": "shop"
+  },
+  "pay": {
+    "word": "pay",
+    "meaning_zh": "付钱",
+    "example_en": "We pay for milk with money.",
+    "example_zh": "我们用钱付牛奶的钱。",
+    "similar1": "buy",
+    "similar2": "pay for food",
+    "similar3": "pay by phone"
+  },
+  "dark": {
+    "word": "dark",
+    "meaning_zh": "黑暗；暗处",
+    "example_en": "He sits in the dark every night.",
+    "example_zh": "他每晚都坐在黑暗里。",
+    "similar1": "darkness",
+    "similar2": "shadow",
+    "similar3": "gloom"
+  },
+  "beach": {
+    "word": "beach",
+    "meaning_zh": "海滩",
+    "example_en": "We walk on the beach every sunny day.",
+    "example_zh": "每个晴天我们都去海滩散步。",
+    "similar1": "shore",
+    "similar2": "coast",
+    "similar3": "sand"
+  },
+  "bird": {
+    "word": "bird",
+    "meaning_zh": "鸟",
+    "example_en": "A blue bird sings in the tree.",
+    "example_zh": "一只蓝色的鸟在树上唱歌。",
+    "similar1": "cat",
+    "similar2": "dog",
+    "similar3": "fish"
+  },
+  "camp": {
+    "word": "camp",
+    "meaning_zh": "营地",
+    "example_en": "We go to summer camp every year.",
+    "example_zh": "我们每年去夏令营。",
+    "similar1": "tent",
+    "similar2": "cabin",
+    "similar3": "outdoors"
+  },
+  "cold": {
+    "word": "cold",
+    "meaning_zh": "寒冷",
+    "example_en": "Cold makes my nose turn red.",
+    "example_zh": "寒冷让我的鼻子变红。",
+    "similar1": "heat",
+    "similar2": "wind",
+    "similar3": "snow"
+  },
+  "dog": {
+    "word": "dog",
+    "meaning_zh": "狗",
+    "example_en": "My dog runs fast in the park.",
+    "example_zh": "我的狗在公园里跑得很快。",
+    "similar1": "pet",
+    "similar2": "puppy",
+    "similar3": "animal"
+  },
+  "deep": {
+    "word": "deep",
+    "meaning_zh": "深（度）",
+    "example_en": "The well is very deep.",
+    "example_zh": "这口井很深。",
+    "similar1": "deeply",
+    "similar2": "shallow",
+    "similar3": "water"
+  },
+  "earth": {
+    "word": "earth",
+    "meaning_zh": "地球",
+    "example_en": "We live on the earth.",
+    "example_zh": "我们住在地球上。",
+    "similar1": "moon",
+    "similar2": "sun",
+    "similar3": "sky"
+  },
+  "flat": {
+    "word": "flat",
+    "meaning_zh": "平地",
+    "example_en": "The farm is on a flat.",
+    "example_zh": "农场在一片平地上。",
+    "similar1": "hill",
+    "similar2": "mountain",
+    "similar3": "land"
+  },
+  "hill": {
+    "word": "hill",
+    "meaning_zh": "小山",
+    "example_en": "We walk up the hill.",
+    "example_zh": "我们爬上那座小山。",
+    "similar1": "mountain",
+    "similar2": "valley",
+    "similar3": "flat"
+  },
+  "ice": {
+    "word": "ice",
+    "meaning_zh": "冰",
+    "example_en": "Water turns to ice in winter.",
+    "example_zh": "冬天水变成冰。",
+    "similar1": "snow",
+    "similar2": "cold",
+    "similar3": "water"
+  },
+  "land": {
+    "word": "land",
+    "meaning_zh": "陆地",
+    "example_en": "Birds fly over the land.",
+    "example_zh": "鸟儿飞过陆地。",
+    "similar1": "sea",
+    "similar2": "earth",
+    "similar3": "hill"
+  },
+  "field": {
+    "word": "field",
+    "meaning_zh": "田野；场地",
+    "example_en": "We play football in the field.",
+    "example_zh": "我们在田野里踢足球。",
+    "similar1": "farm",
+    "similar2": "grass",
+    "similar3": "play football"
+  },
+  "hole": {
+    "word": "hole",
+    "meaning_zh": "洞",
+    "example_en": "There is a small hole in the wall.",
+    "example_zh": "墙上有一个小洞。",
+    "similar1": "ground",
+    "similar2": "dig a hole",
+    "similar3": "mouse"
+  },
+  "horse": {
+    "word": "horse",
+    "meaning_zh": "马",
+    "example_en": "My uncle has a brown horse.",
+    "example_zh": "我叔叔有一匹棕色的马。",
+    "similar1": "farm",
+    "similar2": "ride a horse",
+    "similar3": "animal"
+  },
+  "panda": {
+    "word": "panda",
+    "meaning_zh": "熊猫",
+    "example_en": "The panda eats bamboo every day.",
+    "example_zh": "这只熊猫每天吃竹子。",
+    "similar1": "zoo",
+    "similar2": "black and white",
+    "similar3": "bear"
+  },
+  "lake": {
+    "word": "lake",
+    "meaning_zh": "湖",
+    "example_en": "We swim in the lake in summer.",
+    "example_zh": "夏天我们在湖里游泳。",
+    "similar1": "water",
+    "similar2": "go to the lake",
+    "similar3": "boat"
+  },
+  "sand": {
+    "word": "sand",
+    "meaning_zh": "沙子",
+    "example_en": "The children play with sand on the beach.",
+    "example_zh": "孩子们在海滩上玩沙子。",
+    "similar1": "beach",
+    "similar2": "build a sandcastle",
+    "similar3": "hot"
+  },
+  "snow": {
+    "word": "snow",
+    "meaning_zh": "雪",
+    "example_en": "Snow falls quietly on the trees.",
+    "example_zh": "雪静静地落在树上。",
+    "similar1": "rain",
+    "similar2": "ice",
+    "similar3": "winter"
+  },
+  "moon": {
+    "word": "moon",
+    "meaning_zh": "月亮",
+    "example_en": "The moon shines brightly at night.",
+    "example_zh": "月亮在夜晚明亮地照耀。",
+    "similar1": "sun",
+    "similar2": "star",
+    "similar3": "sky"
+  },
+  "past": {
+    "word": "past",
+    "meaning_zh": "过（几分）",
+    "example_en": "The film starts at twenty past seven.",
+    "example_zh": "电影七点二十分开始。",
+    "similar1": "to",
+    "similar2": "after",
+    "similar3": "at"
+  },
+  "ocean": {
+    "word": "ocean",
+    "meaning_zh": "海洋",
+    "example_en": "The ocean is very deep and blue.",
+    "example_zh": "海洋又深又蓝。",
+    "similar1": "sea",
+    "similar2": "wave",
+    "similar3": "shore"
+  },
+  "park": {
+    "word": "park",
+    "meaning_zh": "公园",
+    "example_en": "We play in the park every weekend.",
+    "example_zh": "我们每周末都在公园里玩。",
+    "similar1": "school",
+    "similar2": "home",
+    "similar3": "zoo"
+  },
+  "wave": {
+    "word": "wave",
+    "meaning_zh": "波浪；挥手",
+    "example_en": "The wave hits the big rock.",
+    "example_zh": "海浪拍打大岩石。",
+    "similar1": "wind",
+    "similar2": "sand",
+    "similar3": "beach"
+  },
+  "icy": {
+    "word": "icy",
+    "meaning_zh": "结冰的；滑的",
+    "example_en": "The road is icy in winter.",
+    "example_zh": "冬天道路结冰。",
+    "similar1": "ice",
+    "similar2": "cold",
+    "similar3": "slippery"
+  },
+  "star": {
+    "word": "star",
+    "meaning_zh": "星星",
+    "example_en": "We see stars at night.",
+    "example_zh": "我们晚上看见星星。",
+    "similar1": "moon",
+    "similar2": "sky",
+    "similar3": "night"
+  },
+  "sky": {
+    "word": "sky",
+    "meaning_zh": "天空",
+    "example_en": "The sky is blue today.",
+    "example_zh": "今天天空是蓝色的。",
+    "similar1": "cloud",
+    "similar2": "sun",
+    "similar3": "star"
+  },
+  "wind": {
+    "word": "wind",
+    "meaning_zh": "风",
+    "example_en": "The wind blows strongly today.",
+    "example_zh": "今天风刮得很猛。",
+    "similar1": "blow",
+    "similar2": "cloud",
+    "similar3": "weather"
+  },
+  "sea": {
+    "word": "sea",
+    "meaning_zh": "大海",
+    "example_en": "We go to the sea in summer.",
+    "example_zh": "夏天我们去海边。",
+    "similar1": "ocean",
+    "similar2": "beach",
+    "similar3": "water"
+  },
+  "wild": {
+    "word": "wild",
+    "meaning_zh": "野生的",
+    "example_en": "Lions are wild animals.",
+    "example_zh": "狮子是野生动物。",
+    "similar1": "animal",
+    "similar2": "forest",
+    "similar3": "nature"
+  },
+  "bear": {
+    "word": "bear",
+    "meaning_zh": "忍受，承受",
+    "example_en": "I can't bear the cold.",
+    "example_zh": "我受不了寒冷。",
+    "similar1": "stand",
+    "similar2": "can't stand",
+    "similar3": "feel"
+  },
+  "burn": {
+    "word": "burn",
+    "meaning_zh": "燃烧",
+    "example_en": "The fire burns in the stove.",
+    "example_zh": "炉子里的火在燃烧。",
+    "similar1": "fire",
+    "similar2": "hot",
+    "similar3": "heat"
+  },
+  "dry": {
+    "word": "dry",
+    "meaning_zh": "使变干",
+    "example_en": "We dry our clothes in the sun.",
+    "example_zh": "我们在阳光下晒干衣服。",
+    "similar1": "wet",
+    "similar2": "sun",
+    "similar3": "clothes"
+  },
+  "fall": {
+    "word": "fall",
+    "meaning_zh": "（雨、雪等）落下",
+    "example_en": "Snow falls in winter.",
+    "example_zh": "冬天会下雪。",
+    "similar1": "rain",
+    "similar2": "snow",
+    "similar3": "down"
+  },
+  "tree": {
+    "word": "tree",
+    "meaning_zh": "树",
+    "example_en": "A big tree stands in the park.",
+    "example_zh": "一棵大树立在公园里。",
+    "similar1": "leaves",
+    "similar2": "green",
+    "similar3": "park"
+  },
+  "art": {
+    "word": "art",
+    "meaning_zh": "美术；艺术课",
+    "example_en": "We have art on Monday.",
+    "example_zh": "我们周一有美术课。",
+    "similar1": "music",
+    "similar2": "PE",
+    "similar3": "class"
+  },
+  "band": {
+    "word": "band",
+    "meaning_zh": "乐队",
+    "example_en": "He is in the school band.",
+    "example_zh": "他在校乐队里。",
+    "similar1": "drum",
+    "similar2": "play music",
+    "similar3": "school"
+  },
+  "bike": {
+    "word": "bike",
+    "meaning_zh": "自行车",
+    "example_en": "I ride my bike to school.",
+    "example_zh": "我骑自行车上学。",
+    "similar1": "ride",
+    "similar2": "school",
+    "similar3": "home"
+  },
+  "drum": {
+    "word": "drum",
+    "meaning_zh": "鼓",
+    "example_en": "She plays the drum well.",
+    "example_zh": "她鼓打得很好。",
+    "similar1": "band",
+    "similar2": "play music",
+    "similar3": "music"
+  },
+  "game": {
+    "word": "game",
+    "meaning_zh": "比赛；游戏",
+    "example_en": "We play a game after class.",
+    "example_zh": "我们下课后玩一个游戏。",
+    "similar1": "play",
+    "similar2": "ball game",
+    "similar3": "fun"
+  },
+  "fight": {
+    "word": "fight",
+    "meaning_zh": "打架",
+    "example_en": "They do not fight at school.",
+    "example_zh": "他们在学校不打架。",
+    "similar1": "stop",
+    "similar2": "teacher",
+    "similar3": "bad"
+  },
+  "funny": {
+    "word": "funny",
+    "meaning_zh": "滑稽的人（常指让人发笑者）",
+    "example_en": "He is a funny man.",
+    "example_zh": "他是个滑稽的人。",
+    "similar1": "fun",
+    "similar2": "dance",
+    "similar3": "coach"
+  },
+  "coach": {
+    "word": "coach",
+    "meaning_zh": "教练",
+    "example_en": "Mr Li is our running coach.",
+    "example_zh": "李老师是我们的跑步教练。",
+    "similar1": "gym",
+    "similar2": "funny",
+    "similar3": "dance"
+  },
+  "gym": {
+    "word": "gym",
+    "meaning_zh": "健身房",
+    "example_en": "We go to the gym every day.",
+    "example_zh": "我们每天去健身房。",
+    "similar1": "coach",
+    "similar2": "dance",
+    "similar3": "fun"
+  },
+  "dance": {
+    "word": "dance",
+    "meaning_zh": "舞蹈",
+    "example_en": "Dance is her favourite hobby.",
+    "example_zh": "舞蹈是她最喜爱的爱好。",
+    "similar1": "funny",
+    "similar2": "gym",
+    "similar3": "hobby"
+  },
+  "fun": {
+    "word": "fun",
+    "meaning_zh": "乐趣",
+    "example_en": "Running is great fun.",
+    "example_zh": "跑步很有趣。",
+    "similar1": "funny",
+    "similar2": "hobby",
+    "similar3": "dance"
+  },
+  "hobby": {
+    "word": "hobby",
+    "meaning_zh": "爱好",
+    "example_en": "My hobby is running.",
+    "example_zh": "我的爱好是跑步。",
+    "similar1": "dance",
+    "similar2": "fun",
+    "similar3": "gym"
+  },
+  "cycle": {
+    "word": "cycle",
+    "meaning_zh": "自行车",
+    "example_en": "I ride my cycle to school.",
+    "example_zh": "我骑我的自行车去学校。",
+    "similar1": "bike",
+    "similar2": "ride a cycle",
+    "similar3": "wheel"
+  },
+  "film": {
+    "word": "film",
+    "meaning_zh": "电影（胶片）",
+    "example_en": "We watch a film at home.",
+    "example_zh": "我们在家看一部电影。",
+    "similar1": "movie",
+    "similar2": "watch a film",
+    "similar3": "camera"
+  },
+  "movie": {
+    "word": "movie",
+    "meaning_zh": "电影",
+    "example_en": "She likes this movie.",
+    "example_zh": "她喜欢这部电影。",
+    "similar1": "film",
+    "similar2": "see a movie",
+    "similar3": "theater"
+  },
+  "ring": {
+    "word": "ring",
+    "meaning_zh": "戒指",
+    "example_en": "My mother wears a ring.",
+    "example_zh": "我妈妈戴一枚戒指。",
+    "similar1": "jewelry",
+    "similar2": "wear a ring",
+    "similar3": "gold"
+  },
+  "magic": {
+    "word": "magic",
+    "meaning_zh": "魔术",
+    "example_en": "He does magic for us.",
+    "example_zh": "他为我们表演魔术。",
+    "similar1": "trick",
+    "similar2": "do magic",
+    "similar3": "show"
+  },
+  "slip": {
+    "word": "slip",
+    "meaning_zh": "纸条",
+    "example_en": "I write a slip for you.",
+    "example_zh": "我给你写一张纸条。",
+    "similar1": "note",
+    "similar2": "write a slip",
+    "similar3": "paper"
+  },
+  "pace": {
+    "word": "pace",
+    "meaning_zh": "步伐；步速",
+    "example_en": "He walks at a slow pace.",
+    "example_zh": "他以缓慢的步伐走路。",
+    "similar1": "step",
+    "similar2": "walk",
+    "similar3": "speed"
+  },
+  "photo": {
+    "word": "photo",
+    "meaning_zh": "照片",
+    "example_en": "I take a photo with my phone.",
+    "example_zh": "我用手机拍一张照片。",
+    "similar1": "picture",
+    "similar2": "camera",
+    "similar3": "look"
+  },
+  "rider": {
+    "word": "rider",
+    "meaning_zh": "骑手；乘车人",
+    "example_en": "She is a good bike rider.",
+    "example_zh": "她是个很棒的自行车骑手。",
+    "similar1": "bike",
+    "similar2": "ride",
+    "similar3": "player"
+  },
+  "music": {
+    "word": "music",
+    "meaning_zh": "音乐",
+    "example_en": "We like pop music.",
+    "example_zh": "我们喜欢流行音乐。",
+    "similar1": "song",
+    "similar2": "play music",
+    "similar3": "listen"
+  },
+  "team": {
+    "word": "team",
+    "meaning_zh": "队；团队",
+    "example_en": "Our class is a strong team.",
+    "example_zh": "我们班是一支强大的队伍。",
+    "similar1": "class",
+    "similar2": "play on a team",
+    "similar3": "game"
+  },
+  "step": {
+    "word": "step",
+    "meaning_zh": "脚步；一步",
+    "example_en": "Take one step forward.",
+    "example_zh": "向前迈一步。",
+    "similar1": "pace",
+    "similar2": "walk",
+    "similar3": "foot"
+  },
+  "back": {
+    "word": "back",
+    "meaning_zh": "（动词）向后退",
+    "example_en": "He back s up slowly.",
+    "example_zh": "他慢慢地向后退。",
+    "similar1": "up",
+    "similar2": "go back",
+    "similar3": "move back"
+  },
+  "be": {
+    "word": "be",
+    "meaning_zh": "是",
+    "example_en": "He is not late.",
+    "example_zh": "我是学生。",
+    "similar1": "am",
+    "similar2": "is",
+    "similar3": "are"
+  },
+  "beat": {
+    "word": "beat",
+    "meaning_zh": "打败（对手）",
+    "example_en": "They beat us in the race.",
+    "example_zh": "李打败了华打乒乓球。",
+    "similar1": "win",
+    "similar2": "lose to",
+    "similar3": "play against"
+  },
+  "race": {
+    "word": "race",
+    "meaning_zh": "比赛；赛跑",
+    "example_en": "They watch the race.",
+    "example_zh": "我们在学校举行一场比赛。",
+    "similar1": "run",
+    "similar2": "win a race",
+    "similar3": "race day"
+  },
+  "song": {
+    "word": "song",
+    "meaning_zh": "歌曲",
+    "example_en": "We sing the song at class.",
+    "example_zh": "她唱一首歌。",
+    "similar1": "sing",
+    "similar2": "music",
+    "similar3": "listen to a song"
+  },
+  "toy": {
+    "word": "toy",
+    "meaning_zh": "玩具",
+    "example_en": "It is a red toy.",
+    "example_zh": "我有一个玩具车。",
+    "similar1": "car",
+    "similar2": "play with toys",
+    "similar3": "doll"
+  },
+  "can": {
+    "word": "can",
+    "meaning_zh": "能；会",
+    "example_en": "She can swim very well.",
+    "example_zh": "她游泳游得很好。",
+    "similar1": "may",
+    "similar2": "must",
+    "similar3": "will"
+  },
+  "down": {
+    "word": "down",
+    "meaning_zh": "向下（动词）",
+    "example_en": "He puts his book down on the table.",
+    "example_zh": "他把书放在桌子上。",
+    "similar1": "drop",
+    "similar2": "place",
+    "similar3": "set"
+  },
+  "bore": {
+    "word": "bore",
+    "meaning_zh": "使厌烦",
+    "example_en": "He often bores his friends with long stories.",
+    "example_zh": "他常讲冗长的故事让朋友厌烦。",
+    "similar1": "annoy",
+    "similar2": "irritate",
+    "similar3": "tire"
+  },
+  "do": {
+    "word": "do",
+    "meaning_zh": "做",
+    "example_en": "I do my homework after school.",
+    "example_zh": "我放学后做作业。",
+    "similar1": "make",
+    "similar2": "try",
+    "similar3": "finish"
+  },
+  "come": {
+    "word": "come",
+    "meaning_zh": "来",
+    "example_en": "We come to school every day.",
+    "example_zh": "我们每天来学校。",
+    "similar1": "go",
+    "similar2": "get",
+    "similar3": "arrive"
+  },
+  "draw": {
+    "word": "draw",
+    "meaning_zh": "画",
+    "example_en": "She draws a cat in her notebook.",
+    "example_zh": "她在笔记本上画一只猫。",
+    "similar1": "paint",
+    "similar2": "color",
+    "similar3": "sketch"
+  },
+  "dig": {
+    "word": "dig",
+    "meaning_zh": "挖（土、洞等）",
+    "example_en": "We dig a hole in the garden.",
+    "example_zh": "我们在花园里挖一个洞。",
+    "similar1": "dig a hole",
+    "similar2": "shovel",
+    "similar3": "soil"
+  },
+  "get": {
+    "word": "get",
+    "meaning_zh": "变得（后接形容词）",
+    "example_en": "I get tired after running.",
+    "example_zh": "我跑步后会变得累。",
+    "similar1": "get hot",
+    "similar2": "get up",
+    "similar3": "feel"
+  },
+  "full": {
+    "word": "full",
+    "meaning_zh": "吃饱的",
+    "example_en": "He is full after lunch.",
+    "example_zh": "他午饭后吃饱了。",
+    "similar1": "full of water",
+    "similar2": "hungry",
+    "similar3": "eat too much"
+  },
+  "fit": {
+    "word": "fit",
+    "meaning_zh": "健康的；强健的",
+    "example_en": "She is fit and runs every day.",
+    "example_zh": "她很健康，每天都跑步。",
+    "similar1": "fit for sports",
+    "similar2": "healthy",
+    "similar3": "strong"
+  },
+  "glue": {
+    "word": "glue",
+    "meaning_zh": "用胶水粘住",
+    "example_en": "We glue the paper to the board.",
+    "example_zh": "我们把纸粘在板子上。",
+    "similar1": "glue stick",
+    "similar2": "stick",
+    "similar3": "tape"
+  },
+  "drop": {
+    "word": "drop",
+    "meaning_zh": "使（某物）落下",
+    "example_en": "He drops his water bottle on the floor.",
+    "example_zh": "他把水瓶掉在地上了。",
+    "similar1": "drop down",
+    "similar2": "fall",
+    "similar3": "pick up"
+  },
+  "fell": {
+    "word": "fell",
+    "meaning_zh": "（使）摔倒；跌倒",
+    "example_en": "He fell down at school.",
+    "example_zh": "他在学校摔倒了。",
+    "similar1": "fall",
+    "similar2": "down",
+    "similar3": "get up"
+  },
+  "go": {
+    "word": "go",
+    "meaning_zh": "去；走",
+    "example_en": "We go to school every day.",
+    "example_zh": "我们每天去上学。",
+    "similar1": "go to school",
+    "similar2": "go home",
+    "similar3": "go out"
+  },
+  "like": {
+    "word": "like",
+    "meaning_zh": "喜欢",
+    "example_en": "I like football very much.",
+    "example_zh": "我非常喜欢足球。",
+    "similar1": "like sports",
+    "similar2": "do not like",
+    "similar3": "like to play"
+  },
+  "gan": {
+    "word": "gan",
+    "meaning_zh": "人名（甘）",
+    "example_en": "Gan is my classmate.",
+    "example_zh": "甘是我的同学。",
+    "similar1": "Li",
+    "similar2": "Hua",
+    "similar3": "Mr. Gan"
+  },
+  "fill": {
+    "word": "fill",
+    "meaning_zh": "装满；填满",
+    "example_en": "She fills the cup with water.",
+    "example_zh": "她把水杯装满水。",
+    "similar1": "fill...with",
+    "similar2": "full",
+    "similar3": "cup"
+  },
+  "feed": {
+    "word": "feed",
+    "meaning_zh": "喂（养）",
+    "example_en": "He feeds his dog every morning.",
+    "example_zh": "他每天早上喂狗。",
+    "similar1": "feed the dog",
+    "similar2": "feed animals",
+    "similar3": "food"
+  },
+  "jump": {
+    "word": "jump",
+    "meaning_zh": "跳",
+    "example_en": "He jumps high in the gym class.",
+    "example_zh": "他在体育课上跳得很高。",
+    "similar1": "run",
+    "similar2": "walk",
+    "similar3": "climb"
+  },
+  "farm": {
+    "word": "farm",
+    "meaning_zh": "以农为生",
+    "example_en": "My uncle farms on a big field.",
+    "example_zh": "我叔叔在一大片田里务农。",
+    "similar1": "grow",
+    "similar2": "raise",
+    "similar3": "work"
+  },
+  "lie": {
+    "word": "lie",
+    "meaning_zh": "躺下",
+    "example_en": "He lies on the bed now.",
+    "example_zh": "他现在正躺在床上。",
+    "similar1": "sit",
+    "similar2": "stand",
+    "similar3": "rest"
+  },
+  "give": {
+    "word": "give",
+    "meaning_zh": "给予",
+    "example_en": "He gives his friend a new book.",
+    "example_zh": "他送朋友一本新书。",
+    "similar1": "send",
+    "similar2": "show",
+    "similar3": "take"
+  },
+  "grow": {
+    "word": "grow",
+    "meaning_zh": "生长；种植",
+    "example_en": "Plants grow in the sun.",
+    "example_zh": "植物在阳光下生长。",
+    "similar1": "live",
+    "similar2": "eat",
+    "similar3": "need"
+  },
+  "hear": {
+    "word": "hear",
+    "meaning_zh": "听见；听到",
+    "example_en": "I hear birds sing every day.",
+    "example_zh": "我每天听到鸟儿歌唱。",
+    "similar1": "see",
+    "similar2": "feel",
+    "similar3": "know"
+  },
+  "hide": {
+    "word": "hide",
+    "meaning_zh": "躲藏",
+    "example_en": "He hides behind the big tree.",
+    "example_zh": "他躲在大树后面。",
+    "similar1": "run",
+    "similar2": "stay",
+    "similar3": "find"
+  },
+  "lift": {
+    "word": "lift",
+    "meaning_zh": "举起；抬起",
+    "example_en": "She lifts the box carefully every day.",
+    "example_zh": "她每天小心地举起这个箱子。",
+    "similar1": "raise",
+    "similar2": "pick up",
+    "similar3": "carry"
+  },
+  "off": {
+    "word": "off",
+    "meaning_zh": "关掉（电器等）",
+    "example_en": "She turns the light off every night.",
+    "example_zh": "她每晚都关灯。",
+    "similar1": "on",
+    "similar2": "up",
+    "similar3": "down"
+  },
+  "play": {
+    "word": "play",
+    "meaning_zh": "玩耍；进行（球类等）运动",
+    "example_en": "We play football every Friday after school.",
+    "example_zh": "我们每周五放学后踢足球。",
+    "similar1": "run",
+    "similar2": "jump",
+    "similar3": "swim"
+  },
+  "hit": {
+    "word": "hit",
+    "meaning_zh": "击打；碰撞",
+    "example_en": "He hits the ball with his bat.",
+    "example_zh": "他用球棒击打球。",
+    "similar1": "kick",
+    "similar2": "throw",
+    "similar3": "catch"
+  },
+  "free": {
+    "word": "free",
+    "meaning_zh": "使自由；释放",
+    "example_en": "We help free the bird from the cage.",
+    "example_zh": "我们帮小鸟从笼子里飞出来。",
+    "similar1": "open",
+    "similar2": "let",
+    "similar3": "take"
+  },
+  "post": {
+    "word": "post",
+    "meaning_zh": "张贴（告示、通知）",
+    "example_en": "We post notices on the wall.",
+    "example_zh": "我们在墙上张贴通知。",
+    "similar1": "put up",
+    "similar2": "put",
+    "similar3": "notice"
+  },
+  "pull": {
+    "word": "pull",
+    "meaning_zh": "拉",
+    "example_en": "He pulls the door open.",
+    "example_zh": "他拉开门。",
+    "similar1": "push",
+    "similar2": "open the door",
+    "similar3": "hand"
+  },
+  "pair": {
+    "word": "pair",
+    "meaning_zh": "配对；组成一对",
+    "example_en": "We pair up for swimming practice.",
+    "example_zh": "我们两人一组进行游泳练习。",
+    "similar1": "up",
+    "similar2": "two people",
+    "similar3": "practice"
+  },
+  "long": {
+    "word": "long",
+    "meaning_zh": "渴望；极想（做某事）",
+    "example_en": "I long to swim in the pool.",
+    "example_zh": "我渴望在泳池里游泳。",
+    "similar1": "want",
+    "similar2": "need",
+    "similar3": "swim"
+  },
+  "may": {
+    "word": "may",
+    "meaning_zh": "可能；也许",
+    "example_en": "It may rain today.",
+    "example_zh": "今天可能会下雨。",
+    "similar1": "might",
+    "similar2": "can",
+    "similar3": "rain"
+  },
+  "seem": {
+    "word": "seem",
+    "meaning_zh": "似乎；看起来",
+    "example_en": "She seems happy after swimming.",
+    "example_zh": "她游完泳后看起来很开心。",
+    "similar1": "look",
+    "similar2": "feel",
+    "similar3": "happy"
+  },
+  "push": {
+    "word": "push",
+    "meaning_zh": "推",
+    "example_en": "I push the door.",
+    "example_zh": "我推门。",
+    "similar1": "pull",
+    "similar2": "open the door",
+    "similar3": "hand"
+  },
+  "take": {
+    "word": "take",
+    "meaning_zh": "拿；带走",
+    "example_en": "She takes her book.",
+    "example_zh": "她拿她的书。",
+    "similar1": "bring",
+    "similar2": "carry",
+    "similar3": "book"
+  },
+  "sing": {
+    "word": "sing",
+    "meaning_zh": "唱歌",
+    "example_en": "We sing a song.",
+    "example_zh": "我们唱一首歌。",
+    "similar1": "dance",
+    "similar2": "play music",
+    "similar3": "song"
+  },
+  "put": {
+    "word": "put",
+    "meaning_zh": "放",
+    "example_en": "He puts his pen on the desk.",
+    "example_zh": "他把钢笔放在课桌上。",
+    "similar1": "place",
+    "similar2": "put down",
+    "similar3": "desk"
+  },
+  "own": {
+    "word": "own",
+    "meaning_zh": "拥有",
+    "example_en": "I own a bike.",
+    "example_zh": "我有一辆自行车。",
+    "similar1": "have",
+    "similar2": "my bike",
+    "similar3": "bike"
+  },
+  "set": {
+    "word": "set",
+    "meaning_zh": "放；摆放",
+    "example_en": "They set the table.",
+    "example_zh": "他们摆好餐桌。",
+    "similar1": "put",
+    "similar2": "set the clock",
+    "similar3": "table"
+  },
+  "run": {
+    "word": "run",
+    "meaning_zh": "跑步",
+    "example_en": "I run in the park every day.",
+    "example_zh": "我每天在公园跑步。",
+    "similar1": "runs",
+    "similar2": "ran",
+    "similar3": "jog"
+  },
+  "show": {
+    "word": "show",
+    "meaning_zh": "展示",
+    "example_en": "She shows her drawing to Li.",
+    "example_zh": "她把画给李看。",
+    "similar1": "shows",
+    "similar2": "showed",
+    "similar3": "look at"
+  },
+  "stay": {
+    "word": "stay",
+    "meaning_zh": "待在（某地）",
+    "example_en": "We stay at home on Sunday.",
+    "example_zh": "我们周日待在家里。",
+    "similar1": "stays",
+    "similar2": "stayed",
+    "similar3": "at home"
+  },
+  "see": {
+    "word": "see",
+    "meaning_zh": "看见",
+    "example_en": "He sees a red ball on the floor.",
+    "example_zh": "他看见地板上有个红球。",
+    "similar1": "sees",
+    "similar2": "saw",
+    "similar3": "look at"
+  },
+  "sit": {
+    "word": "sit",
+    "meaning_zh": "坐",
+    "example_en": "You sit on the chair now.",
+    "example_zh": "你现在坐在椅子上。",
+    "similar1": "sits",
+    "similar2": "sat",
+    "similar3": "on the chair"
+  },
+  "nod": {
+    "word": "nod",
+    "meaning_zh": "点头",
+    "example_en": "Li nods his head and says yes.",
+    "example_zh": "李点点头，说“是”。",
+    "similar1": "nods",
+    "similar2": "nodded",
+    "similar3": "shake head"
+  },
+  "rise": {
+    "word": "rise",
+    "meaning_zh": "（太阳）升起",
+    "example_en": "The sun rises in the east.",
+    "example_zh": "太阳从东方升起。",
+    "similar1": "go up",
+    "similar2": "set",
+    "similar3": "morning"
+  },
+  "talk": {
+    "word": "talk",
+    "meaning_zh": "说话",
+    "example_en": "We talk at school.",
+    "example_zh": "我们在学校说话。",
+    "similar1": "say",
+    "similar2": "speak",
+    "similar3": "listen"
+  },
+  "tend": {
+    "word": "tend",
+    "meaning_zh": "往往做某事",
+    "example_en": "He tends to play football after class.",
+    "example_zh": "他放学后常常踢足球。",
+    "similar1": "often",
+    "similar2": "usually",
+    "similar3": "like to play"
+  },
+  "urge": {
+    "word": "urge",
+    "meaning_zh": "强烈要求",
+    "example_en": "My teacher urges me to try.",
+    "example_zh": "老师强烈要求我试试。",
+    "similar1": "ask",
+    "similar2": "tell",
+    "similar3": "want me to do"
+  },
+  "must": {
+    "word": "must",
+    "meaning_zh": "必须",
+    "example_en": "I must go home now.",
+    "example_zh": "我现在必须回家。",
+    "similar1": "have to",
+    "similar2": "need to",
+    "similar3": "can not skip"
+  },
+  "win": {
+    "word": "win",
+    "meaning_zh": "赢",
+    "example_en": "She wins the game.",
+    "example_zh": "她赢了这场比赛。",
+    "similar1": "lose",
+    "similar2": "play a game",
+    "similar3": "get first place"
+  },
+  "out": {
+    "word": "out",
+    "meaning_zh": "出去；离开（某地）",
+    "example_en": "We go out on Sunday.",
+    "example_zh": "我们星期天出去。",
+    "similar1": "go out",
+    "similar2": "come out",
+    "similar3": "get out"
+  },
+  "save": {
+    "word": "save",
+    "meaning_zh": "节省；节约（钱或资源）",
+    "example_en": "I save money every week.",
+    "example_zh": "我每周存钱。",
+    "similar1": "save money",
+    "similar2": "save time",
+    "similar3": "use less"
+  },
+  "tap": {
+    "word": "tap",
+    "meaning_zh": "轻敲；轻拍（小动作）",
+    "example_en": "He taps the table with his hand.",
+    "example_zh": "他用手轻敲桌子。",
+    "similar1": "tap the screen",
+    "similar2": "tap a key",
+    "similar3": "touch lightly"
+  },
+  "turn": {
+    "word": "turn",
+    "meaning_zh": "转动；翻转（身体或物体）",
+    "example_en": "She turns the page slowly.",
+    "example_zh": "她慢慢地翻页。",
+    "similar1": "turn left",
+    "similar2": "turn on",
+    "similar3": "turn off"
+  },
+  "send": {
+    "word": "send",
+    "meaning_zh": "发送（信息、物品等）",
+    "example_en": "I send a message to Li.",
+    "example_zh": "我给李发了一条消息。",
+    "similar1": "send a text",
+    "similar2": "send an email",
+    "similar3": "send a letter"
+  },
+  "putt": {
+    "word": "putt",
+    "meaning_zh": "轻击（高尔夫球）",
+    "example_en": "He putts the ball into the hole.",
+    "example_zh": "他把球轻击入洞。",
+    "similar1": "golf",
+    "similar2": "hit",
+    "similar3": "ball"
+  },
+  "swim": {
+    "word": "swim",
+    "meaning_zh": "游泳",
+    "example_en": "We swim in the pool on Sundays.",
+    "example_zh": "我们每周日去泳池游泳。",
+    "similar1": "pool",
+    "similar2": "water",
+    "similar3": "go swimming"
+  },
+  "walk": {
+    "word": "walk",
+    "meaning_zh": "步行",
+    "example_en": "She walks to school every day.",
+    "example_zh": "她每天步行去学校。",
+    "similar1": "school",
+    "similar2": "go walking",
+    "similar3": "foot"
+  },
+  "up": {
+    "word": "up",
+    "meaning_zh": "向上（副词）",
+    "example_en": "He looks up at the sky.",
+    "example_zh": "他抬头看天空。",
+    "similar1": "down",
+    "similar2": "look up",
+    "similar3": "sky"
+  },
+  "want": {
+    "word": "want",
+    "meaning_zh": "想要",
+    "example_en": "I want a new book.",
+    "example_zh": "我想要一本新书。",
+    "similar1": "need",
+    "similar2": "like",
+    "similar3": "have"
+  },
+  "area": {
+    "word": "area",
+    "meaning_zh": "地区；区域",
+    "example_en": "This area is quiet.",
+    "example_zh": "这个地区很安静。",
+    "similar1": "city",
+    "similar2": "park",
+    "similar3": "school area"
+  },
+  "boat": {
+    "word": "boat",
+    "meaning_zh": "小船",
+    "example_en": "We see a boat on the river.",
+    "example_zh": "我们在河上看到一条小船。",
+    "similar1": "car",
+    "similar2": "bus",
+    "similar3": "take a boat"
+  },
+  "city": {
+    "word": "city",
+    "meaning_zh": "城市",
+    "example_en": "Beijing is a big city.",
+    "example_zh": "北京是一座大城市。",
+    "similar1": "area",
+    "similar2": "town",
+    "similar3": "city map"
+  },
+  "car": {
+    "word": "car",
+    "meaning_zh": "小汽车",
+    "example_en": "My father drives a car.",
+    "example_zh": "我爸爸开一辆小汽车。",
+    "similar1": "boat",
+    "similar2": "bus",
+    "similar3": "by car"
+  },
+  "guide": {
+    "word": "guide",
+    "meaning_zh": "向导；导游",
+    "example_en": "She is a good guide.",
+    "example_zh": "她是一位好导游。",
+    "similar1": "help",
+    "similar2": "show the way",
+    "similar3": "tour guide"
+  },
+  "hurry": {
+    "word": "hurry",
+    "meaning_zh": "匆忙；急忙",
+    "example_en": "We do not hurry in the morning.",
+    "example_zh": "我们早上不匆忙。",
+    "similar1": "go fast",
+    "similar2": "quickly",
+    "similar3": "in a hurry"
+  },
+  "far": {
+    "word": "far",
+    "meaning_zh": "远处；远方",
+    "example_en": "We go far on the bus.",
+    "example_zh": "我们坐公交车去远方。",
+    "similar1": "near",
+    "similar2": "go far",
+    "similar3": "so far"
+  },
+  "east": {
+    "word": "east",
+    "meaning_zh": "东方；东部",
+    "example_en": "Beijing is in the east.",
+    "example_zh": "北京在东部。",
+    "similar1": "west",
+    "similar2": "north",
+    "similar3": "south"
+  },
+  "gate": {
+    "word": "gate",
+    "meaning_zh": "大门；入口",
+    "example_en": "The gate is open.",
+    "example_zh": "大门开着。",
+    "similar1": "door",
+    "similar2": "close the gate",
+    "similar3": "airport gate"
+  },
+  "hotel": {
+    "word": "hotel",
+    "meaning_zh": "旅馆；酒店",
+    "example_en": "We stay at a hotel.",
+    "example_zh": "我们住在一家旅馆。",
+    "similar1": "room",
+    "similar2": "book a hotel",
+    "similar3": "live in a hotel"
+  },
+  "last": {
+    "word": "last",
+    "meaning_zh": "末尾；最后部分",
+    "example_en": "He sits at the last.",
+    "example_zh": "他坐在末尾。",
+    "similar1": "first",
+    "similar2": "at the last",
+    "similar3": "in the last row"
+  },
+  "law": {
+    "word": "law",
+    "meaning_zh": "法律",
+    "example_en": "It is a law in China.",
+    "example_zh": "这是中国的法律。",
+    "similar1": "rule",
+    "similar2": "follow the law",
+    "similar3": "make a law"
+  },
+  "km": {
+    "word": "km",
+    "meaning_zh": "千米，公里",
+    "example_en": "It is five km from my home to school.",
+    "example_zh": "我家到学校五千米。",
+    "similar1": "mile",
+    "similar2": "meter",
+    "similar3": "distance"
+  },
+  "plane": {
+    "word": "plane",
+    "meaning_zh": "飞机",
+    "example_en": "We go to Shanghai by plane.",
+    "example_zh": "我们乘飞机去上海。",
+    "similar1": "train",
+    "similar2": "bus",
+    "similar3": "take a plane"
+  },
+  "lead": {
+    "word": "lead",
+    "meaning_zh": "铅（金属）",
+    "example_en": "A pencil has lead in it.",
+    "example_zh": "铅笔里有铅。",
+    "similar1": "pencil",
+    "similar2": "metal",
+    "similar3": "eraser"
+  },
+  "mile": {
+    "word": "mile",
+    "meaning_zh": "英里",
+    "example_en": "One mile is about one point six km.",
+    "example_zh": "一英里约一点六千米。",
+    "similar1": "km",
+    "similar2": "distance",
+    "similar3": "road"
+  },
+  "low": {
+    "word": "low",
+    "meaning_zh": "低处，低点",
+    "example_en": "The river is at a low this summer.",
+    "example_zh": "今年夏天河水水位很低。",
+    "similar1": "high",
+    "similar2": "water level",
+    "similar3": "ground"
+  },
+  "spain": {
+    "word": "spain",
+    "meaning_zh": "西班牙（国家名）",
+    "example_en": "Spain is in Europe.",
+    "example_zh": "西班牙在欧洲。",
+    "similar1": "france",
+    "similar2": "italy",
+    "similar3": "country"
+  },
+  "rush": {
+    "word": "rush",
+    "meaning_zh": "匆忙；急忙",
+    "example_en": "We rush to the hotel.",
+    "example_zh": "我们匆忙赶去酒店。",
+    "similar1": "hurry",
+    "similar2": "run",
+    "similar3": "go fast"
+  },
+  "south": {
+    "word": "south",
+    "meaning_zh": "南方",
+    "example_en": "The hotel is in the south.",
+    "example_zh": "酒店在南方。",
+    "similar1": "north",
+    "similar2": "east",
+    "similar3": "west"
+  },
+  "side": {
+    "word": "side",
+    "meaning_zh": "边；侧",
+    "example_en": "My room is on the left side.",
+    "example_zh": "我的房间在左边。",
+    "similar1": "left",
+    "similar2": "right",
+    "similar3": "middle"
+  },
+  "north": {
+    "word": "north",
+    "meaning_zh": "北方",
+    "example_en": "Beijing is in the north.",
+    "example_zh": "北京在北方。",
+    "similar1": "south",
+    "similar2": "east",
+    "similar3": "west"
+  },
+  "sight": {
+    "word": "sight",
+    "meaning_zh": "风景；名胜",
+    "example_en": "We see a nice sight.",
+    "example_zh": "我们看到一处好风景。",
+    "similar1": "view",
+    "similar2": "place",
+    "similar3": "park"
+  },
+  "sign": {
+    "word": "sign",
+    "meaning_zh": "标志；牌子",
+    "example_en": "I see a 'No Smoking' sign.",
+    "example_zh": "我看到一个“禁止吸烟”标志。",
+    "similar1": "notice",
+    "similar2": "word",
+    "similar3": "picture"
+  },
+  "rate": {
+    "word": "rate",
+    "meaning_zh": "比率；速度",
+    "example_en": "The map shows the scale rate.",
+    "example_zh": "这张地图标出了比例尺比率。",
+    "similar1": "scale",
+    "similar2": "percent",
+    "similar3": "fast"
+  },
+  "trip": {
+    "word": "trip",
+    "meaning_zh": "旅行；短途出行",
+    "example_en": "We take a trip to Beijing.",
+    "example_zh": "我们去北京旅行。",
+    "similar1": "go on a trip",
+    "similar2": "plan a trip",
+    "similar3": "short trip"
+  },
+  "safe": {
+    "word": "safe",
+    "meaning_zh": "安全的地方",
+    "example_en": "The park is a safe place.",
+    "example_zh": "公园是一个安全的地方。",
+    "similar1": "place",
+    "similar2": "home",
+    "similar3": "school"
+  },
+  "way": {
+    "word": "way",
+    "meaning_zh": "道路；路线",
+    "example_en": "This way goes to the town.",
+    "example_zh": "这条路通向小镇。",
+    "similar1": "road",
+    "similar2": "path",
+    "similar3": "street"
+  },
+  "scale": {
+    "word": "scale",
+    "meaning_zh": "比例尺",
+    "example_en": "Look at the map scale.",
+    "example_zh": "看地图上的比例尺。",
+    "similar1": "map",
+    "similar2": "rate",
+    "similar3": "number"
+  },
+  "town": {
+    "word": "town",
+    "meaning_zh": "小镇；城镇",
+    "example_en": "My town has a small park.",
+    "example_zh": "我的小镇有一个小公园。",
+    "similar1": "city",
+    "similar2": "village",
+    "similar3": "area"
+  },
+  "fly": {
+    "word": "fly",
+    "meaning_zh": "乘飞机去某地",
+    "example_en": "We fly to Beijing on Sunday.",
+    "example_zh": "我们周日飞往北京。",
+    "similar1": "go by plane",
+    "similar2": "take a plane",
+    "similar3": "travel"
+  },
+  "near": {
+    "word": "near",
+    "meaning_zh": "靠近；在……附近",
+    "example_en": "He sits near the window.",
+    "example_zh": "他坐在窗户附近。",
+    "similar1": "next to",
+    "similar2": "by",
+    "similar3": "close to"
+  },
+  "map": {
+    "word": "map",
+    "meaning_zh": "看地图",
+    "example_en": "She looks at a map in class.",
+    "example_zh": "她在课上看一张地图。",
+    "similar1": "read a map",
+    "similar2": "use a map",
+    "similar3": "find places"
+  },
+  "wait": {
+    "word": "wait",
+    "meaning_zh": "等候；等待",
+    "example_en": "I wait for my friend at school.",
+    "example_zh": "我在学校等我的朋友。",
+    "similar1": "stand and wait",
+    "similar2": "wait for",
+    "similar3": "stay here"
+  },
+  "unit": {
+    "word": "unit",
+    "meaning_zh": "单元（教材或课程中的一章）",
+    "example_en": "This is Unit 6 in our book.",
+    "example_zh": "这是我们书中的第六单元。",
+    "similar1": "lesson",
+    "similar2": "chapter",
+    "similar3": "part"
+  },
+  "chang": {
+    "word": "chang",
+    "meaning_zh": "人名（常指张）",
+    "example_en": "Chang is my classmate.",
+    "example_zh": "张是我的同学。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "mr chang"
+  },
+  "ac": {
+    "word": "ac",
+    "meaning_zh": "缩写（空调）",
+    "example_en": "The ac is on in the room.",
+    "example_zh": "房间里空调开着。",
+    "similar1": "tv",
+    "similar2": "fan",
+    "similar3": "br ac"
+  },
+  "adam": {
+    "word": "adam",
+    "meaning_zh": "人名（亚当）",
+    "example_en": "Adam likes apples.",
+    "example_zh": "亚当喜欢苹果。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "mr adam"
+  },
+  "bias": {
+    "word": "bias",
+    "meaning_zh": "偏见",
+    "example_en": "He has a bias about math.",
+    "example_zh": "他对数学有偏见。",
+    "similar1": "idea",
+    "similar2": "feeling",
+    "similar3": "wrong thought"
+  },
+  "boss": {
+    "word": "boss",
+    "meaning_zh": "老板",
+    "example_en": "My boss is kind.",
+    "example_zh": "我的老板很和善。",
+    "similar1": "teacher",
+    "similar2": "manager",
+    "similar3": "mr li"
+  },
+  "final": {
+    "word": "final",
+    "meaning_zh": "期末考试",
+    "example_en": "We have a final next week.",
+    "example_zh": "我们下周有期末考试。",
+    "similar1": "test",
+    "similar2": "exam",
+    "similar3": "last test"
+  },
+  "ea": {
+    "word": "ea",
+    "meaning_zh": "东亚洲（缩写）",
+    "example_en": "EA stands for East Asia.",
+    "example_zh": "EA代表东亚。",
+    "similar1": "EU",
+    "similar2": "US",
+    "similar3": "UK"
+  },
+  "co": {
+    "word": "co",
+    "meaning_zh": "公司（缩写）",
+    "example_en": "My dad works for a big co in Shanghai.",
+    "example_zh": "我爸爸在上海一家大公司工作。",
+    "similar1": "firm",
+    "similar2": "company",
+    "similar3": "biz"
+  },
+  "chi": {
+    "word": "chi",
+    "meaning_zh": "气（中医概念）",
+    "example_en": "In Chinese medicine, chi is life energy.",
+    "example_zh": "在中医里，气是生命能量。",
+    "similar1": "qi",
+    "similar2": "energy",
+    "similar3": "vitality"
+  },
+  "bolt": {
+    "word": "bolt",
+    "meaning_zh": "螺栓；门闩",
+    "example_en": "He tightens the bolt with a wrench.",
+    "example_zh": "他用扳手拧紧螺栓。",
+    "similar1": "screw",
+    "similar2": "nut",
+    "similar3": "nail"
+  },
+  "forth": {
+    "word": "forth",
+    "meaning_zh": "向前",
+    "example_en": "She walks forth with a smile.",
+    "example_zh": "她面带微笑向前走。",
+    "similar1": "forward",
+    "similar2": "on",
+    "similar3": "ahead"
+  },
+  "due": {
+    "word": "due",
+    "meaning_zh": "到期日",
+    "example_en": "The book is due tomorrow.",
+    "example_zh": "这本书明天到期。",
+    "similar1": "date",
+    "similar2": "deadline",
+    "similar3": "time"
+  },
+  "cd": {
+    "word": "cd",
+    "meaning_zh": "光盘",
+    "example_en": "My brother listens to music on a CD.",
+    "example_zh": "我哥哥用光盘听音乐。",
+    "similar1": "radio",
+    "similar2": "phone",
+    "similar3": "book"
+  },
+  "br": {
+    "word": "br",
+    "meaning_zh": "换行符（计算机）",
+    "example_en": "The HTML tag br makes a line break.",
+    "example_zh": "HTML标签br用于换行。",
+    "similar1": "tag",
+    "similar2": "code",
+    "similar3": "html"
+  },
+  "eight": {
+    "word": "eight",
+    "meaning_zh": "八",
+    "example_en": "There are eight ducks on the lake.",
+    "example_zh": "湖上有八只鸭子。",
+    "similar1": "seven",
+    "similar2": "nine",
+    "similar3": "number"
+  },
+  "four": {
+    "word": "four",
+    "meaning_zh": "四",
+    "example_en": "I have four new books.",
+    "example_zh": "我有四本新书。",
+    "similar1": "three",
+    "similar2": "five",
+    "similar3": "one"
+  },
+  "hag": {
+    "word": "hag",
+    "meaning_zh": "丑老太婆（贬义）",
+    "example_en": "She calls her strict teacher a hag.",
+    "example_zh": "她把严厉的老师叫作丑老太婆。",
+    "similar1": "witch",
+    "similar2": "crone",
+    "similar3": "shrew"
+  },
+  "half": {
+    "word": "half",
+    "meaning_zh": "一半",
+    "example_en": "I eat half an apple every day.",
+    "example_zh": "我每天吃半个苹果。",
+    "similar1": "whole",
+    "similar2": "part",
+    "similar3": "quarter"
+  },
+  "job": {
+    "word": "job",
+    "meaning_zh": "工作；职业",
+    "example_en": "My dad has a good job in the city.",
+    "example_zh": "我爸爸在城里有一份好工作。",
+    "similar1": "work",
+    "similar2": "career",
+    "similar3": "position"
+  },
+  "hua": {
+    "word": "hua",
+    "meaning_zh": "华（中文名常用字）",
+    "example_en": "Hua is a common Chinese name.",
+    "example_zh": "华是一个常见的中文名字。",
+    "similar1": "Li",
+    "similar2": "Wang",
+    "similar3": "Zhang"
+  },
+  "metal": {
+    "word": "metal",
+    "meaning_zh": "金属（物质）",
+    "example_en": "Iron and copper are common metals.",
+    "example_zh": "铁和铜是常见金属。",
+    "similar1": "steel",
+    "similar2": "aluminum",
+    "similar3": "gold"
+  },
+  "gps": {
+    "word": "gps",
+    "meaning_zh": "全球定位系统",
+    "example_en": "My phone has a GPS for maps.",
+    "example_zh": "我的手机有用于地图的GPS。",
+    "similar1": "map",
+    "similar2": "phone",
+    "similar3": "car"
+  },
+  "helen": {
+    "word": "helen",
+    "meaning_zh": "海伦（人名）",
+    "example_en": "Helen is a kind and smart girl.",
+    "example_zh": "海伦是个善良又聪明的女孩。",
+    "similar1": "Anna",
+    "similar2": "Tom",
+    "similar3": "Lucy"
+  },
+  "lucy": {
+    "word": "lucy",
+    "meaning_zh": "露西（人名）",
+    "example_en": "Lucy helps her mother at home.",
+    "example_zh": "露西在家帮妈妈。",
+    "similar1": "alan",
+    "similar2": "emma",
+    "similar3": "lily"
+  },
+  "five": {
+    "word": "five",
+    "meaning_zh": "五（数字）",
+    "example_en": "I have five red apples.",
+    "example_zh": "我有五个红苹果。",
+    "similar1": "three",
+    "similar2": "seven",
+    "similar3": "ten"
+  },
+  "jean": {
+    "word": "jean",
+    "meaning_zh": "牛仔裤（单数）",
+    "example_en": "He wears blue jeans every day.",
+    "example_zh": "他每天穿蓝色牛仔裤。",
+    "similar1": "shirt",
+    "similar2": "sock",
+    "similar3": "shoe"
+  },
+  "lily": {
+    "word": "lily",
+    "meaning_zh": "百合花",
+    "example_en": "Lily grows in my garden.",
+    "example_zh": "百合花长在我的花园里。",
+    "similar1": "rose",
+    "similar2": "tulip",
+    "similar3": "daisy"
+  },
+  "lung": {
+    "word": "lung",
+    "meaning_zh": "肺",
+    "example_en": "We use our lungs to breathe.",
+    "example_zh": "我们用肺来呼吸。",
+    "similar1": "heart",
+    "similar2": "brain",
+    "similar3": "liver"
+  },
+  "none": {
+    "word": "none",
+    "meaning_zh": "一个也没有",
+    "example_en": "None of us knows the answer now.",
+    "example_zh": "现在我们谁都不知道答案。",
+    "similar1": "no one",
+    "similar2": "nobody",
+    "similar3": "nothing"
+  },
+  "frame": {
+    "word": "frame",
+    "meaning_zh": "框架；相框",
+    "example_en": "The photo is in a wooden frame.",
+    "example_zh": "这张照片装在一个木制相框里。",
+    "similar1": "picture",
+    "similar2": "wall",
+    "similar3": "glass"
+  },
+  "li": {
+    "word": "li",
+    "meaning_zh": "人名（李）",
+    "example_en": "Li is my friend.",
+    "example_zh": "李是我的朋友。",
+    "similar1": "hua",
+    "similar2": "paul",
+    "similar3": "mary"
+  },
+  "lot": {
+    "word": "lot",
+    "meaning_zh": "许多（=a lot of）",
+    "example_en": "We have a lot of food.",
+    "example_zh": "我们有许多食物。",
+    "similar1": "much",
+    "similar2": "many",
+    "similar3": "a lot of"
+  },
+  "mrs": {
+    "word": "mrs",
+    "meaning_zh": "人名尊称（夫人/太太）",
+    "example_en": "Mrs Li is our teacher.",
+    "example_zh": "李老师是我们的老师。",
+    "similar1": "mr",
+    "similar2": "ms",
+    "similar3": "br"
+  },
+  "paul": {
+    "word": "paul",
+    "meaning_zh": "人名（保罗）",
+    "example_en": "Paul likes apples.",
+    "example_zh": "保罗喜欢苹果。",
+    "similar1": "li",
+    "similar2": "mary",
+    "similar3": "hua"
+  },
+  "i": {
+    "word": "i",
+    "meaning_zh": "人称代词（我）",
+    "example_en": "I like music.",
+    "example_zh": "我喜欢音乐。",
+    "similar1": "he",
+    "similar2": "she",
+    "similar3": "we"
+  },
+  "mary": {
+    "word": "mary",
+    "meaning_zh": "人名（玛丽）",
+    "example_en": "Mary is at home.",
+    "example_zh": "玛丽在家。",
+    "similar1": "li",
+    "similar2": "paul",
+    "similar3": "hua"
+  },
+  "lin": {
+    "word": "lin",
+    "meaning_zh": "人名（林）",
+    "example_en": "Lin is my classmate.",
+    "example_zh": "林是我的同学。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "matt"
+  },
+  "nine": {
+    "word": "nine",
+    "meaning_zh": "数字9",
+    "example_en": "I have nine books.",
+    "example_zh": "我有九本书。",
+    "similar1": "one",
+    "similar2": "five",
+    "similar3": "ten"
+  },
+  "matt": {
+    "word": "matt",
+    "meaning_zh": "人名（马特）",
+    "example_en": "Matt plays football.",
+    "example_zh": "马特踢足球。",
+    "similar1": "lin",
+    "similar2": "hua",
+    "similar3": "br"
+  },
+  "mri": {
+    "word": "mri",
+    "meaning_zh": "缩写（核磁共振成像）",
+    "example_en": "The doctor uses an MRI.",
+    "example_zh": "医生使用核磁共振成像仪。",
+    "similar1": "br",
+    "similar2": "mr",
+    "similar3": "re"
+  },
+  "mr": {
+    "word": "mr",
+    "meaning_zh": "缩写（先生）",
+    "example_en": "Mr Li teaches English.",
+    "example_zh": "李老师教英语。",
+    "similar1": "mrs",
+    "similar2": "miss",
+    "similar3": "br"
+  },
+  "one": {
+    "word": "one",
+    "meaning_zh": "数字1",
+    "example_en": "She has one apple.",
+    "example_zh": "她有一个苹果。",
+    "similar1": "nine",
+    "similar2": "two",
+    "similar3": "three"
+  },
+  "mike": {
+    "word": "mike",
+    "meaning_zh": "人名，迈克",
+    "example_en": "Mike is my friend.",
+    "example_zh": "迈克是我的朋友。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "br"
+  },
+  "sb": {
+    "word": "sb",
+    "meaning_zh": "缩写，某人",
+    "example_en": "I see sb in the park.",
+    "example_zh": "我在公园里看到某人。",
+    "similar1": "sth",
+    "similar2": "mr",
+    "similar3": "ms"
+  },
+  "ms": {
+    "word": "ms",
+    "meaning_zh": "缩写，女士（用于姓氏前）",
+    "example_en": "Ms Li teaches English.",
+    "example_zh": "李女士教英语。",
+    "similar1": "mr",
+    "similar2": "mrs",
+    "similar3": "sb"
+  },
+  "opus": {
+    "word": "opus",
+    "meaning_zh": "作品（尤指音乐或文学）",
+    "example_en": "He plays an opus on the piano.",
+    "example_zh": "他在钢琴上演奏一首作品。",
+    "similar1": "song",
+    "similar2": "book",
+    "similar3": "art"
+  },
+  "sth": {
+    "word": "sth",
+    "meaning_zh": "缩写，某事",
+    "example_en": "Tell me sth about your day.",
+    "example_zh": "告诉我一些你今天的事。",
+    "similar1": "sb",
+    "similar2": "thing",
+    "similar3": "idea"
+  },
+  "th": {
+    "word": "th",
+    "meaning_zh": "缩写，第（序数词后缀）",
+    "example_en": "It is the 5th day of May.",
+    "example_zh": "今天是五月的第五天。",
+    "similar1": "st",
+    "similar2": "nd",
+    "similar3": "rd"
+  },
+  "tom": {
+    "word": "tom",
+    "meaning_zh": "人名（汤姆）",
+    "example_en": "Tom is my friend.",
+    "example_zh": "汤姆是我的朋友。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "br"
+  },
+  "re": {
+    "word": "re",
+    "meaning_zh": "人名（瑞）",
+    "example_en": "Re is in Class 3.",
+    "example_zh": "瑞在三班。",
+    "similar1": "tom",
+    "similar2": "hua",
+    "similar3": "br"
+  },
+  "stop": {
+    "word": "stop",
+    "meaning_zh": "车站",
+    "example_en": "The bus stop is near my home.",
+    "example_zh": "公交车站在我家附近。",
+    "similar1": "bus",
+    "similar2": "home",
+    "similar3": "near"
+  },
+  "six": {
+    "word": "six",
+    "meaning_zh": "数字六",
+    "example_en": "I have six books.",
+    "example_zh": "我有六本书。",
+    "similar1": "one",
+    "similar2": "five",
+    "similar3": "seven"
+  },
+  "tai": {
+    "word": "tai",
+    "meaning_zh": "人名（泰）",
+    "example_en": "Tai likes apples.",
+    "example_zh": "泰喜欢苹果。",
+    "similar1": "tom",
+    "similar2": "re",
+    "similar3": "hua"
+  },
+  "ton": {
+    "word": "ton",
+    "meaning_zh": "吨",
+    "example_en": "One ton is 1000 kilos.",
+    "example_zh": "一吨是1000公斤。",
+    "similar1": "kilo",
+    "similar2": "food",
+    "similar3": "heavy"
+  },
+  "rick": {
+    "word": "rick",
+    "meaning_zh": "人名（瑞克）",
+    "example_en": "Rick is my friend.",
+    "example_zh": "瑞克是我的朋友。",
+    "similar1": "li",
+    "similar2": "sam",
+    "similar3": "hua"
+  },
+  "sixty": {
+    "word": "sixty",
+    "meaning_zh": "六十",
+    "example_en": "She has sixty books.",
+    "example_zh": "她有六十本书。",
+    "similar1": "ten",
+    "similar2": "two",
+    "similar3": "un"
+  },
+  "ten": {
+    "word": "ten",
+    "meaning_zh": "十",
+    "example_en": "We have ten apples.",
+    "example_zh": "我们有十个苹果。",
+    "similar1": "two",
+    "similar2": "sixty",
+    "similar3": "un"
+  },
+  "two": {
+    "word": "two",
+    "meaning_zh": "二",
+    "example_en": "I see two cats.",
+    "example_zh": "我看见两只猫。",
+    "similar1": "ten",
+    "similar2": "sixty",
+    "similar3": "un"
+  },
+  "un": {
+    "word": "un",
+    "meaning_zh": "人名（联合国缩写，此处作人名用）",
+    "example_en": "Un is in Class 3.",
+    "example_zh": "恩在三班。",
+    "similar1": "rick",
+    "similar2": "sam",
+    "similar3": "li"
+  },
+  "sam": {
+    "word": "sam",
+    "meaning_zh": "人名（山姆）",
+    "example_en": "Sam likes food.",
+    "example_zh": "山姆喜欢食物。",
+    "similar1": "rick",
+    "similar2": "li",
+    "similar3": "hua"
+  },
+  "a": {
+    "word": "a",
+    "meaning_zh": "一个（不定冠词）",
+    "example_en": "She has a red book.",
+    "example_zh": "她有一本红书。",
+    "similar1": "an",
+    "similar2": "the",
+    "similar3": "this"
+  },
+  "as": {
+    "word": "as",
+    "meaning_zh": "作为；以……身份",
+    "example_en": "She works as a teacher in our school.",
+    "example_zh": "她在我们学校当老师。",
+    "similar1": "like",
+    "similar2": "for",
+    "similar3": "as a"
+  },
+  "at": {
+    "word": "at",
+    "meaning_zh": "在（具体时刻）",
+    "example_en": "The bus leaves at half past seven.",
+    "example_zh": "公交车七点半出发。",
+    "similar1": "on",
+    "similar2": "in",
+    "similar3": "by"
+  },
+  "all": {
+    "word": "all",
+    "meaning_zh": "全部",
+    "example_en": "We all like ice cream on hot days.",
+    "example_zh": "我们所有人都喜欢在热天吃冰淇淋。",
+    "similar1": "every",
+    "similar2": "each",
+    "similar3": "whole"
+  },
+  "ago": {
+    "word": "ago",
+    "meaning_zh": "……以前",
+    "example_en": "She moved here two months ago.",
+    "example_zh": "她两个月前搬来这里的。",
+    "similar1": "before",
+    "similar2": "later",
+    "similar3": "past"
+  },
+  "yang": {
+    "word": "yang",
+    "meaning_zh": "阳（中医概念）",
+    "example_en": "Yang means heat and activity in Chinese medicine.",
+    "example_zh": "阳在中医里代表热和活动。",
+    "similar1": "yin",
+    "similar2": "energy",
+    "similar3": "balance"
+  },
+  "app": {
+    "word": "app",
+    "meaning_zh": "应用程序",
+    "example_en": "I use a weather app every day.",
+    "example_zh": "我每天使用天气应用程序。",
+    "similar1": "game",
+    "similar2": "tool",
+    "similar3": "site"
+  },
+  "any": {
+    "word": "any",
+    "meaning_zh": "任何",
+    "example_en": "I do not have any books.",
+    "example_zh": "我没有任何书。",
+    "similar1": "some",
+    "similar2": "no",
+    "similar3": "all"
+  },
+  "amy": {
+    "word": "amy",
+    "meaning_zh": "艾米（人名）",
+    "example_en": "Amy gives me a new book today.",
+    "example_zh": "艾米今天送给我一本新书。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "br"
+  },
+  "alan": {
+    "word": "alan",
+    "meaning_zh": "艾伦（人名）",
+    "example_en": "Alan plays football every day.",
+    "example_zh": "艾伦每天踢足球。",
+    "similar1": "lucy",
+    "similar2": "emma",
+    "similar3": "lily"
+  },
+  "by": {
+    "word": "by",
+    "meaning_zh": "不晚于（截止）",
+    "example_en": "The shop closes by nine tonight.",
+    "example_zh": "这家店今晚九点前关门。",
+    "similar1": "before",
+    "similar2": "until",
+    "similar3": "at"
+  },
+  "emma": {
+    "word": "emma",
+    "meaning_zh": "艾玛（人名）",
+    "example_en": "Emma reads a book each night.",
+    "example_zh": "艾玛每晚读一本书。",
+    "similar1": "lucy",
+    "similar2": "alan",
+    "similar3": "lily"
+  },
+  "fixe": {
+    "word": "fixe",
+    "meaning_zh": "（人名）菲克斯",
+    "example_en": "Fixe is my friend.",
+    "example_zh": "菲克斯是我的朋友。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "eric"
+  },
+  "dr": {
+    "word": "dr",
+    "meaning_zh": "医生（缩写）",
+    "example_en": "Dr Li works in the hospital.",
+    "example_zh": "李医生在医院工作。",
+    "similar1": "mr",
+    "similar2": "br",
+    "similar3": "nurse"
+  },
+  "cute": {
+    "word": "cute",
+    "meaning_zh": "可爱的",
+    "example_en": "My cat is cute.",
+    "example_zh": "我的猫很可爱。",
+    "similar1": "nice",
+    "similar2": "funny",
+    "similar3": "sweet"
+  },
+  "eric": {
+    "word": "eric",
+    "meaning_zh": "（人名）埃里克",
+    "example_en": "Eric plays football well.",
+    "example_zh": "埃里克足球踢得很好。",
+    "similar1": "dave",
+    "similar2": "hua",
+    "similar3": "li"
+  },
+  "dave": {
+    "word": "dave",
+    "meaning_zh": "（人名）戴夫",
+    "example_en": "Dave is in Class 3.",
+    "example_zh": "戴夫在三班。",
+    "similar1": "eric",
+    "similar2": "li",
+    "similar3": "hua"
+  },
+  "ever": {
+    "word": "ever",
+    "meaning_zh": "曾经（用于疑问/否定）",
+    "example_en": "Do you ever go to the park?",
+    "example_zh": "你曾经去公园吗？",
+    "similar1": "never",
+    "similar2": "always",
+    "similar3": "often"
+  },
+  "else": {
+    "word": "else",
+    "meaning_zh": "另外；其他",
+    "example_en": "We need some food else.",
+    "example_zh": "我们需要一些别的食物。",
+    "similar1": "other",
+    "similar2": "too",
+    "similar3": "also"
+  },
+  "fei": {
+    "word": "fei",
+    "meaning_zh": "人名",
+    "example_en": "Fei is my classmate.",
+    "example_zh": "飞是我的同学。",
+    "similar1": "Li",
+    "similar2": "Hua",
+    "similar3": "Mr Li"
+  },
+  "it": {
+    "word": "it",
+    "meaning_zh": "它；这",
+    "example_en": "It is a book.",
+    "example_zh": "它是一本书。",
+    "similar1": "he",
+    "similar2": "she",
+    "similar3": "this"
+  },
+  "mixe": {
+    "word": "mixe",
+    "meaning_zh": "人名",
+    "example_en": "Mixe is in Class 3.",
+    "example_zh": "米克在三班。",
+    "similar1": "Fei",
+    "similar2": "Br",
+    "similar3": "Hua"
+  },
+  "in": {
+    "word": "in",
+    "meaning_zh": "在（年月/季节/时段）",
+    "example_en": "The park is quiet in the evening.",
+    "example_zh": "傍晚公园很安静。",
+    "similar1": "on",
+    "similar2": "at",
+    "similar3": "during"
+  },
+  "he": {
+    "word": "he",
+    "meaning_zh": "他",
+    "example_en": "He is my friend.",
+    "example_zh": "他是我的朋友。",
+    "similar1": "she",
+    "similar2": "it",
+    "similar3": "we"
+  },
+  "his": {
+    "word": "his",
+    "meaning_zh": "他的（物主代词）",
+    "example_en": "He forgets his book at home every day.",
+    "example_zh": "他每天都把书忘在家里。",
+    "similar1": "her",
+    "similar2": "my",
+    "similar3": "their"
+  },
+  "no": {
+    "word": "no",
+    "meaning_zh": "不；没有",
+    "example_en": "No, I do not want more cake now.",
+    "example_zh": "不，我现在不想再吃蛋糕了。",
+    "similar1": "not",
+    "similar2": "never",
+    "similar3": "none"
+  },
+  "jim": {
+    "word": "jim",
+    "meaning_zh": "吉姆（人名）",
+    "example_en": "Jim plays soccer with his friends.",
+    "example_zh": "吉姆和朋友们踢足球。",
+    "similar1": "Tom",
+    "similar2": "Anna",
+    "similar3": "Lily"
+  },
+  "my": {
+    "word": "my",
+    "meaning_zh": "我的",
+    "example_en": "My bag is on the desk.",
+    "example_zh": "我的书包在课桌上。",
+    "similar1": "his",
+    "similar2": "her",
+    "similar3": "our"
+  },
+  "if": {
+    "word": "if",
+    "meaning_zh": "是否（引导宾语从句）",
+    "example_en": "I do not know if he likes apples.",
+    "example_zh": "我不知道他是否喜欢苹果。",
+    "similar1": "whether",
+    "similar2": "that",
+    "similar3": "how"
+  },
+  "liu": {
+    "word": "liu",
+    "meaning_zh": "刘（姓氏）",
+    "example_en": "Liu is my teacher's last name.",
+    "example_zh": "刘是我老师的姓。",
+    "similar1": "Wang",
+    "similar2": "Zhang",
+    "similar3": "Li"
+  },
+  "mine": {
+    "word": "mine",
+    "meaning_zh": "我的（东西）",
+    "example_en": "This book is mine.",
+    "example_zh": "这本书是我的。",
+    "similar1": "yours",
+    "similar2": "his",
+    "similar3": "hers"
+  },
+  "of": {
+    "word": "of",
+    "meaning_zh": "……的",
+    "example_en": "The color of my bag is blue.",
+    "example_zh": "我的书包颜色是蓝色。",
+    "similar1": "'s",
+    "similar2": "in the middle of",
+    "similar3": "a lot of"
+  },
+  "onto": {
+    "word": "onto",
+    "meaning_zh": "到……上面",
+    "example_en": "She puts the cup onto the table.",
+    "example_zh": "她把杯子放到桌子上。",
+    "similar1": "on",
+    "similar2": "into",
+    "similar3": "put onto"
+  },
+  "its": {
+    "word": "its",
+    "meaning_zh": "它的",
+    "example_en": "The cat licks its paw.",
+    "example_zh": "猫舔它的爪子。",
+    "similar1": "his",
+    "similar2": "her",
+    "similar3": "their"
+  },
+  "nor": {
+    "word": "nor",
+    "meaning_zh": "也不",
+    "example_en": "He does not like tea, nor does he like coffee.",
+    "example_zh": "他不喜欢茶，也不喜欢咖啡。",
+    "similar1": "neither",
+    "similar2": "not...nor",
+    "similar3": "or"
+  },
+  "on": {
+    "word": "on",
+    "meaning_zh": "在（星期/日期）",
+    "example_en": "My birthday is on May 8th.",
+    "example_zh": "我的生日在 5 月 8 日。",
+    "similar1": "in",
+    "similar2": "at",
+    "similar3": "by"
+  },
+  "now": {
+    "word": "now",
+    "meaning_zh": "现在",
+    "example_en": "We eat lunch now every day.",
+    "example_zh": "我们每天现在吃午饭。",
+    "similar1": "today",
+    "similar2": "right now",
+    "similar3": "at once"
+  },
+  "sara": {
+    "word": "sara",
+    "meaning_zh": "莎拉（人名）",
+    "example_en": "Sara likes apples and bananas.",
+    "example_zh": "莎拉喜欢苹果和香蕉。",
+    "similar1": "Tom",
+    "similar2": "Lily",
+    "similar3": "Jack"
+  },
+  "so": {
+    "word": "so",
+    "meaning_zh": "因此；所以",
+    "example_en": "It is raining, so we stay indoors.",
+    "example_zh": "下雨了，所以我们待在室内。",
+    "similar1": "therefore",
+    "similar2": "thus",
+    "similar3": "hence"
+  },
+  "or": {
+    "word": "or",
+    "meaning_zh": "或者",
+    "example_en": "Do you want tea or coffee?",
+    "example_zh": "你想要茶还是咖啡？",
+    "similar1": "and",
+    "similar2": "but",
+    "similar3": "so"
+  },
+  "not": {
+    "word": "not",
+    "meaning_zh": "不（否定副词）",
+    "example_en": "He does not eat meat on Mondays.",
+    "example_zh": "他每周一不吃肉。",
+    "similar1": "no",
+    "similar2": "never",
+    "similar3": "hardly"
+  },
+  "non": {
+    "word": "non",
+    "meaning_zh": "非；不",
+    "example_en": "Non-stop means without stopping.",
+    "example_zh": "“non-stop”意思是不停止。",
+    "similar1": "no",
+    "similar2": "not",
+    "similar3": "un"
+  },
+  "rin": {
+    "word": "rin",
+    "meaning_zh": "人名（林）",
+    "example_en": "Rin is my classmate.",
+    "example_zh": "林是我的同学。",
+    "similar1": "li",
+    "similar2": "hua",
+    "similar3": "tony"
+  },
+  "tim": {
+    "word": "tim",
+    "meaning_zh": "人名（蒂姆）",
+    "example_en": "Tim plays football after school.",
+    "example_zh": "蒂姆放学后踢足球。",
+    "similar1": "rin",
+    "similar2": "tony",
+    "similar3": "br"
+  },
+  "too": {
+    "word": "too",
+    "meaning_zh": "也；还",
+    "example_en": "I like apples too.",
+    "example_zh": "我也喜欢苹果。",
+    "similar1": "also",
+    "similar2": "as well",
+    "similar3": "so do I"
+  },
+  "tony": {
+    "word": "tony",
+    "meaning_zh": "人名（托尼）",
+    "example_en": "Tony can speak English well.",
+    "example_zh": "托尼英语说得很好。",
+    "similar1": "rin",
+    "similar2": "tim",
+    "similar3": "li"
+  },
+  "we": {
+    "word": "we",
+    "meaning_zh": "我们",
+    "example_en": "We go to school every day.",
+    "example_zh": "我们每天上学。",
+    "similar1": "i",
+    "similar2": "you",
+    "similar3": "they"
+  },
+  "upon": {
+    "word": "upon",
+    "meaning_zh": "在……之上；一……就",
+    "example_en": "She puts the book upon the desk.",
+    "example_zh": "她把书放在课桌上。",
+    "similar1": "on",
+    "similar2": "over",
+    "similar3": "above"
+  },
+  "wang": {
+    "word": "wang",
+    "meaning_zh": "王（姓）",
+    "example_en": "Wang is a common Chinese name.",
+    "example_zh": "王是一个常见的中文姓氏。",
+    "similar1": "Li",
+    "similar2": "Zhang",
+    "similar3": "Liu"
+  },
+  "tina": {
+    "word": "tina",
+    "meaning_zh": "蒂娜（人名）",
+    "example_en": "Tina plays soccer after school.",
+    "example_zh": "蒂娜放学后踢足球。",
+    "similar1": "Tom",
+    "similar2": "Lily",
+    "similar3": "Jack"
+  },
+  "why": {
+    "word": "why",
+    "meaning_zh": "为什么",
+    "example_en": "Why do you like apples?",
+    "example_zh": "你为什么喜欢苹果？",
+    "similar1": "what",
+    "similar2": "when",
+    "similar3": "where"
+  },
+  "tiny": {
+    "word": "tiny",
+    "meaning_zh": "极小的",
+    "example_en": "This ant is tiny but strong.",
+    "example_zh": "这只蚂蚁极小却很强壮。",
+    "similar1": "small",
+    "similar2": "little",
+    "similar3": "mini"
+  },
+  "any (other)": {
+    "word": "any (other)",
+    "meaning_zh": "任何（其他）",
+    "example_en": "Do you have any other questions?",
+    "example_zh": "你还有其他问题吗？",
+    "similar1": "some",
+    "similar2": "no",
+    "similar3": "all"
+  }
+}

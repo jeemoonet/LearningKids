@@ -1,0 +1,466 @@
+{
+  "cheat": {
+    "meaning_zh": "作弊；欺骗",
+    "example_en": "Don't cheat in the exam.",
+    "example_zh": "考试不要作弊。",
+    "similar1": "cheated",
+    "similar2": "cheating",
+    "similar3": "rule"
+  },
+  "case": {
+    "meaning_zh": "盒子；情况",
+    "example_en": "I have a pencil case on my desk.",
+    "example_zh": "我的课桌上有一个铅笔盒。",
+    "similar1": "cases",
+    "similar2": "pencil case",
+    "similar3": "book"
+  },
+  "club": {
+    "meaning_zh": "俱乐部；社团",
+    "example_en": "I join an English club after school.",
+    "example_zh": "我放学后参加英语社团。",
+    "similar1": "clubs",
+    "similar2": "join a club",
+    "similar3": "school"
+  },
+  "book": {
+    "meaning_zh": "书；书本",
+    "example_en": "I was reading a book in my study.",
+    "example_zh": "我正在书房里看书。",
+    "similar1": "books",
+    "similar2": "read a book",
+    "similar3": "picture book"
+  },
+  "email": {
+    "meaning_zh": "电子邮件",
+    "example_en": "I'm glad to receive your email.",
+    "example_zh": "很高兴收到你的邮件。",
+    "similar1": "emails",
+    "similar2": "send an email",
+    "similar3": "write"
+  },
+  "fact": {
+    "meaning_zh": "事实；知识点",
+    "example_en": "We learn a new fact in class every day.",
+    "example_zh": "我们每天在课堂上学一个新知识点。",
+    "similar1": "facts",
+    "similar2": "in fact",
+    "similar3": "know"
+  },
+  "level": {
+    "meaning_zh": "水平；等级",
+    "example_en": "I have some doubt about math at this level.",
+    "example_zh": "我对这个水平的数学有点疑问。",
+    "similar1": "levels",
+    "similar2": "high level",
+    "similar3": "class"
+  },
+  "form": {
+    "meaning_zh": "表格；形式",
+    "example_en": "We fill in a form at the start of class.",
+    "example_zh": "我们上课开始时填一张表。",
+    "similar1": "forms",
+    "similar2": "fill in a form",
+    "similar3": "name"
+  },
+  "doubt": {
+    "meaning_zh": "疑问；怀疑",
+    "example_en": "I have some doubt about this math problem.",
+    "example_zh": "我对这道数学题有点疑问。",
+    "similar1": "doubts",
+    "similar2": "no doubt",
+    "similar3": "question"
+  },
+  "math": {
+    "meaning_zh": "数学",
+    "example_en": "We read the news and study math in class.",
+    "example_zh": "我们在课上读新闻并学数学。",
+    "similar1": "maths",
+    "similar2": "math class",
+    "similar3": "study"
+  },
+  "news": {
+    "meaning_zh": "新闻；消息",
+    "example_en": "We read the news at the start of class.",
+    "example_zh": "我们上课开始时读新闻。",
+    "similar1": "newspaper",
+    "similar2": "good news",
+    "similar3": "read"
+  },
+  "group": {
+    "meaning_zh": "小组；群体",
+    "example_en": "Our group can help each other after class.",
+    "example_zh": "我们小组下课后可以互相帮助。",
+    "similar1": "groups",
+    "similar2": "work in a group",
+    "similar3": "team"
+  },
+  "idea": {
+    "meaning_zh": "想法；主意",
+    "example_en": "You need a key idea for the exam.",
+    "example_zh": "考试你需要一个关键想法。",
+    "similar1": "ideas",
+    "similar2": "good idea",
+    "similar3": "think"
+  },
+  "mind": {
+    "meaning_zh": "头脑；心思",
+    "example_en": "Keep your mind on the paper.",
+    "example_zh": "把注意力放在试卷上。",
+    "similar1": "minds",
+    "similar2": "keep your mind on",
+    "similar3": "think"
+  },
+  "need": {
+    "meaning_zh": "需要",
+    "example_en": "You need to know the key idea for the exam.",
+    "example_zh": "你需要知道考试的关键想法。",
+    "similar1": "needed",
+    "similar2": "need to",
+    "similar3": "want"
+  },
+  "role": {
+    "meaning_zh": "角色；作用",
+    "example_en": "Know your role in the group work.",
+    "example_zh": "要知道你在小组作业中的角色。",
+    "similar1": "roles",
+    "similar2": "play a role",
+    "similar3": "group"
+  },
+  "limit": {
+    "meaning_zh": "限制；极限",
+    "example_en": "There is a time limit in the exam.",
+    "example_zh": "考试有时间限制。",
+    "similar1": "limits",
+    "similar2": "time limit",
+    "similar3": "rule"
+  },
+  "key": {
+    "meaning_zh": "关键；钥匙",
+    "example_en": "You need the key idea for the exam.",
+    "example_zh": "你需要考试的关键想法。",
+    "similar1": "keys",
+    "similar2": "key idea",
+    "similar3": "answer"
+  },
+  "real": {
+    "meaning_zh": "真正的；真实的",
+    "example_en": "This part of the paper feels real hard.",
+    "example_zh": "试卷这部分真的很难。",
+    "similar1": "really",
+    "similar2": "real hard",
+    "similar3": "true"
+  },
+  "quiet": {
+    "meaning_zh": "安静的",
+    "example_en": "The teacher wants us to be quiet.",
+    "example_zh": "老师要我们保持安静。",
+    "similar1": "quietly",
+    "similar2": "keep quiet",
+    "similar3": "class"
+  },
+  "score": {
+    "meaning_zh": "分数；得分",
+    "example_en": "Follow the rule and you may get a good score.",
+    "example_zh": "遵守规则，你可能会得高分。",
+    "similar1": "scores",
+    "similar2": "high score",
+    "similar3": "mark"
+  },
+  "paper": {
+    "meaning_zh": "试卷；纸",
+    "example_en": "Keep your mind on the paper.",
+    "example_zh": "把注意力放在试卷上。",
+    "similar1": "papers",
+    "similar2": "exam paper",
+    "similar3": "test"
+  },
+  "rule": {
+    "meaning_zh": "规则；规定",
+    "example_en": "Follow the rule and you may get a good score.",
+    "example_zh": "遵守规则，你可能会得高分。",
+    "similar1": "rules",
+    "similar2": "follow the rule",
+    "similar3": "class"
+  },
+  "part": {
+    "meaning_zh": "部分",
+    "example_en": "This part of the paper feels real hard.",
+    "example_zh": "试卷这部分真的很难。",
+    "similar1": "parts",
+    "similar2": "take part",
+    "similar3": "paper"
+  },
+  "shape": {
+    "meaning_zh": "形状",
+    "example_en": "The shape of her work looks nice.",
+    "example_zh": "她作业的形状很好看。",
+    "similar1": "shapes",
+    "similar2": "in shape",
+    "similar3": "round"
+  },
+  "term": {
+    "meaning_zh": "学期；术语",
+    "example_en": "My friend got a prize for a good mark this term.",
+    "example_zh": "我朋友这学期因分数好得了奖。",
+    "similar1": "terms",
+    "similar2": "this term",
+    "similar3": "school"
+  },
+  "proof": {
+    "meaning_zh": "证明",
+    "example_en": "She can print the proof on paper.",
+    "example_zh": "她可以把证明打印在纸上。",
+    "similar1": "prove",
+    "similar2": "proof of",
+    "similar3": "print"
+  },
+  "mark": {
+    "meaning_zh": "分数；标记",
+    "example_en": "My friend got a good mark this term.",
+    "example_zh": "我朋友这学期得了好分数。",
+    "similar1": "marks",
+    "similar2": "full marks",
+    "similar3": "score"
+  },
+  "print": {
+    "meaning_zh": "打印",
+    "example_en": "She can print the proof on paper.",
+    "example_zh": "她可以把证明打印在纸上。",
+    "similar1": "printed",
+    "similar2": "print out",
+    "similar3": "paper"
+  },
+  "prize": {
+    "meaning_zh": "奖品；奖项",
+    "example_en": "My friend got a prize for a good mark.",
+    "example_zh": "我朋友因好分数得了奖。",
+    "similar1": "prizes",
+    "similar2": "win a prize",
+    "similar3": "gift"
+  },
+  "fair": {
+    "meaning_zh": "公平的",
+    "example_en": "The title of our work should be fair to all.",
+    "example_zh": "我们作业的标题应对所有人公平。",
+    "similar1": "fairly",
+    "similar2": "be fair to",
+    "similar3": "rule"
+  },
+  "topic": {
+    "meaning_zh": "话题；主题",
+    "example_en": "Our task is about a new topic this week.",
+    "example_zh": "我们本周的任务是一个新话题。",
+    "similar1": "topics",
+    "similar2": "talk about",
+    "similar3": "task"
+  },
+  "note": {
+    "meaning_zh": "笔记；便条",
+    "example_en": "I use a ruler and write a note in my book.",
+    "example_zh": "我用尺子并在书里做笔记。",
+    "similar1": "notes",
+    "similar2": "take notes",
+    "similar3": "write"
+  },
+  "ruler": {
+    "meaning_zh": "尺子",
+    "example_en": "I use a ruler to draw a line in my book.",
+    "example_zh": "我用尺子在书里画线。",
+    "similar1": "rulers",
+    "similar2": "use a ruler",
+    "similar3": "book"
+  },
+  "task": {
+    "meaning_zh": "任务；作业",
+    "example_en": "Our task is about a new topic this week.",
+    "example_zh": "我们本周的任务是一个新话题。",
+    "similar1": "tasks",
+    "similar2": "do a task",
+    "similar3": "homework"
+  },
+  "title": {
+    "meaning_zh": "标题；题目",
+    "example_en": "The title of our work should be fair to all.",
+    "example_zh": "我们作业的标题应对所有人公平。",
+    "similar1": "titles",
+    "similar2": "write a title",
+    "similar3": "name"
+  },
+  "add": {
+    "meaning_zh": "添加；增加",
+    "example_en": "I add a note once a day.",
+    "example_zh": "我每天加一条笔记。",
+    "similar1": "added",
+    "similar2": "add to",
+    "similar3": "note"
+  },
+  "ask": {
+    "meaning_zh": "问；请求",
+    "example_en": "I ask the teacher to help me use the new word.",
+    "example_zh": "我请老师帮我用这个新词。",
+    "similar1": "asked",
+    "similar2": "ask for",
+    "similar3": "help"
+  },
+  "june": {
+    "meaning_zh": "六月",
+    "example_en": "The library is open in June.",
+    "example_zh": "图书馆六月开放。",
+    "similar1": "July",
+    "similar2": "in June",
+    "similar3": "month"
+  },
+  "once": {
+    "meaning_zh": "一次；曾经",
+    "example_en": "I add a note once a day.",
+    "example_zh": "我每天加一条笔记。",
+    "similar1": "one",
+    "similar2": "once a day",
+    "similar3": "again"
+  },
+  "use": {
+    "meaning_zh": "使用",
+    "example_en": "I ask the teacher to help me use the new word.",
+    "example_zh": "我请老师帮我用这个新词。",
+    "similar1": "used",
+    "similar2": "use a word",
+    "similar3": "word"
+  },
+  "word": {
+    "meaning_zh": "单词；话",
+    "example_en": "I ask the teacher to help me use the new word.",
+    "example_zh": "我请老师帮我用这个新词。",
+    "similar1": "words",
+    "similar2": "new word",
+    "similar3": "learn"
+  },
+  "new": {
+    "meaning_zh": "新的",
+    "example_en": "We meet in class and keep a new list of names.",
+    "example_zh": "我们在课堂见面，保存一份新的姓名名单。",
+    "similar1": "newer",
+    "similar2": "new list",
+    "similar3": "old"
+  },
+  "plan": {
+    "meaning_zh": "计划",
+    "example_en": "Our plan is to learn five words each day.",
+    "example_zh": "我们计划每天学五个单词。",
+    "similar1": "planned",
+    "similar2": "make a plan",
+    "similar3": "list"
+  },
+  "meet": {
+    "meaning_zh": "见面；遇见",
+    "example_en": "We meet in class every morning.",
+    "example_zh": "我们每天早上在课堂见面。",
+    "similar1": "met",
+    "similar2": "meet in class",
+    "similar3": "class"
+  },
+  "list": {
+    "meaning_zh": "列表；清单",
+    "example_en": "We keep a new list of names in class.",
+    "example_zh": "我们在课堂保存一份新的姓名名单。",
+    "similar1": "lists",
+    "similar2": "make a list",
+    "similar3": "name"
+  },
+  "name": {
+    "meaning_zh": "名字；命名",
+    "example_en": "I write my name on the list first.",
+    "example_zh": "我先在名单上写下自己的名字。",
+    "similar1": "named",
+    "similar2": "write your name",
+    "similar3": "list"
+  },
+  "keep": {
+    "meaning_zh": "保持；保存",
+    "example_en": "We keep a new list of names in class.",
+    "example_zh": "我们在课堂保存一份新的姓名名单。",
+    "similar1": "kept",
+    "similar2": "keep a list",
+    "similar3": "save"
+  },
+  "pick": {
+    "meaning_zh": "挑选；采摘",
+    "example_en": "Let me help you pick the right book.",
+    "example_zh": "让我帮你选对的书。",
+    "similar1": "picked",
+    "similar2": "pick up",
+    "similar3": "book"
+  },
+  "help": {
+    "meaning_zh": "帮助",
+    "example_en": "Let me help you pick the right book.",
+    "example_zh": "让我帮你选对的书。",
+    "similar1": "helped",
+    "similar2": "help sb.",
+    "similar3": "ask"
+  },
+  "know": {
+    "meaning_zh": "知道；了解",
+    "example_en": "I know you can pass the test.",
+    "example_zh": "我知道你能通过考试。",
+    "similar1": "knew",
+    "similar2": "know the word",
+    "similar3": "learn"
+  },
+  "pass": {
+    "meaning_zh": "通过；经过",
+    "example_en": "I know you can pass the test.",
+    "example_zh": "我知道你能通过考试。",
+    "similar1": "passed",
+    "similar2": "pass the test",
+    "similar3": "fail"
+  },
+  "let": {
+    "meaning_zh": "让；允许",
+    "example_en": "Let me help you pick the right book.",
+    "example_zh": "让我帮你选对的书。",
+    "similar1": "lets",
+    "similar2": "let sb. do",
+    "similar3": "help"
+  },
+  "miss": {
+    "meaning_zh": "错过；想念",
+    "example_en": "Do not miss class today.",
+    "example_zh": "今天别缺课。",
+    "similar1": "missed",
+    "similar2": "miss class",
+    "similar3": "class"
+  },
+  "look": {
+    "meaning_zh": "看；看起来",
+    "example_en": "Look at the book and say the word out.",
+    "example_zh": "看书，大声说出单词。",
+    "similar1": "looked",
+    "similar2": "look at",
+    "similar3": "see"
+  },
+  "say": {
+    "meaning_zh": "说；讲",
+    "example_en": "Look at the book and say the word out.",
+    "example_zh": "看书，大声说出单词。",
+    "similar1": "said",
+    "similar2": "say out",
+    "similar3": "tell"
+  },
+  "try": {
+    "meaning_zh": "尝试；努力",
+    "example_en": "Try again if you make a mistake.",
+    "example_zh": "说错了就再试一次。",
+    "similar1": "tried",
+    "similar2": "try again",
+    "similar3": "do"
+  },
+  "tell": {
+    "meaning_zh": "告诉；讲述",
+    "example_en": "Tell me when you need help.",
+    "example_zh": "需要帮助就告诉我。",
+    "similar1": "told",
+    "similar2": "tell me",
+    "similar3": "say"
+  }
+}

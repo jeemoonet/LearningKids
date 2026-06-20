@@ -1,0 +1,35 @@
+﻿{
+  "tierId": "beginner",
+  "groupIndex": 85,
+  "title": "浠嬭瘝1-閲屽鐐归珮浣?,
+  "words": [
+    {
+      "word": "at",
+      "pos": "other"
+    },
+    {
+      "word": "above",
+      "pos": "other"
+    },
+    {
+      "word": "below",
+      "pos": "other"
+    },
+    {
+      "word": "in",
+      "pos": "other"
+    },
+    {
+      "word": "on",
+      "pos": "other"
+    },
+    {
+      "word": "under",
+      "pos": "other"
+    }
+  ],
+  "scene": "閲屽鐐归珮浣?,
+  "theme": "浠嬭瘝",
+  "asset": "src/public/images/vocab-groups/beginner/85.png",
+  "prompt": "Educational flat cartoon, 16:9 banner, 2D flat style, gentle shading, bright warm natural light. Scene \"浠嬭瘝1-閲屽鐐归珮浣嶾" (浠嬭瘝/閲屽鐐归珮浣?. Palette: sky blue, warm beige, soft green. Anchors: desk, transparent box, table lamp, floor area. Composition: One cozy study corner: apple in box (in), cup on desk (on), red pin at desk corner (at), cat under desk (under), lamp above desk (above), floor below desk (below). Visual rules by POS: n=noun鈫抩bject; v=verb鈫抍haracter action; adj=adjective鈫抭uality badge/color cue; adv=adverb鈫抦otion/speed cue; o=other鈫抯ign/icon. Visuals: at[o:red location pin at desk corner], above[o:lamp hanging above desk], below[o:floor area below desk], in[o:apple inside transparent box], on[o:cup on desk surface], under[o:cat under desk]. Same room, one moment, one visual per word. ONE continuous scene. NO grid, panels, collage, comic strip. Labels MOST prominent: LARGE white pill badge, bold navy sans-serif, leader line+dot. Label once: at, above, below, in, on, under. Teen-friendly cartoon. No Chinese, no extra words."
+}

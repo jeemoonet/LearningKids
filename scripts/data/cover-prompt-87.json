@@ -1,0 +1,35 @@
+﻿{
+  "tierId": "beginner",
+  "groupIndex": 87,
+  "title": "浠嬭瘝3-杩戣繙鍛ㄥ洿閲屽",
+  "words": [
+    {
+      "word": "around",
+      "pos": "other"
+    },
+    {
+      "word": "near",
+      "pos": "other"
+    },
+    {
+      "word": "inside",
+      "pos": "other"
+    },
+    {
+      "word": "over",
+      "pos": "other"
+    },
+    {
+      "word": "outside",
+      "pos": "other"
+    },
+    {
+      "word": "far from",
+      "pos": "other"
+    }
+  ],
+  "scene": "杩戣繙鍛ㄥ洿閲屽",
+  "theme": "浠嬭瘝",
+  "asset": "src/public/images/vocab-groups/beginner/87.png",
+  "prompt": "Educational flat cartoon, 16:9 banner, 2D flat style, gentle shading, bright warm natural light. Scene \"浠嬭瘝3-杩戣繙鍛ㄥ洿閲屽\" (浠嬭瘝/杩戣繙鍛ㄥ洿閲屽). Palette: teal, sand yellow, forest green. Anchors: school building, door, park lake, small bridge. Composition: One school + park scene: home near school (near), far mountain far from village (far from), trees around lake (around), students inside classroom through window (inside), students outside door (outside), bridge over river (over). Visual rules by POS: n=noun鈫抩bject; v=verb鈫抍haracter action; adj=adjective鈫抭uality badge/color cue; adv=adverb鈫抦otion/speed cue; o=other鈫抯ign/icon. Visuals: around[o:trees around lake], near[o:house near school building], inside[o:students inside classroom], over[o:small bridge over river], outside[o:students waiting outside door], far from[o:far from sign/icon]. Same room, one moment, one visual per word. ONE continuous scene. NO grid, panels, collage, comic strip. Labels MOST prominent: LARGE white pill badge, bold navy sans-serif, leader line+dot. Label once: around, near, inside, over, outside, far from. Teen-friendly cartoon. No Chinese, no extra words."
+}
