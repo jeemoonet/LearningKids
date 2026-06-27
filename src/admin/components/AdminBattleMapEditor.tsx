@@ -106,12 +106,13 @@ export function AdminBattleMapEditor({
   )
 
   const updateNode = useCallback(
-    (id: string, patch: Partial<Pick<BattleMapNodeConfig, 'x' | 'y' | 'label' | 'terrain'>>) => {
+    (id: string, patch: Partial<Pick<BattleMapNodeConfig, 'x' | 'y' | 'label'>> & { terrain?: MapTerrain }) => {
+      const kingdom = toKingdomLayout(layout)
       commitLayout({
-        ...toKingdomLayout(layout),
+        ...kingdom,
         nodes: {
-          ...layout.nodes,
-          [id]: { ...layout.nodes[id], ...patch },
+          ...kingdom.nodes,
+          [id]: { ...kingdom.nodes[id], ...patch },
         },
       })
     },
@@ -124,12 +125,13 @@ export function AdminBattleMapEditor({
 
     const onPointerMove = (e: PointerEvent) => {
       if (nodeDragRef.current && nodeDragRef.current.pointerId === e.pointerId) {
+        const kingdom = toKingdomLayout(layout)
         const { x, y } = clientToPct(viewport, e.clientX, e.clientY)
         commitLayout({
-          ...toKingdomLayout(layout),
+          ...kingdom,
           nodes: {
-            ...layout.nodes,
-            [nodeDragRef.current.id]: { ...layout.nodes[nodeDragRef.current.id], x, y },
+            ...kingdom.nodes,
+            [nodeDragRef.current.id]: { ...kingdom.nodes[nodeDragRef.current.id], x, y },
           },
         })
         return
@@ -386,7 +388,7 @@ export function AdminBattleMapEditor({
                     className="admin-battle-map__row-type"
                     value={n.terrain}
                     onClick={(e) => e.stopPropagation()}
-                    onChange={(e) => updateNode(id, { terrain: e.target.value })}
+                    onChange={(e) => updateNode(id, { terrain: e.target.value as MapTerrain })}
                   >
                     {TERRAIN_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
