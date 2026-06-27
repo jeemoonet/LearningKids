@@ -1,0 +1,82 @@
+[
+  {
+    "id": "word_hello",
+    "word": "hello",
+    "meaning": "你好",
+    "partOfSpeech": "other",
+    "theme": "greeting",
+    "keySlots": { "own": [1], "captured": [1, 3] }
+  },
+  {
+    "id": "word_hi",
+    "word": "hi",
+    "meaning": "嗨",
+    "partOfSpeech": "other",
+    "theme": "greeting",
+    "keySlots": { "own": [1], "captured": [1] }
+  },
+  {
+    "id": "word_good",
+    "word": "good",
+    "meaning": "好的",
+    "partOfSpeech": "adjective",
+    "theme": "greeting",
+    "keySlots": { "own": [1], "captured": [1, 2] }
+  },
+  {
+    "id": "word_morning",
+    "word": "morning",
+    "meaning": "早晨",
+    "partOfSpeech": "noun",
+    "theme": "greeting",
+    "keySlots": { "own": [2], "captured": [2, 4] }
+  },
+  {
+    "id": "word_night",
+    "word": "night",
+    "meaning": "夜晚",
+    "partOfSpeech": "noun",
+    "theme": "greeting",
+    "keySlots": { "own": [2], "captured": [1, 3] }
+  },
+  {
+    "id": "word_thank",
+    "word": "thank",
+    "meaning": "感谢",
+    "partOfSpeech": "verb",
+    "theme": "greeting",
+    "keySlots": { "own": [2], "captured": [2, 3] }
+  },
+  {
+    "id": "word_please",
+    "word": "please",
+    "meaning": "请",
+    "partOfSpeech": "adverb",
+    "theme": "greeting",
+    "keySlots": { "own": [3], "captured": [3, 4] }
+  },
+  {
+    "id": "word_sorry",
+    "word": "sorry",
+    "meaning": "对不起",
+    "partOfSpeech": "adjective",
+    "theme": "greeting",
+    "keySlots": { "own": [2], "captured": [2, 4] }
+  },
+  {
+    "id": "word_yes",
+    "word": "yes",
+    "meaning": "是的",
+    "partOfSpeech": "adverb",
+    "theme": "greeting",
+    "keySlots": { "own": [1], "captured": [1] }
+  },
+  {
+    "id": "word_no",
+    "word": "no",
+    "meaning": "不",
+    "partOfSpeech": "adverb",
+    "theme": "greeting",
+    "keySlots": { "own": [1], "captured": [1] }
+  }
+]

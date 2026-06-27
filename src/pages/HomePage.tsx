@@ -4,18 +4,20 @@ interface HomePageProps {
   user: AuthUser | null
   authLoading: boolean
   onLogout: () => void
-  onEnterGraph: () => void
-  onEnterSignTraining: () => void
   onEnterVocabTraining: () => void
+  onEnterPrepGame: () => void
+  onEnterSentenceGame: () => void
+  onEnterFreeVocab: () => void
 }
 
 export function HomePage({
   user,
   authLoading,
   onLogout,
-  onEnterGraph,
-  onEnterSignTraining,
   onEnterVocabTraining,
+  onEnterPrepGame,
+  onEnterSentenceGame,
+  onEnterFreeVocab,
 }: HomePageProps) {
   return (
     <div className="home-page">
@@ -39,27 +41,45 @@ export function HomePage({
       </header>
 
       <div className="home-entries">
-        <button type="button" className="home-entry home-entry-graph" onClick={onEnterGraph}>
+        <button
+          type="button"
+          className="home-entry home-entry-prep"
+          onClick={onEnterPrepGame}
+        >
           <span className="home-entry-icon" aria-hidden="true">
-            📈
+            in
           </span>
-          <span className="home-entry-title">函数图像</span>
+          <span className="home-entry-title">精灵起源</span>
           <span className="home-entry-desc">
-            输入一次函数、二次函数或反比例函数，在同一坐标系中观察图像
+            自动生成中考精灵题，每次练习句子不同，可反复刷题
           </span>
         </button>
 
         <button
           type="button"
-          className="home-entry home-entry-sign"
-          onClick={onEnterSignTraining}
+          className="home-entry home-entry-sentence"
+          onClick={onEnterSentenceGame}
         >
           <span className="home-entry-icon" aria-hidden="true">
-            ±
+            SVO
           </span>
-          <span className="home-entry-title">正负训练营</span>
+          <span className="home-entry-title">句型侦探</span>
           <span className="home-entry-desc">
-            闪卡练习正负号变换：去括号、变号与系数分配
+            主谓宾定状补填空练习，掌握动词时态、状语与形副用法
+          </span>
+        </button>
+
+        <button
+          type="button"
+          className="home-entry home-entry-free-vocab"
+          onClick={onEnterFreeVocab}
+        >
+          <span className="home-entry-icon" aria-hidden="true">
+            FV
+          </span>
+          <span className="home-entry-title">自由背单词</span>
+          <span className="home-entry-desc">
+            先筛选 100 个基础词，再按句型与 AI 自由选词背诵
           </span>
         </button>
 

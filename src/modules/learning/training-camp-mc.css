@@ -1,0 +1,1027 @@
+/* ── 训练营 · 游戏世界风格（与世界地图背景一致） ── */
+
+.learning-app.is-training-camp {
+  --tc-cream: #f6ead0;
+  --tc-cream-dim: rgba(246, 234, 208, 0.66);
+  --tc-glass: linear-gradient(160deg, rgba(58, 38, 17, 0.62), rgba(34, 22, 9, 0.74));
+  --tc-glass-border: rgba(231, 190, 93, 0.5);
+  --tc-gold: #e7be5d;
+  --tc-gold-bright: #e6855c;
+  --tc-seal: #9e3b27;
+  /* 兼容旧 MC 变量名，供子模块样式复用 */
+  --mc-gui-bg: var(--tc-glass);
+  --mc-gui-border-light: rgba(231, 190, 93, 0.55);
+  --mc-gui-border-dark: rgba(80, 50, 20, 0.85);
+  --mc-text: var(--tc-cream);
+  --mc-text-dim: var(--tc-cream-dim);
+  --mc-accent: var(--tc-gold);
+  --mc-accent-warm: var(--tc-gold-bright);
+  --mc-font: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+  background: #070910;
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .learning-main {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.learning-app.is-training-camp .learning-embedded-game {
+  margin: 0;
+  min-height: 0;
+}
+
+/* 世界地图背景 + 暗角 */
+.tc-camp {
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--mc-font);
+}
+
+.tc-camp__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+}
+
+.tc-camp__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 28%, rgba(255, 244, 214, 0.28) 0%, rgba(0, 0, 0, 0) 45%),
+    radial-gradient(130% 120% at 50% 62%, rgba(50, 30, 8, 0) 52%, rgba(50, 30, 8, 0.42) 100%);
+}
+
+/* 左侧边栏：返回我的世界 + 主导航 */
+.tc-camp-sidebar {
+  position: fixed;
+  left: 14px;
+  top: 20px;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  width: max-content;
+  max-width: 140px;
+}
+
+.tc-camp-btn--world {
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* 左侧主导航：复用 lk-float-nav，训练营内置于边栏内 */
+.tc-camp-nav {
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
+}
+
+.tc-camp-main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  min-width: 1024px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 32px 48px 168px;
+}
+
+.tc-camp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 12px;
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  color: var(--tc-cream);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 8px 20px rgba(18, 10, 3, 0.35),
+    inset 0 1px 0 rgba(255, 245, 220, 0.12);
+  transition: border-color 0.15s ease, filter 0.15s ease;
+}
+
+.tc-camp-btn:hover:not(:disabled) {
+  border-color: rgba(231, 190, 93, 0.75);
+  filter: brightness(1.06);
+}
+
+.tc-camp-section-head {
+  margin-bottom: 16px;
+  padding: 18px 22px;
+}
+
+.tc-camp-section-head h1 {
+  margin: 0 0 6px;
+  font-family: var(--mc-font);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--tc-cream);
+  letter-spacing: 0.02em;
+}
+
+.tc-camp-section-head p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--tc-cream-dim);
+  line-height: 1.55;
+}
+
+.tc-camp-section-body {
+  position: relative;
+  z-index: 1;
+}
+
+.learning-app.is-training-camp .tc-camp-section-body .module-prep-game.is-prep-pc,
+.learning-app.is-training-camp .tc-camp-section-body .module-sentence-game.is-sentence-embedded {
+  min-width: 0;
+  min-height: 0;
+  background: transparent;
+}
+
+.learning-app.is-training-camp .app-main-prep-embedded,
+.learning-app.is-training-camp .app-main-sentence-embedded {
+  padding: 0;
+  max-width: none;
+}
+
+/* 通用玻璃面板（旧 MC 面板兼容） */
+.tc-mc-panel {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 24px rgba(18, 10, 3, 0.42),
+    inset 0 1px 0 rgba(255, 245, 220, 0.12);
+  color: var(--tc-cream);
+}
+
+.tc-mc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 12px;
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px);
+  color: var(--tc-cream);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.12s ease, border-color 0.12s ease;
+}
+
+.tc-mc-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  border-color: rgba(231, 190, 93, 0.75);
+}
+
+.tc-mc-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.tc-mc-btn--green {
+  background: linear-gradient(160deg, rgba(74, 120, 50, 0.85), rgba(45, 80, 30, 0.9));
+  border-color: rgba(140, 200, 100, 0.55);
+}
+
+.tc-mc-btn--gold {
+  background: linear-gradient(160deg, rgba(180, 130, 40, 0.85), rgba(120, 80, 20, 0.9));
+  border-color: rgba(231, 190, 93, 0.65);
+  color: #fff8eb;
+}
+
+/* ── 训练营入口页 ── */
+.tc-mc-hub .tc-mc-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 20px 22px;
+}
+
+.tc-mc-head__icon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  background: linear-gradient(180deg, #6fcf4a 0%, #4a9e28 100%);
+  border: 3px solid;
+  border-color: #fff #2d5016 #2d5016 #fff;
+  image-rendering: pixelated;
+}
+
+.tc-mc-head h1 {
+  margin: 0;
+  font-family: var(--mc-font);
+  font-size: 1.65rem;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 2px 2px 0 #2d5016;
+}
+
+.tc-mc-head p {
+  margin: 6px 0 0;
+  font-size: 0.92rem;
+  color: var(--mc-text-dim);
+}
+
+.tc-mc-game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.tc-mc-game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.tc-mc-game-card:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+}
+
+.tc-mc-game-card__icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.tc-mc-game-card__title {
+  font-family: var(--mc-font);
+  font-size: 1rem;
+  color: var(--game-accent, var(--mc-accent-warm));
+  text-shadow: 1px 1px 0 #000;
+}
+
+.tc-mc-game-card__desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--mc-text-dim);
+}
+
+.tc-mc-game-card__action {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--game-accent, var(--mc-accent));
+}
+
+/* ── 游戏内页：模块头部 ── */
+.tc-mc-hub-toolbar {
+  margin-bottom: 16px;
+}
+
+.tc-mc-hub-toolbar .tc-mc-btn {
+  font-size: 0.82rem;
+  padding: 8px 14px;
+}
+
+.learning-app.is-training-camp .module-header {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  padding: 20px 32px 8px;
+}
+
+.learning-app.is-training-camp .sentence-pc-header {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 32px 12px;
+}
+
+.learning-app.is-training-camp .module-prep-game.is-prep-pc .prep-pc-header-text h1 {
+  font-family: var(--mc-font);
+  font-size: 1.75rem;
+  color: var(--tc-cream);
+  letter-spacing: 0.02em;
+}
+
+.learning-app.is-training-camp .module-prep-game.is-prep-pc .prep-pc-header-text p {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .module-header h1,
+.learning-app.is-training-camp .sentence-pc-header-text h1 {
+  font-family: var(--mc-font);
+  font-size: 1.5rem;
+  color: var(--tc-cream);
+  letter-spacing: 0.02em;
+}
+
+.learning-app.is-training-camp .module-header p,
+.learning-app.is-training-camp .sentence-pc-header-text p {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .module-back-button {
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 12px;
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px);
+  color: var(--tc-cream);
+  font-weight: 600;
+}
+
+.learning-app.is-training-camp .module-back-button:hover {
+  filter: brightness(1.08);
+  border-color: rgba(231, 190, 93, 0.75);
+  background: var(--tc-glass);
+  color: var(--tc-cream);
+}
+
+/* ── 关卡选择 ── */
+.learning-app.is-training-camp .module-prep-game,
+.learning-app.is-training-camp .module-sentence-game.is-sentence-pc,
+.learning-app.is-training-camp .module-sentence-game.is-structure-pc {
+  background: transparent;
+  min-height: 100vh;
+}
+
+.learning-app.is-training-camp .module-prep-game.is-prep-pc {
+  background: transparent;
+}
+
+.learning-app.is-training-camp .app-main-prep,
+.learning-app.is-training-camp .app-main-sentence-pc,
+.learning-app.is-training-camp .app-main-prep-pc,
+.learning-app.is-training-camp .app-main-sentence-challenge-pc,
+.learning-app.is-training-camp .app-main-structure-pc {
+  position: relative;
+  z-index: 1;
+}
+
+.learning-app.is-training-camp .prep-track-section,
+.learning-app.is-training-camp .prep-boss-section,
+.learning-app.is-training-camp .prep-level-topnav-item,
+.learning-app.is-training-camp .prep-level-main-panel,
+.learning-app.is-training-camp .sentence-level-select-pc .sentence-level-main-panel,
+.learning-app.is-training-camp .sentence-track-section {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 24px rgba(18, 10, 3, 0.42),
+    inset 0 1px 0 rgba(255, 245, 220, 0.12);
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-track-header h2,
+.learning-app.is-training-camp .sentence-track-header h2,
+.learning-app.is-training-camp .sentence-level-sidebar-label {
+  font-family: var(--mc-font);
+  font-size: 0.95rem;
+  color: var(--mc-accent-warm);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.learning-app.is-training-camp .prep-track-header p,
+.learning-app.is-training-camp .sentence-track-header p {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-level-card,
+.learning-app.is-training-camp .sentence-level-card,
+.learning-app.is-training-camp .prep-level-topnav-item,
+.learning-app.is-training-camp .sentence-level-sidebar-item {
+  border: 1.5px solid rgba(231, 190, 93, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 245, 220, 0.06);
+  color: var(--tc-cream);
+  transition: filter 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.learning-app.is-training-camp .prep-level-card:hover:not(:disabled),
+.learning-app.is-training-camp .sentence-level-card:hover:not(:disabled),
+.learning-app.is-training-camp .prep-level-topnav-item:hover:not(.is-locked),
+.learning-app.is-training-camp .sentence-level-sidebar-item:hover:not(.is-locked) {
+  filter: brightness(1.08);
+  border-color: rgba(231, 190, 93, 0.65);
+  transform: none;
+  background: rgba(231, 190, 93, 0.12);
+}
+
+.learning-app.is-training-camp .prep-level-card.is-passed,
+.learning-app.is-training-camp .sentence-level-card.is-passed {
+  background: rgba(140, 200, 100, 0.14);
+  border-color: rgba(140, 200, 100, 0.55);
+}
+
+.learning-app.is-training-camp .prep-level-card.is-locked,
+.learning-app.is-training-camp .sentence-level-card.is-locked,
+.learning-app.is-training-camp .sentence-level-sidebar-item.is-locked {
+  background: rgba(0, 0, 0, 0.35);
+  color: #888;
+  opacity: 0.75;
+}
+
+.learning-app.is-training-camp .prep-level-card-title,
+.learning-app.is-training-camp .sentence-level-card-title,
+.learning-app.is-training-camp .sentence-level-sidebar-item strong {
+  color: #fff;
+}
+
+.learning-app.is-training-camp .prep-level-card-scene,
+.learning-app.is-training-camp .sentence-level-card-scene {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-level-card-words,
+.learning-app.is-training-camp .sentence-level-card-roles,
+.learning-app.is-training-camp .prep-level-card-meta,
+.learning-app.is-training-camp .sentence-level-card-meta {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-boss-button,
+.learning-app.is-training-camp .sentence-boss-button,
+.learning-app.is-training-camp .sentence-boss-button-pc {
+  border: 1.5px solid rgba(231, 190, 93, 0.65);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(180, 130, 40, 0.55), rgba(120, 80, 20, 0.65));
+  backdrop-filter: blur(6px);
+}
+
+.learning-app.is-training-camp .prep-boss-button.is-locked,
+.learning-app.is-training-camp .sentence-boss-button.is-locked {
+  border-color: #555 #222 #222 #555;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.learning-app.is-training-camp .prep-boss-button-title,
+.learning-app.is-training-camp .sentence-boss-button-title {
+  color: #ffdd66;
+  text-shadow: 1px 1px 0 #553300;
+}
+
+.learning-app.is-training-camp .prep-boss-button-desc,
+.learning-app.is-training-camp .sentence-boss-button-desc {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-level-topnav-item.is-active,
+.learning-app.is-training-camp .sentence-level-sidebar-item.is-active {
+  background: rgba(91, 124, 250, 0.18);
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 4px 16px rgba(91, 124, 250, 0.2);
+}
+
+.learning-app.is-training-camp .prep-level-topnav-item[data-track='position'].is-active {
+  background: rgba(91, 124, 250, 0.18);
+  border-color: rgba(139, 92, 246, 0.55);
+}
+
+.learning-app.is-training-camp .prep-level-topnav-item-title,
+.learning-app.is-training-camp .prep-level-topnav-item-meta {
+  color: inherit;
+}
+
+.learning-app.is-training-camp .prep-level-topnav {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.learning-app.is-training-camp .prep-level-topnav-item {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px);
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 12px;
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-track-header-text h2,
+.learning-app.is-training-camp .prep-track-header-text p {
+  writing-mode: horizontal-tb;
+}
+
+.learning-app.is-training-camp .prep-track-progress {
+  color: var(--mc-accent-warm);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid #555;
+  border-radius: 0;
+}
+
+.learning-app.is-training-camp .sentence-level-sidebar-item[data-track='tense'].is-active,
+.learning-app.is-training-camp .sentence-level-sidebar-item[data-track='structure'].is-active,
+.learning-app.is-training-camp .sentence-level-sidebar-item[data-track='adverbial'].is-active,
+.learning-app.is-training-camp .sentence-level-sidebar-item[data-track='adj-adv'].is-active {
+  background: rgba(91, 124, 250, 0.18);
+  border-color: rgba(139, 92, 246, 0.55);
+}
+
+.learning-app.is-training-camp .prep-status,
+.learning-app.is-training-camp .sentence-status {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-status-error,
+.learning-app.is-training-camp .sentence-status-error {
+  color: #ff6b6b;
+}
+
+/* ── 精灵系列统一布局 ── */
+.learning-app.is-training-camp .prep-spirit-detail-back-link {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-spirit-detail-back-link:hover {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-spirit-detail-page .prep-spirit-series,
+.learning-app.is-training-camp .prep-spirit-detail-heading h1 {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-spirit-detail-heading h1,
+.learning-app.is-training-camp .prep-spirit-detail-heading {
+  background: transparent;
+  border: none;
+}
+
+.learning-app.is-training-camp .prep-spirit-detail-intro {
+  color: var(--mc-text-dim);
+  font-weight: 400;
+}
+
+.learning-app.is-training-camp .prep-spirit-family-section,
+.learning-app.is-training-camp .prep-spirit-series-card {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-spirit-family-name,
+.learning-app.is-training-camp .prep-spirit-family-progress,
+.learning-app.is-training-camp .prep-spirit-series-card-scene {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-spirit-family-desc,
+.learning-app.is-training-camp .prep-spirit-series-card-status {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-spirit-family-progress {
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(231, 190, 93, 0.35);
+}
+
+.learning-app.is-training-camp .prep-spirit-series-card-title {
+  color: #fff;
+}
+
+.learning-app.is-training-camp .prep-spirit-series-card:hover:not(:disabled) {
+  border-color: rgba(231, 190, 93, 0.65);
+  background: rgba(231, 190, 93, 0.12);
+}
+
+.learning-app.is-training-camp .prep-spirit-series-card.is-passed {
+  background: rgba(140, 200, 100, 0.14);
+  border-color: rgba(140, 200, 100, 0.55);
+}
+
+.learning-app.is-training-camp .prep-spirit-series-panel,
+.learning-app.is-training-camp .prep-spirit-level-tab,
+.learning-app.is-training-camp .prep-spirit-card {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-spirit-level-tab.is-active {
+  background: rgba(91, 124, 250, 0.18);
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 4px 16px rgba(91, 124, 250, 0.2);
+}
+
+.learning-app.is-training-camp .prep-spirit-level-tab.is-passed.is-active {
+  background: rgba(140, 200, 100, 0.14);
+  border-color: rgba(140, 200, 100, 0.55);
+}
+
+.learning-app.is-training-camp .prep-spirit-level-tab-title,
+.learning-app.is-training-camp .prep-spirit-block-title,
+.learning-app.is-training-camp .prep-spirit-card-word,
+.learning-app.is-training-camp .prep-spirit-compare-words,
+.learning-app.is-training-camp .prep-spirit-family-ability strong,
+.learning-app.is-training-camp .prep-challenge-toolbar-meta strong {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-spirit-level-tab-scene,
+.learning-app.is-training-camp .prep-spirit-block-sub,
+.learning-app.is-training-camp .prep-spirit-family-intro,
+.learning-app.is-training-camp .prep-spirit-family-ability,
+.learning-app.is-training-camp .prep-spirit-member-chip span,
+.learning-app.is-training-camp .prep-spirit-card-ability,
+.learning-app.is-training-camp .prep-spirit-card-example-zh,
+.learning-app.is-training-camp .prep-spirit-actions-hint,
+.learning-app.is-training-camp .prep-challenge-toolbar-meta,
+.learning-app.is-training-camp .prep-challenge-toolbar-meta span {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-spirit-member-chip,
+.learning-app.is-training-camp .prep-spirit-compare-tip {
+  background: rgba(255, 245, 220, 0.06);
+  border-color: rgba(231, 190, 93, 0.35);
+}
+
+.learning-app.is-training-camp .prep-spirit-member-chip em,
+.learning-app.is-training-camp .prep-spirit-card-tag {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-spirit-card-tag--warrior {
+  color: #fcd34d;
+  border-color: rgba(252, 211, 77, 0.45);
+  background: rgba(180, 120, 20, 0.22);
+}
+
+.learning-app.is-training-camp .prep-spirit-card-tag--commoner {
+  color: #6ee7b7;
+  border-color: rgba(110, 231, 183, 0.4);
+  background: rgba(20, 100, 70, 0.22);
+}
+
+.learning-app.is-training-camp .prep-spirit-card-example-en,
+.learning-app.is-training-camp .prep-spirit-compare-table td,
+.learning-app.is-training-camp .prep-spirit-compare-table code {
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-spirit-compare-table th {
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-spirit-compare-table th,
+.learning-app.is-training-camp .prep-spirit-compare-table td {
+  border-bottom-color: rgba(231, 190, 93, 0.22);
+}
+
+.learning-app.is-training-camp .prep-spirit-start-button {
+  border: 1.5px solid rgba(140, 200, 100, 0.65);
+  background: linear-gradient(160deg, rgba(80, 160, 60, 0.75), rgba(40, 100, 30, 0.85));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.learning-app.is-training-camp .prep-level-topnav-item[data-track='more'].is-active {
+  background: rgba(180, 130, 40, 0.22);
+  border-color: rgba(231, 190, 93, 0.65);
+}
+
+.learning-app.is-training-camp .module-prep-game.is-prep-pc.is-prep-challenge {
+  background: transparent;
+}
+
+.learning-app.is-training-camp .prep-challenge-pc .prep-challenge-board {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  box-shadow:
+    0 10px 24px rgba(18, 10, 3, 0.42),
+    inset 0 1px 0 rgba(255, 245, 220, 0.12);
+}
+
+.learning-app.is-training-camp .prep-challenge-pc .prep-challenge-workspace {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(231, 190, 93, 0.35);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.learning-app.is-training-camp .prep-challenge-pill {
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(231, 190, 93, 0.35);
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-challenge-pill strong {
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-challenge-dock {
+  border-top-color: rgba(231, 190, 93, 0.22);
+}
+
+.learning-app.is-training-camp .prep-challenge-dock-label {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-challenge-options.is-receiving {
+  background: rgba(231, 190, 93, 0.1);
+  outline-color: rgba(231, 190, 93, 0.45);
+}
+
+.learning-app.is-training-camp .prep-challenge-option.prep-cloze-chip {
+  border: 1.5px solid rgba(231, 190, 93, 0.55);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 245, 220, 0.2) 0%, rgba(90, 60, 20, 0.45) 100%);
+  color: var(--tc-cream);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+}
+
+.learning-app.is-training-camp .prep-challenge-option.prep-cloze-chip:not(.prep-cloze-chip--in-blank):hover {
+  border-color: rgba(231, 190, 93, 0.85);
+  transform: translateY(-2px);
+}
+
+.learning-app.is-training-camp .prep-cloze-blank {
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(231, 190, 93, 0.55);
+}
+
+.learning-app.is-training-camp .prep-cloze-blank-placeholder {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-cloze-submit {
+  border: 1.5px solid rgba(140, 200, 100, 0.65);
+  background: linear-gradient(160deg, rgba(80, 160, 60, 0.85), rgba(40, 100, 30, 0.95));
+}
+
+.learning-app.is-training-camp .prep-challenge-intro,
+.learning-app.is-training-camp .prep-challenge-result,
+.learning-app.is-training-camp .prep-challenge-board,
+.learning-app.is-training-camp .sentence-challenge-intro,
+.learning-app.is-training-camp .sentence-challenge-result,
+.learning-app.is-training-camp .sentence-challenge-board,
+.learning-app.is-training-camp .sentence-structure-intro,
+.learning-app.is-training-camp .sentence-structure-result,
+.learning-app.is-training-camp .sentence-structure-board {
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 24px rgba(18, 10, 3, 0.42),
+    inset 0 1px 0 rgba(255, 245, 220, 0.12);
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-challenge-intro h2,
+.learning-app.is-training-camp .prep-challenge-result-label,
+.learning-app.is-training-camp .sentence-challenge-intro h2,
+.learning-app.is-training-camp .sentence-challenge-result-label,
+.learning-app.is-training-camp .sentence-structure-intro h2,
+.learning-app.is-training-camp .sentence-structure-result-label {
+  font-family: var(--mc-font);
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-challenge-intro p,
+.learning-app.is-training-camp .prep-challenge-result-elapsed,
+.learning-app.is-training-camp .prep-challenge-rules,
+.learning-app.is-training-camp .sentence-challenge-intro p,
+.learning-app.is-training-camp .sentence-structure-intro p,
+.learning-app.is-training-camp .sentence-structure-rules {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-challenge-level,
+.learning-app.is-training-camp .sentence-challenge-level,
+.learning-app.is-training-camp .sentence-structure-level {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #555;
+  border-radius: 0;
+  color: var(--mc-text);
+}
+
+.learning-app.is-training-camp .prep-challenge-level strong,
+.learning-app.is-training-camp .sentence-challenge-level strong,
+.learning-app.is-training-camp .sentence-structure-level strong {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .prep-challenge-level span,
+.learning-app.is-training-camp .sentence-challenge-level span,
+.learning-app.is-training-camp .sentence-structure-level span {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-challenge-stat,
+.learning-app.is-training-camp .sentence-challenge-stat,
+.learning-app.is-training-camp .sentence-structure-stat {
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid #555;
+  border-radius: 0;
+}
+
+.learning-app.is-training-camp .prep-challenge-stat-label,
+.learning-app.is-training-camp .sentence-challenge-stat-label,
+.learning-app.is-training-camp .sentence-structure-stat-label {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-challenge-stat-value,
+.learning-app.is-training-camp .sentence-challenge-stat-value,
+.learning-app.is-training-camp .sentence-structure-stat-value {
+  color: #fff;
+}
+
+.learning-app.is-training-camp .prep-challenge-workspace,
+.learning-app.is-training-camp .sentence-challenge-workspace,
+.learning-app.is-training-camp .sentence-structure-workspace {
+  background: rgba(0, 0, 0, 0.35);
+  border: 2px solid #444;
+  border-radius: 0;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.learning-app.is-training-camp .prep-challenge-sentence,
+.learning-app.is-training-camp .sentence-challenge-sentence,
+.learning-app.is-training-camp .sentence-structure-sentence {
+  color: #fff;
+}
+
+.learning-app.is-training-camp .prep-challenge-sentence-zh,
+.learning-app.is-training-camp .sentence-challenge-sentence-zh {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .prep-challenge-option,
+.learning-app.is-training-camp .sentence-challenge-option {
+  border: 2px solid #555;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.learning-app.is-training-camp .prep-challenge-option:hover:not(:disabled),
+.learning-app.is-training-camp .sentence-challenge-option:hover:not(:disabled) {
+  border-color: var(--mc-accent-warm);
+  background: rgba(255, 170, 0, 0.12);
+}
+
+.learning-app.is-training-camp .prep-challenge-option.is-correct,
+.learning-app.is-training-camp .sentence-challenge-option.is-correct {
+  border-color: var(--mc-accent);
+  background: rgba(85, 255, 85, 0.15);
+}
+
+.learning-app.is-training-camp .prep-challenge-option.is-wrong,
+.learning-app.is-training-camp .sentence-challenge-option.is-wrong {
+  border-color: #ff5555;
+  background: rgba(255, 85, 85, 0.12);
+}
+
+.learning-app.is-training-camp .prep-challenge-hint,
+.learning-app.is-training-camp .sentence-challenge-hint {
+  background: rgba(255, 170, 0, 0.12);
+  border: 2px solid #885500;
+  border-radius: 0;
+  color: #ffdd88;
+}
+
+.learning-app.is-training-camp .prep-cloze-bank,
+.learning-app.is-training-camp .sentence-cloze-bank,
+.learning-app.is-training-camp .sentence-structure-word-bank {
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid #666;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.learning-app.is-training-camp .prep-cloze-chip,
+.learning-app.is-training-camp .sentence-cloze-chip,
+.learning-app.is-training-camp .sentence-structure-word-chip {
+  border: 2px solid;
+  border-color: #aaa #444 #444 #aaa;
+  border-radius: 0;
+  background: linear-gradient(180deg, #9a9a9a 0%, #6e6e6e 100%);
+  color: #fff;
+}
+
+.learning-app.is-training-camp .prep-challenge-start-button,
+.learning-app.is-training-camp .prep-cloze-submit,
+.learning-app.is-training-camp .sentence-challenge-start-button,
+.learning-app.is-training-camp .sentence-cloze-submit,
+.learning-app.is-training-camp .sentence-structure-start-button {
+  border: 1.5px solid rgba(140, 200, 100, 0.55);
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(74, 120, 50, 0.85), rgba(45, 80, 30, 0.9));
+  color: #fff8eb;
+}
+
+.learning-app.is-training-camp .prep-challenge-secondary-button,
+.learning-app.is-training-camp .sentence-challenge-secondary-button,
+.learning-app.is-training-camp .sentence-structure-secondary-button {
+  border: 1.5px solid var(--tc-glass-border);
+  border-radius: 12px;
+  background: var(--tc-glass);
+  backdrop-filter: blur(9px);
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .prep-challenge-score-value,
+.learning-app.is-training-camp .sentence-challenge-score-value,
+.learning-app.is-training-camp .sentence-structure-score-value {
+  color: var(--mc-accent-warm);
+  text-shadow: 2px 2px 0 #553300;
+}
+
+.learning-app.is-training-camp .tc-mc-game .module-prep-game,
+.learning-app.is-training-camp .tc-mc-game .module-sentence-game {
+  position: relative;
+  z-index: 1;
+}
+
+.learning-app.is-training-camp .sentence-boss-panel,
+.learning-app.is-training-camp .sentence-boss-panel-body {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .sentence-track-progress {
+  color: var(--tc-gold);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(231, 190, 93, 0.35);
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+@media (max-width: 900px) {
+  .tc-camp-main {
+    min-width: 0;
+    padding: 20px 16px 100px 16px;
+  }
+
+  .tc-camp-sidebar {
+    left: 8px;
+    top: 12px;
+    max-width: calc(100vw - 16px);
+  }
+
+  .tc-camp-nav {
+    flex-direction: row;
+    max-width: calc(100vw - 16px);
+    overflow-x: auto;
+  }
+
+  .learning-app.is-training-camp .module-header,
+  .learning-app.is-training-camp .sentence-pc-header {
+    padding: 20px 16px 8px;
+  }
+}

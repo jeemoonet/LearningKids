@@ -3,11 +3,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { DatabaseSync } from 'node:sqlite'
 import { mapWordRow } from './gameGroups.js'
-import { loadDashscopeApiKey } from './loadDashscopeApiKey.js'
+import { callLlmJson, toFriendlyLlmError } from './llmJsonChat.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const CHAT_URL = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
-const DEFAULT_MODEL = process.env.DASHSCOPE_CHAT_MODEL?.trim() || 'qwen-plus'
 
 const TIER_LABELS: Record<string, string> = {
   beginner: '初级',
@@ -21,8 +19,20 @@ const HIGH_FREQ_FILES: Record<string, string> = {
   advanced: '中考高频词-高级组.md',
 }
 
+const POS_LABEL: Record<string, string> = {
+  noun: '名词',
+  verb: '动词',
+  adj: '形容词',
+  adv: '副词',
+  pronoun: '代词',
+  other: '其他',
+}
+
+const VALID_POS = new Set(Object.keys(POS_LABEL))
+
 interface GeneratedWordPayload {
   word: string
+  pos?: string
   meaning_zh: string
   example_en: string
   example_zh: string
@@ -83,15 +93,16 @@ function buildPrompt(context: WordContext, highFreq: string): string {
 
   return `你是初中英语词汇编写专家，面向英语弱基础学生（北京中考）。
 
-请为以下单词重新生成词汇数据（释义、例句、关联词）。
+请为以下单词重新生成词汇数据（词性、释义、例句、关联词）。
 
 ## 单词
 - word: ${context.word}
-- 词性: ${context.posLabel || context.pos}
+- 当前词性（仅供参考）: ${context.posLabel || context.pos}
 - 年级: ${tierLabel}
 - ${sceneLine}
 
 ## 例句规则（DOC-PROD-001）
+0. pos：词性，只能是 noun|verb|adj|adv|pronoun|other 之一，按该词在本年级最常考用法判定
 1. meaning_zh：中文释义，≤20字，仅最常考的一个义项
 2. example_en：6～10 个英文词，最多 12 词；${tierSentenceRules(context.tierId)}
 3. example_zh：例句中文对照，自然简洁
@@ -109,39 +120,30 @@ ${highFreq || '（暂无熟词池，请使用初中常见词）'}
 
 ## 输出格式
 只输出 JSON，不要 markdown 代码块：
-{"word":"${context.word}","meaning_zh":"...","example_en":"...","example_zh":"...","similar1":"...","similar2":"...","similar3":"..."}
-word 字段必须与上面单词完全一致。`
+{"word":"${context.word}","pos":"noun","meaning_zh":"...","example_en":"...","example_zh":"...","similar1":"...","similar2":"...","similar3":"..."}
+word 字段必须与上面单词完全一致。pos 必须是 noun|verb|adj|adv|pronoun|other 之一。`
 }
 
-async function callQwen(prompt: string): Promise<GeneratedWordPayload> {
-  const apiKey = loadDashscopeApiKey()
-  const response = await fetch(CHAT_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: DEFAULT_MODEL,
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.3,
-      response_format: { type: 'json_object' },
-    }),
-  })
-
-  const payload = (await response.json()) as {
-    choices?: Array<{ message?: { content?: string } }>
-    error?: { message?: string }
+async function callLlm(prompt: string): Promise<GeneratedWordPayload> {
+  try {
+    const { content } = await callLlmJson(prompt)
+    return JSON.parse(content) as GeneratedWordPayload
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'AI 生成失败'
+    throw new Error(toFriendlyLlmError(message))
   }
+}
 
-  if (!response.ok) {
-    throw new Error(payload.error?.message ?? `百炼 API 请求失败 (${response.status})`)
+function resolvePos(entry: GeneratedWordPayload, fallbackPos: string): { pos: string; posLabel: string } {
+  const pos = entry.pos?.trim().toLowerCase()
+  if (pos && VALID_POS.has(pos)) {
+    return { pos, posLabel: POS_LABEL[pos] ?? '其他' }
   }
-
-  const content = payload.choices?.[0]?.message?.content
-  if (!content) throw new Error('百炼 API 未返回内容')
-
-  return JSON.parse(content) as GeneratedWordPayload
+  const fallback = fallbackPos.trim().toLowerCase()
+  if (VALID_POS.has(fallback)) {
+    return { pos: fallback, posLabel: POS_LABEL[fallback] ?? '其他' }
+  }
+  return { pos: 'other', posLabel: '其他' }
 }
 
 function validateGenerated(entry: GeneratedWordPayload, expectedWord: string): void {
@@ -192,18 +194,21 @@ export async function regenerateWordContent(db: DatabaseSync, wordId: number) {
   const context = loadWordContext(db, wordId)
   const highFreq = loadHighFreqPool(context.tierId)
   const prompt = buildPrompt(context, highFreq)
-  const generated = await callQwen(prompt)
+  const generated = await callLlm(prompt)
 
   validateGenerated(generated, context.word)
+  const { pos, posLabel } = resolvePos(generated, context.pos)
 
   db.prepare(
     `
     UPDATE words
-    SET meaning_zh = ?, example_en = ?, example_zh = ?,
+    SET pos = ?, pos_label = ?, meaning_zh = ?, example_en = ?, example_zh = ?,
         similar1 = ?, similar2 = ?, similar3 = ?
     WHERE id = ?
     `,
   ).run(
+    pos,
+    posLabel,
     generated.meaning_zh.trim(),
     generated.example_en.trim(),
     generated.example_zh.trim(),

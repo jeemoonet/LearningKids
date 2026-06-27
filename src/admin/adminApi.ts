@@ -1,5 +1,5 @@
 import { apiFetch } from '../lib/api'
-import { adminApiFetch } from './adminApiFetch'
+import { adminApiFetch, adminApiDownload } from './adminApiFetch'
 import type { VocabPos, VocabTierId, VocabWord } from '../modules/vocab-training/types'
 
 export interface GameSettingItem {
@@ -76,6 +76,136 @@ export interface AdminWordPatch {
   pos?: VocabPos
 }
 
+export interface AdminWordsResponse {
+  words: VocabWord[]
+  pagination: {
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+  }
+}
+
+export async function fetchAdminWords(params: {
+  q?: string
+  tierId?: string
+  libraryId?: string
+  page?: number
+  limit?: number
+}): Promise<AdminWordsResponse> {
+  const search = new URLSearchParams()
+  if (params.q) search.set('q', params.q)
+  if (params.libraryId) search.set('libraryId', params.libraryId)
+  else if (params.tierId) search.set('tierId', params.tierId)
+  if (params.page) search.set('page', String(params.page))
+  if (params.limit) search.set('limit', String(params.limit))
+  const qs = search.toString()
+  return adminApiFetch<AdminWordsResponse>(`/admin/words${qs ? `?${qs}` : ''}`)
+}
+
+export async function exportAdminWords(params: {
+  q?: string
+  tierId?: string
+  libraryId?: string
+  title?: string
+}): Promise<{ blob: Blob; filename: string }> {
+  const search = new URLSearchParams()
+  if (params.q) search.set('q', params.q)
+  if (params.libraryId) search.set('libraryId', params.libraryId)
+  else if (params.tierId) search.set('tierId', params.tierId)
+  if (params.title) search.set('title', params.title)
+  const qs = search.toString()
+  return adminApiDownload(`/admin/words/export${qs ? `?${qs}` : ''}`)
+}
+
+export interface AdminLibraryOption {
+  id: string
+  name: string
+  wordCount: number
+}
+
+export async function fetchAdminLibraryOptions(): Promise<AdminLibraryOption[]> {
+  const data = await adminApiFetch<{ libraries: AdminLibraryOption[] }>('/admin/libraries')
+  return data.libraries
+}
+
+export interface KingdomMapPosition {
+  x: number
+  y: number
+  region: string
+}
+
+export interface BattleMapNodeConfig {
+  id: string
+  x: number
+  y: number
+  label: string
+  terrain: string
+  levelId?: string
+}
+
+export interface BattleMapLayoutConfig {
+  kingdomId: string
+  spineBeforeFork: string[]
+  spineAfterFork: string[]
+  fork: {
+    nodeId: string
+    branches: Array<{
+      id: string
+      label: string
+      hint: string
+      nodeIds: string[]
+    }>
+    mergeNodeId: string
+  }
+  nodes: Record<string, BattleMapNodeConfig>
+}
+
+export interface AdminKingdom {
+  id: string
+  order: number
+  name: string
+  subtitle: string
+  difficulty: string
+  theme: string
+  mapPosition: KingdomMapPosition
+  hasBattleMap: boolean
+  battleMapLayout: BattleMapLayoutConfig | null
+  hasOverride: boolean
+  updatedAt: number | null
+}
+
+export async function fetchAdminKingdoms(): Promise<AdminKingdom[]> {
+  const data = await adminApiFetch<{ kingdoms: AdminKingdom[] }>('/admin/planet/kingdoms')
+  return data.kingdoms
+}
+
+export async function updateAdminKingdom(
+  kingdomId: string,
+  patch: {
+    name?: string
+    subtitle?: string
+    mapX?: number
+    mapY?: number
+    mapRegion?: string
+    battleMapLayout?: BattleMapLayoutConfig | null
+  },
+): Promise<AdminKingdom> {
+  const data = await adminApiFetch<{ kingdom: AdminKingdom }>(`/admin/planet/kingdoms/${kingdomId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(patch),
+  })
+  return data.kingdom
+}
+
+export async function resetAdminKingdomOverride(kingdomId: string): Promise<AdminKingdom> {
+  const data = await adminApiFetch<{ kingdom: AdminKingdom }>(
+    `/admin/planet/kingdoms/${kingdomId}/override`,
+    { method: 'DELETE' },
+  )
+  return data.kingdom
+}
+
 export async function updateAdminWord(
   wordId: number,
   patch: AdminWordPatch,
@@ -92,6 +222,10 @@ export async function regenerateAdminWord(wordId: number): Promise<VocabWord> {
     method: 'POST',
   })
   return data.word
+}
+
+export async function deleteAdminWord(wordId: number): Promise<void> {
+  await adminApiFetch(`/admin/vocab/words/${wordId}`, { method: 'DELETE' })
 }
 
 export interface AdminPassageResult {

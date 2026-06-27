@@ -51,15 +51,54 @@ export function RegenerateIcon() {
   )
 }
 
+export function AiOptimizeIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 3l1.2 3.6L17 8l-3.8 1.4L12 13l-1.2-3.6L7 8l3.8-1.4L12 3z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18 14l.8 2.4L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export function DeleteIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M10 11v6M14 11v6M6 7l1 12a1 1 0 0 0 1 .9h8a1 1 0 0 0 1-.9L18 7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function AdminWordActionButtons({
   onEdit,
   onRegenerate,
+  onDelete,
   regenerating = false,
+  deleting = false,
 }: {
   onEdit: () => void
   onRegenerate: () => void
+  onDelete?: () => void
   regenerating?: boolean
+  deleting?: boolean
 }) {
+  const busy = regenerating || deleting
+
   return (
     <div className="admin-word-action-btns">
       <button
@@ -71,7 +110,7 @@ export function AdminWordActionButtons({
         }}
         title="编辑词性、释义与例句"
         aria-label="编辑词性、释义与例句"
-        disabled={regenerating}
+        disabled={busy}
       >
         <EditIcon />
       </button>
@@ -82,12 +121,27 @@ export function AdminWordActionButtons({
           event.stopPropagation()
           onRegenerate()
         }}
-        title="按规则重新生成释义与例句"
-        aria-label="按规则重新生成释义与例句"
-        disabled={regenerating}
+        title="AI 优化：重新生成词性、释义、例句与翻译"
+        aria-label="AI 优化：重新生成词性、释义、例句与翻译"
+        disabled={busy}
       >
-        {regenerating ? <span className="admin-word-action-spinner" aria-hidden="true" /> : <RegenerateIcon />}
+        {regenerating ? <span className="admin-word-action-spinner" aria-hidden="true" /> : <AiOptimizeIcon />}
       </button>
+      {onDelete ? (
+        <button
+          type="button"
+          className="admin-word-action-btn admin-word-action-btn-delete"
+          onClick={(event) => {
+            event.stopPropagation()
+            onDelete()
+          }}
+          title="删除单词"
+          aria-label="删除单词"
+          disabled={busy}
+        >
+          {deleting ? <span className="admin-word-action-spinner" aria-hidden="true" /> : <DeleteIcon />}
+        </button>
+      ) : null}
     </div>
   )
 }

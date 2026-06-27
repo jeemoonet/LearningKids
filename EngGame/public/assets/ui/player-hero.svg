@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" role="img" aria-label="UÍº">
+  <defs>
+    <linearGradient id="cloak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2d6a4f"/>
+      <stop offset="100%" stop-color="#1b4332"/>
+    </linearGradient>
+  </defs>
+  <!-- shadow -->
+  <ellipse cx="100" cy="245" rx="55" ry="10" fill="#000" opacity="0.25"/>
+  <!-- legs -->
+  <rect x="78" y="175" width="16" height="55" fill="#264653" rx="6"/>
+  <rect x="106" y="175" width="16" height="55" fill="#264653" rx="6"/>
+  <!-- body / cloak -->
+  <path d="M55 95 L100 70 L145 95 L135 190 L65 190 Z" fill="url(#cloak)"/>
+  <!-- book -->
+  <rect x="118" y="130" width="34" height="42" fill="#e9c46a" rx="3"/>
+  <line x1="124" y1="140" x2="146" y2="140" stroke="#8d5a2a" stroke-width="2"/>
+  <line x1="124" y1="150" x2="146" y2="150" stroke="#8d5a2a" stroke-width="2"/>
+  <line x1="124" y1="160" x2="140" y2="160" stroke="#8d5a2a" stroke-width="2"/>
+  <!-- arm -->
+  <path d="M135 120 Q155 135 148 155 L130 148 Z" fill="#40916c"/>
+  <!-- head -->
+  <circle cx="100" cy="82" r="32" fill="#f4a261"/>
+  <!-- hair -->
+  <path d="M68 78 Q100 45 132 78 Q125 62 100 58 Q75 62 68 78 Z" fill="#3d2817"/>
+  <!-- eyes -->
+  <circle cx="88" cy="84" r="4" fill="#1d3557"/>
+  <circle cx="112" cy="84" r="4" fill="#1d3557"/>
+  <!-- smile -->
+  <path d="M90 96 Q100 104 110 96" stroke="#c45a2a" stroke-width="2" fill="none"/>
+  <!-- word bullets belt -->
+  <rect x="70" y="168" width="60" height="12" fill="#457b9d" rx="4" opacity="0.8"/>
+</svg>

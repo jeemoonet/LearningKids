@@ -1,0 +1,25 @@
+{
+  "id": 1,
+  "name": "迷雾森林",
+  "monsterName": "迷雾小妖",
+  "monsterAsset": "mist",
+  "backgroundAsset": "level-01-mist",
+  "monsterPartOfSpeech": "adjective",
+  "themeWordIds": [
+    "word_hello",
+    "word_hi",
+    "word_good",
+    "word_morning",
+    "word_night",
+    "word_thank",
+    "word_please",
+    "word_sorry",
+    "word_yes",
+    "word_no"
+  ],
+  "isTutorialLevel": true,
+  "damageMultiplier": 0.5,
+  "timerSeconds": 10,
+  "skills": [{ "type": "blur_options" }],
+  "attackPoolWeights": { "theme": 0.7, "learned": 0.3 }
+}

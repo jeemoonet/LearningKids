@@ -7,6 +7,13 @@ import { buildBeginnerThemeGroups } from '../lib/buildBeginnerThemeGroups.js'
 import { clearGameGroups, mapWordRow, saveGameGroups } from '../lib/gameGroups.js'
 import { generateAllThemePassages, generateThemePassage } from '../lib/generateThemePassage.js'
 import { regenerateWordContent } from '../lib/regenerateWordContent.js'
+import {
+  buildAttachmentContentDisposition,
+  buildWordListExportHtml,
+  htmlToPdf,
+  queryWordsForExport,
+  sanitizeExportFilename,
+} from '../lib/wordListExport.js'
 
 type AppEnv = { Variables: { admin: AdminUser } }
 
@@ -18,24 +25,113 @@ adminRoutes.get('/game-settings', (c) => {
   return c.json({
     settings: [
       {
+        id: 'words',
+        label: '单词库',
+        description: '浏览与编辑全部标准单词及释义',
+        available: true,
+      },
+      {
+        id: 'planet',
+        label: '征服星球',
+        description: '七王国名称与大陆/战斗地图标注',
+        available: true,
+      },
+      {
         id: 'vocab',
         label: '单词记忆',
         description: '大组选择与小组随机分组（名词40%·动词30%·其他30%）',
         available: true,
       },
-      {
-        id: 'graph',
-        label: '函数图像',
-        description: '函数图像训练参数（即将开放）',
-        available: false,
-      },
-      {
-        id: 'sign-training',
-        label: '正负训练营',
-        description: '正负号训练参数（即将开放）',
-        available: false,
-      },
     ],
+  })
+})
+
+adminRoutes.get('/words', (c) => {
+  const q = (c.req.query('q') ?? '').trim().toLowerCase()
+  const tierId = (c.req.query('tierId') ?? '').trim()
+  const libraryId = (c.req.query('libraryId') ?? '').trim()
+  const page = Math.max(1, Number(c.req.query('page') ?? 1))
+  const limit = Math.min(200, Math.max(4, Number(c.req.query('limit') ?? 48)))
+
+  const db = getDb()
+  const conditions: string[] = []
+  const params: Array<string | number> = []
+  const fromJoin = libraryId
+    ? `FROM words w INNER JOIN library_words lw ON lw.word_id = w.id AND lw.library_id = ?`
+    : 'FROM words w'
+
+  if (libraryId) {
+    params.push(libraryId)
+  } else if (tierId) {
+    conditions.push('w.tier_id = ?')
+    params.push(tierId)
+  }
+  if (q) {
+    conditions.push('(lower(w.word) LIKE ? OR lower(w.meaning_zh) LIKE ?)')
+    params.push(`%${q}%`, `%${q}%`)
+  }
+
+  const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : ''
+  const orderBy = libraryId ? 'lw.sort_order, w.id' : 'w.tier_id, w.sort_order, w.id'
+
+  const totalRow = db
+    .prepare(`SELECT COUNT(*) AS count ${fromJoin} ${where}`)
+    .get(...params) as { count: number }
+  const total = totalRow?.count ?? 0
+  const offset = (page - 1) * limit
+
+  const rows = db
+    .prepare(`SELECT w.* ${fromJoin} ${where} ORDER BY ${orderBy} LIMIT ? OFFSET ?`)
+    .all(...params, limit, offset) as Array<Record<string, unknown>>
+
+  return c.json({
+    words: rows.map(mapWordRow),
+    pagination: {
+      page,
+      limit,
+      total,
+      totalPages: Math.max(1, Math.ceil(total / limit)),
+    },
+  })
+})
+
+adminRoutes.get('/words/export', (c) => {
+  const q = (c.req.query('q') ?? '').trim()
+  const tierId = (c.req.query('tierId') ?? '').trim()
+  const libraryId = (c.req.query('libraryId') ?? '').trim()
+  const title = (c.req.query('title') ?? '').trim() || '单词库导出'
+
+  const db = getDb()
+  const words = queryWordsForExport(db, { q, tierId, libraryId })
+
+  if (words.length === 0) {
+    return c.json({ error: '没有可导出的单词' }, 400)
+  }
+
+  const exportTitle = `${title}（${words.length} 词）`
+  const html = buildWordListExportHtml(exportTitle, words)
+  const pdf = htmlToPdf(html)
+
+  const datePart = new Date().toISOString().slice(0, 10)
+  const baseName = sanitizeExportFilename(title)
+  const downloadName = `${baseName}-${datePart}.pdf`
+  const disposition = buildAttachmentContentDisposition(downloadName)
+
+  if (pdf) {
+    return new Response(new Uint8Array(pdf), {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': disposition,
+      },
+    })
+  }
+
+  const htmlName = `${baseName}-${datePart}.html`
+  return new Response(html, {
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Content-Disposition': buildAttachmentContentDisposition(htmlName),
+    },
   })
 })
 
@@ -350,4 +446,52 @@ adminRoutes.post('/vocab/words/:wordId/regenerate', async (c) => {
     const message = error instanceof Error ? error.message : '重新生成失败'
     return c.json({ error: message }, 502)
   }
+})
+
+adminRoutes.delete('/vocab/words/:wordId', (c) => {
+  const wordId = Number(c.req.param('wordId'))
+  if (!wordId) return c.json({ error: '无效的 wordId' }, 400)
+
+  const db = getDb()
+  const existing = db
+    .prepare('SELECT id, word, tier_id FROM words WHERE id = ?')
+    .get(wordId) as { id: number; word: string; tier_id: string } | undefined
+  if (!existing) return c.json({ error: '单词不存在' }, 404)
+
+  const wordKey = existing.word.trim().toLowerCase()
+  const affectedLibraries = db
+    .prepare('SELECT DISTINCT library_id FROM library_words WHERE word_id = ?')
+    .all(wordId) as Array<{ library_id: string }>
+
+  db.exec('BEGIN IMMEDIATE')
+  try {
+    db.prepare('DELETE FROM user_word_corrections WHERE word_id = ?').run(wordId)
+    db.prepare('DELETE FROM user_word_assignments WHERE word_id = ?').run(wordId)
+    db.prepare('DELETE FROM section_words WHERE word_id = ?').run(wordId)
+    db.prepare('DELETE FROM user_word_progress WHERE lower(word) = ?').run(wordKey)
+    db.prepare('DELETE FROM user_known_words WHERE lower(word) = ?').run(wordKey)
+    db.prepare('DELETE FROM fv_known_words WHERE lower(word) = ?').run(wordKey)
+    db.prepare('DELETE FROM fv_learning_words WHERE lower(word) = ?').run(wordKey)
+    db.prepare('DELETE FROM fv_batch_word WHERE lower(word) = ?').run(wordKey)
+    db.prepare('DELETE FROM user_planet_familiarity WHERE lower(word) = ?').run(wordKey)
+    db.prepare('DELETE FROM words WHERE id = ?').run(wordId)
+
+    db.prepare(
+      'UPDATE tiers SET word_count = (SELECT COUNT(*) FROM words WHERE tier_id = ?) WHERE id = ?',
+    ).run(existing.tier_id, existing.tier_id)
+
+    for (const row of affectedLibraries) {
+      db.prepare(
+        'UPDATE learning_libraries SET word_count = (SELECT COUNT(*) FROM library_words WHERE library_id = ?) WHERE id = ?',
+      ).run(row.library_id, row.library_id)
+    }
+
+    db.exec('COMMIT')
+  } catch (error) {
+    db.exec('ROLLBACK')
+    const message = error instanceof Error ? error.message : '删除失败'
+    return c.json({ error: message }, 500)
+  }
+
+  return c.json({ ok: true, wordId, word: existing.word })
 })

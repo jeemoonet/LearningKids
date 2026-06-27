@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { fetchGameSettings, type GameSettingItem } from '../admin/adminApi'
 import { VocabGameSettings } from '../admin/VocabGameSettings'
+import { AdminLibraries } from '../admin/AdminLibraries'
+import { AdminWords } from '../admin/AdminWords'
+import { AdminPlanetKingdoms } from '../admin/AdminPlanetKingdoms'
 
 interface AdminPageProps {
   user: { displayName: string }
@@ -8,19 +11,21 @@ interface AdminPageProps {
   onLogout: () => void
 }
 
-type AdminView = 'home' | 'vocab' | 'graph' | 'sign-training'
+type AdminView = 'home' | 'words' | 'planet' | 'vocab' | 'libraries'
 
 const NAV_ICONS: Record<string, string> = {
   home: '◫',
+  words: '词',
+  planet: '🌍',
   vocab: 'Aa',
-  graph: 'ƒ',
-  'sign-training': '±',
+  libraries: '📚',
 }
 
 function viewFromSettingId(id: string): AdminView {
+  if (id === 'words') return 'words'
+  if (id === 'planet') return 'planet'
   if (id === 'vocab') return 'vocab'
-  if (id === 'graph') return 'graph'
-  if (id === 'sign-training') return 'sign-training'
+  if (id === 'libraries') return 'libraries'
   return 'home'
 }
 
@@ -39,6 +44,7 @@ export function AdminPage({ user, onBack, onLogout }: AdminPageProps) {
 
   const navItems: Array<{ id: AdminView; label: string; available: boolean }> = [
     { id: 'home', label: '概览', available: true },
+    { id: 'libraries', label: '学习库管理', available: true },
     ...settings.map((item) => ({
       id: viewFromSettingId(item.id),
       label: item.label,
@@ -133,7 +139,13 @@ export function AdminPage({ user, onBack, onLogout }: AdminPageProps) {
           </>
         )}
 
+        {view === 'words' && <AdminWords />}
+
+        {view === 'planet' && <AdminPlanetKingdoms />}
+
         {view === 'vocab' && <VocabGameSettings />}
+
+        {view === 'libraries' && <AdminLibraries />}
       </main>
     </div>
   )

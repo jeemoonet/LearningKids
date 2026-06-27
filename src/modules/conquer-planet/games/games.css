@@ -1,0 +1,78 @@
+/* 过关游戏插件 · 通用样式 */
+
+/* 拼写挖空 */
+.cp-spell-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.cp-spell-fixed,
+.cp-spell-slot {
+  width: 38px;
+  height: 46px;
+  font-size: 22px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.cp-spell-fixed {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e8e2d0;
+}
+.cp-spell-slot {
+  border: 2px solid #c9a14a;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  outline: none;
+}
+.cp-spell-slot:focus {
+  border-color: #f0c869;
+  box-shadow: 0 0 0 2px rgba(240, 200, 105, 0.3);
+}
+
+/* 词义连线 */
+.cp-match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  max-width: 520px;
+  margin: 18px auto;
+}
+.cp-match-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cp-match-chip {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(201, 161, 74, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ece6d6;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.cp-match-chip:hover:not(:disabled) {
+  border-color: #f0c869;
+}
+.cp-match-chip--active {
+  border-color: #f0c869;
+  background: rgba(240, 200, 105, 0.18);
+}
+.cp-match-chip--ok {
+  border-color: #5fbf6a;
+  background: rgba(95, 191, 106, 0.22);
+}
+.cp-match-chip--bad {
+  border-color: #d9534f;
+  background: rgba(217, 83, 79, 0.22);
+}
+.cp-match-chip--done {
+  opacity: 0.4;
+  cursor: default;
+}

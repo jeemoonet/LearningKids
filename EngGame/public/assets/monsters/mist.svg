@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" role="img" aria-label="χώ–">
+  <defs>
+    <radialGradient id="bodyGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#8ecae6" stop-opacity="0.95"/>
+      <stop offset="70%" stop-color="#4a6fa5" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1d3557" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- mist tail -->
+  <path d="M120 200 Q80 240 60 270 Q100 250 120 230 Q140 250 180 270 Q160 240 120 200 Z" fill="#a8c8e8" opacity="0.45"/>
+  <path d="M120 180 Q70 220 50 260 Q95 235 120 210 Q145 235 190 260 Q170 220 120 180 Z" fill="#c5d9ed" opacity="0.3"/>
+  <!-- body -->
+  <ellipse cx="120" cy="130" rx="68" ry="78" fill="url(#bodyGlow)" filter="url(#glow)"/>
+  <!-- face -->
+  <ellipse cx="120" cy="118" rx="42" ry="48" fill="#b8d4ea" opacity="0.85"/>
+  <!-- eyes -->
+  <ellipse cx="102" cy="112" rx="10" ry="14" fill="#1d3557"/>
+  <ellipse cx="138" cy="112" rx="10" ry="14" fill="#1d3557"/>
+  <circle cx="105" cy="108" r="4" fill="#e8f4ff"/>
+  <circle cx="141" cy="108" r="4" fill="#e8f4ff"/>
+  <!-- mouth -->
+  <path d="M108 138 Q120 148 132 138" stroke="#2d4a6f" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- arms -->
+  <path d="M55 145 Q35 165 45 185 Q58 170 62 150 Z" fill="#9bb8d3" opacity="0.7"/>
+  <path d="M185 145 Q205 165 195 185 Q182 170 178 150 Z" fill="#9bb8d3" opacity="0.7"/>
+  <!-- crown mist -->
+  <path d="M90 75 Q120 45 150 75 L145 88 Q120 68 95 88 Z" fill="#dfe8f5" opacity="0.8"/>
+  <!-- floating orbs -->
+  <circle cx="75" cy="90" r="6" fill="#a8dadc" opacity="0.6"/>
+  <circle cx="165" cy="85" r="5" fill="#a8dadc" opacity="0.5"/>
+</svg>

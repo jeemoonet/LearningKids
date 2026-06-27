@@ -7,18 +7,21 @@
     "dev": "vite",
     "dev:server": "node --import tsx/esm --experimental-sqlite --watch server/src/index.ts",
     "dev:all": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-dev.ps1",
+    "dev:all:mac": "bash scripts/start-dev.sh",
     "build": "tsc -b && vite build",
     "build:server": "tsc -p server/tsconfig.json",
     "start:server": "node --experimental-sqlite server/dist/index.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "annotate:free-vocab-pos": "python3 scripts/annotate_free_vocab_pos.py"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.4",
     "hono": "^4.8.3",
     "mathjs": "^15.2.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

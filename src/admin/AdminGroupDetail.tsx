@@ -1,16 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { AdminTierGroup } from './adminApi'
 import { regenerateAdminPassage, regenerateAdminWord, updateAdminWord } from './adminApi'
-import { AdminWordActionButtons, AdminWordEditModal, RegenerateIcon } from './AdminWordEditModal'
+import { AdminWordEditModal, RegenerateIcon } from './AdminWordEditModal'
+import { AdminWordDetailCard } from './AdminWordDetailCard'
 import { GroupCoverImage } from '../components/GroupCoverImage'
 import { GroupCoverBadge } from '../components/GroupCoverPreviewModal'
 import { hasGroupCover } from '../modules/vocab-training/groupCover'
 import { splitPassageByWords } from '../modules/vocab-training/passageAudio'
-import { getThreeExamples, formatVerbTensesLine, getNounPlural, getVerbTenses } from '../modules/vocab-training/wordForms'
 import type { VocabPos, VocabTier, VocabWord } from '../modules/vocab-training/types'
 import { getWordDisplay } from '../modules/vocab-training/wordFrequency'
-import { getSpeakableWord } from '../modules/vocab-training/VocabWordHeadline'
-import { WordFrequencyTag } from '../modules/vocab-training/WordFrequencyTag'
 
 function PassageBlock({ text, words }: { text: string; words: string[] }) {
   const segments = useMemo(() => splitPassageByWords(text, words), [text, words])
@@ -28,84 +26,6 @@ function PassageBlock({ text, words }: { text: string; words: string[] }) {
         ),
       )}
     </p>
-  )
-}
-
-interface AdminWordDetailRowProps {
-  word: VocabWord
-  regenerating: boolean
-  onEdit: (word: VocabWord) => void
-  onRegenerate: (word: VocabWord) => void
-}
-
-function AdminWordDetailRow({
-  word,
-  regenerating,
-  onEdit,
-  onRegenerate,
-}: AdminWordDetailRowProps) {
-  const { baseWord, frequency } = getWordDisplay(word.word, word)
-  const speakWord = getSpeakableWord(word.word, word)
-  const examples = getThreeExamples(word)
-  const verbTenses = word.pos === 'verb' ? getVerbTenses(speakWord) : null
-  const plural = word.pos === 'noun' ? getNounPlural(speakWord) : null
-
-  return (
-    <article className={`admin-word-detail-card${regenerating ? ' is-regenerating' : ''}`}>
-      <AdminWordActionButtons
-        onEdit={() => onEdit(word)}
-        onRegenerate={() => onRegenerate(word)}
-        regenerating={regenerating}
-      />
-
-      <header className="admin-word-detail-head">
-        <h3 className="admin-word-detail-word">{baseWord}</h3>
-        {frequency && <WordFrequencyTag frequency={frequency} className="admin-word-detail-freq" />}
-      </header>
-
-      <dl className="admin-word-detail-grid">
-        <div className="admin-word-detail-field">
-          <dt>音标</dt>
-          <dd>{word.phonetic || '暂无'}</dd>
-        </div>
-        <div className="admin-word-detail-field">
-          <dt>词性</dt>
-          <dd>{word.posLabel || word.pos}</dd>
-        </div>
-        {verbTenses && (
-          <div className="admin-word-detail-field admin-word-detail-field-wide">
-            <dt>动词时态</dt>
-            <dd className="admin-word-detail-forms">{formatVerbTensesLine(verbTenses)}</dd>
-          </div>
-        )}
-        {plural && (
-          <div className="admin-word-detail-field">
-            <dt>复数</dt>
-            <dd className="admin-word-detail-forms">{plural}</dd>
-          </div>
-        )}
-        <div className="admin-word-detail-field admin-word-detail-field-wide">
-          <dt>释义</dt>
-          <dd>{word.meaningZh || '暂无'}</dd>
-        </div>
-      </dl>
-
-      {examples.length > 0 ? (
-        <div className="admin-word-detail-examples">
-          <span className="admin-word-detail-examples-title">例句</span>
-          <ul>
-            {examples.map((example, index) => (
-              <li key={index}>
-                <p className="admin-word-detail-example-en">{example.en}</p>
-                {example.zh && <p className="admin-word-detail-example-zh">{example.zh}</p>}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p className="admin-word-detail-no-example">暂无例句</p>
-      )}
-    </article>
   )
 }
 
@@ -309,10 +229,11 @@ export function AdminGroupDetail({
           {regenerateError && <p className="admin-alert admin-alert-error">{regenerateError}</p>}
           <div className="admin-word-detail-list">
             {words.map((word) => (
-              <AdminWordDetailRow
+              <AdminWordDetailCard
                 key={word.id}
                 word={word}
                 regenerating={regeneratingWordId === word.id}
+                showRegenerate
                 onEdit={(item) => {
                   setEditError('')
                   setEditingWord(item)

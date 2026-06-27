@@ -9,7 +9,19 @@ import { adminAuthRoutes } from './routes/adminAuth.js'
 import { adminRoutes } from './routes/admin.js'
 import { progressRoutes } from './routes/progress.js'
 import { vocabRoutes } from './routes/vocab.js'
+import { prepGameRoutes } from './routes/prepGame.js'
+import { sentenceGameRoutes } from './routes/sentenceGame.js'
+import { freeVocabRoutes } from './routes/freeVocab.js'
 import { wordbookRoutes } from './routes/wordbook.js'
+import { profileRoutes } from './routes/profile.js'
+import { knownWordsRoutes } from './routes/knownWords.js'
+import { librariesRoutes } from './routes/libraries.js'
+import { learningRoutes } from './routes/learning.js'
+import { coursewareRoutes } from './routes/courseware.js'
+import { assessmentRoutes } from './routes/assessment.js'
+import { adminLibrariesRoutes } from './routes/adminLibraries.js'
+import { adminPlanetRoutes } from './routes/adminPlanet.js'
+import { conquerPlanetRoutes } from './routes/conquerPlanet.js'
 
 const app = new Hono()
 
@@ -33,10 +45,22 @@ app.get('/api/health', (c) => {
 
 app.route('/api/auth', authRoutes)
 app.route('/api/admin/auth', adminAuthRoutes)
+app.route('/api/admin/libraries', adminLibrariesRoutes)
+app.route('/api/admin/planet', adminPlanetRoutes)
 app.route('/api/admin', adminRoutes)
 app.route('/api/vocab', vocabRoutes)
 app.route('/api/progress', progressRoutes)
 app.route('/api/wordbook', wordbookRoutes)
+app.route('/api/prep-game', prepGameRoutes)
+app.route('/api/sentence-game', sentenceGameRoutes)
+app.route('/api/free-vocab', freeVocabRoutes)
+app.route('/api/profile', profileRoutes)
+app.route('/api/known-words', knownWordsRoutes)
+app.route('/api/libraries', librariesRoutes)
+app.route('/api/learning', learningRoutes)
+app.route('/api/courseware', coursewareRoutes)
+app.route('/api/assessment', assessmentRoutes)
+app.route('/api/conquer-planet', conquerPlanetRoutes)
 
 const port = Number(process.env.PORT ?? 3001)
 

@@ -4,22 +4,34 @@ from __future__ import annotations
 
 from nltk.corpus import wordnet as wn
 
-# 功能词、代词、介词、连词等 — 保持 other
-FUNCTION_WORDS = {
-    "a", "an", "the", "i", "you", "he", "she", "it", "we", "they",
-    "me", "him", "her", "us", "them", "my", "your", "his", "its", "our", "their",
-    "mine", "yours", "hers", "ours", "theirs", "myself", "yourself", "himself",
-    "herself", "itself", "ourselves", "themselves",
-    "in", "on", "at", "for", "with", "from", "to", "of", "by", "about", "into",
+# 自由背单词初始化：固定基础代词（自动种入已掌握词库，不参与抽题）
+FIXED_PRONOUNS = {
+    "i", "you", "he", "she", "it", "we", "they",
+    "this", "that",
+    "my", "your", "his", "her", "its", "our", "their",
+}
+
+# 介词 — 标 prep（军团「精灵」编队）
+PREPOSITION_WORDS = {
+    "at", "on", "in", "for", "by", "from", "to", "of", "with", "about", "into",
     "through", "during", "before", "after", "between", "under", "over", "above",
     "below", "across", "against", "without", "within", "upon", "among", "along",
     "around", "behind", "beside", "beyond", "inside", "outside", "toward", "towards",
+    "until", "since", "past", "off", "ago",
+}
+
+# 连词、冠词等功能词 — 保持 other（代词单独标 pronoun）
+FUNCTION_WORDS = {
+    "a", "an", "the",
+    "me", "him", "us", "them",
+    "mine", "yours", "hers", "ours", "theirs", "myself", "yourself", "himself",
+    "herself", "itself", "ourselves", "themselves",
     "and", "or", "but", "so", "if", "because", "while", "though", "when", "where",
-    "why", "how", "what", "who", "which", "that", "this", "these", "those",
+    "why", "how", "what", "who", "which",
     "both", "either", "neither", "not", "no", "yes", "nor",
     "very", "quite", "just", "only", "even", "still", "already", "yet", "again",
     "here", "there", "now", "then", "as", "than", "such", "whether",
-    "mr", "dr", "ms", "mrs", "docx", "didn", "aske", "fixe", "rin", "sara",
+    "mr", "dr", "ms", "mrs", "docx", "didn", "fixe", "rin", "sara",
     "eric", "wang", "dave", "tina", "tim",
 }
 
@@ -66,8 +78,14 @@ POS_LABEL = {
     "verb": "动词",
     "adj": "形容词",
     "adv": "副词",
+    "prep": "介词",
+    "pronoun": "代词",
     "other": "其他",
 }
+
+
+def is_pronoun(word: str) -> bool:
+    return word.lower() in FIXED_PRONOUNS
 
 
 def _adj_synsets(word: str) -> list:
@@ -78,10 +96,18 @@ def _adv_synsets(word: str) -> list:
     return wn.synsets(word, pos="r")
 
 
+def is_preposition(word: str) -> bool:
+    return word.lower() in PREPOSITION_WORDS
+
+
 def refine_other_pos(word: str) -> str:
-    """将原 other 类细分为 adj / adv / other。"""
+    """将原 other 类细分为 pronoun / prep / adj / adv / other。"""
     w = word.lower()
 
+    if is_pronoun(w):
+        return "pronoun"
+    if is_preposition(w):
+        return "prep"
     if w in FUNCTION_WORDS:
         return "other"
     if w in MANUAL_ADJ:

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="÷þî—:">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2a4a"/>
+      <stop offset="55%" stop-color="#2d4a3e"/>
+      <stop offset="100%" stop-color="#0f1f18"/>
+    </linearGradient>
+    <radialGradient id="fog" cx="50%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#b8c9d9" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#b8c9d9" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <!-- distant trees -->
+  <ellipse cx="120" cy="340" rx="90" ry="120" fill="#1e3d2f" opacity="0.9"/>
+  <ellipse cx="680" cy="330" rx="110" ry="140" fill="#163528" opacity="0.95"/>
+  <ellipse cx="400" cy="360" rx="200" ry="80" fill="#244a38" opacity="0.7"/>
+  <!-- tree trunks -->
+  <rect x="95" y="280" width="18" height="90" fill="#3d2817" rx="4"/>
+  <rect x="655" y="260" width="22" height="110" fill="#3d2817" rx="4"/>
+  <!-- ground -->
+  <path d="M0 380 Q200 360 400 390 T800 375 L800 500 L0 500 Z" fill="#142820"/>
+  <path d="M0 400 Q250 385 500 405 T800 390 L800 500 L0 500 Z" fill="#1a3328" opacity="0.8"/>
+  <!-- mist layers -->
+  <ellipse cx="250" cy="420" rx="180" ry="40" fill="url(#fog)" filter="url(#soft)"/>
+  <ellipse cx="550" cy="400" rx="220" ry="50" fill="url(#fog)" filter="url(#soft)"/>
+  <ellipse cx="400" cy="450" rx="300" ry="60" fill="#dfe8f0" opacity="0.18" filter="url(#soft)"/>
+  <!-- fireflies -->
+  <circle cx="180" cy="300" r="3" fill="#ffe66d" opacity="0.8"/>
+  <circle cx="620" cy="280" r="2.5" fill="#a8e6cf" opacity="0.9"/>
+  <circle cx="440" cy="320" r="2" fill="#ffd3b6" opacity="0.7"/>
+</svg>

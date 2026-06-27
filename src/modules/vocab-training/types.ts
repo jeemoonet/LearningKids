@@ -1,10 +1,11 @@
-export type VocabPos = 'noun' | 'verb' | 'adj' | 'adv' | 'other'
+export type VocabPos = 'noun' | 'verb' | 'adj' | 'adv' | 'pronoun' | 'other'
 
 export const VOCAB_POS_LABEL: Record<VocabPos, string> = {
   noun: '名词',
   verb: '动词',
   adj: '形容词',
   adv: '副词',
+  pronoun: '代词',
   other: '其他',
 }
 
