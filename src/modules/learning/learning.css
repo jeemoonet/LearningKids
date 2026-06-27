@@ -1584,6 +1584,61 @@
   border-top: 1px dashed rgba(120, 92, 48, 0.4);
 }
 
+.lw-mw-fellow.is-me {
+  margin: 0 -4px;
+  padding: 12px 10px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 236, 170, 0.55), rgba(231, 190, 93, 0.28));
+  border: 1.5px solid rgba(179, 133, 47, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.lw-mw-fellow.is-me + .lw-mw-fellow-divider {
+  margin-top: 6px;
+}
+
+.lw-mw-fellow__me-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: #5c3a0a;
+  vertical-align: middle;
+  border-radius: 8px;
+  background: rgba(231, 190, 93, 0.75);
+  border: 1px solid rgba(179, 133, 47, 0.45);
+}
+
+.lw-mw-fellow-divider {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 6px 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(74, 52, 24, 0.55);
+}
+
+.lw-mw-fellow-divider::before,
+.lw-mw-fellow-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(120, 92, 48, 0.28);
+}
+
+.lw-mw-fellow-empty {
+  list-style: none;
+  padding: 14px 6px 4px;
+  font-size: 0.85rem;
+  color: rgba(74, 52, 24, 0.65);
+  text-align: center;
+}
+
 .lw-mw-fellow__rank {
   flex: none;
   width: 26px;
@@ -1652,6 +1707,12 @@
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--mw-ink);
+}
+
+.lw-mw-fellow__meta {
+  font-size: 0.78rem;
+  color: rgba(74, 52, 24, 0.72);
+  line-height: 1.3;
 }
 
 .lw-mw-fellow__flags {

@@ -122,8 +122,61 @@ export const KINGDOM_1_BATTLE_MAP: KingdomBattleMapLayout = {
   nodes: KINGDOM_1_NODES,
 }
 
+const KINGDOM_2_NODES: Record<string, BattleMapNode> = {
+  /*
+   * 初始坐标沿用 kingdom-1 布局，待管理台对齐 kingdom-2-map.png（1024×571）
+   */
+  start: { id: 'start', x: 49.7, y: 94.3, label: '炊烟营地', terrain: 'camp' },
+  'wp-cliff': { id: 'wp-cliff', x: 74, y: 82.5, label: '禾木小桥', terrain: 'waypoint' },
+  'recruit-1': { id: 'recruit-1', x: 71, y: 78, label: '麦穗村庄', terrain: 'village' },
+  'review-2': { id: 'review-2', x: 77.4, y: 67.6, label: '发酵窖场', terrain: 'valley' },
+  'wp-outpost': { id: 'wp-outpost', x: 50.1, y: 70.7, label: '磨坊哨塔', terrain: 'tower' },
+  'recruit-2': { id: 'recruit-2', x: 53, y: 66, label: '果园聚落', terrain: 'village' },
+  'wp-add-2': { id: 'wp-add-2', x: 56.9, y: 61.3, label: '灶火路口', terrain: 'fork' },
+  'review-1': { id: 'review-1', x: 54, y: 56, label: '香料集市', terrain: 'valley' },
+  'wp-add-3': { id: 'wp-add-3', x: 46.8, y: 30.7, label: '石窑关隘', terrain: 'waypoint' },
+  'wp-add-1': { id: 'wp-add-1', x: 56.2, y: 17.8, label: '御膳王城', terrain: 'castle' },
+}
+
+export const KINGDOM_2_BATTLE_MAP: KingdomBattleMapLayout = {
+  kingdomId: 'kingdom-2',
+  spineBeforeFork: [
+    'start',
+    'wp-cliff',
+    'recruit-1',
+    'wp-outpost',
+    'recruit-2',
+    'wp-add-2',
+    'review-1',
+    'review-2',
+    'wp-add-3',
+    'wp-add-1',
+  ],
+  fork: {
+    nodeId: 'fork-1',
+    branches: [
+      {
+        id: 'wheat',
+        label: '麦香大道',
+        hint: '沿金色麦浪而上，经磨坊与粮仓',
+        nodeIds: [],
+      },
+      {
+        id: 'orchard',
+        label: '果岭小径',
+        hint: '穿红果林，经果园与晒场',
+        nodeIds: [],
+      },
+    ],
+    mergeNodeId: 'wp-add-3',
+  },
+  spineAfterFork: [],
+  nodes: KINGDOM_2_NODES,
+}
+
 const LAYOUTS: Record<string, KingdomBattleMapLayout> = {
   'kingdom-1': KINGDOM_1_BATTLE_MAP,
+  'kingdom-2': KINGDOM_2_BATTLE_MAP,
 }
 
 export function getKingdomBattleMapLayout(kingdomId: string): KingdomBattleMapLayout | null {

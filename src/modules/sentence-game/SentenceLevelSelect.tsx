@@ -39,9 +39,9 @@ const ALL_TRACK_SECTIONS: TrackSectionMeta[] = [
   },
   {
     track: 'adj-adv',
-    shortTitle: '形副高级',
-    title: '形容词 & 副词（高级）',
-    description: '形副辨析、系动词后接形容词、比较级与最高级',
+    shortTitle: '学者魔法师高级',
+    title: '学者 & 魔法师（高级）',
+    description: '学者魔法师辨析、系动词后接学者、比较级与最高级',
   },
 ]
 

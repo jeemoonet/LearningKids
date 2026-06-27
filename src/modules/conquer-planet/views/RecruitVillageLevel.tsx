@@ -4,7 +4,7 @@ import { LevelIntroModal } from '../components/LevelIntroModal'
 import { buildRecruitIntro } from '../data/levelIntro'
 import { getLevelLearningProfile } from '../data/levelLearningMethods'
 import { useConquer } from '../ConquerContext'
-import { GameRunner, getLevelGameSpec, settleLevel } from '../games'
+import { GameRunner, getLevelGameSpec, isLevelCleared, settleLevel } from '../games'
 import type { PlanetLevel, PlanetWord } from '../types'
 
 interface RecruitVillageLevelProps {
@@ -12,7 +12,7 @@ interface RecruitVillageLevelProps {
   onBack: () => void
 }
 
-type Phase = 'loading' | 'intro' | 'play' | 'done'
+type Phase = 'loading' | 'intro' | 'play' | 'done' | 'empty'
 
 export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProps) {
   const { setSession } = useConquer()
@@ -21,6 +21,7 @@ export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProp
   const [pool, setPool] = useState<PlanetWord[]>([])
   const [recruited, setRecruited] = useState<string[]>([])
   const [loadError, setLoadError] = useState('')
+  const [playError, setPlayError] = useState('')
   const [phase, setPhase] = useState<Phase>('loading')
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProp
         setLevel(payload.level)
         setCandidates(payload.candidates)
         setPool(payload.distractorPool)
-        setPhase(payload.candidates.length === 0 ? 'done' : 'intro')
+        setPhase(payload.candidates.length === 0 ? 'empty' : 'intro')
       })
       .catch((err) => setLoadError(err instanceof Error ? err.message : '加载失败'))
   }, [levelId])
@@ -52,13 +53,11 @@ export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProp
     return <p className="cp-level-empty">正在召集村民…</p>
   }
 
-  if (phase === 'done' && candidates.length === 0) {
+  if (phase === 'empty') {
     return (
       <div className="cp-level-page">
-        <div className="cp-stage cp-stage--done">
-          <p className="cp-level-empty">当前学习库中没有可用的练习词汇，请检查词库配置。</p>
-          <button type="button" className="cp-btn" onClick={onBack}>返回地图</button>
-        </div>
+        <p className="cp-level-empty">当前学习库中没有可用的练习词汇，请检查词库配置。</p>
+        <button type="button" className="cp-btn" onClick={onBack}>返回地图</button>
       </div>
     )
   }
@@ -104,6 +103,7 @@ export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProp
             <button type="button" className="cp-back" onClick={onBack}>← 撤退</button>
             <span className="cp-level-tag">🏘️ {getLevelLearningProfile('recruit').nodeLabel}</span>
           </div>
+          {playError && <p className="cp-level-empty">{playError}</p>}
           <GameRunner
             spec={getLevelGameSpec('recruit')}
             context={{ words: candidates, distractors: pool }}
@@ -115,6 +115,12 @@ export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProp
               </div>
             }
             onLevelComplete={async (results) => {
+              const spec = getLevelGameSpec('recruit')
+              if (!isLevelCleared(spec, results)) {
+                setPlayError('尚未通关：请完成全部认词与造句练习。')
+                return
+              }
+              setPlayError('')
               try {
                 const outcome = await settleLevel('recruit', levelId, results)
                 setSession(outcome.session)

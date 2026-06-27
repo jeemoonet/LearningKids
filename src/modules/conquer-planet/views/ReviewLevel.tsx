@@ -4,7 +4,7 @@ import { LevelIntroModal } from '../components/LevelIntroModal'
 import { buildReviewIntro } from '../data/levelIntro'
 import { getLevelLearningProfile } from '../data/levelLearningMethods'
 import { useConquer } from '../ConquerContext'
-import { GameRunner, getLevelGameSpec, settleLevel } from '../games'
+import { GameRunner, getLevelGameSpec, isLevelCleared, settleLevel } from '../games'
 import type { PlanetLevel, PlanetWord } from '../types'
 
 interface ReviewLevelProps {
@@ -23,6 +23,7 @@ export function ReviewLevel({ levelId, onBack }: ReviewLevelProps) {
   const [deserted, setDeserted] = useState<string[]>([])
   const [loadError, setLoadError] = useState('')
   const [phase, setPhase] = useState<Phase>('loading')
+  const [playError, setPlayError] = useState('')
 
   useEffect(() => {
     let cancelled = false
@@ -121,6 +122,7 @@ export function ReviewLevel({ levelId, onBack }: ReviewLevelProps) {
             <button type="button" className="cp-back" onClick={onBack}>← 返回</button>
             {tag}
           </div>
+          {playError && <p className="cp-level-empty">{playError}</p>}
           <GameRunner
             spec={getLevelGameSpec('review')}
             context={{ words: queue, distractors: pool }}
@@ -132,6 +134,12 @@ export function ReviewLevel({ levelId, onBack }: ReviewLevelProps) {
               </div>
             }
             onLevelComplete={async (results) => {
+              const spec = getLevelGameSpec('review')
+              if (!isLevelCleared(spec, results)) {
+                setPlayError('尚未通关：请全部认对后再提交。')
+                return
+              }
+              setPlayError('')
               try {
                 const outcome = await settleLevel('review', levelId, results)
                 setSession(outcome.session)

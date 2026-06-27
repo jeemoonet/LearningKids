@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { ArmyInspectModal } from '../components/ArmyInspectModal'
 import { ForwardMovePanel } from '../components/ForwardMovePanel'
 import { MapHud } from '../components/MapHud'
-import { MapLayoutEditor } from '../components/MapLayoutEditor'
+import { MapStepChallenge } from '../components/MapStepChallenge'
 import { MonsterSprite } from '../components/monsters/MonsterIllustrations'
 import { SceneArrivalModal } from '../components/SceneArrivalModal'
 import {
@@ -14,11 +15,9 @@ import { getKingdomBattleMapLayout } from '../planetMapConfig'
 import {
   getForkArrivalEvent,
   getForkChoiceEvent,
-  getLevelEvent,
-  getLevelLearningNote,
   getWaypointEvent,
 } from '../data/sceneEvents'
-import { getLevelLearningProfile } from '../data/levelLearningMethods'
+import { nodeNeedsArrivalChallenge, nodeRequiresStepChallenge } from '../data/stepChallenge'
 import { BoardGameMapScene } from '../components/BoardGameMapScene'
 import { FantasyTopDownMapScene } from '../components/FantasyTopDownMapScene'
 import {
@@ -27,16 +26,7 @@ import {
   ImageKingdomMapScene,
 } from '../components/ImageKingdomMapScene'
 import { buildParchmentPathD, buildStraightPathD, ParchmentMapScene } from '../components/ParchmentMapScene'
-import {
-  isMapEditMode,
-  KINGDOM_MAP_VIEW,
-} from '../data/mapViewBox'
-import {
-  applyMapLayoutDraft,
-  getMainPathIds,
-  layoutToDraft,
-  loadMapLayoutDraft,
-} from '../data/mapLayoutDraft'
+import { KINGDOM_MAP_VIEW } from '../data/mapViewBox'
 import { resetKingdomProgress } from '../api'
 import { useConquer } from '../ConquerContext'
 import { useMapProgress, type MapArrival } from '../hooks/useMapProgress'
@@ -76,6 +66,7 @@ interface SceneModalContent {
   body: string
   primaryLabel: string
   enterable?: boolean
+  requiresStepChallenge?: boolean
   note?: string
   branchChoices?: Array<{ id: string; label: string; hint: string }>
 }
@@ -84,9 +75,8 @@ function buildSceneModal(
   arrival: MapArrival,
   node: BattleMapNode,
   level: PlanetLevel | undefined,
-  levelDone: boolean,
   layout: KingdomBattleMapLayout,
-): SceneModalContent {
+): SceneModalContent | null {
   if (arrival.kind === 'fork-arrival') {
     return {
       icon: '⑂',
@@ -112,19 +102,9 @@ function buildSceneModal(
     }
   }
 
-  if (level) {
-    const enterable = !levelDone
-    const profile = getLevelLearningProfile(level.kind)
-    return {
-      icon: nodeIcon(level),
-      title: level.name,
-      location: node.label,
-      body: getLevelEvent(level, levelDone),
-      note: getLevelLearningNote(level, levelDone),
-      primaryLabel: enterable ? profile.enterCta : '继续探索',
-      enterable,
-    }
-  }
+  if (level) return null
+
+  if (nodeRequiresStepChallenge(node)) return null
 
   return {
     icon: terrainIcon(node.terrain),
@@ -252,16 +232,10 @@ function RichKingdomMap({
 }: KingdomBattleMapViewProps) {
   const { session, setSession } = useConquer()
   const conquered = session?.conqueredLevelIds ?? []
-  const canvasRef = useRef<HTMLDivElement>(null)
-  const [editMode, setEditMode] = useState(isMapEditMode)
   const [resetting, setResetting] = useState(false)
-  const fileLayout = getKingdomBattleMapLayout(kingdom.id)
-  const [layoutDraft, setLayoutDraft] = useState(() => loadMapLayoutDraft(kingdom.id))
-
-  const effectiveLayout = useMemo(() => {
-    if (!fileLayout) return null
-    return applyMapLayoutDraft(fileLayout, layoutDraft)
-  }, [fileLayout, layoutDraft])
+  const [armyInspectOpen, setArmyInspectOpen] = useState(false)
+  const [stepChallengeNodeId, setStepChallengeNodeId] = useState<string | null>(null)
+  const layout = getKingdomBattleMapLayout(kingdom.id)
 
   const {
     pathIds,
@@ -272,14 +246,14 @@ function RichKingdomMap({
     atEnd,
     nextNodeId,
     blockedByLevel,
+    blockedByStep,
     pendingArrival,
     clearArrival,
     advanceOneStep,
     chooseBranch,
     resetMapProgress,
-  } = useMapProgress(kingdom.id, conquered, effectiveLayout)
-
-  const layout = effectiveLayout
+    markStepDone,
+  } = useMapProgress(kingdom.id, conquered, layout)
   const levels = kingdom.levels
   const levelById = useMemo(() => new Map(levels.map((l) => [l.id, l])), [levels])
   const bossLevel = levels.find((l) => l.kind === 'boss')
@@ -288,21 +262,19 @@ function RichKingdomMap({
   const usesRealBg = Boolean(mapImage) && (mapStyle === 'image' || mapStyle === 'boardgame')
   const viewW = usesRealBg ? KINGDOM_MAP_VIEW.w : 1000
   const viewH = usesRealBg ? KINGDOM_MAP_VIEW.h : 700
-  const swayScale = editMode ? 0 : usesRealBg ? 0.25 : 1
-  const editPathIds = layout ? getMainPathIds(layout) : []
+  const swayScale = usesRealBg ? 0.25 : 1
 
   const pathD = useMemo(() => {
     if (!layout) return ''
-    const ids = editMode ? editPathIds : pathIds
-    const points = pathPointsFromLayout(layout, ids)
-    if (editMode || usesRealBg) {
+    const points = pathPointsFromLayout(layout, pathIds)
+    if (usesRealBg) {
       return buildStraightPathD(points, viewW, viewH)
     }
     return buildParchmentPathD(points, viewW, viewH, swayScale)
-  }, [layout, pathIds, editPathIds, editMode, swayScale, viewW, viewH, usesRealBg])
+  }, [layout, pathIds, swayScale, viewW, viewH, usesRealBg])
 
   const alternatePaths = useMemo(() => {
-    if (!layout || editMode) return undefined
+    if (!layout) return undefined
     if (branchId) {
       const unchosen = layout.fork.branches.find((b) => b.id !== branchId)
       if (!unchosen) return undefined
@@ -314,7 +286,7 @@ function RichKingdomMap({
     return buildForkPreviewPaths(layout).map((ids) =>
       buildStraightPathD(pathPointsFromLayout(layout, ids), viewW, viewH),
     )
-  }, [layout, branchId, swayScale, viewW, viewH, editMode, usesRealBg])
+  }, [layout, branchId, swayScale, viewW, viewH, usesRealBg])
   const playerNodeId = pathIds[pathIndex]
   const playerNode = layout?.nodes[playerNodeId]
   const currentLevel = playerNode?.levelId ? levelById.get(playerNode.levelId) : undefined
@@ -324,16 +296,30 @@ function RichKingdomMap({
     const node = layout.nodes[pendingArrival.nodeId]
     if (!node) return null
     const level = node.levelId ? levelById.get(node.levelId) : undefined
-    const levelDone = level ? !!level.done : false
-    const content = buildSceneModal(pendingArrival, node, level, levelDone, layout)
-    return content
+    return buildSceneModal(pendingArrival, node, level, layout)
   }, [pendingArrival, layout, levelById])
 
+  const startStepChallenge = (nodeId: string) => {
+    setStepChallengeNodeId(nodeId)
+  }
+
   useEffect(() => {
-    if (pendingArrival && !sceneModal) {
+    if (!pendingArrival || pendingArrival.kind !== 'move' || !layout) return
+    const node = layout.nodes[pendingArrival.nodeId]
+    if (!node) return
+    const level = node.levelId ? levelById.get(node.levelId) : undefined
+
+    if (level && !level.done) {
       clearArrival()
+      onEnter(level)
+      return
     }
-  }, [pendingArrival, sceneModal, clearArrival])
+
+    if (nodeNeedsArrivalChallenge(node, level)) {
+      clearArrival()
+      startStepChallenge(node.id)
+    }
+  }, [pendingArrival, layout, levelById, clearArrival, onEnter])
 
   const handleSceneConfirm = () => {
     if (!pendingArrival || !layout || !sceneModal) {
@@ -342,11 +328,16 @@ function RichKingdomMap({
     }
     const node = layout.nodes[pendingArrival.nodeId]
     const level = node?.levelId ? levelById.get(node.levelId) : undefined
-    const canEnter = !!sceneModal.enterable && !!level
+
+    if (sceneModal.requiresStepChallenge && node) {
+      clearArrival()
+      startStepChallenge(node.id)
+      return
+    }
 
     clearArrival()
 
-    if (canEnter && level) {
+    if (sceneModal.enterable && level) {
       onEnter(level)
     }
   }
@@ -361,13 +352,18 @@ function RichKingdomMap({
       if (level && !level.done) {
         onEnter(level)
       }
+      return
+    }
+
+    if (nodeId === playerNodeId && blockedByStep) {
+      startStepChallenge(nodeId)
     }
   }
 
   const handleResetToStart = async () => {
     if (
       !window.confirm(
-        '确定回到起点？本王国的关卡征服进度与地图位置将清零（标注坐标不受影响）。',
+        '确定回到起点？本王国的关卡征服进度与地图位置将清零。',
       )
     ) {
       return
@@ -386,14 +382,11 @@ function RichKingdomMap({
 
   const useIllustratedMap =
     mapStyle === 'fantasy-topdown' || mapStyle === 'image' || mapStyle === 'boardgame'
-  /** 连线仅用于标注对齐，正常游玩不显示 */
-  const displayPathD = editMode ? pathD : ''
-  const displayAlternatePaths = editMode ? alternatePaths : undefined
 
-  if (!session || !layout || !fileLayout) return null
+  if (!session || !layout) return null
 
   return (
-    <div className={`cp-map-layout cp-map-layout--immersive${useIllustratedMap ? ' cp-map-layout--fantasy' : ''}${editMode ? ' cp-map-layout--edit' : ''}`}>
+    <div className={`cp-map-layout cp-map-layout--immersive${useIllustratedMap ? ' cp-map-layout--fantasy' : ''}`}>
       <div
         className={[
           'cp-world-map',
@@ -404,45 +397,40 @@ function RichKingdomMap({
           .filter(Boolean)
           .join(' ')}
       >
-        <div ref={canvasRef} className="cp-world-map__canvas cp-world-map__canvas--immersive">          {mapStyle === 'boardgame' ? (
+        <div className="cp-world-map__canvas cp-world-map__canvas--immersive">
+          {mapStyle === 'boardgame' ? (
             <BoardGameMapScene
-              pathD={displayPathD}
+              pathD=""
               kingdomName={kingdom.name}
               immersive
-              alternatePaths={displayAlternatePaths}
               layout={layout}
               backgroundSrc={mapImage ?? undefined}
             />
           ) : mapStyle === 'image' && mapImage ? (
-            <ImageKingdomMapScene
-              imageSrc={mapImage}
-              pathD={displayPathD}
-              immersive
-              alternatePaths={displayAlternatePaths}
-            />
+            <ImageKingdomMapScene imageSrc={mapImage} pathD="" immersive />
           ) : mapStyle === 'fantasy-topdown' ? (
             <FantasyTopDownMapScene
-              pathD={displayPathD}
+              pathD=""
               kingdomName={kingdom.name}
               monsterName={kingdom.monster.name}
               immersive
-              alternatePaths={displayAlternatePaths}
               layout={layout}
             />
           ) : (
             <ParchmentMapScene
-              pathD={displayPathD}
+              pathD={pathD}
               kingdomName={kingdom.name}
               monsterId={kingdom.monster.id}
               monsterName={kingdom.monster.name}
               immersive
-              alternatePaths={displayAlternatePaths}
+              alternatePaths={alternatePaths}
             />
           )}
 
           <MapHud
             title={`王国 ${kingdom.order} · ${kingdom.name}`}
             subtitle={kingdom.subtitle}
+            onInspectArmy={() => setArmyInspectOpen(true)}
             leading={
               <button type="button" className="cp-map-hud__back" onClick={onOpenContinentOverview}>
                 大陆
@@ -450,27 +438,15 @@ function RichKingdomMap({
             }
             trailing={
               <>
-                {!editMode && (
-                  <>
-                    <button
-                      type="button"
-                      className="cp-map-hud__reset"
-                      onClick={handleResetToStart}
-                      disabled={resetting}
-                      title="清零本王国关卡进度与地图位置"
-                    >
-                      {resetting ? '重置中…' : '回到起点'}
-                    </button>
-                    <button
-                      type="button"
-                      className="cp-map-hud__edit"
-                      onClick={() => setEditMode(true)}
-                      title="拖拽节点调整坐标，可导出代码"
-                    >
-                      标注
-                    </button>
-                  </>
-                )}
+                <button
+                  type="button"
+                  className="cp-map-hud__reset"
+                  onClick={handleResetToStart}
+                  disabled={resetting}
+                  title="清零本王国关卡进度与地图位置"
+                >
+                  {resetting ? '重置中…' : '回到起点'}
+                </button>
                 <div className="cp-map-hud__monster" title={kingdom.monster.epithet}>
                   <MonsterSprite id={kingdom.monster.id} size={40} title={kingdom.monster.name} />
                   <span>{kingdom.monster.name}</span>
@@ -479,16 +455,11 @@ function RichKingdomMap({
             }
           />
 
-          {editMode && layout && fileLayout && (
-            <MapLayoutEditor
-              kingdomId={kingdom.id}
-              layout={layout}
-              originalLayout={fileLayout}
-              canvasRef={canvasRef}
-              onLayoutChange={(nextLayout) => {
-                setLayoutDraft(layoutToDraft(fileLayout, nextLayout))
-              }}
-              onClose={() => setEditMode(false)}
+          {armyInspectOpen && (
+            <ArmyInspectModal
+              open
+              session={session}
+              onClose={() => setArmyInspectOpen(false)}
             />
           )}
 
@@ -505,7 +476,7 @@ function RichKingdomMap({
             </div>
           )}
 
-          <div className={`cp-world-map__nodes${editMode ? ' cp-world-map__nodes--hidden' : ''}`}>
+          <div className="cp-world-map__nodes">
             {pathIds.map((nodeId) => {
               const node = layout.nodes[nodeId]
               if (!node) return null
@@ -519,6 +490,7 @@ function RichKingdomMap({
               const isNext = nodeId === nextNodeId
               const isCurrentLevel =
                 isPlayerHere && level && !level.done && blockedByLevel
+              const isCurrentStep = isPlayerHere && !level && blockedByStep
 
               const reviewBadge =
                 level?.kind === 'review' && session.dueReviewCount > 0
@@ -533,31 +505,61 @@ function RichKingdomMap({
                   isDone={!!level?.done}
                   isPlayerHere={isPlayerHere}
                   isNext={isNext}
-                  isCurrentLevel={!!isCurrentLevel}
+                  isCurrentLevel={!!isCurrentLevel || !!isCurrentStep}
                   reviewBadge={reviewBadge}
-                  onActivate={isCurrentLevel ? () => handleNodeActivate(nodeId) : undefined}
+                  onActivate={
+                    isCurrentLevel || isCurrentStep ? () => handleNodeActivate(nodeId) : undefined
+                  }
                 />
               )
             })}
           </div>
 
-          {!editMode && <MapPlayerToken node={playerNode} moving={moving} />}
+          <MapPlayerToken node={playerNode} moving={moving} />
         </div>
 
-        {!editMode && (
-          <div className="cp-map-overlay">
+        <div className="cp-map-overlay">
             <ForwardMovePanel
             canAdvance={canAdvance}
             moving={moving}
             atEnd={atEnd}
             blockedByLevel={blockedByLevel}
+            blockedByStep={blockedByStep}
             onAdvance={advanceOneStep}
             onEnterLevel={
               blockedByLevel && currentLevel && !currentLevel.done
                 ? () => onEnter(currentLevel)
                 : undefined
             }
+            onEnterStep={
+              blockedByStep && !blockedByLevel && playerNode
+                ? () => startStepChallenge(playerNode.id)
+                : undefined
+            }
           />
+
+          {stepChallengeNodeId && session && layout.nodes[stepChallengeNodeId] && (
+            <MapStepChallenge
+              session={session}
+              node={layout.nodes[stepChallengeNodeId]}
+              level={
+                layout.nodes[stepChallengeNodeId].levelId
+                  ? levelById.get(layout.nodes[stepChallengeNodeId].levelId!)
+                  : undefined
+              }
+              variant={
+                layout.nodes[stepChallengeNodeId].levelId ? 'consolidate' : 'waypoint'
+              }
+              onComplete={() => {
+                const node = layout.nodes[stepChallengeNodeId]
+                if (node && nodeRequiresStepChallenge(node)) {
+                  markStepDone(stepChallengeNodeId)
+                }
+                setStepChallengeNodeId(null)
+              }}
+              onExit={() => setStepChallengeNodeId(null)}
+            />
+          )}
 
           {sceneModal && pendingArrival && (
             <SceneArrivalModal
@@ -576,19 +578,18 @@ function RichKingdomMap({
             />
           )}
         </div>
-        )}
 
         <p className="cp-world-map__hint cp-world-map__hint--float">
-          {editMode
-            ? '标注模式：拖拽节点对齐道路，完成后点「保存到本地」或「复制 TS 代码」'
-            : '点击右下角箭头，沿路径逐格前进；每站必经关卡，通关后再继续'}
-        </p>      </div>
+          点击右下角箭头逐格前进；每站须完成关卡或路途试炼，通关后再继续
+        </p>
+      </div>
     </div>
   )
 }
 
 function LegacyKingdomMap({ kingdom, onOpenContinentOverview, onEnter }: KingdomBattleMapViewProps) {
   const { session } = useConquer()
+  const [armyInspectOpen, setArmyInspectOpen] = useState(false)
   const levels = kingdom.levels
   const bossLevel = levels.find((l) => l.kind === 'boss')
 
@@ -621,6 +622,7 @@ function LegacyKingdomMap({ kingdom, onOpenContinentOverview, onEnter }: Kingdom
           <MapHud
             title={`王国 ${kingdom.order} · ${kingdom.name}`}
             subtitle={kingdom.subtitle}
+            onInspectArmy={() => setArmyInspectOpen(true)}
             leading={
               <button type="button" className="cp-map-hud__back" onClick={onOpenContinentOverview}>
                 大陆
@@ -633,6 +635,14 @@ function LegacyKingdomMap({ kingdom, onOpenContinentOverview, onEnter }: Kingdom
               </div>
             }
           />
+
+          {armyInspectOpen && (
+            <ArmyInspectModal
+              open
+              session={session}
+              onClose={() => setArmyInspectOpen(false)}
+            />
+          )}
 
           {bossLevel && (
             <div

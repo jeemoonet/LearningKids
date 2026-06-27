@@ -7,10 +7,18 @@ interface MapHudProps {
   leading?: ReactNode
   trailing?: ReactNode
   showArmy?: boolean
+  onInspectArmy?: () => void
 }
 
 /** 浮在地图上的标题与军团参数 HUD */
-export function MapHud({ title, subtitle, leading, trailing, showArmy = true }: MapHudProps) {
+export function MapHud({
+  title,
+  subtitle,
+  leading,
+  trailing,
+  showArmy = true,
+  onInspectArmy,
+}: MapHudProps) {
   return (
     <div className="cp-map-hud" aria-label="地图信息">
       <div className="cp-map-hud__left">
@@ -23,7 +31,7 @@ export function MapHud({ title, subtitle, leading, trailing, showArmy = true }: 
       </div>
       {showArmy && (
         <div className="cp-map-hud__right">
-          <ArmyPanel variant="float" />
+          <ArmyPanel variant="float" onInspectArmy={onInspectArmy} />
         </div>
       )}
     </div>

@@ -62,6 +62,10 @@ function isCorrectLabel(label: string, answer: string): boolean {
   return label.toLowerCase() === answer.toLowerCase()
 }
 
+function questionDrawKey(question: SentenceQuestion): string {
+  return `${question.sentence}|${question.answer}`
+}
+
 function formatElapsedSeconds(totalSeconds: number): string {
   const minutes = Math.floor(totalSeconds / 60)
   const seconds = totalSeconds % 60
@@ -77,7 +81,7 @@ interface SentenceChallengeModeProps {
   isBoss?: boolean
   onBack: () => void
   onComplete: () => void
-  onRegenerateQuestions: () => Promise<SentenceQuestion[]>
+  onRegenerateQuestions: (excludeKeys?: string[]) => Promise<SentenceQuestion[]>
 }
 
 export function SentenceChallengeMode({
@@ -417,7 +421,8 @@ export function SentenceChallengeMode({
   const regenerateAndRestart = async (autoStart: boolean) => {
     setRegenerating(true)
     try {
-      const nextQuestions = await onRegenerateQuestions()
+      const excludeKeys = roundQuestions.map(questionDrawKey)
+      const nextQuestions = await onRegenerateQuestions(excludeKeys)
       if (nextQuestions.length === 0) return
       setRoundQuestions(nextQuestions)
       questionsRef.current = nextQuestions
@@ -578,15 +583,7 @@ export function SentenceChallengeMode({
               onClick={() => void regenerateAndRestart(true)}
               disabled={regenerating}
             >
-              {regenerating ? '正在出题…' : '再练一轮（新题）'}
-            </button>
-            <button
-              type="button"
-              className="sentence-challenge-secondary-button"
-              onClick={() => void regenerateAndRestart(false)}
-              disabled={regenerating}
-            >
-              换一批题目
+              {regenerating ? '正在出题…' : '再练一轮'}
             </button>
             <button
               type="button"

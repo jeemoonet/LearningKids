@@ -139,7 +139,7 @@ export const KINGDOM_LEVELS: Record<string, PlanetLevelConfig[]> = {
       id: 'boss-1',
       kind: 'boss',
       name: '迷雾王宫',
-      desc: '名词怪兽盘踞王宫。派出医生(形容词)相生克制，拼写发射击破封印',
+      desc: '名词怪兽盘踞王宫。派出学者(形容词)相生克制，拼写发射击破封印',
       icon: '🏯',
       monsterPos: 'noun',
       monsterName: '迷雾石像',

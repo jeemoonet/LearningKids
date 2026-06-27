@@ -686,6 +686,30 @@ export function completeReviewLevel(
   return buildPlanetSession(db, userId)
 }
 
+export interface PlanetProgressSummary {
+  kingdomTotal: number
+  conqueredKingdoms: number
+  activeKingdomId: string
+  activeKingdomName: string
+}
+
+/** 轻量进度摘要，供「我的小伙伴」等社交排行使用 */
+export function getPlanetProgressSummary(db: DatabaseSync, userId: string): PlanetProgressSummary {
+  const conquered = getConqueredLevels(db, userId)
+  const kingdoms = buildKingdomSummaries(db, conquered)
+  const activeKingdomId = resolveActiveKingdomId(kingdoms)
+  const activeKingdom = kingdoms.find((k) => k.id === activeKingdomId)
+  const baseKingdom = getKingdom(activeKingdomId)
+  const kingdomMeta = baseKingdom ? getEffectiveKingdomConfig(db, baseKingdom) : undefined
+
+  return {
+    kingdomTotal: kingdoms.length,
+    conqueredKingdoms: kingdoms.filter((k) => k.status === 'cleared').length,
+    activeKingdomId,
+    activeKingdomName: kingdomMeta?.name ?? activeKingdom?.name ?? '',
+  }
+}
+
 /** 清零指定王国的关卡征服进度（不影响词库/走散士兵等） */
 export function resetKingdomProgress(
   db: DatabaseSync,

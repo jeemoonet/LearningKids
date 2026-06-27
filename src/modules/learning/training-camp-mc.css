@@ -939,20 +939,180 @@
 .learning-app.is-training-camp .prep-cloze-bank,
 .learning-app.is-training-camp .sentence-cloze-bank,
 .learning-app.is-training-camp .sentence-structure-word-bank {
-  background: rgba(0, 0, 0, 0.45);
-  border: 2px solid #666;
-  border-radius: 0;
-  box-shadow: none;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(231, 190, 93, 0.35);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.learning-app.is-training-camp .sentence-cloze-bank.is-receiving,
+.learning-app.is-training-camp .sentence-structure-word-bank.is-receiving,
+.learning-app.is-training-camp .prep-cloze-bank.is-receiving {
+  border-color: rgba(231, 190, 93, 0.65);
+  background: rgba(231, 190, 93, 0.1);
+}
+
+.learning-app.is-training-camp .sentence-cloze-bank-label,
+.learning-app.is-training-camp .sentence-structure-bank-title {
+  color: var(--mc-accent-warm);
 }
 
 .learning-app.is-training-camp .prep-cloze-chip,
 .learning-app.is-training-camp .sentence-cloze-chip,
 .learning-app.is-training-camp .sentence-structure-word-chip {
-  border: 2px solid;
-  border-color: #aaa #444 #444 #aaa;
-  border-radius: 0;
-  background: linear-gradient(180deg, #9a9a9a 0%, #6e6e6e 100%);
-  color: #fff;
+  border: 1.5px solid rgba(231, 190, 93, 0.55);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 245, 220, 0.2) 0%, rgba(90, 60, 20, 0.45) 100%);
+  color: var(--tc-cream);
+  font-family: var(--mc-font);
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.learning-app.is-training-camp .sentence-cloze-chip:not(.sentence-cloze-chip--in-blank):hover,
+.learning-app.is-training-camp .sentence-structure-word-chip--bank:hover,
+.learning-app.is-training-camp .prep-cloze-chip:not(.prep-cloze-chip--in-blank):hover {
+  border-color: rgba(231, 190, 93, 0.85);
+  background: linear-gradient(180deg, rgba(255, 245, 220, 0.28) 0%, rgba(110, 72, 24, 0.55) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.learning-app.is-training-camp .sentence-cloze-chip.is-correct,
+.learning-app.is-training-camp .sentence-structure-word-chip.is-correct,
+.learning-app.is-training-camp .prep-cloze-chip.is-correct {
+  border-color: rgba(140, 200, 100, 0.75);
+  background: rgba(140, 200, 100, 0.18);
+  color: #d4f5c4;
+}
+
+.learning-app.is-training-camp .sentence-cloze-chip.is-wrong,
+.learning-app.is-training-camp .sentence-structure-word-chip.is-wrong,
+.learning-app.is-training-camp .prep-cloze-chip.is-wrong {
+  border-color: rgba(255, 85, 85, 0.75);
+  background: rgba(255, 85, 85, 0.15);
+  color: #ffd4d4;
+}
+
+.learning-app.is-training-camp .sentence-cloze-chip--in-blank,
+.learning-app.is-training-camp .sentence-structure-word-chip--placed,
+.learning-app.is-training-camp .prep-cloze-chip--in-blank {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.learning-app.is-training-camp .sentence-cloze-blank {
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom-color: rgba(231, 190, 93, 0.55);
+}
+
+.learning-app.is-training-camp .sentence-cloze-blank.is-drag-over {
+  background: rgba(231, 190, 93, 0.12);
+  border-bottom-color: rgba(231, 190, 93, 0.85);
+}
+
+.learning-app.is-training-camp .sentence-cloze-blank.is-correct {
+  background: rgba(140, 200, 100, 0.15);
+  border-bottom-color: rgba(140, 200, 100, 0.75);
+}
+
+.learning-app.is-training-camp .sentence-cloze-blank.is-wrong {
+  background: rgba(255, 85, 85, 0.12);
+  border-bottom-color: rgba(255, 85, 85, 0.75);
+}
+
+.learning-app.is-training-camp .sentence-challenge-prompt-label,
+.learning-app.is-training-camp .sentence-challenge-drag-hint {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .sentence-challenge-drag-hint.is-retry {
+  color: var(--mc-accent-warm);
+}
+
+.learning-app.is-training-camp .sentence-challenge-drag-hint.is-advancing {
+  color: #8fd48f;
+}
+
+.learning-app.is-training-camp .sm-pair-hint {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .sm-pair-card {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(231, 190, 93, 0.35);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.22);
+}
+
+.learning-app.is-training-camp .sm-pair-card.is-correct {
+  border-color: rgba(140, 200, 100, 0.75);
+  box-shadow: 0 0 0 2px rgba(140, 200, 100, 0.18);
+}
+
+.learning-app.is-training-camp .sm-pair-card.is-wrong {
+  border-color: rgba(255, 85, 85, 0.75);
+  box-shadow: 0 0 0 2px rgba(255, 85, 85, 0.12);
+}
+
+.learning-app.is-training-camp .sm-pair-card-type {
+  color: #e9d5ff;
+  background: rgba(109, 40, 217, 0.35);
+}
+
+.learning-app.is-training-camp .sm-pair-word {
+  background: rgba(255, 245, 220, 0.08);
+  border-color: rgba(231, 190, 93, 0.28);
+}
+
+.learning-app.is-training-camp .sm-pair-word--target {
+  background: rgba(231, 190, 93, 0.12);
+  border-color: rgba(231, 190, 93, 0.55);
+}
+
+.learning-app.is-training-camp .sm-pair-word-text {
+  color: var(--tc-cream);
+}
+
+.learning-app.is-training-camp .sm-pair-badge--scholar {
+  color: #bfdbfe;
+  background: rgba(37, 99, 235, 0.35);
+}
+
+.learning-app.is-training-camp .sm-pair-badge--magician {
+  color: #a7f3d0;
+  background: rgba(16, 185, 129, 0.28);
+}
+
+.learning-app.is-training-camp .sm-pair-badge--noun,
+.learning-app.is-training-camp .sm-pair-badge--verb {
+  color: var(--mc-text-dim);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.learning-app.is-training-camp .sm-pair-card-zh {
+  color: var(--mc-text-dim);
+}
+
+.learning-app.is-training-camp .sm-pair-guess-btn {
+  border-color: rgba(147, 197, 253, 0.45);
+  background: rgba(255, 245, 220, 0.08);
+  color: #bfdbfe;
+}
+
+.learning-app.is-training-camp .sm-pair-guess-btn--magician {
+  border-color: rgba(110, 231, 183, 0.45);
+  color: #a7f3d0;
+}
+
+.learning-app.is-training-camp .sm-pair-guess-btn.is-selected {
+  background: rgba(37, 99, 235, 0.28);
+  border-color: rgba(147, 197, 253, 0.75);
+}
+
+.learning-app.is-training-camp .sm-pair-guess-btn--magician.is-selected {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: rgba(110, 231, 183, 0.75);
 }
 
 .learning-app.is-training-camp .prep-challenge-start-button,

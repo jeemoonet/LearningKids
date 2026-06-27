@@ -22,11 +22,31 @@ sentenceGameRoutes.get('/questions', (c) => {
   const count = countRaw ? Number(countRaw) : undefined
   if (!levelId) return c.json({ error: '缺少 levelId' }, 400)
 
-  const questions = getSentenceQuestions(levelId, count && count > 0 ? count : undefined)
+  let excludeKeys: string[] = []
+  const excludeRaw = c.req.query('exclude')
+  if (excludeRaw) {
+    try {
+      const parsed = JSON.parse(excludeRaw) as unknown
+      if (Array.isArray(parsed)) {
+        excludeKeys = parsed.filter((item): item is string => typeof item === 'string')
+      }
+    } catch {
+      excludeKeys = []
+    }
+  }
+  // 兼容 sentence 中 {blank} / ______ 两种占位符
+  excludeKeys = excludeKeys.map((key) => key.replace('{blank}', '______'))
+
+  const questions = getSentenceQuestions(
+    levelId,
+    count && count > 0 ? count : undefined,
+    excludeKeys,
+  )
   if (questions.length === 0) {
     return c.json({ error: '未找到该关卡题目' }, 404)
   }
 
+  c.header('Cache-Control', 'no-store')
   return c.json({
     levelId,
     ruleSummary: getSentenceLevelRule(levelId),

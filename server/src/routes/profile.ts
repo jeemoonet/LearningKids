@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import type { AuthUser } from '../auth.js'
 import { requireAuth } from '../auth.js'
 import { getDb } from '../db.js'
+import { getPeerBoard } from '../lib/learning/peerStats.js'
 import { getProfile, setCurrentLibrary, updateProfile } from '../lib/learning/profiles.js'
 
 type AppEnv = { Variables: { user: AuthUser } }
@@ -13,6 +14,11 @@ profileRoutes.use('*', requireAuth)
 profileRoutes.get('/', (c) => {
   const user = c.get('user')
   return c.json({ profile: getProfile(getDb(), user.id, user.username, user.displayName) })
+})
+
+profileRoutes.get('/peers', (c) => {
+  const user = c.get('user')
+  return c.json(getPeerBoard(getDb(), user.id, user.displayName))
 })
 
 profileRoutes.put('/', async (c) => {

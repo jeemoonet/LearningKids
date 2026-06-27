@@ -111,7 +111,7 @@ export const SIX_RACES: Array<Exclude<PartOfSpeech, 'other'>> = [
 export const POS_RACE: Record<PartOfSpeech, { race: string; role: string; color: string; icon: string }> = {
   noun: { race: RACE_LABEL.noun, role: '平民', color: '#fbbc04', icon: '🧢' },
   verb: { race: RACE_LABEL.verb, role: '武士', color: '#ea4335', icon: '🛡️' },
-  adjective: { race: RACE_LABEL.adjective, role: '医生', color: '#4285f4', icon: '⛑️' },
+  adjective: { race: RACE_LABEL.adjective, role: '学者', color: '#4285f4', icon: '⛑️' },
   adverb: { race: RACE_LABEL.adverb, role: '魔法师', color: '#34a853', icon: '🎩' },
   prep: { race: RACE_LABEL.prep, role: '精灵', color: '#7cb342', icon: '🧚' },
   pronoun: { race: RACE_LABEL.pronoun, role: '贵族', color: '#ab47bc', icon: '👑' },

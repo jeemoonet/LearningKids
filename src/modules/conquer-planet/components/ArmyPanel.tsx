@@ -7,9 +7,10 @@ const POS_ORDER: PartOfSpeech[] = [...SIX_RACES]
 
 interface ArmyPanelProps {
   variant?: 'default' | 'compact' | 'float'
+  onInspectArmy?: () => void
 }
 
-export function ArmyPanel({ variant = 'compact' }: ArmyPanelProps) {
+export function ArmyPanel({ variant = 'compact', onInspectArmy }: ArmyPanelProps) {
   const { session } = useConquer()
 
   const byPos = useMemo(() => {
@@ -59,6 +60,11 @@ export function ArmyPanel({ variant = 'compact' }: ArmyPanelProps) {
           )
         })}
       </div>
+      {onInspectArmy && (
+        <button type="button" className="cp-army-inspect-btn" onClick={onInspectArmy}>
+          视察军队
+        </button>
+      )}
     </aside>
   )
 }

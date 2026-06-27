@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   buildActivePath,
+  type BattleMapNode,
   type KingdomBattleMapLayout,
 } from '../data/kingdomBattleMapLayout'
+import { nodeRequiresStepChallenge } from '../data/stepChallenge'
 import { getKingdomBattleMapLayout } from '../planetMapConfig'
 
 const STORAGE_KEY = 'conquer-map-progress-v1'
+const STEP_DONE_KEY = 'conquer-map-step-done-v1'
 /** 单格行进耗时 */
 const STEP_MS = 360
 
@@ -39,6 +42,41 @@ function writeKingdom(kingdomId: string, data: StoredProgress) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
 }
 
+function readStepDone(kingdomId: string): Set<string> {
+  try {
+    const raw = localStorage.getItem(STEP_DONE_KEY)
+    if (!raw) return new Set()
+    const all = JSON.parse(raw) as Record<string, string[]>
+    return new Set(all[kingdomId] ?? [])
+  } catch {
+    return new Set()
+  }
+}
+
+function writeStepDone(kingdomId: string, nodeIds: Set<string>) {
+  const all: Record<string, string[]> = {}
+  try {
+    const raw = localStorage.getItem(STEP_DONE_KEY)
+    if (raw) Object.assign(all, JSON.parse(raw) as Record<string, string[]>)
+  } catch {
+    /* ignore */
+  }
+  all[kingdomId] = [...nodeIds]
+  localStorage.setItem(STEP_DONE_KEY, JSON.stringify(all))
+}
+
+export function clearKingdomStepProgress(kingdomId: string) {
+  const all: Record<string, string[]> = {}
+  try {
+    const raw = localStorage.getItem(STEP_DONE_KEY)
+    if (raw) Object.assign(all, JSON.parse(raw) as Record<string, string[]>)
+  } catch {
+    /* ignore */
+  }
+  delete all[kingdomId]
+  localStorage.setItem(STEP_DONE_KEY, JSON.stringify(all))
+}
+
 export function clearKingdomMapProgress(kingdomId: string) {
   const all = readAll()
   delete all[kingdomId]
@@ -53,6 +91,7 @@ function maxAllowedPathIndex(
   layout: KingdomBattleMapLayout,
   branchId: string | null,
   conqueredLevelIds: string[],
+  stepDoneNodeIds: Set<string>,
 ): number {
   const pathIds = buildActivePath(layout, branchId)
   for (let i = 0; i < pathIds.length; i++) {
@@ -60,18 +99,19 @@ function maxAllowedPathIndex(
     if (node?.levelId && !conqueredLevelIds.includes(node.levelId)) {
       return i
     }
+    if (node && nodeRequiresStepChallenge(node) && !stepDoneNodeIds.has(node.id)) {
+      return i
+    }
   }
   return Math.max(0, pathIds.length - 1)
 }
 
-function currentNodeBlocksAdvance(
+function currentNode(
   layout: KingdomBattleMapLayout,
   pathIds: string[],
   pathIndex: number,
-  conqueredLevelIds: string[],
-): boolean {
-  const node = layout.nodes[pathIds[pathIndex]]
-  return Boolean(node?.levelId && !conqueredLevelIds.includes(node.levelId))
+): BattleMapNode | undefined {
+  return layout.nodes[pathIds[pathIndex]]
 }
 
 export function useMapProgress(
@@ -85,6 +125,7 @@ export function useMapProgress(
   const [branchId, setBranchId] = useState<string | null>(null)
   const [moving, setMoving] = useState(false)
   const [pendingArrival, setPendingArrival] = useState<MapArrival | null>(null)
+  const [stepDoneNodeIds, setStepDoneNodeIds] = useState<Set<string>>(() => readStepDone(kingdomId))
   const timersRef = useRef<number[]>([])
 
   const clearTimers = useCallback(() => {
@@ -98,7 +139,7 @@ export function useMapProgress(
     if (!layout) return
     const stored = readAll()[kingdomId]
     const branch = stored?.branchId ?? null
-    const allowed = maxAllowedPathIndex(layout, branch, conqueredLevelIds)
+    const allowed = maxAllowedPathIndex(layout, branch, conqueredLevelIds, readStepDone(kingdomId))
     const storedIdx = stored?.pathIndex ?? 0
     const clamped = Math.min(storedIdx, allowed)
     setPathIndex(clamped)
@@ -139,9 +180,16 @@ export function useMapProgress(
   const clearArrival = useCallback(() => setPendingArrival(null), [])
 
   const atEnd = pathIndex >= pathIds.length - 1 && !atFork
-  const blockedByLevel = layout
-    ? currentNodeBlocksAdvance(layout, pathIds, pathIndex, conqueredLevelIds)
-    : false
+  const playerNode = layout ? currentNode(layout, pathIds, pathIndex) : undefined
+  const blockedByLevel = Boolean(
+    playerNode?.levelId && !conqueredLevelIds.includes(playerNode.levelId),
+  )
+  const blockedByStep = Boolean(
+    playerNode &&
+      nodeRequiresStepChallenge(playerNode) &&
+      !stepDoneNodeIds.has(playerNode.id),
+  )
+  const blockedByChallenge = blockedByLevel || blockedByStep
 
   const canAdvance =
     !!layout &&
@@ -149,16 +197,28 @@ export function useMapProgress(
     !pendingArrival &&
     !atFork &&
     !atEnd &&
-    !blockedByLevel
+    !blockedByChallenge
 
-  /** 沿路径前进一格，每格必经（关卡未通关则停留） */
+  const markStepDone = useCallback(
+    (nodeId: string) => {
+      setStepDoneNodeIds((prev) => {
+        const next = new Set(prev)
+        next.add(nodeId)
+        writeStepDone(kingdomId, next)
+        return next
+      })
+    },
+    [kingdomId],
+  )
+
+  /** 沿路径前进一格，每格必经（关卡/路点试炼未完成则停留） */
   const advanceOneStep = useCallback(() => {
     if (
       !layout ||
       moving ||
       pendingArrival ||
       atFork ||
-      blockedByLevel ||
+      blockedByChallenge ||
       pathIndex >= pathIds.length - 1
     ) {
       return
@@ -191,7 +251,7 @@ export function useMapProgress(
     moving,
     pendingArrival,
     atFork,
-    blockedByLevel,
+    blockedByChallenge,
     pathIndex,
     pathIds,
     branchId,
@@ -221,16 +281,19 @@ export function useMapProgress(
   const resetMapProgress = useCallback(() => {
     clearTimers()
     clearKingdomMapProgress(kingdomId)
+    clearKingdomStepProgress(kingdomId)
     setPathIndex(0)
     setBranchId(null)
     setMoving(false)
     setPendingArrival(null)
+    setStepDoneNodeIds(new Set())
   }, [kingdomId, clearTimers])
 
   // 队伍前方的下一格（仅用于方向提示，不可点击）
   const nextNodeId =
     canAdvance && pathIndex < pathIds.length - 1 ? pathIds[pathIndex + 1] : null
-  const playerPos = layout?.nodes[pathIds[pathIndex] ?? '']
+  const playerNodeId = pathIds[pathIndex] ?? ''
+  const playerPos = playerNode
 
   return {
     layout,
@@ -242,12 +305,16 @@ export function useMapProgress(
     moving,
     canAdvance,
     blockedByLevel,
+    blockedByStep,
+    blockedByChallenge,
     nextNodeId,
     playerPos,
+    playerNodeId,
     pendingArrival,
     clearArrival,
     advanceOneStep,
     chooseBranch,
     resetMapProgress,
+    markStepDone,
   }
 }

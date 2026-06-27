@@ -140,9 +140,9 @@ const LEVEL_DEFS: LevelDef[] = [
   {
     id: 'adj-adv-1',
     track: 'adj-adv',
-    title: '形副辨析',
-    scene: '形容词 vs 副词',
-    ruleSummary: '修饰名词用形容词；修饰动词/形容词/副词用副词；系动词后接形容词',
+    title: '学者魔法师辨析',
+    scene: '学者 vs 魔法师',
+    ruleSummary: '修饰名词用学者；修饰动词/学者/魔法师用魔法师；系动词后接学者',
     focusRoles: ['adverbial', 'complement', 'attributive'],
   },
   {
@@ -157,8 +157,8 @@ const LEVEL_DEFS: LevelDef[] = [
     id: 'adj-adv-3',
     track: 'adj-adv',
     title: '高级',
-    scene: '形副综合',
-    ruleSummary: '混合形副辨析与比较等级，注意修饰对象与比较结构',
+    scene: '学者魔法师综合',
+    ruleSummary: '混合学者魔法师辨析与比较等级，注意修饰对象与比较结构',
     focusRoles: ['adverbial', 'complement', 'attributive'],
     roundCount: 8,
   },
@@ -277,12 +277,57 @@ function createSessionId(): string {
   return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`
 }
 
+function normalizeDrawKey(sentence: string, answer: string): string {
+  return `${sentence.replace('{blank}', '______')}|${answer}`
+}
+
+function templateKey(template: SentenceTemplate): string {
+  return normalizeDrawKey(template.sentence, template.answer)
+}
+
+/** 从题库随机抽题；excludeKeys 用于「再练一轮」时尽量避开上一轮题目 */
+function pickTemplates(
+  templates: SentenceTemplate[],
+  roundCount: number,
+  excludeKeys: string[] = [],
+): SentenceTemplate[] {
+  const exclude = new Set(excludeKeys)
+  let pool = shuffle(templates.filter((item) => !exclude.has(templateKey(item))))
+
+  // 排除后不够题量则回退全池，但仍优先未出现过的题
+  if (pool.length < roundCount) {
+    const seen = new Set(pool.map(templateKey))
+    const rest = shuffle(templates.filter((item) => !seen.has(templateKey(item))))
+    pool = [...pool, ...rest]
+    if (pool.length < roundCount) {
+      pool = shuffle(templates)
+    }
+  }
+
+  const selected: SentenceTemplate[] = []
+  const used = new Set<string>()
+
+  for (const template of pool) {
+    if (selected.length >= roundCount) break
+    const key = templateKey(template)
+    if (used.has(key)) continue
+    used.add(key)
+    selected.push(template)
+  }
+
+  return selected.slice(0, roundCount)
+}
+
 function getLevelDef(levelId: string): LevelDef | undefined {
   if (levelId === 'boss') return BOSS_LEVEL
   return LEVEL_DEFS.find((item) => item.id === levelId)
 }
 
-export function generateSentenceSession(levelId: string, count?: number): SentenceQuestion[] {
+export function generateSentenceSession(
+  levelId: string,
+  count?: number,
+  excludeKeys: string[] = [],
+): SentenceQuestion[] {
   const def = getLevelDef(levelId)
   if (!def) return []
 
@@ -291,29 +336,12 @@ export function generateSentenceSession(levelId: string, count?: number): Senten
   if (templates.length === 0) return []
 
   const sessionId = createSessionId()
-  const shuffled = shuffle(templates)
-  const questions: SentenceQuestion[] = []
-  const usedKeys = new Set<string>()
+  const picked = pickTemplates(templates, roundCount, excludeKeys)
+  const questions = picked.map((template, index) =>
+    templateToQuestion(levelId, template, index, sessionId),
+  )
 
-  for (const template of shuffled) {
-    if (questions.length >= roundCount) break
-    const key = `${template.sentence}:${template.answer}`
-    if (usedKeys.has(key)) continue
-    usedKeys.add(key)
-    questions.push(templateToQuestion(levelId, template, questions.length, sessionId))
-  }
-
-  let guard = 0
-  while (questions.length < roundCount && guard < roundCount * 10) {
-    guard += 1
-    const template = shuffled[guard % shuffled.length]
-    const key = `${template.sentence}:${template.answer}:${guard}`
-    if (usedKeys.has(key)) continue
-    usedKeys.add(key)
-    questions.push(templateToQuestion(levelId, template, questions.length, sessionId))
-  }
-
-  return shuffle(questions).slice(0, roundCount)
+  return shuffle(questions)
 }
 
 export function listSentenceLevels(): SentenceLevel[] {
@@ -340,8 +368,12 @@ export function listSentenceLevels(): SentenceLevel[] {
   return levels
 }
 
-export function getSentenceQuestions(levelId: string, count?: number): SentenceQuestion[] {
-  return generateSentenceSession(levelId, count)
+export function getSentenceQuestions(
+  levelId: string,
+  count?: number,
+  excludeKeys: string[] = [],
+): SentenceQuestion[] {
+  return generateSentenceSession(levelId, count, excludeKeys)
 }
 
 export function getSentenceLevelRule(levelId: string): string {

@@ -25,7 +25,7 @@ export const KINGDOM_GUIDES: KingdomGuideEntry[] = [
     subtitle: '邪恶军团最薄弱的边境，从这里开始壮大你的军团。',
     focus: '入门关：认识单词、完成造句，把村民收编为第一批士兵。',
     monster: '迷雾石像 · 名词守卫',
-    tip: '名词怪兽镇守，派出医生（形容词）相生克制，拼写发射击破封印。',
+    tip: '名词怪兽镇守，派出学者（形容词）相生克制，拼写发射击破封印。',
   },
   {
     id: 'kingdom-2',
@@ -37,7 +37,7 @@ export const KINGDOM_GUIDES: KingdomGuideEntry[] = [
     subtitle: '灶火永不熄灭的国度，形容词强化名词的试炼之地。',
     focus: '主题词汇关：饮食类名词 + 形容词搭配，练习"形容词修饰名词"。',
     monster: '饕餮锅灵 · 食欲化形',
-    tip: '用形容词（医生）强化名词军团，相生加成更易破防。',
+    tip: '用形容词（学者）强化名词军团，相生加成更易破防。',
   },
   {
     id: 'kingdom-3',

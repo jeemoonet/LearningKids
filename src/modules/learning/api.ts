@@ -1,6 +1,25 @@
 import { apiFetch } from '../../lib/api'
 import type { VocabWord } from '../vocab-training/types'
 
+export interface PeerBoard {
+  self: PeerLearner
+  selfRank: number
+  peers: PeerLearner[]
+}
+
+export interface PeerLearner {
+  userId: string
+  displayName: string
+  avatar: string
+  level: number
+  knownCount: number
+  conqueredKingdoms: number
+  kingdomTotal: number
+  currentKingdomId: string
+  currentKingdomName: string
+  online: boolean
+}
+
 export interface LearningProfile {
   userId: string
   username: string
@@ -116,6 +135,7 @@ export interface SubmitResult {
 
 export const learningApi = {
   getProfile: () => apiFetch<{ profile: LearningProfile }>('/profile'),
+  listPeers: () => apiFetch<PeerBoard>('/profile/peers'),
   updateProfile: (patch: { grade?: string; displayName?: string }) =>
     apiFetch<{ profile: LearningProfile }>('/profile', {
       method: 'PUT',

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { learningApi, type LearningLibrary, type LearningProfile } from './api'
+import { learningApi, type LearningLibrary, type LearningProfile, type PeerLearner } from './api'
 import { useConquer } from '../conquer-planet/ConquerContext'
 import { getKingdomMapImage } from '../conquer-planet/components/ImageKingdomMapScene'
 import { WordBankFloatPanel } from './components/WordBankFloatPanel'
@@ -18,6 +18,59 @@ type ExpandKey = 'quests' | 'fellows' | 'achievements' | null
 
 const KINGDOM_TOTAL = 7
 const RANK_MEDALS = ['🥇', '🥈', '🥉']
+
+function fellowRankLabel(rank: number): string {
+  return RANK_MEDALS[rank - 1] ?? String(rank)
+}
+
+function FellowRow({
+  fellow,
+  rank,
+  isMe = false,
+}: {
+  fellow: PeerLearner
+  rank: number
+  isMe?: boolean
+}) {
+  return (
+    <li className={`lw-mw-fellow${isMe ? ' is-me' : ''}`}>
+      <span className="lw-mw-fellow__rank" aria-hidden="true">
+        {fellowRankLabel(rank)}
+      </span>
+      <span className="lw-mw-fellow__portrait">
+        <span className="lw-mw-fellow__face" aria-hidden="true">{fellow.avatar}</span>
+        {fellow.online && <span className="lw-mw-fellow__online" title="在线" />}
+        <span className="lw-mw-fellow__lv">{fellow.level}</span>
+      </span>
+      <span className="lw-mw-fellow__info">
+        <span className="lw-mw-fellow__name">
+          {fellow.displayName}
+          {isMe && <span className="lw-mw-fellow__me-tag">我</span>}
+        </span>
+        <span className="lw-mw-fellow__meta">
+          {fellow.currentKingdomName || '尚未开始'} · {fellow.knownCount} 词
+        </span>
+        <span
+          className="lw-mw-fellow__flags"
+          aria-label={`已征服 ${fellow.conqueredKingdoms} / ${fellow.kingdomTotal} 国`}
+        >
+          {Array.from({ length: fellow.kingdomTotal }).map((_, i) => (
+            <span
+              key={i}
+              className={`lw-mw-flag${i < fellow.conqueredKingdoms ? ' is-won' : ''}`}
+              aria-hidden="true"
+            >
+              {i < fellow.conqueredKingdoms ? '🚩' : '·'}
+            </span>
+          ))}
+        </span>
+      </span>
+      <span className="lw-mw-fellow__count">
+        {fellow.conqueredKingdoms}/{fellow.kingdomTotal}
+      </span>
+    </li>
+  )
+}
 
 function levelKindLabel(kind: PlanetLevel['kind']): string {
   return levelKindShortLabel(kind)
@@ -45,6 +98,8 @@ export function MyWorldDashboard({
   const [targetOpen, setTargetOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [libraries, setLibraries] = useState<LearningLibrary[]>([])
+  const [peerBoard, setPeerBoard] = useState<{ self: PeerLearner; selfRank: number; peers: PeerLearner[] } | null>(null)
+  const [peersLoading, setPeersLoading] = useState(true)
   const [targetBusy, setTargetBusy] = useState(false)
   const [targetMsg, setTargetMsg] = useState('')
 
@@ -53,6 +108,15 @@ export function MyWorldDashboard({
       .listLibraries()
       .then(({ libraries: list }) => setLibraries(list))
       .catch(() => undefined)
+  }, [])
+
+  useEffect(() => {
+    setPeersLoading(true)
+    learningApi
+      .listPeers()
+      .then((board) => setPeerBoard(board))
+      .catch(() => setPeerBoard(null))
+      .finally(() => setPeersLoading(false))
   }, [])
 
   // 正在征服的王国（无 current 时回退到第一个王国）
@@ -96,13 +160,11 @@ export function MyWorldDashboard({
   ]
   const questsLeft = todayQuests.filter((q) => !q.done).length
 
-  const companions = [
-    { id: 'c1', name: '雷恩', avatar: '🐯', level: 9, conquered: 5, online: true },
-    { id: 'c2', name: '小薇', avatar: '🦉', level: 7, conquered: 4, online: false },
-    { id: 'c3', name: '阿凯', avatar: '🐻', level: 6, conquered: 3, online: true },
-    { id: 'c4', name: '糖糖', avatar: '🐰', level: 5, conquered: 2, online: true },
-  ]
-  const rankedCompanions = [...companions].sort((a, b) => b.conquered - a.conquered)
+  const peers = peerBoard?.peers ?? []
+  const selfPeer = peerBoard?.self ?? null
+  const selfRank = peerBoard?.selfRank ?? 0
+  const kingdomTotal = selfPeer?.kingdomTotal ?? peers[0]?.kingdomTotal ?? session?.kingdoms.length ?? KINGDOM_TOTAL
+  const topPeer = peers[0]
 
   const achievements = [
     { id: 'a1', icon: '🏅', label: '初识百词', unlocked: true },
@@ -150,38 +212,27 @@ export function MyWorldDashboard({
       )
     }
     if (expanded === 'fellows') {
+      if (peersLoading) {
+        return <p className="lw-mw-lib-msg">正在加载小伙伴数据…</p>
+      }
+      if (!selfPeer) {
+        return <p className="lw-mw-lib-msg">加载失败，请稍后重试</p>
+      }
       return (
         <ul className="lw-mw-fellow-list">
-          {rankedCompanions.map((fellow, idx) => (
-            <li key={fellow.id} className="lw-mw-fellow">
-              <span className="lw-mw-fellow__rank" aria-hidden="true">
-                {RANK_MEDALS[idx] ?? idx + 1}
-              </span>
-              <span className="lw-mw-fellow__portrait">
-                <span className="lw-mw-fellow__face" aria-hidden="true">{fellow.avatar}</span>
-                {fellow.online && <span className="lw-mw-fellow__online" title="在线" />}
-                <span className="lw-mw-fellow__lv">{fellow.level}</span>
-              </span>
-              <span className="lw-mw-fellow__info">
-                <span className="lw-mw-fellow__name">{fellow.name}</span>
-                <span
-                  className="lw-mw-fellow__flags"
-                  aria-label={`已征服 ${fellow.conquered} / ${KINGDOM_TOTAL} 国`}
-                >
-                  {Array.from({ length: KINGDOM_TOTAL }).map((_, i) => (
-                    <span
-                      key={i}
-                      className={`lw-mw-flag${i < fellow.conquered ? ' is-won' : ''}`}
-                      aria-hidden="true"
-                    >
-                      {i < fellow.conquered ? '🚩' : '·'}
-                    </span>
-                  ))}
-                </span>
-              </span>
-              <span className="lw-mw-fellow__count">{fellow.conquered}/{KINGDOM_TOTAL}</span>
-            </li>
-          ))}
+          <FellowRow fellow={selfPeer} rank={selfRank} isMe />
+          {peers.length > 0 ? (
+            <>
+              <li className="lw-mw-fellow-divider" aria-hidden="true">
+                <span>小伙伴排行</span>
+              </li>
+              {peers.map((fellow, idx) => (
+                <FellowRow key={fellow.userId} fellow={fellow} rank={idx + 1} />
+              ))}
+            </>
+          ) : (
+            <li className="lw-mw-fellow-empty">暂无其他学员，邀请同学一起征服星球吧！</li>
+          )}
         </ul>
       )
     }
@@ -406,12 +457,18 @@ export function MyWorldDashboard({
             <span className="lw-mw-chip__body">
               <span className="lw-mw-chip__title">我的小伙伴</span>
               <span className="lw-mw-chip__summary">
-                {companions.length} 位 · 榜首 {rankedCompanions[0]?.conquered}/{KINGDOM_TOTAL} 国
+                {peersLoading
+                  ? '加载中…'
+                  : !selfPeer
+                    ? '加载失败'
+                    : peers.length === 0
+                      ? `我 · ${selfPeer.conqueredKingdoms}/${kingdomTotal} 国`
+                      : `${peers.length + 1} 位 · 我第 ${selfRank} · 榜首 ${topPeer?.conqueredKingdoms ?? 0}/${kingdomTotal} 国`}
               </span>
             </span>
             <span className="lw-mw-chip__avatars" aria-hidden="true">
-              {rankedCompanions.slice(0, 3).map((f) => (
-                <span key={f.id} className="lw-mw-chip__mini">{f.avatar}</span>
+              {(selfPeer ? [selfPeer, ...peers] : peers).slice(0, 3).map((f) => (
+                <span key={f.userId} className="lw-mw-chip__mini">{f.avatar}</span>
               ))}
             </span>
             <span className="lw-mw-chip__cue" aria-hidden="true">展开 ▸</span>

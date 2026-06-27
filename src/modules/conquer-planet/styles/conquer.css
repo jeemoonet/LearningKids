@@ -245,6 +245,283 @@ body.cp-battle-immersive .cp-topbar--shell {
   height: 6px;
 }
 
+.cp-army-inspect-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(251, 188, 4, 0.45);
+  background: rgba(120, 70, 20, 0.55);
+  color: #fdeec4;
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.cp-army-inspect-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(251, 188, 4, 0.75);
+  background: rgba(140, 85, 25, 0.72);
+}
+
+.cp-army-inspect-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(8, 10, 18, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.cp-army-inspect {
+  width: min(720px, 100%);
+  max-height: min(88vh, 860px);
+  overflow: auto;
+  padding: 22px 24px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(251, 188, 4, 0.35);
+  background: linear-gradient(165deg, rgba(24, 28, 42, 0.96), rgba(12, 14, 24, 0.98));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.cp-army-inspect__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.cp-army-inspect__eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(251, 188, 4, 0.75);
+}
+
+.cp-army-inspect__title {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #fbbf24;
+}
+
+.cp-army-inspect__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8eaed;
+  cursor: pointer;
+}
+
+.cp-army-inspect__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-bottom: 12px;
+}
+
+.cp-army-inspect__badge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(138, 180, 248, 0.14);
+  border: 1px solid rgba(138, 180, 248, 0.35);
+  color: #8ab4f8;
+  font-size: 0.78rem;
+}
+
+.cp-army-inspect__hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #9aa0a6;
+}
+
+.cp-army-inspect__passage {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+}
+
+.cp-army-inspect__passage-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #e8eaed;
+}
+
+.cp-army-inspect__passage-zh {
+  margin: 12px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #9aa0a6;
+}
+
+.cp-army-inspect-blank {
+  display: inline;
+  vertical-align: baseline;
+  margin: 0 2px;
+  padding: 0 2px;
+  border-bottom: 2px dashed rgba(251, 188, 4, 0.45);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.cp-army-inspect-blank.is-active {
+  background: rgba(251, 188, 4, 0.12);
+  border-bottom-color: rgba(251, 188, 4, 0.85);
+}
+
+.cp-army-inspect-blank.is-drag-over {
+  background: rgba(138, 180, 248, 0.18);
+  border-bottom-color: #8ab4f8;
+}
+
+.cp-army-inspect-blank.is-filled {
+  border-bottom-style: solid;
+}
+
+.cp-army-inspect-blank.is-correct {
+  border-bottom-color: #34a853;
+  background: rgba(52, 168, 83, 0.1);
+}
+
+.cp-army-inspect-blank.is-wrong {
+  border-bottom-color: #ea4335;
+  background: rgba(234, 67, 53, 0.14);
+}
+
+.cp-army-inspect-blank-answer {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgba(234, 67, 53, 0.22);
+  border: 1px solid rgba(234, 67, 53, 0.55);
+  color: #ffb4ab;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.cp-army-inspect-blank-mark {
+  display: inline-block;
+  margin-left: 3px;
+  color: #34a853;
+  font-size: 0.82rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.cp-army-inspect-blank-placeholder {
+  opacity: 0.35;
+}
+
+.cp-army-inspect-bank {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 16px;
+}
+
+.cp-army-inspect-bank.is-receiving {
+  border-color: rgba(138, 180, 248, 0.55);
+  background: rgba(138, 180, 248, 0.08);
+}
+
+.cp-army-inspect-bank__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+  color: #9aa0a6;
+}
+
+.cp-army-inspect-bank__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cp-army-inspect-bank__empty {
+  font-size: 0.82rem;
+  color: #9aa0a6;
+}
+
+.cp-army-inspect-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(138, 180, 248, 0.45);
+  background: rgba(138, 180, 248, 0.12);
+  color: #e8eaed;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.cp-army-inspect-chip:active {
+  cursor: grabbing;
+}
+
+.cp-army-inspect-chip.is-dragging {
+  opacity: 0.55;
+}
+
+.cp-army-inspect-chip--in-blank {
+  margin: 0;
+  cursor: pointer;
+}
+
+.cp-army-inspect-chip.is-correct {
+  border-color: rgba(52, 168, 83, 0.85);
+  background: rgba(52, 168, 83, 0.28);
+  color: #b7f5c8;
+}
+
+.cp-army-inspect-chip.is-wrong {
+  border-color: rgba(234, 67, 53, 0.85);
+  background: rgba(234, 67, 53, 0.28);
+  color: #ffcbc7;
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.55);
+}
+
+.cp-army-inspect__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cp-army-inspect__result {
+  margin: 0;
+  flex: 1 1 100%;
+  font-size: 0.92rem;
+  color: #fdeec4;
+}
+
+.cp-army-inspect__empty {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .cp-map-main {
   display: flex;
   flex-direction: column;
@@ -374,6 +651,10 @@ body.cp-battle-immersive .cp-topbar--shell {
   pointer-events: auto;
 }
 
+.cp-map-overlay .cp-step-challenge {
+  pointer-events: auto;
+}
+
 /* ── 前进箭头面板 ── */
 .cp-forward-panel {
   position: absolute;
@@ -495,6 +776,39 @@ body.cp-battle-immersive .cp-topbar--shell {
   font-size: 0.88rem;
   letter-spacing: 0.04em;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.cp-step-challenge {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(8, 10, 18, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.cp-step-challenge__panel {
+  width: min(560px, 100%);
+  max-height: min(80vh, 720px);
+  overflow: auto;
+  padding: 20px 22px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(251, 188, 4, 0.35);
+  background: linear-gradient(165deg, rgba(24, 28, 42, 0.96), rgba(12, 14, 24, 0.98));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.cp-step-challenge__topbar {
+  margin-bottom: 12px;
+}
+
+.cp-step-challenge__title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  color: #fbbf24;
 }
 
 /* ───── 地图 HUD 浮层 ───── */

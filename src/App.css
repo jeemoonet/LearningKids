@@ -575,6 +575,113 @@
   background: #fff;
 }
 
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-field__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.01em;
+}
+
+.admin-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: #fafafa;
+  color: #111;
+  font: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.admin-input::placeholder {
+  color: #aaa;
+}
+
+.admin-input:hover:not(:disabled) {
+  border-color: #ccc;
+  background: #fff;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: #111;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+.admin-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.admin-input--number {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.admin-field--sm {
+  max-width: 140px;
+}
+
+.admin-field--md {
+  max-width: 320px;
+}
+
+.admin-field--full {
+  width: 100%;
+}
+
+.admin-form-card {
+  padding: 16px 18px;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  background: #fafafa;
+}
+
+.admin-field-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-field-grid--basic {
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  align-items: start;
+}
+
+.admin-field-grid--coords {
+  grid-template-columns: repeat(2, minmax(0, 140px));
+}
+
+.admin-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ececec;
+}
+
+.admin-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  color: #666;
+  font-size: 0.82rem;
+}
+
 .admin-module-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -7904,6 +8011,165 @@
   }
 }
 
+/* ── 学者 / 魔法师 · 词组辨认 ── */
+
+.sm-pair-board {
+  padding: 28px 32px;
+}
+
+.sm-pair-hint {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.sm-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.sm-pair-card {
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.sm-pair-card.is-correct {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.15);
+}
+
+.sm-pair-card.is-wrong {
+  border-color: #f87171;
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.12);
+}
+
+.sm-pair-card-type {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #6d28d9;
+  background: #ede9fe;
+}
+
+.sm-pair-card-words {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.sm-pair-word {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.sm-pair-word--target {
+  background: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.sm-pair-word-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  font-family: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+}
+
+.sm-pair-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sm-pair-badge--scholar {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.sm-pair-badge--magician {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.sm-pair-badge--noun,
+.sm-pair-badge--verb {
+  color: #6b7280;
+  background: #f3f4f6;
+}
+
+.sm-pair-card-zh {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.sm-pair-guess-row {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.sm-pair-guess-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #c7d2fe;
+  background: #fff;
+  color: #4338ca;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.sm-pair-guess-btn--magician {
+  border-color: #a7f3d0;
+  color: #047857;
+}
+
+.sm-pair-guess-btn.is-selected {
+  background: #eef2ff;
+  border-color: #4f46e5;
+}
+
+.sm-pair-guess-btn--magician.is-selected {
+  background: #ecfdf5;
+  border-color: #10b981;
+}
+
+.sm-pair-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .sm-pair-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── 句子成分还原 · PC 宽屏横屏 ── */
 
 .module-sentence-game.is-structure-pc {
@@ -8802,5 +9068,487 @@
 
   .sentence-structure-word-bank .sentence-structure-bank-chips {
     justify-content: flex-start;
+  }
+}
+
+/* ── 征服星球 · 管理台地图标注 ── */
+
+.admin-planet-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+}
+
+.admin-planet-sidebar {
+  padding: 12px;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  background: #fafafa;
+}
+
+.admin-planet-sidebar h2 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.admin-planet-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-planet-nav .admin-nav-item {
+  justify-content: flex-start;
+}
+
+.admin-planet-nav .admin-nav-badge {
+  margin-left: auto;
+}
+
+.admin-planet-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.admin-continent-picker {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(240px, 320px);
+  gap: 16px;
+  align-items: start;
+}
+
+.admin-continent-picker__map {
+  position: relative;
+  aspect-ratio: 1000 / 700;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: crosshair;
+  background: #1a1208 url(/assets/conquer-planet/world-map-bg.png) center/cover;
+}
+
+.admin-continent-picker__marker {
+  position: absolute;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #f5c842;
+  box-shadow: 0 0 10px rgba(245, 200, 66, 0.85);
+  transform: translate(-50%, -50%);
+  cursor: grab;
+}
+
+.admin-continent-picker__marker.is-dragging {
+  cursor: grabbing;
+  box-shadow: 0 0 14px rgba(245, 200, 66, 1);
+}
+
+.admin-continent-picker__hint {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  margin: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.admin-continent-picker__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-continent-picker__panel-title {
+  margin: 0 0 2px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.admin-battle-map {
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.admin-battle-map__canvas {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  max-height: 72vh;
+  overflow: hidden;
+  background: #2a2418;
+}
+
+.admin-battle-map__scroll {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  max-height: 72vh;
+  overflow: auto;
+}
+
+.admin-battle-map__viewport {
+  position: relative;
+  min-width: 100%;
+}
+
+.admin-battle-map__zoom-controls {
+  position: absolute;
+  z-index: 5;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 10px;
+  background: rgba(18, 18, 22, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.admin-battle-map__zoom-btn,
+.admin-battle-map__zoom-reset {
+  height: 32px;
+  min-width: 32px;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.admin-battle-map__zoom-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.admin-battle-map__zoom-btn:hover:not(:disabled),
+.admin-battle-map__zoom-reset:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.admin-battle-map__zoom-label {
+  min-width: 44px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.78rem;
+}
+
+.admin-battle-map__zoom-reset {
+  font-size: 0.75rem;
+}
+
+.admin-battle-map__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.admin-battle-map__bg--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+}
+
+.admin-battle-map__path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.admin-battle-map__path-line {
+  fill: none;
+  stroke: rgba(245, 200, 66, 0.55);
+  stroke-width: 6;
+  stroke-dasharray: 12 8;
+  stroke-linecap: round;
+}
+
+.admin-battle-map__hitlayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: crosshair;
+}
+
+.admin-battle-map__handle {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  touch-action: none;
+}
+
+.admin-battle-map__handle.is-dragging {
+  cursor: grabbing;
+}
+
+.admin-battle-map__handle-dot {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #f5c842;
+  box-shadow: 0 0 8px rgba(245, 200, 66, 0.8);
+}
+
+.admin-battle-map__handle.is-active .admin-battle-map__handle-dot {
+  width: 20px;
+  height: 20px;
+  background: #ff9f1a;
+}
+
+.admin-battle-map__handle-label {
+  max-width: 88px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-battle-map__panel {
+  position: absolute;
+  z-index: 6;
+  bottom: 12px;
+  right: 12px;
+  width: min(360px, calc(100% - 24px));
+  max-height: min(420px, calc(100% - 24px));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(18, 18, 22, 0.92);
+  color: #eee;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.admin-battle-map__panel.is-placed {
+  bottom: auto;
+  right: auto;
+}
+
+.admin-battle-map__panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.admin-battle-map__panel-head:active {
+  cursor: grabbing;
+}
+
+.admin-battle-map__panel-head h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.admin-battle-map__panel-drag-hint {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.admin-battle-map__panel .admin-status {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.admin-battle-map__count-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-battle-map__count-row label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.admin-battle-map__count-row input[type='number'] {
+  width: 64px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font: inherit;
+}
+
+.admin-battle-map__tip {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-battle-map__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: auto;
+  flex: 1;
+}
+
+.admin-battle-map__list li {
+  margin-bottom: 4px;
+  border-radius: 8px;
+}
+
+.admin-battle-map__list li.is-active {
+  background: rgba(245, 200, 66, 0.12);
+}
+
+.admin-battle-map__row {
+  display: grid;
+  grid-template-columns: 24px 72px 1fr auto auto 28px;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.admin-battle-map__row-idx {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.admin-battle-map__row-type,
+.admin-battle-map__row-name {
+  height: 30px;
+  padding: 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.admin-battle-map__row-xy {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.admin-battle-map__row-level {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.2);
+  color: #93c5fd;
+  font-size: 0.68rem;
+}
+
+.admin-battle-map__row-del {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.admin-battle-map__row-del:hover {
+  background: rgba(239, 68, 68, 0.28);
+}
+
+.admin-battle-map__row-add {
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  text-align: left;
+}
+
+.admin-battle-map__row-add:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 960px) {
+  .admin-planet-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-field-grid--basic {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-field--md {
+    max-width: none;
+  }
+
+  .admin-continent-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-battle-map__row {
+    grid-template-columns: 24px 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .admin-battle-map__row-xy,
+  .admin-battle-map__row-level {
+    grid-column: 2 / 4;
+  }
+
+  .admin-battle-map__row-del {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
   }
 }

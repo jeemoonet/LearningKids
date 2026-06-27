@@ -9,14 +9,18 @@ export async function fetchSentenceLevels(): Promise<SentenceLevel[]> {
 export async function fetchSentenceQuestions(
   levelId: string,
   count?: number,
+  excludeKeys?: string[],
 ): Promise<{
   levelId: string
   ruleSummary: string
   questions: SentenceQuestion[]
 }> {
-  const params = new URLSearchParams({ levelId })
+  const params = new URLSearchParams({ levelId, _: String(Date.now()) })
   if (count && count > 0) params.set('count', String(count))
-  return apiFetch(`/sentence-game/questions?${params.toString()}`)
+  if (excludeKeys && excludeKeys.length > 0) {
+    params.set('exclude', JSON.stringify(excludeKeys))
+  }
+  return apiFetch(`/sentence-game/questions?${params.toString()}`, { cache: 'no-store' })
 }
 
 export async function fetchStructurePuzzles(

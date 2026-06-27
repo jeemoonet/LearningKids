@@ -22,7 +22,7 @@ export const ELEMENT_LABEL: Record<Element, string> = {
 export const RACE_LABEL: Record<PartOfSpeech, string> = {
   noun: '平民 NOUN',
   verb: '武士 VERB',
-  adjective: '医生 ADJ',
+  adjective: '学者 ADJ',
   adverb: '魔法师 ADV',
   prep: '精灵 PREP',
   pronoun: '贵族 PRON',

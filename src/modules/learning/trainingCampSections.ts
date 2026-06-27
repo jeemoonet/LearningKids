@@ -38,11 +38,11 @@ export const TRAINING_CAMP_SECTIONS: TrainingCampSection[] = [
     id: 'magic',
     label: '魔法世界',
     icon: '🪄',
-    summary: '副词与动词的组合，形副辨析与高级用法',
+    summary: '魔法师与动词的组合，学者魔法师辨析与高级用法',
     module: 'sentence',
     tracks: ['adj-adv'],
     title: '魔法世界',
-    description: '形容词与副词搭配动词，掌握比较级与最高级',
+    description: '学者与魔法师搭配动词，掌握比较级与最高级',
   },
   {
     id: 'formation',

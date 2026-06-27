@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { fetchSentenceLevels, fetchSentenceQuestions, fetchStructurePuzzles } from './api'
 import { SentenceChallengeMode } from './SentenceChallengeMode'
+import { ScholarMagicianMode } from './ScholarMagicianMode'
 import { SentenceLevelSelect } from './SentenceLevelSelect'
 import { SentenceStructureMode } from './SentenceStructureMode'
 import type { SentenceLevel, SentenceQuestion, SentenceTrack, StructurePuzzle } from './types'
@@ -40,6 +41,7 @@ export function SentenceGameModule({
   const [ruleSummary, setRuleSummary] = useState('')
   const [isBoss, setIsBoss] = useState(false)
   const [isStructure, setIsStructure] = useState(false)
+  const [isScholarMagician, setIsScholarMagician] = useState(false)
   const [challengeLoading, setChallengeLoading] = useState(false)
 
   const trackFilter = useMemo(() => {
@@ -70,8 +72,8 @@ export function SentenceGameModule({
     }
   }, [])
 
-  const loadQuestions = useCallback(async (level: SentenceLevel) => {
-    const data = await fetchSentenceQuestions(level.id, level.questionCount)
+  const loadQuestions = useCallback(async (level: SentenceLevel, excludeKeys?: string[]) => {
+    const data = await fetchSentenceQuestions(level.id, level.questionCount, excludeKeys)
     setQuestions(data.questions)
     setRuleSummary(data.ruleSummary)
     return data.questions
@@ -93,9 +95,14 @@ export function SentenceGameModule({
     setError('')
     try {
       const structureMode = level.track === 'structure' && level.id.startsWith('struct-')
+      const scholarMagicianMode = level.track === 'adj-adv'
       if (structureMode) {
         await loadStructurePuzzles(level)
         setQuestions([])
+      } else if (scholarMagicianMode) {
+        setQuestions([])
+        setStructurePuzzles([])
+        setRuleSummary(level.ruleSummary)
       } else {
         await loadQuestions(level)
         setStructurePuzzles([])
@@ -103,6 +110,7 @@ export function SentenceGameModule({
       setActiveLevel(level)
       setIsBoss(level.track === 'boss')
       setIsStructure(structureMode)
+      setIsScholarMagician(scholarMagicianMode)
       setView('challenge')
     } catch (err) {
       setError(err instanceof Error ? err.message : '生成题目失败')
@@ -122,12 +130,13 @@ export function SentenceGameModule({
     setQuestions([])
     setStructurePuzzles([])
     setIsStructure(false)
+    setIsScholarMagician(false)
     void loadLevels()
   }
 
-  const handleRegenerateQuestions = useCallback(async () => {
+  const handleRegenerateQuestions = useCallback(async (excludeKeys?: string[]) => {
     if (!activeLevel) return []
-    const next = await loadQuestions(activeLevel)
+    const next = await loadQuestions(activeLevel, excludeKeys)
     return next
   }, [activeLevel, loadQuestions])
 
@@ -187,7 +196,18 @@ export function SentenceGameModule({
         </main>
       )}
 
-      {view === 'challenge' && activeLevel && !isStructure && questions.length > 0 && (
+      {view === 'challenge' && activeLevel && isScholarMagician && (
+        <main className="app-main app-main-sentence-challenge-pc">
+          <ScholarMagicianMode
+            level={activeLevel}
+            ruleSummary={ruleSummary}
+            onBack={handleBackToLevels}
+            onComplete={handleBackToLevels}
+          />
+        </main>
+      )}
+
+      {view === 'challenge' && activeLevel && !isStructure && !isScholarMagician && questions.length > 0 && (
         <main className="app-main app-main-sentence-challenge-pc">
           <SentenceChallengeMode
             level={activeLevel}
