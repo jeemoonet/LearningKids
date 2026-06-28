@@ -97,7 +97,7 @@ export const PLANET_KINGDOMS: PlanetKingdomConfig[] = [
     id: 'kingdom-7',
     order: 7,
     name: '暗影王座国',
-    subtitle: '邪恶军团的心脏，征服词性星球的最终决战',
+    subtitle: '邪恶军团的心脏，征服卡吉姆星球的最终决战',
     difficulty: '★★★★★',
     theme: 'throne',
     monster: { id: 'shadow-crown', name: '暗影王座', epithet: '词性至尊', partOfSpeech: 'noun' },

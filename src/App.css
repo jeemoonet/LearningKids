@@ -5762,6 +5762,15 @@
   color: #9a3412;
 }
 
+.prep-spirit-family-sub {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #c2410c;
+  opacity: 0.85;
+}
+
 .prep-spirit-family-desc {
   margin: 0;
   font-size: 0.88rem;
@@ -5786,6 +5795,23 @@
   gap: 12px;
 }
 
+.prep-spirit-series-grid--single {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 320px));
+}
+
+.prep-warrior-families-page .prep-spirit-family-section[data-track='tense'] .prep-spirit-family-name {
+  color: #7c3aed;
+}
+
+.prep-warrior-families-page .prep-spirit-family-section[data-track='match'] .prep-spirit-family-name {
+  color: #047857;
+}
+
+.prep-spirit-series-card--match:hover:not(:disabled) {
+  border-color: #6ee7b7;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+}
+
 .prep-spirit-series-card {
   display: flex;
   flex-direction: column;
@@ -5808,6 +5834,18 @@
 .prep-spirit-series-card.is-passed {
   border-color: #86efac;
   background: #f0fdf4;
+}
+
+.prep-spirit-series-card.is-locked {
+  opacity: 0.72;
+  cursor: not-allowed;
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.prep-spirit-series-card.is-locked .prep-spirit-series-card-title,
+.prep-spirit-series-card.is-locked .prep-spirit-series-card-scene {
+  color: #9ca3af;
 }
 
 .prep-spirit-series-card:disabled {
@@ -5879,6 +5917,23 @@
   color: #6b7280;
   line-height: 1.55;
   font-weight: 400;
+}
+
+.prep-spirit-detail-rule {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #9a3412;
+  font-weight: 600;
+}
+
+.sentence-challenge-playhead {
+  margin-bottom: 12px;
+}
+
+.prep-spirit-actions--secondary {
+  margin-top: -8px;
+  padding-top: 0;
 }
 
 .prep-spirit-detail-page .prep-spirit-series {
@@ -8167,6 +8222,289 @@
 @media (max-width: 900px) {
   .sm-pair-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ── 武士 · 魔法师 · 时空连线 ── */
+
+.wm-match-level-card {
+  cursor: pointer;
+  text-align: left;
+  border-style: dashed;
+}
+
+.wm-match-board {
+  padding: 28px 0;
+}
+
+.wm-match-center {
+  width: 60%;
+  max-width: 920px;
+  min-width: min(100%, 520px);
+  margin: 0 auto;
+}
+
+.wm-match-hint {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.wm-match-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(48px, 88px) minmax(0, 1fr);
+  gap: 0;
+  align-items: stretch;
+  min-height: 420px;
+  margin-bottom: 24px;
+  padding: 20px 12px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  overflow: visible;
+}
+
+.wm-match-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.wm-match-line {
+  stroke: #6366f1;
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.9;
+  transition: stroke 0.2s;
+}
+
+.wm-match-line--correct {
+  stroke: #22c55e;
+  stroke-width: 3;
+}
+
+.wm-match-line--wrong {
+  stroke: #ef4444;
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+}
+
+.wm-match-col {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wm-match-bridge {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.wm-match-col-label {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  text-align: center;
+}
+
+.wm-match-col--left .wm-match-col-label {
+  text-align: left;
+}
+
+.wm-match-col--right .wm-match-col-label {
+  text-align: right;
+}
+
+.wm-match-hint.is-alert {
+  color: #dc2626;
+}
+
+.wm-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+  font: inherit;
+  position: relative;
+  z-index: 2;
+  touch-action: manipulation;
+  text-align: left;
+}
+
+.wm-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.wm-card:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.wm-card--warrior {
+  border-color: #fcd34d;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.wm-card--option {
+  border-color: rgba(231, 190, 93, 0.45);
+  background: linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.88) 100%);
+}
+
+.wm-card.is-selected {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+  border-color: #6366f1;
+}
+
+.wm-card.is-targetable {
+  animation: wm-pulse 1.2s ease-in-out infinite;
+}
+
+.wm-card.is-connected {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.wm-card.is-correct {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.wm-card.is-wrong {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+}
+
+.wm-card-word {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  font-family: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+}
+
+.wm-card-gloss {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.wm-card-combo {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #4338ca;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  line-height: 1.45;
+}
+
+.wm-card.is-connected .wm-card-combo {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.22);
+}
+
+.wm-match-line-label {
+  fill: #4338ca;
+  font-size: 12px;
+  font-weight: 700;
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 4px;
+}
+
+.wm-match-combo-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wm-match-combo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.wm-match-combo-en {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+  font-family: 'Georgia', 'Times New Roman', 'Songti SC', serif;
+}
+
+.wm-match-combo-zh {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4338ca;
+}
+
+.wm-match-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+@keyframes wm-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.25); }
+  50% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18); }
+}
+
+@media (max-width: 900px) {
+  .wm-match-center {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .wm-match-stage {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: unset;
+  }
+
+  .wm-match-bridge {
+    display: none;
+  }
+
+  .wm-match-col--left .wm-match-col-label,
+  .wm-match-col--right .wm-match-col-label {
+    text-align: center;
+  }
+
+  .wm-match-combo-item {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

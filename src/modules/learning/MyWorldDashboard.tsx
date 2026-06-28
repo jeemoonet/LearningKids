@@ -1,17 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
 import { learningApi, type LearningLibrary, type LearningProfile, type PeerLearner } from './api'
+import { migrateGrammarProgressOnce } from './migrateGrammarProgress'
 import { useConquer } from '../conquer-planet/ConquerContext'
-import { getKingdomMapImage } from '../conquer-planet/components/ImageKingdomMapScene'
-import { WordBankFloatPanel } from './components/WordBankFloatPanel'
-import { formatLearningMethodsSummary, levelKindShortLabel } from '../conquer-planet/data/levelLearningMethods'
-import { SIX_RACES, type PlanetLevel } from '../conquer-planet/types'
+import { MyWorldKingdomOverview } from './components/MyWorldKingdomOverview'
+import { MyWorldRightRail } from './components/MyWorldRightRail'
+import {
+  needsRecruitOnboarding,
+  RecruitArmyOnboardingModal,
+} from './components/RecruitArmyOnboardingModal'
+import { WorldMapBackground } from './components/WorldMapBackground'
 
 export interface MyWorldDashboardProps {
   profile: LearningProfile | null
   onEnterKingdom: (kingdomId: string) => void
   onOpenCollection: () => void
   onRefresh: () => Promise<void>
-  onLogout: () => void
 }
 
 type ExpandKey = 'quests' | 'fellows' | 'achievements' | null
@@ -48,7 +51,10 @@ function FellowRow({
           {isMe && <span className="lw-mw-fellow__me-tag">我</span>}
         </span>
         <span className="lw-mw-fellow__meta">
-          {fellow.currentKingdomName || '尚未开始'} · {fellow.knownCount} 词
+          Lv.{fellow.level} {fellow.levelTitle}
+        </span>
+        <span className="lw-mw-fellow__meta">
+          {fellow.currentKingdomName || '尚未开始'} · ⚔️{fellow.combatPower} ✨{fellow.magicPower} · {fellow.knownCount} 词
         </span>
         <span
           className="lw-mw-fellow__flags"
@@ -72,36 +78,24 @@ function FellowRow({
   )
 }
 
-function levelKindLabel(kind: PlanetLevel['kind']): string {
-  return levelKindShortLabel(kind)
-}
-
-function levelMethodLabel(kind: PlanetLevel['kind']): string {
-  return formatLearningMethodsSummary(kind)
-}
-
 /**
  * 「我的世界」个人成长基地 · 沉浸式羊皮纸 HUD。
- * 右上为英雄铭牌（替代用户名）+ 我的军团 / 征服目标按钮；左上为远征罗盘；
- * 中央展示「正在征服的王国」（左进展 / 右地图，点击进入）。
+ * 右上：统一命令面板（资料 + 军团 / 目标 / 任务 / 小伙伴 / 成就墙）。
+ * 中央展示七王国全景（未解锁可见），选中王国可查看详情并进入。
  */
 export function MyWorldDashboard({
   profile,
   onEnterKingdom,
   onOpenCollection,
   onRefresh,
-  onLogout,
 }: MyWorldDashboardProps) {
   const { session, loading, refresh: refreshConquer } = useConquer()
   const [expanded, setExpanded] = useState<ExpandKey>(null)
-  const [legionOpen, setLegionOpen] = useState(false)
-  const [targetOpen, setTargetOpen] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
   const [libraries, setLibraries] = useState<LearningLibrary[]>([])
   const [peerBoard, setPeerBoard] = useState<{ self: PeerLearner; selfRank: number; peers: PeerLearner[] } | null>(null)
   const [peersLoading, setPeersLoading] = useState(true)
-  const [targetBusy, setTargetBusy] = useState(false)
-  const [targetMsg, setTargetMsg] = useState('')
+  const [onboardOpen, setOnboardOpen] = useState(false)
+  const [onboardDismissed, setOnboardDismissed] = useState(false)
 
   useEffect(() => {
     learningApi
@@ -119,39 +113,22 @@ export function MyWorldDashboard({
       .finally(() => setPeersLoading(false))
   }, [])
 
-  // 正在征服的王国（无 current 时回退到第一个王国）
+  useEffect(() => {
+    void migrateGrammarProgressOnce().catch(() => undefined)
+  }, [])
+
+  useEffect(() => {
+    if (!profile || onboardDismissed) return
+    if (needsRecruitOnboarding(profile)) {
+      setOnboardOpen(true)
+    }
+  }, [profile, onboardDismissed])
+
+  // 正在征服的王国（用于引导弹窗等）
   const currentKingdom = useMemo(() => {
     if (!session) return null
     return session.kingdoms.find((k) => k.status === 'current') ?? session.kingdoms[0] ?? null
   }, [session])
-
-  const kingdomMap = currentKingdom ? getKingdomMapImage(currentKingdom.id) : null
-  const kingdomPercent = currentKingdom && currentKingdom.levelsTotal > 0
-    ? Math.round((currentKingdom.levelsDone / currentKingdom.levelsTotal) * 100)
-    : 0
-  const nextLevelIdx = currentKingdom
-    ? currentKingdom.levels.findIndex((lv) => !lv.done)
-    : -1
-
-  const legionCount = session?.armySize ?? profile?.knownCount ?? 0
-  const raceCount = useMemo(() => {
-    if (!session) return 0
-    const present = new Set<string>()
-    for (const soldier of session.soldiers) {
-      if (SIX_RACES.includes(soldier.partOfSpeech as (typeof SIX_RACES)[number])) {
-        present.add(soldier.partOfSpeech)
-      }
-    }
-    return present.size
-  }, [session])
-
-  // ---- 占位数据（后续接入真实接口） ----
-  const heroName = profile?.displayName?.trim() || '小小冒险家'
-  const heroTitle = '词汇见习骑士'
-  const heroLevel = 7
-  const xpCurrent = 320
-  const xpMax = 500
-  const xpPercent = Math.round((xpCurrent / xpMax) * 100)
 
   const todayQuests = [
     { id: 'q1', icon: '📖', text: '攻读「第 3 小节」12 个新词', reward: '+60', done: false },
@@ -164,7 +141,6 @@ export function MyWorldDashboard({
   const selfPeer = peerBoard?.self ?? null
   const selfRank = peerBoard?.selfRank ?? 0
   const kingdomTotal = selfPeer?.kingdomTotal ?? peers[0]?.kingdomTotal ?? session?.kingdoms.length ?? KINGDOM_TOTAL
-  const topPeer = peers[0]
 
   const achievements = [
     { id: 'a1', icon: '🏅', label: '初识百词', unlocked: true },
@@ -175,25 +151,6 @@ export function MyWorldDashboard({
     { id: 'a6', icon: '🔒', label: '神秘成就', unlocked: false },
   ]
   const unlockedCount = achievements.filter((a) => a.unlocked).length
-
-  const chooseLibrary = async (id: string) => {
-    if (!id || id === profile?.currentLibraryId) {
-      setTargetOpen(false)
-      return
-    }
-    setTargetBusy(true)
-    setTargetMsg('')
-    try {
-      await learningApi.setCurrentLibrary(id)
-      await onRefresh()
-      await refreshConquer()
-      setTargetOpen(false)
-    } catch (err) {
-      setTargetMsg(err instanceof Error ? err.message : '切换失败')
-    } finally {
-      setTargetBusy(false)
-    }
-  }
 
   const renderExpanded = () => {
     if (expanded === 'quests') {
@@ -262,232 +219,77 @@ export function MyWorldDashboard({
     if (currentKingdom) onEnterKingdom(currentKingdom.id)
   }
 
+  const fellowsSummary = peersLoading
+    ? '加载中…'
+    : !selfPeer
+      ? '加载失败'
+      : peers.length === 0
+        ? `我 · ${selfPeer.conqueredKingdoms}/${kingdomTotal} 国`
+        : `${peers.length + 1} 位 · 我第 ${selfRank}`
+
+  const sideRail = (
+    <>
+      <button
+        type="button"
+        className="lw-mw-glass lw-mw-chip"
+        onClick={() => setExpanded('quests')}
+      >
+        <span className="lw-mw-chip__icon" aria-hidden="true">📜</span>
+        <span className="lw-mw-chip__body">
+          <span className="lw-mw-chip__title">今日任务</span>
+          <span className="lw-mw-chip__summary">{questsLeft} 个待完成</span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        className="lw-mw-glass lw-mw-chip"
+        onClick={() => setExpanded('fellows')}
+      >
+        <span className="lw-mw-chip__icon" aria-hidden="true">🤝</span>
+        <span className="lw-mw-chip__body">
+          <span className="lw-mw-chip__title">我的小伙伴</span>
+          <span className="lw-mw-chip__summary">{fellowsSummary}</span>
+        </span>
+        <span className="lw-mw-chip__avatars" aria-hidden="true">
+          {(selfPeer ? [selfPeer, ...peers] : peers).slice(0, 3).map((f) => (
+            <span key={f.userId} className="lw-mw-chip__mini">{f.avatar}</span>
+          ))}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        className="lw-mw-glass lw-mw-chip"
+        onClick={() => setExpanded('achievements')}
+      >
+        <span className="lw-mw-chip__icon" aria-hidden="true">🏆</span>
+        <span className="lw-mw-chip__body">
+          <span className="lw-mw-chip__title">成就墙</span>
+          <span className="lw-mw-chip__summary">已点亮 {unlockedCount}/{achievements.length}</span>
+        </span>
+      </button>
+    </>
+  )
+
   return (
     <div className="lw-mw">
-      <img
-        className="lw-mw__bg"
-        src="/assets/conquer-planet/world-map-bg.png"
-        alt=""
-        aria-hidden="true"
-      />
-      <span className="lw-mw__vignette" aria-hidden="true" />
+      <WorldMapBackground />
 
-      <div className="lw-mw-hud">
-        {/* 顶部：游戏品牌（左） + 军团/目标/用户（右） */}
-        <div className="lw-mw-top">
-          <section className="lw-mw-glass lw-mw-brand" aria-label="词性星球">
-            <span className="lw-mw-brand__logo" aria-hidden="true">🪐</span>
-            <div className="lw-mw-brand__text">
-              <span className="lw-mw-brand__name">词性星球</span>
-              <span className="lw-mw-brand__sub">征服星球 · 单词远征</span>
-            </div>
-          </section>
-
-          <div className="lw-mw-topbar">
-            <div className="lw-mw-actions">
-              <button
-                type="button"
-                className="lw-mw-glass lw-mw-action"
-                onClick={() => setLegionOpen(true)}
-              >
-                <span className="lw-mw-action__icon" aria-hidden="true">🛡️</span>
-                <span className="lw-mw-action__body">
-                  <span className="lw-mw-action__title">我的军团</span>
-                  <span className="lw-mw-action__sub">{legionCount} 兵 · {raceCount}/6 族</span>
-                </span>
-              </button>
-              <button
-                type="button"
-                className="lw-mw-glass lw-mw-action"
-                onClick={() => setTargetOpen(true)}
-              >
-                <span className="lw-mw-action__icon" aria-hidden="true">🎯</span>
-                <span className="lw-mw-action__body">
-                  <span className="lw-mw-action__title">征服目标</span>
-                  <span className="lw-mw-action__sub">
-                    {profile?.currentLibraryName ?? '未选择'}
-                  </span>
-                </span>
-              </button>
-            </div>
-
-            <section className="lw-mw-glass lw-mw-hero">
-              <div className="lw-mw-hero__crest" aria-hidden="true">
-                <span className="lw-mw-hero__crest-face">🦊</span>
-                <span className="lw-mw-hero__level">Lv.{heroLevel}</span>
-              </div>
-              <div className="lw-mw-hero__main">
-                <span className="lw-mw-hero__name">{heroName}</span>
-                <span className="lw-mw-hero__title">✦ {heroTitle} ✦</span>
-                <div className="lw-mw-hero__xp" role="img" aria-label={`经验 ${xpCurrent}/${xpMax}`}>
-                  <span className="lw-mw-hero__xp-fill" style={{ width: `${xpPercent}%` }} />
-                  <span className="lw-mw-hero__xp-text">EXP {xpCurrent}/{xpMax}</span>
-                </div>
-              </div>
-              <div className="lw-mw-hero__menu-wrap">
-                <button
-                  type="button"
-                  className="lw-mw-hero__menu-btn"
-                  aria-label="账户菜单"
-                  aria-expanded={menuOpen}
-                  onClick={() => setMenuOpen((v) => !v)}
-                >
-                  ▾
-                </button>
-                {menuOpen && (
-                  <>
-                    <button
-                      type="button"
-                      className="lw-mw-menu__backdrop"
-                      aria-label="关闭菜单"
-                      onClick={() => setMenuOpen(false)}
-                    />
-                    <div className="lw-mw-menu">
-                      <a className="lw-mw-menu__item" href="/admin">管理后台</a>
-                      <button
-                        type="button"
-                        className="lw-mw-menu__item"
-                        onClick={() => {
-                          setMenuOpen(false)
-                          onLogout()
-                        }}
-                      >
-                        退出登录
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
-            </section>
-          </div>
-        </div>
-
-        {/* 中央：正在征服的王国（左进展 / 右地图，点击进入） */}
+      <div className="lw-mw-hud lw-mw-hud--map-focus">
+        <header className="lw-mw-head">
+          <div id="lw-top-actions-slot" className="lw-mw-head__slot" />
+        </header>
         <div className="lw-mw-center">
-          {currentKingdom ? (
-            <div
-              className="lw-mw-glass lw-mw-realm"
-              role="button"
-              tabIndex={0}
-              aria-label={`进入 ${currentKingdom.name}`}
-              onClick={enterCurrent}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  enterCurrent()
-                }
-              }}
-            >
-              <div className="lw-mw-realm__progress">
-                <div className="lw-mw-realm__head">
-                  <span className="lw-mw-realm__order">王国 {currentKingdom.order} · 出征中</span>
-                  <h2 className="lw-mw-realm__name">{currentKingdom.name}</h2>
-                  <p className="lw-mw-realm__sub">{currentKingdom.subtitle}</p>
-                </div>
-                <p className="lw-mw-realm__boss">
-                  👹 镇守 · {currentKingdom.monster.name}
-                  <span className="lw-mw-realm__boss-epithet">（{currentKingdom.monster.epithet}）</span>
-                </p>
-                <div className="lw-mw-realm__bar" aria-hidden="true">
-                  <span className="lw-mw-realm__bar-fill" style={{ width: `${kingdomPercent}%` }} />
-                  <span className="lw-mw-realm__bar-text">
-                    征服进度 {currentKingdom.levelsDone}/{currentKingdom.levelsTotal} 关
-                  </span>
-                </div>
-                <ul className="lw-mw-track">
-                  {currentKingdom.levels.map((lv, idx) => (
-                    <li
-                      key={lv.id}
-                      className={`lw-mw-track__item${lv.done ? ' is-done' : idx === nextLevelIdx ? ' is-current' : ''}`}
-                    >
-                      <span className="lw-mw-track__icon" aria-hidden="true">
-                        {lv.done ? '✓' : lv.icon}
-                      </span>
-                      <span className="lw-mw-track__name">{lv.name}</span>
-                      <span className="lw-mw-track__kind" title={levelMethodLabel(lv.kind)}>
-                        {levelKindLabel(lv.kind)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="lw-mw-realm__map">
-                {kingdomMap ? (
-                  <img className="lw-mw-realm__map-img" src={kingdomMap} alt={`${currentKingdom.name}地图`} />
-                ) : (
-                  <div className="lw-mw-realm__map-fallback">
-                    <span className="lw-mw-realm__map-emoji" aria-hidden="true">🗺️</span>
-                    <span>地图绘制中</span>
-                  </div>
-                )}
-                <span className="lw-mw-realm__map-scrim" aria-hidden="true" />
-                <span className="lw-mw-realm__enter">进入王国 ▸</span>
-              </div>
-            </div>
-          ) : (
-            <div className="lw-mw-glass lw-mw-realm--empty">
-              <span className="lw-mw-realm__map-emoji" aria-hidden="true">🧭</span>
-              <p>{loading ? '正在召集军团…' : '暂无进行中的王国'}</p>
-            </div>
-          )}
-        </div>
-
-        {/* 底部：可展开的半透明信息坞 */}
-        <div className="lw-mw-dock">
-          <button
-            type="button"
-            className="lw-mw-glass lw-mw-chip"
-            onClick={() => setExpanded('quests')}
-          >
-            <span className="lw-mw-chip__icon" aria-hidden="true">📜</span>
-            <span className="lw-mw-chip__body">
-              <span className="lw-mw-chip__title">今日任务</span>
-              <span className="lw-mw-chip__summary">{questsLeft} 个待完成</span>
-            </span>
-            <span className="lw-mw-chip__cue" aria-hidden="true">展开 ▸</span>
-          </button>
-
-          <button
-            type="button"
-            className="lw-mw-glass lw-mw-chip"
-            onClick={() => setExpanded('fellows')}
-          >
-            <span className="lw-mw-chip__icon" aria-hidden="true">🤝</span>
-            <span className="lw-mw-chip__body">
-              <span className="lw-mw-chip__title">我的小伙伴</span>
-              <span className="lw-mw-chip__summary">
-                {peersLoading
-                  ? '加载中…'
-                  : !selfPeer
-                    ? '加载失败'
-                    : peers.length === 0
-                      ? `我 · ${selfPeer.conqueredKingdoms}/${kingdomTotal} 国`
-                      : `${peers.length + 1} 位 · 我第 ${selfRank} · 榜首 ${topPeer?.conqueredKingdoms ?? 0}/${kingdomTotal} 国`}
-              </span>
-            </span>
-            <span className="lw-mw-chip__avatars" aria-hidden="true">
-              {(selfPeer ? [selfPeer, ...peers] : peers).slice(0, 3).map((f) => (
-                <span key={f.userId} className="lw-mw-chip__mini">{f.avatar}</span>
-              ))}
-            </span>
-            <span className="lw-mw-chip__cue" aria-hidden="true">展开 ▸</span>
-          </button>
-
-          <button
-            type="button"
-            className="lw-mw-glass lw-mw-chip"
-            onClick={() => setExpanded('achievements')}
-          >
-            <span className="lw-mw-chip__icon" aria-hidden="true">🏆</span>
-            <span className="lw-mw-chip__body">
-              <span className="lw-mw-chip__title">成就墙</span>
-              <span className="lw-mw-chip__summary">已点亮 {unlockedCount}/{achievements.length}</span>
-            </span>
-            <span className="lw-mw-chip__cue" aria-hidden="true">展开 ▸</span>
-          </button>
+          <MyWorldKingdomOverview
+            kingdoms={session?.kingdoms ?? []}
+            loading={loading}
+            onEnterKingdom={onEnterKingdom}
+          />
         </div>
       </div>
+
+      <MyWorldRightRail>{sideRail}</MyWorldRightRail>
 
       {/* 展开浮层 */}
       {expanded && (
@@ -528,60 +330,26 @@ export function MyWorldDashboard({
         </div>
       )}
 
-      {/* 征服目标选择浮层 */}
-      {targetOpen && (
-        <div
-          className="lw-mw-overlay"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setTargetOpen(false)}
-        >
-          <div className="lw-mw-sheet" onClick={(e) => e.stopPropagation()}>
-            <div className="lw-mw-sheet__head">
-              <h2 className="lw-mw-sheet__title">🎯 选择征服目标</h2>
-              <button
-                type="button"
-                className="lw-mw-sheet__close"
-                onClick={() => setTargetOpen(false)}
-                aria-label="关闭"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="lw-mw-sheet__body">
-              {targetMsg && <p className="lw-mw-lib-msg">{targetMsg}</p>}
-              <ul className="lw-mw-lib-list">
-                {libraries.map((lib) => {
-                  const active = lib.id === profile?.currentLibraryId
-                  return (
-                    <li key={lib.id}>
-                      <button
-                        type="button"
-                        className={`lw-mw-lib-item${active ? ' is-active' : ''}`}
-                        disabled={targetBusy}
-                        onClick={() => void chooseLibrary(lib.id)}
-                      >
-                        <span className="lw-mw-lib-item__main">
-                          <span className="lw-mw-lib-item__name">{lib.name}</span>
-                          <span className="lw-mw-lib-item__count">{lib.wordCount} 词</span>
-                        </span>
-                        {active && <span className="lw-mw-lib-item__badge">当前</span>}
-                      </button>
-                    </li>
-                  )
-                })}
-                {libraries.length === 0 && <li className="lw-mw-lib-msg">暂无可选学习库</li>}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 我的军团 */}
-      {legionOpen && (
-        <WordBankFloatPanel
-          soldiers={session?.soldiers ?? []}
-          onClose={() => setLegionOpen(false)}
+      {/* 新用户：招募军队引导 */}
+      {onboardOpen && (
+        <RecruitArmyOnboardingModal
+          open={onboardOpen}
+          profile={profile}
+          libraries={libraries}
+          kingdomName={currentKingdom?.name}
+          onRefresh={async () => {
+            await onRefresh()
+            await refreshConquer()
+          }}
+          onEnterAdventure={() => {
+            setOnboardOpen(false)
+            setOnboardDismissed(true)
+            enterCurrent()
+          }}
+          onClose={() => {
+            setOnboardOpen(false)
+            setOnboardDismissed(true)
+          }}
         />
       )}
     </div>

@@ -4,6 +4,11 @@ import {
   completeReviewLevel,
   submitPlanetReview,
 } from '../api'
+import {
+  findLevelInSession,
+  soldierWordsAdded,
+  upsertRoadbookEntry,
+} from '../lib/roadbook'
 import { collectCorrectWords, collectWrongWords } from './selectGames'
 import type { PlanetLevelKind, PlanetSession } from '../types'
 import type { GameResult } from './types'
@@ -34,17 +39,36 @@ export interface SettlementOutcome {
  * - review：逐词调整熟悉度（答对 +、答错 -，归零则叛逃）
  * - boss：标记关卡通关
  */
+function recordRoadbook(
+  session: PlanetSession,
+  levelId: string,
+  words: string[],
+  previousSession?: PlanetSession | null,
+) {
+  const meta = findLevelInSession(previousSession ?? session, levelId)
+  if (!meta) return
+  upsertRoadbookEntry(meta.kingdomId, {
+    levelId,
+    levelName: meta.levelName,
+    kind: meta.kind,
+    words,
+  })
+}
+
 export async function settleLevel(
   kind: SettlementKind,
   levelId: string,
   results: GameResult[],
+  opts?: { previousSession?: PlanetSession | null },
 ): Promise<SettlementOutcome> {
   const correctWords = collectCorrectWords(results)
   const wrongWords = collectWrongWords(results)
+  const previousSession = opts?.previousSession ?? null
 
   switch (kind) {
     case 'recruit': {
       const { session } = await completeRecruitLevel(levelId, correctWords)
+      recordRoadbook(session, levelId, correctWords, previousSession)
       return {
         kind,
         session,
@@ -62,6 +86,7 @@ export async function settleLevel(
         if (res.deserted) deserted.push(word)
       }
       const { session } = await completeReviewLevel(levelId)
+      recordRoadbook(session, levelId, correctWords, previousSession)
       return {
         kind,
         session,
@@ -74,6 +99,8 @@ export async function settleLevel(
     }
     case 'boss': {
       const { session } = await completeBossLevel(levelId)
+      const addedWords = soldierWordsAdded(previousSession, session)
+      recordRoadbook(session, levelId, addedWords, previousSession)
       return { kind, session, summary: '城堡攻陷，关卡通关！' }
     }
     default: {

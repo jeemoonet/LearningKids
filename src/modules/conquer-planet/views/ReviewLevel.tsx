@@ -15,7 +15,7 @@ interface ReviewLevelProps {
 type Phase = 'loading' | 'intro' | 'empty' | 'play' | 'done'
 
 export function ReviewLevel({ levelId, onBack }: ReviewLevelProps) {
-  const { setSession } = useConquer()
+  const { session, setSession } = useConquer()
   const [level, setLevel] = useState<PlanetLevel | null>(null)
   const [queue, setQueue] = useState<PlanetWord[]>([])
   const [pool, setPool] = useState<PlanetWord[]>([])
@@ -141,7 +141,9 @@ export function ReviewLevel({ levelId, onBack }: ReviewLevelProps) {
               }
               setPlayError('')
               try {
-                const outcome = await settleLevel('review', levelId, results)
+                const outcome = await settleLevel('review', levelId, results, {
+                  previousSession: session,
+                })
                 setSession(outcome.session)
                 setKept(outcome.reviewed?.kept ?? [])
                 setDeserted(outcome.reviewed?.deserted ?? [])

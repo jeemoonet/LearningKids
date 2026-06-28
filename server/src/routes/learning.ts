@@ -9,12 +9,18 @@ import {
   getSectionDetail,
   updateSectionFamiliarity,
 } from '../lib/learning/learningSet.js'
+import { getPlayerStats } from '../lib/learning/playerStats.js'
 
 type AppEnv = { Variables: { user: AuthUser } }
 
 export const learningRoutes = new Hono<AppEnv>()
 
 learningRoutes.use('*', requireAuth)
+
+learningRoutes.get('/player-stats', (c) => {
+  const userId = c.get('user').id
+  return c.json(getPlayerStats(getDb(), userId))
+})
 
 learningRoutes.get('/active', (c) => {
   const userId = c.get('user').id

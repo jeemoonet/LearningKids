@@ -5,6 +5,7 @@ import { POS_SYNERGY } from '../../../word-hunter/domain/element/DamageResolver'
 import { MonsterSprite } from '../../components/monsters/MonsterIllustrations'
 import { buildBossBattleSession } from '../../domain/bossBattle'
 import { POS_RACE, type BossLevelPayload } from '../../types'
+import { useConquer } from '../../ConquerContext'
 import type { GameProps } from '../types'
 import '../../../word-hunter/styles/battle.css'
 import '../../../word-hunter/styles/word-hunter.css'
@@ -24,6 +25,7 @@ type Phase = 'intro' | 'battle' | 'lose'
 /** 敌人对决：包装 Word Hunter 回合制战斗（拼写发射 + 认词闪避 + 词性克制） */
 export function EnemyDuelGame({ context, onComplete, onExit }: GameProps) {
   const meta = context.meta as Partial<EnemyDuelMeta> | undefined
+  const { setSession } = useConquer()
   const loadBossBattle = useSessionStore((s) => s.loadBossBattle)
   const prepareBattle = useSessionStore((s) => s.prepareBattle)
   const startBattle = useSessionStore((s) => s.startBattle)
@@ -46,6 +48,11 @@ export function EnemyDuelGame({ context, onComplete, onExit }: GameProps) {
   }, [meta?.bossPayload, meta?.levelId, monsterId, loadBossBattle])
 
   useEffect(() => () => clear(), [clear])
+
+  useEffect(() => {
+    useSessionStore.setState({ onPlanetSessionUpdate: setSession })
+    return () => useSessionStore.setState({ onPlanetSessionUpdate: null })
+  }, [setSession])
 
   useEffect(() => {
     if (phase === 'battle') {
@@ -95,7 +102,7 @@ export function EnemyDuelGame({ context, onComplete, onExit }: GameProps) {
             <strong style={{ color: race.color }}> {race.race}</strong> 属性的怪兽。
           </p>
           <p className="cp-stage-hint">
-            💡 闪避认词 → 缴获入匣 → 拼写发射击破封印。
+            💡 闪避认词 → 缴获入匣 → 拼写发射击破封印。已入团的词答对还能提升熟悉度！
             <strong style={{ color: race.color }}>{race.race}</strong> 怪兽怕
             <strong>{counterRace.race}</strong>，相生 +20%，同性 -20%。
           </p>

@@ -1,6 +1,7 @@
 import type { DatabaseSync } from 'node:sqlite'
 import { getPlanetProgressSummary } from './conquerPlanet.js'
 import { getKnownCount } from './knownWords.js'
+import { getPlayerStats } from './playerStats.js'
 
 const PEER_AVATARS = ['🐯', '🦉', '🐻', '🐰', '🦊', '🐼', '🦁', '🐸', '🐶', '🐱', '🐨', '🐷']
 
@@ -9,6 +10,10 @@ export interface PeerLearner {
   displayName: string
   avatar: string
   level: number
+  levelTitle: string
+  combatPower: number
+  magicPower: number
+  totalGrowth: number
   knownCount: number
   conqueredKingdoms: number
   kingdomTotal: number
@@ -31,11 +36,9 @@ function avatarForUser(userId: string): string {
   return PEER_AVATARS[hash % PEER_AVATARS.length]
 }
 
-function levelFromKnownCount(count: number): number {
-  return Math.max(1, Math.min(99, Math.floor(count / 12) + 1))
-}
-
 function comparePeers(a: PeerLearner, b: PeerLearner): number {
+  if (b.level !== a.level) return b.level - a.level
+  if (b.totalGrowth !== a.totalGrowth) return b.totalGrowth - a.totalGrowth
   if (b.conqueredKingdoms !== a.conqueredKingdoms) return b.conqueredKingdoms - a.conqueredKingdoms
   return b.knownCount - a.knownCount
 }
@@ -48,11 +51,16 @@ function buildPeerLearner(
 ): PeerLearner {
   const knownCount = getKnownCount(db, userId)
   const progress = getPlanetProgressSummary(db, userId)
+  const stats = getPlayerStats(db, userId)
   return {
     userId,
     displayName,
     avatar: avatarForUser(userId),
-    level: levelFromKnownCount(knownCount),
+    level: stats.level,
+    levelTitle: stats.levelTitle,
+    combatPower: stats.combatPower,
+    magicPower: stats.magicPower,
+    totalGrowth: stats.totalGrowth,
     knownCount,
     conqueredKingdoms: progress.conqueredKingdoms,
     kingdomTotal: progress.kingdomTotal,

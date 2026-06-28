@@ -24,7 +24,7 @@ export function CastleBossLevel({
   monsterName = '迷雾石像',
   onBack,
 }: CastleBossLevelProps) {
-  const { setSession } = useConquer()
+  const { session, setSession } = useConquer()
   const [payload, setPayload] = useState<BossLevelPayload | null>(null)
   const [rewards, setRewards] = useState<PlanetWord[]>([])
   const [loadError, setLoadError] = useState('')
@@ -111,7 +111,9 @@ export function CastleBossLevel({
           onLevelComplete={async (results) => {
             if (results.some((r) => r.cleared)) {
               try {
-                const outcome = await settleLevel('boss', levelId, results)
+                const outcome = await settleLevel('boss', levelId, results, {
+                  previousSession: session,
+                })
                 setSession(outcome.session)
                 setPhase('win')
               } catch (err) {

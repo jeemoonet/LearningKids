@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
 import { fetchPlanetConfig, fetchPlanetSession } from './api'
 import { setPlanetMapConfig, type PlanetMapConfig } from './planetMapConfig'
+import { emitPlayerStatsDirty } from '../learning/playerStatsEvents'
 import type { PlanetSession } from './types'
 
 interface ConquerContextValue {
@@ -30,6 +31,7 @@ export function ConquerProvider({ children }: { children: ReactNode }) {
       setSession(s)
       setMapConfig(config)
       setPlanetMapConfig(config)
+      emitPlayerStatsDirty()
     } catch (err) {
       setError(err instanceof Error ? err.message : '加载失败')
     }
@@ -40,7 +42,7 @@ export function ConquerProvider({ children }: { children: ReactNode }) {
   }, [refresh])
 
   return (
-    <ConquerContext.Provider value={{ session, mapConfig, loading, error, refresh, setSession }}>
+    <ConquerContext.Provider value={{ session, mapConfig, loading, error, refresh, setSession: (s) => { setSession(s); emitPlayerStatsDirty() } }}>
       {children}
     </ConquerContext.Provider>
   )

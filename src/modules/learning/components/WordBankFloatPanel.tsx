@@ -226,29 +226,6 @@ export function WordBankFloatPanel({ soldiers, onClose }: WordBankFloatPanelProp
           })}
         </div>
 
-        <div className="lw-wordbank-rank">
-          <span className="lw-wordbank-rank__label">战力榜前列</span>
-          <div className="lw-legion-rank-row">
-            {visibleRanked.slice(0, 8).map(({ soldier, power, race }, index) => {
-              const raceMeta = POS_RACE[race]
-              return (
-                <div
-                  key={soldier.wordId}
-                  className="lw-legion-rank-card"
-                  style={{ '--race-color': raceMeta.color } as CSSProperties}
-                >
-                  <span className="lw-legion-rank-card__icon" aria-hidden="true">
-                    <RaceIcon pos={race} size={20} />
-                  </span>
-                  <span className="lw-legion-rank-card__order">{index + 1}</span>
-                  <span className="lw-legion-rank-card__word">{soldier.word}</span>
-                  <span className="lw-legion-rank-card__power">{power}</span>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
         <div className="lw-wordbank-body">
           {visibleSquads.length === 0 ? (
             <p className="lw-legion-empty">该种族暂无战士</p>

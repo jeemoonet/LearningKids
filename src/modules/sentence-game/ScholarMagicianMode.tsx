@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import type { SentenceLevel } from './types'
 import { recordSentenceResult } from './progress'
 import {
@@ -15,6 +15,7 @@ type GuessMap = Record<string, ScholarMagicianRole | null>
 interface ScholarMagicianModeProps {
   level: SentenceLevel
   ruleSummary: string
+  autoStart?: boolean
   onBack: () => void
   onComplete: () => void
 }
@@ -41,9 +42,11 @@ function initGuesses(pairs: ScholarMagicianPair[]): GuessMap {
 export function ScholarMagicianMode({
   level,
   ruleSummary,
+  autoStart = false,
   onBack,
   onComplete,
 }: ScholarMagicianModeProps) {
+  void ruleSummary
   const [phase, setPhase] = useState<Phase>('ready')
   const [pairs, setPairs] = useState<ScholarMagicianPair[]>([])
   const [guesses, setGuesses] = useState<GuessMap>({})
@@ -72,6 +75,13 @@ export function ScholarMagicianMode({
     setCorrectCount(0)
     setPhase('study')
   }, [level.id, level.questionCount])
+
+  const autoStartedRef = useRef(false)
+  useLayoutEffect(() => {
+    if (!autoStart || autoStartedRef.current) return
+    autoStartedRef.current = true
+    startSession()
+  }, [autoStart, startSession])
 
   const handleStartQuiz = () => {
     setGuesses(initGuesses(pairs))
@@ -111,17 +121,13 @@ export function ScholarMagicianMode({
 
   return (
     <section className="sentence-challenge sentence-challenge-pc sm-pair-mode">
-      <div className="sentence-challenge-toolbar">
-        <button type="button" className="module-back-button" onClick={onBack}>
-          ← 返回关卡
+      <div className="sentence-challenge-playhead">
+        <button type="button" className="prep-spirit-detail-back-link" onClick={onBack}>
+          {autoStart ? '← 返回介绍' : '← 返回关卡'}
         </button>
-        <div className="sentence-challenge-level">
-          <strong>{level.scene}</strong>
-          <span>{ruleSummary}</span>
-        </div>
       </div>
 
-      {phase === 'ready' && (
+      {!autoStart && phase === 'ready' && (
         <div className="sentence-challenge-intro">
           <h2>{level.title}</h2>
           <p>每页 {level.questionCount} 组词对：学者+名词、动词+魔法师。先看标注，再辨认关键词。</p>

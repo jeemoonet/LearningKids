@@ -280,6 +280,32 @@ export function buildScholarMagicianSession(
   return picked.slice(0, count)
 }
 
+export interface VerbAdvCollocation {
+  verb: string
+  adv: string
+  phraseZh: string
+}
+
+/** 从学者魔法师词库提取全部动词+副词固定搭配 */
+export function listVerbAdvCollocations(): VerbAdvCollocation[] {
+  const seen = new Set<string>()
+  const items: VerbAdvCollocation[] = []
+
+  for (const pool of Object.values(POOLS)) {
+    for (const pair of pool) {
+      if (pair.pattern !== 'verb-adv') continue
+      const verb = pair.words.find((w) => w.role === 'verb')?.text
+      const adv = pair.words.find((w) => w.role === 'magician')?.text
+      if (!verb || !adv) continue
+      const key = `${verb.toLowerCase()}|${adv.toLowerCase()}`
+      if (seen.has(key)) continue
+      seen.add(key)
+      items.push({ verb, adv, phraseZh: pair.phraseZh })
+    }
+  }
+  return items
+}
+
 export function patternLabel(pattern: PairPattern): string {
   return pattern === 'adj-noun' ? '学者 + 名词' : '动词 + 魔法师'
 }

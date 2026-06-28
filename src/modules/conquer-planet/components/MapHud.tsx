@@ -1,24 +1,14 @@
 import type { ReactNode } from 'react'
-import { ArmyPanel } from './ArmyPanel'
 
 interface MapHudProps {
   title: string
   subtitle?: string
   leading?: ReactNode
   trailing?: ReactNode
-  showArmy?: boolean
-  onInspectArmy?: () => void
 }
 
-/** 浮在地图上的标题与军团参数 HUD */
-export function MapHud({
-  title,
-  subtitle,
-  leading,
-  trailing,
-  showArmy = true,
-  onInspectArmy,
-}: MapHudProps) {
+/** 浮在地图上的标题 HUD（军团指标已移至右上角用户栏） */
+export function MapHud({ title, subtitle, leading, trailing }: MapHudProps) {
   return (
     <div className="cp-map-hud" aria-label="地图信息">
       <div className="cp-map-hud__left">
@@ -29,11 +19,6 @@ export function MapHud({
         </div>
         {trailing}
       </div>
-      {showArmy && (
-        <div className="cp-map-hud__right">
-          <ArmyPanel variant="float" onInspectArmy={onInspectArmy} />
-        </div>
-      )}
     </div>
   )
 }

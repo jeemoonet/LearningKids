@@ -60,6 +60,11 @@ export interface PlanetSession {
   conqueredLevelIds: string[]
   armySize: number
   armyExp: number
+  /** @deprecated 使用 combatPower */
+  combatPower: number
+  magicPower?: number
+  level?: number
+  levelTitle?: string
   totalPower: number
   dueReviewCount: number
   soldiers: PlanetSoldier[]
@@ -223,7 +228,7 @@ function fetchKnownWordRows(db: DatabaseSync, userId: string) {
     .all(userId) as Array<Record<string, unknown>>
 }
 
-function ensureFamiliarityRows(db: DatabaseSync, userId: string): void {
+export function ensureFamiliarityRows(db: DatabaseSync, userId: string): void {
   const now = Date.now()
   const known = listKnownWords(db, userId)
   const insert = db.prepare(`
@@ -406,6 +411,8 @@ export function buildPlanetSession(db: DatabaseSync, userId: string): PlanetSess
     ? getEffectiveKingdomConfig(db, baseKingdom)
     : undefined
 
+  const combatPower = armyExp
+
   return {
     activeKingdomId,
     kingdoms,
@@ -417,7 +424,8 @@ export function buildPlanetSession(db: DatabaseSync, userId: string): PlanetSess
     levels: activeKingdom.levels,
     conqueredLevelIds: conquered,
     armySize: soldiers.length,
-    armyExp,
+    armyExp: combatPower,
+    combatPower,
     totalPower: Math.round(totalPower * 10) / 10,
     dueReviewCount,
     soldiers,

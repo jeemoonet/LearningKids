@@ -11,9 +11,16 @@ import { BattleEngine } from './domain/battle/BattleEngine'
 import { AutoLoadout } from './domain/loadout/AutoLoadout'
 import { WordBank } from './domain/word/WordBank'
 import type { WordHunterSession } from './types'
+import { submitBossMicroGain } from '../conquer-planet/api'
+import type { PlanetSession } from '../conquer-planet/types'
+import { emitPlayerStatsDirty } from '../learning/playerStatsEvents'
+
+type BattleMode = 'section' | 'boss' | null
 
 interface SessionStore {
   sectionId: string | null
+  battleMode: BattleMode
+  onPlanetSessionUpdate: ((session: PlanetSession) => void) | null
   save: SaveData | null
   wordBank: WordBank | null
   engine: BattleEngine | null
@@ -62,8 +69,25 @@ function sessionToSave(session: WordHunterSession): SaveData {
   }
 }
 
+function reportBossMicroGain(
+  word: string,
+  onUpdate: ((session: PlanetSession) => void) | null,
+  patchMessage: (hint: string) => void,
+): void {
+  void submitBossMicroGain(word)
+    .then((res) => {
+      if (!res.gained) return
+      onUpdate?.(res.session)
+      emitPlayerStatsDirty()
+      patchMessage(`${word} 熟悉度 +1`)
+    })
+    .catch(() => undefined)
+}
+
 export const useSessionStore = create<SessionStore>((set, get) => ({
   sectionId: null,
+  battleMode: null,
+  onPlanetSessionUpdate: null,
   save: null,
   wordBank: null,
   engine: null,
@@ -78,6 +102,7 @@ export const useSessionStore = create<SessionStore>((set, get) => ({
     const wordBank = new WordBank(entries, save)
     set({
       sectionId: session.sectionId,
+      battleMode: 'section',
       save,
       wordBank,
       level: session.level,
@@ -109,6 +134,7 @@ export const useSessionStore = create<SessionStore>((set, get) => ({
     const wordBank = new WordBank(entries, save)
     set({
       sectionId: levelId,
+      battleMode: 'boss',
       save,
       wordBank,
       level,
@@ -145,10 +171,26 @@ export const useSessionStore = create<SessionStore>((set, get) => ({
   },
 
   submitDefense: (optionId) => {
-    const { engine } = get()
+    const { engine, wordBank, battleMode, onPlanetSessionUpdate } = get()
     if (!engine) return
+    const attackWordId = engine.getState().attackWordId
     engine.submitDefense(optionId)
-    set({ battle: { ...engine.getState() } })
+    const state = engine.getState()
+    const patchMessage = (hint: string) => {
+      const current = get().battle
+      if (!current?.resolveMessage) return
+      set({
+        battle: {
+          ...current,
+          resolveMessage: `${current.resolveMessage}（${hint}）`,
+        },
+      })
+    }
+    if (battleMode === 'boss' && state.lastDefenseCorrect && attackWordId) {
+      const entry = wordBank?.getEntry(attackWordId)
+      if (entry) reportBossMicroGain(entry.word, onPlanetSessionUpdate, patchMessage)
+    }
+    set({ battle: { ...state } })
   },
 
   defenseTimeout: () => {
@@ -180,11 +222,26 @@ export const useSessionStore = create<SessionStore>((set, get) => ({
   },
 
   fireClip: (wordId, inputs) => {
-    const { engine } = get()
+    const { engine, wordBank, battleMode, onPlanetSessionUpdate } = get()
     if (!engine) return
+    const entry = wordBank?.getEntry(wordId)
     engine.selectAttackWord(wordId)
     engine.submitSpell(inputs)
-    set({ battle: { ...engine.getState() } })
+    const state = engine.getState()
+    const patchMessage = (hint: string) => {
+      const current = get().battle
+      if (!current?.resolveMessage) return
+      set({
+        battle: {
+          ...current,
+          resolveMessage: `${current.resolveMessage}（${hint}）`,
+        },
+      })
+    }
+    if (battleMode === 'boss' && entry && state.lastHitResult) {
+      reportBossMicroGain(entry.word, onPlanetSessionUpdate, patchMessage)
+    }
+    set({ battle: { ...state } })
   },
 
   finishResolve: () => {
@@ -208,6 +265,8 @@ export const useSessionStore = create<SessionStore>((set, get) => ({
   clear: () => {
     set({
       sectionId: null,
+      battleMode: null,
+      onPlanetSessionUpdate: null,
       save: null,
       wordBank: null,
       engine: null,

@@ -313,6 +313,7 @@ export function getDb(): DatabaseSync {
   migrateFreeVocabTables(db)
   migratePlanetKingdomOverrides(db)
   migrateWordsDropWordGroupsFk(db)
+  migratePlayerStatsTables(db)
   seedDefaultLibraries(db)
   seedNorthernIceLibrary(db)
   seedNewConcept1Library(db)
@@ -541,4 +542,50 @@ function migrateUserWordProgressToWordKey(db: DatabaseSync): void {
 
 export function getDbPath(): string {
   return DB_PATH
+}
+
+function migratePlayerStatsTables(db: DatabaseSync): void {
+  const profileCols = db.prepare('PRAGMA table_info(user_profiles)').all() as Array<{ name: string }>
+  if (!profileCols.some((c) => c.name === 'magic_power')) {
+    db.exec('ALTER TABLE user_profiles ADD COLUMN magic_power INTEGER NOT NULL DEFAULT 0')
+  }
+
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS user_grammar_familiarity (
+      user_id TEXT NOT NULL,
+      skill_id TEXT NOT NULL,
+      module TEXT NOT NULL,
+      familiarity INTEGER NOT NULL DEFAULT 0 CHECK (familiarity >= 0 AND familiarity <= 5),
+      best_score INTEGER NOT NULL DEFAULT 0,
+      total_questions INTEGER NOT NULL DEFAULT 0,
+      pass_count INTEGER NOT NULL DEFAULT 0,
+      last_played_at INTEGER,
+      last_fam_gain_at INTEGER,
+      updated_at INTEGER NOT NULL DEFAULT 0,
+      PRIMARY KEY (user_id, skill_id),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    CREATE INDEX IF NOT EXISTS idx_user_grammar_familiarity_user ON user_grammar_familiarity(user_id);
+
+    CREATE TABLE IF NOT EXISTS user_grammar_pass_log (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      skill_id TEXT NOT NULL,
+      module TEXT NOT NULL,
+      correct_count INTEGER NOT NULL,
+      total_questions INTEGER NOT NULL,
+      created_at INTEGER NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    CREATE INDEX IF NOT EXISTS idx_user_grammar_pass_log_user ON user_grammar_pass_log(user_id);
+
+    CREATE TABLE IF NOT EXISTS user_planet_boss_gain_log (
+      user_id TEXT NOT NULL,
+      word TEXT NOT NULL,
+      gain_day INTEGER NOT NULL,
+      created_at INTEGER NOT NULL,
+      PRIMARY KEY (user_id, word, gain_day),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+  `)
 }

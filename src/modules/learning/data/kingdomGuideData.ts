@@ -94,12 +94,12 @@ export const KINGDOM_GUIDES: KingdomGuideEntry[] = [
     region: '极北王座',
     difficulty: '★★★★★',
     icon: '👑',
-    subtitle: '邪恶军团的心脏，征服词性星球的最终决战。',
-    focus: '终极 BOSS 关：集结全军，发起征服词性星球的最终决战。',
+    subtitle: '邪恶军团的心脏，征服卡吉姆星球的最终决战。',
+    focus: '终极 BOSS 关：集结全军，发起征服卡吉姆星球的最终决战。',
     monster: '暗影王座 · 词性至尊',
     tip: '带齐六族精锐与充足战力，方能攻克王座。',
   },
 ]
 
 export const KINGDOM_GUIDE_INTRO =
-  '词性星球被邪恶军团割据为七大王国，由弱到强、由易到难。逐一征服，壮大你的军团。'
+  '卡吉姆星球被邪恶军团割据为七大王国，由弱到强、由易到难。逐一征服，壮大你的军团。'

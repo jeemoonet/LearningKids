@@ -1,0 +1,38 @@
+export const FORMATION_GAME_FAMILIES = [
+  {
+    id: 'components',
+    track: 'components',
+    icon: '🧩',
+    name: '句子成分',
+    subtitle: '主谓宾 · 定语 · 状语入门',
+    intro: '从主谓宾入手，学习定语修饰名词与状语修饰动词',
+    levelIds: ['struct-1', 'struct-2', 'struct-3'],
+  },
+  {
+    id: 'adverbial',
+    track: 'adverbial',
+    icon: '⏱',
+    name: '时间 & 地点状语',
+    subtitle: 'When · Where',
+    intro: '掌握时间状语与地点状语的搭配与方位表达',
+    levelIds: ['adv-time', 'adv-place', 'adv-3'],
+  },
+  {
+    id: 'advanced',
+    track: 'advanced',
+    icon: '⚡',
+    name: '成分综合',
+    subtitle: '高级挑战',
+    intro: '综合运用主谓宾定状补，每句至少包含五种句子成分',
+    levelIds: ['struct-4'],
+  },
+  {
+    id: 'boss',
+    track: 'boss',
+    icon: '👑',
+    name: '综合闯关',
+    subtitle: '全员出动',
+    intro: '混合考查句子成分、时态、状语与形副用法，先判断空格成分再选词',
+    levelIds: ['boss'],
+  },
+] as const

@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
-import { ArmyInspectModal } from '../components/ArmyInspectModal'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ForwardMovePanel } from '../components/ForwardMovePanel'
 import { MapHud } from '../components/MapHud'
 import { MapStepChallenge } from '../components/MapStepChallenge'
 import { MonsterSprite } from '../components/monsters/MonsterIllustrations'
+import { RoadbookSheet } from '../components/RoadbookPanel'
 import { SceneArrivalModal } from '../components/SceneArrivalModal'
 import {
   buildForkPreviewPaths,
@@ -29,7 +29,8 @@ import { buildParchmentPathD, buildStraightPathD, ParchmentMapScene } from '../c
 import { KINGDOM_MAP_VIEW } from '../data/mapViewBox'
 import { resetKingdomProgress } from '../api'
 import { useConquer } from '../ConquerContext'
-import { useMapProgress, type MapArrival } from '../hooks/useMapProgress'
+import { MAP_STEP_MS, useMapProgress, type MapArrival } from '../hooks/useMapProgress'
+import { clearKingdomRoadbook } from '../lib/roadbook'
 import type { PlanetKingdomSummary, PlanetLevel } from '../types'
 
 interface KingdomBattleMapViewProps {
@@ -202,26 +203,92 @@ function MapNodeMarker({
 
 function MapPlayerToken({
   node,
+  fromNode,
+  toNode,
   moving,
 }: {
   node: BattleMapNode | undefined
+  fromNode?: BattleMapNode
+  toNode?: BattleMapNode
   moving: boolean
 }) {
-  if (!node) return null
+  const rafRef = useRef<number | undefined>(undefined)
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null)
+  const animating = moving && fromNode && toNode
+
+  useEffect(() => {
+    if (!node) {
+      setPos(null)
+      return
+    }
+
+    if (!animating) {
+      setPos({ x: node.x, y: node.y })
+      return
+    }
+
+    setPos({ x: fromNode.x, y: fromNode.y })
+    const start = performance.now()
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / MAP_STEP_MS)
+      const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2
+      setPos({
+        x: fromNode.x + (toNode.x - fromNode.x) * eased,
+        y: fromNode.y + (toNode.y - fromNode.y) * eased,
+      })
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [node, animating, fromNode, toNode])
+
+  if (!node || !pos) return null
 
   return (
-    <div
-      className={[
-        'cp-map-player-floater',
-        moving ? 'cp-map-player-floater--moving' : '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
-      style={{ left: `${node.x}%`, top: `${node.y}%` }}
-      aria-hidden="true"
-    >
-      <span className="cp-map-player-floater__flag">🚩</span>
-    </div>
+    <>
+      {animating && (
+        <div className="cp-map-move-trail" aria-hidden="true">
+          <span
+            className="cp-map-move-trail__dust"
+            style={{ left: `${fromNode!.x}%`, top: `${fromNode!.y}%` }}
+          />
+          <span
+            className="cp-map-move-trail__dust cp-map-move-trail__dust--mid"
+            style={{
+              left: `${(fromNode!.x + toNode!.x) / 2}%`,
+              top: `${(fromNode!.y + toNode!.y) / 2}%`,
+            }}
+          />
+        </div>
+      )}
+      <div
+        className={[
+          'cp-map-player-floater',
+          moving ? 'cp-map-player-floater--moving' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+        style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+        aria-hidden="true"
+      >
+        <span className="cp-map-player-marker">
+          <span className="cp-map-player-marker__pin">
+            <span className="cp-map-player-marker__avatar">🧝</span>
+          </span>
+        </span>
+        <span className="cp-map-player-anchor">
+          <span className="cp-map-player-anchor__dot" />
+          <span className="cp-map-player-anchor__ring" />
+          {moving && <span className="cp-map-player-anchor__ping" />}
+        </span>
+      </div>
+    </>
   )
 }
 
@@ -233,7 +300,7 @@ function RichKingdomMap({
   const { session, setSession } = useConquer()
   const conquered = session?.conqueredLevelIds ?? []
   const [resetting, setResetting] = useState(false)
-  const [armyInspectOpen, setArmyInspectOpen] = useState(false)
+  const [roadbookOpen, setRoadbookOpen] = useState(false)
   const [stepChallengeNodeId, setStepChallengeNodeId] = useState<string | null>(null)
   const layout = getKingdomBattleMapLayout(kingdom.id)
 
@@ -247,6 +314,8 @@ function RichKingdomMap({
     nextNodeId,
     blockedByLevel,
     blockedByStep,
+    moveFromNode,
+    moveToNode,
     pendingArrival,
     clearArrival,
     advanceOneStep,
@@ -372,6 +441,7 @@ function RichKingdomMap({
     try {
       const { session: next } = await resetKingdomProgress(kingdom.id)
       resetMapProgress()
+      clearKingdomRoadbook(kingdom.id)
       setSession(next)
     } catch (err) {
       window.alert(err instanceof Error ? err.message : '重置失败')
@@ -430,38 +500,18 @@ function RichKingdomMap({
           <MapHud
             title={`王国 ${kingdom.order} · ${kingdom.name}`}
             subtitle={kingdom.subtitle}
-            onInspectArmy={() => setArmyInspectOpen(true)}
             leading={
               <button type="button" className="cp-map-hud__back" onClick={onOpenContinentOverview}>
                 大陆
               </button>
             }
             trailing={
-              <>
-                <button
-                  type="button"
-                  className="cp-map-hud__reset"
-                  onClick={handleResetToStart}
-                  disabled={resetting}
-                  title="清零本王国关卡进度与地图位置"
-                >
-                  {resetting ? '重置中…' : '回到起点'}
-                </button>
-                <div className="cp-map-hud__monster" title={kingdom.monster.epithet}>
-                  <MonsterSprite id={kingdom.monster.id} size={40} title={kingdom.monster.name} />
-                  <span>{kingdom.monster.name}</span>
-                </div>
-              </>
+              <div className="cp-map-hud__monster" title={kingdom.monster.epithet}>
+                <MonsterSprite id={kingdom.monster.id} size={40} title={kingdom.monster.name} />
+                <span>{kingdom.monster.name}</span>
+              </div>
             }
           />
-
-          {armyInspectOpen && (
-            <ArmyInspectModal
-              open
-              session={session}
-              onClose={() => setArmyInspectOpen(false)}
-            />
-          )}
 
           {bossLevel && !useIllustratedMap && (
             <div
@@ -515,10 +565,15 @@ function RichKingdomMap({
             })}
           </div>
 
-          <MapPlayerToken node={playerNode} moving={moving} />
+          <MapPlayerToken
+            node={playerNode}
+            fromNode={moveFromNode}
+            toNode={moveToNode}
+            moving={moving}
+          />
         </div>
 
-        <div className="cp-map-overlay">
+        <div className={`cp-map-overlay${moving ? ' cp-map-overlay--moving' : ''}`}>
             <ForwardMovePanel
             canAdvance={canAdvance}
             moving={moving}
@@ -526,6 +581,9 @@ function RichKingdomMap({
             blockedByLevel={blockedByLevel}
             blockedByStep={blockedByStep}
             onAdvance={advanceOneStep}
+            onReset={handleResetToStart}
+            resetting={resetting}
+            onOpenRoadbook={() => setRoadbookOpen(true)}
             onEnterLevel={
               blockedByLevel && currentLevel && !currentLevel.done
                 ? () => onEnter(currentLevel)
@@ -537,6 +595,15 @@ function RichKingdomMap({
                 : undefined
             }
           />
+
+          {roadbookOpen && (
+            <RoadbookSheet
+              open
+              kingdomId={kingdom.id}
+              conqueredLevels={levels.filter((l) => l.done)}
+              onClose={() => setRoadbookOpen(false)}
+            />
+          )}
 
           {stepChallengeNodeId && session && layout.nodes[stepChallengeNodeId] && (
             <MapStepChallenge
@@ -589,7 +656,6 @@ function RichKingdomMap({
 
 function LegacyKingdomMap({ kingdom, onOpenContinentOverview, onEnter }: KingdomBattleMapViewProps) {
   const { session } = useConquer()
-  const [armyInspectOpen, setArmyInspectOpen] = useState(false)
   const levels = kingdom.levels
   const bossLevel = levels.find((l) => l.kind === 'boss')
 
@@ -622,7 +688,6 @@ function LegacyKingdomMap({ kingdom, onOpenContinentOverview, onEnter }: Kingdom
           <MapHud
             title={`王国 ${kingdom.order} · ${kingdom.name}`}
             subtitle={kingdom.subtitle}
-            onInspectArmy={() => setArmyInspectOpen(true)}
             leading={
               <button type="button" className="cp-map-hud__back" onClick={onOpenContinentOverview}>
                 大陆
@@ -635,14 +700,6 @@ function LegacyKingdomMap({ kingdom, onOpenContinentOverview, onEnter }: Kingdom
               </div>
             }
           />
-
-          {armyInspectOpen && (
-            <ArmyInspectModal
-              open
-              session={session}
-              onClose={() => setArmyInspectOpen(false)}
-            />
-          )}
 
           {bossLevel && (
             <div

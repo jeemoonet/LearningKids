@@ -1,4 +1,5 @@
 import type { PrepLevel } from './types'
+import { CampLevelDetailHeading } from '../learning/components/CampLevelDetailHeading'
 import { formatPrepLevelHeading } from './prepSpiritCatalog'
 import { PrepSpiritSeriesLayout } from './PrepSpiritSeriesLayout'
 
@@ -19,13 +20,13 @@ export function PrepSpiritDetailPage({
 
   return (
     <div className="prep-spirit-detail-page">
-      <div className="prep-spirit-detail-heading">
-        <button type="button" className="prep-spirit-detail-back-link" onClick={onBack}>
-          ← 精灵起源
-        </button>
-        <h1>{title}</h1>
-        <p className="prep-spirit-detail-intro">{intro}</p>
-      </div>
+      <CampLevelDetailHeading
+        backLabel="精灵起源"
+        onBack={onBack}
+        title={title}
+        summary={intro}
+        ruleSummary={level.ruleSummary}
+      />
 
       <PrepSpiritSeriesLayout level={level} onStart={onStartTest} starting={starting} />
     </div>

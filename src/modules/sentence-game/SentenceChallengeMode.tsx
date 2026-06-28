@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import {
   SENTENCE_CHALLENGE_QUESTION_SECONDS,
   SENTENCE_EXAM_QUESTION_SECONDS,
@@ -79,6 +79,7 @@ interface SentenceChallengeModeProps {
   questions: SentenceQuestion[]
   ruleSummary: string
   isBoss?: boolean
+  autoStart?: boolean
   onBack: () => void
   onComplete: () => void
   onRegenerateQuestions: (excludeKeys?: string[]) => Promise<SentenceQuestion[]>
@@ -89,6 +90,7 @@ export function SentenceChallengeMode({
   questions,
   ruleSummary,
   isBoss = false,
+  autoStart = false,
   onBack,
   onComplete,
   onRegenerateQuestions,
@@ -418,6 +420,13 @@ export function SentenceChallengeMode({
     resetQuestionState(firstQuestion)
   }
 
+  const autoStartedRef = useRef(false)
+  useLayoutEffect(() => {
+    if (!autoStart || autoStartedRef.current || questions.length === 0) return
+    autoStartedRef.current = true
+    handleStart()
+  }, [autoStart, questions.length])
+
   const regenerateAndRestart = async (autoStart: boolean) => {
     setRegenerating(true)
     try {
@@ -523,17 +532,25 @@ export function SentenceChallengeMode({
 
   return (
     <section className="sentence-challenge sentence-challenge-pc">
-      <div className="sentence-challenge-toolbar">
-        <button type="button" className="module-back-button" onClick={onBack}>
-          ← 返回关卡
-        </button>
-        <div className="sentence-challenge-level">
-          <strong>{isBoss ? '综合闯关' : level.scene}</strong>
-          <span>{ruleSummary}</span>
+      {autoStart ? (
+        <div className="sentence-challenge-playhead">
+          <button type="button" className="prep-spirit-detail-back-link" onClick={onBack}>
+            ← 返回介绍
+          </button>
         </div>
-      </div>
+      ) : (
+        <div className="sentence-challenge-toolbar">
+          <button type="button" className="module-back-button" onClick={onBack}>
+            ← 返回关卡
+          </button>
+          <div className="sentence-challenge-level">
+            <strong>{isBoss ? '综合闯关' : level.scene}</strong>
+            <span>{ruleSummary}</span>
+          </div>
+        </div>
+      )}
 
-      {phase === 'ready' && (
+      {!autoStart && phase === 'ready' && (
         <div className="sentence-challenge-intro">
           <h2>{isBoss ? '综合闯关' : level.title}</h2>
           <p>

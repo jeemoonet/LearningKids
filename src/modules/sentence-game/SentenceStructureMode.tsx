@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { HighlightVerbs } from '../../lib/highlightVerbs'
 import { EXAMPLE_SPEECH_RATE, speakEnglish, stopSpeaking } from '../vocab-training/speak'
 import type { SentenceLevel, SentenceRole, StructurePuzzle } from './types'
@@ -55,6 +55,7 @@ interface SentenceStructureModeProps {
   level: SentenceLevel
   puzzles: StructurePuzzle[]
   ruleSummary: string
+  autoStart?: boolean
   onBack: () => void
   onComplete: () => void
   onRegeneratePuzzles: () => Promise<StructurePuzzle[]>
@@ -64,10 +65,12 @@ export function SentenceStructureMode({
   level,
   puzzles,
   ruleSummary,
+  autoStart = false,
   onBack,
   onComplete,
   onRegeneratePuzzles,
 }: SentenceStructureModeProps) {
+  void ruleSummary
   const [phase, setPhase] = useState<StructurePhase>('ready')
   const [roundPuzzles, setRoundPuzzles] = useState(puzzles)
   const [regenerating, setRegenerating] = useState(false)
@@ -357,6 +360,13 @@ export function SentenceStructureMode({
     resetPuzzleState(firstPuzzle)
   }
 
+  const autoStartedRef = useRef(false)
+  useLayoutEffect(() => {
+    if (!autoStart || autoStartedRef.current || puzzles.length === 0) return
+    autoStartedRef.current = true
+    handleStart()
+  }, [autoStart, puzzles.length])
+
   const regenerateAndRestart = async (autoStart: boolean) => {
     setRegenerating(true)
     setRegenerateNotice('')
@@ -423,17 +433,13 @@ export function SentenceStructureMode({
 
   return (
     <section className="sentence-structure-pc">
-      <div className="sentence-structure-toolbar">
-        <button type="button" className="module-back-button" onClick={onBack}>
-          ← 返回关卡
+      <div className="sentence-challenge-playhead">
+        <button type="button" className="prep-spirit-detail-back-link" onClick={onBack}>
+          {autoStart ? '← 返回介绍' : '← 返回关卡'}
         </button>
-        <div className="sentence-structure-level">
-          <strong>{level.title}</strong>
-          <span>{ruleSummary}</span>
-        </div>
       </div>
 
-      {phase === 'ready' && (
+      {!autoStart && phase === 'ready' && (
         <div className="sentence-structure-intro">
           <h2>句子还原 · {level.scene}</h2>
           <p>共 {roundCount} 句。将拆开的单词或词组拖入句子空白处，拼回完整英文句。</p>

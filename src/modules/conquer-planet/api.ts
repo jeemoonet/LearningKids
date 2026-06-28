@@ -49,6 +49,13 @@ export function submitPlanetReview(word: string, correct: boolean) {
   })
 }
 
+export function submitBossMicroGain(word: string) {
+  return apiFetch<{ gained: boolean; familiarity: number; session: PlanetSession }>(
+    '/conquer-planet/boss-micro-gain',
+    { method: 'POST', body: JSON.stringify({ word }) },
+  )
+}
+
 export function completeReviewLevel(levelId: string) {
   return apiFetch<{ session: PlanetSession }>(
     `/conquer-planet/levels/${levelId}/review-complete`,

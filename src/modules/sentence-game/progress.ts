@@ -1,4 +1,6 @@
 import type { SentenceLevelProgress, SentenceProgressMap } from './types'
+import { learningApi } from '../learning/api'
+import { emitPlayerStatsDirty } from '../learning/playerStatsEvents'
 
 const STORAGE_KEY = 'learningkids:sentence-game-progress'
 
@@ -32,6 +34,17 @@ export function recordSentenceResult(
   }
   map[levelId] = next
   saveSentenceProgress(map)
+  void learningApi
+    .submitGrammarResult({
+      module: 'sentence',
+      skillId: levelId,
+      correctCount,
+      totalQuestions,
+    })
+    .then((res) => {
+      if (res.magicGained > 0 || res.levelUp) emitPlayerStatsDirty()
+    })
+    .catch(() => undefined)
   return next
 }
 

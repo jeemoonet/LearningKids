@@ -19,6 +19,7 @@ export interface KnownWord {
   pos: string
   source: string
   learnedAt: number
+  meaningZh?: string
 }
 
 export interface InitWord {
@@ -70,11 +71,27 @@ export function getKnownWordSet(db: DatabaseSync, userId: string): Set<string> {
 export function listKnownWords(db: DatabaseSync, userId: string): KnownWord[] {
   const rows = db
     .prepare(
-      `SELECT word, pos, source, learned_at FROM user_known_words
-       WHERE user_id = ? ORDER BY learned_at DESC, word`,
+      `SELECT k.word, k.pos, k.source, k.learned_at,
+              COALESCE(w.meaning_zh, '') AS meaning_zh
+       FROM user_known_words k
+       LEFT JOIN words w ON LOWER(w.word) = LOWER(k.word)
+       WHERE k.user_id = ?
+       ORDER BY k.learned_at DESC, k.word`,
     )
-    .all(userId) as Array<{ word: string; pos: string; source: string; learned_at: number }>
-  return rows.map((r) => ({ word: r.word, pos: r.pos, source: r.source, learnedAt: r.learned_at }))
+    .all(userId) as Array<{
+      word: string
+      pos: string
+      source: string
+      learned_at: number
+      meaning_zh: string
+    }>
+  return rows.map((r) => ({
+    word: r.word,
+    pos: r.pos,
+    source: r.source,
+    learnedAt: r.learned_at,
+    meaningZh: r.meaning_zh.trim() || undefined,
+  }))
 }
 
 export function isInitComplete(db: DatabaseSync, userId: string): boolean {

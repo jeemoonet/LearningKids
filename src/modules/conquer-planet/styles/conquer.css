@@ -1,10 +1,22 @@
 .cp-root {
+  position: relative;
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 0%, #1b2335 0%, #0c0f17 55%, #070910 100%);
+  overflow: hidden;
+  background: #070910;
   color: #e8eaed;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   display: flex;
   flex-direction: column;
+}
+
+.cp-root > .lk-world-bg-img,
+.cp-root > .lk-world-bg-vignette {
+  z-index: 0;
+}
+
+.cp-root > :not(.lk-world-bg-img):not(.lk-world-bg-vignette) {
+  position: relative;
+  z-index: 1;
 }
 
 .cp-root--embedded {
@@ -32,6 +44,11 @@
   padding: 10px 16px;
   border-bottom: none;
   background: rgba(0, 0, 0, 0.35);
+}
+.cp-topbar__aside {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .cp-brand {
   display: flex;
@@ -573,7 +590,7 @@ body.cp-battle-immersive .cp-topbar--shell {
   min-height: 0;
   height: 100%;
   border-radius: 0;
-  background: #3a6a28;
+  background: transparent;
   box-shadow: none;
   display: flex;
   flex-direction: column;
@@ -617,7 +634,7 @@ body.cp-battle-immersive .cp-topbar--shell {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #1a1410;
+  background: transparent;
 }
 
 .cp-world-map--image .cp-world-map__canvas--immersive,
@@ -655,22 +672,27 @@ body.cp-battle-immersive .cp-topbar--shell {
   pointer-events: auto;
 }
 
+.cp-map-overlay .cp-roadbook-sheet,
+.cp-map-overlay .cp-roadbook-sheet__backdrop {
+  pointer-events: auto;
+}
+
 /* ── 前进箭头面板 ── */
 .cp-forward-panel {
   position: absolute;
-  right: 20px;
-  bottom: 20px;
+  right: 24px;
+  bottom: 22px;
   z-index: 14;
   pointer-events: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .cp-forward-panel__hint {
-  max-width: 180px;
-  padding: 5px 12px;
+  max-width: 200px;
+  padding: 5px 14px;
   border-radius: 999px;
   background: rgba(12, 16, 28, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -682,9 +704,17 @@ body.cp-battle-immersive .cp-topbar--shell {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 }
 
+.cp-forward-panel__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* —— 主操作：前进箭头（最重要，最醒目） —— */
 .cp-forward-btn {
-  width: 72px;
-  height: 72px;
+  width: 88px;
+  height: 88px;
   padding: 0;
   border-radius: 50%;
   border: none;
@@ -714,12 +744,21 @@ body.cp-battle-immersive .cp-topbar--shell {
   height: 100%;
   border-radius: 50%;
   background: linear-gradient(155deg, #fff8eb 0%, #efdcb8 48%, #d3ad72 100%);
-  border: 2px solid #6b4423;
+  border: 3px solid #6b4423;
   box-shadow:
-    inset 0 3px 8px rgba(255, 255, 255, 0.6),
-    inset 0 -4px 8px rgba(80, 50, 20, 0.22),
-    0 10px 24px rgba(0, 0, 0, 0.45);
+    inset 0 3px 10px rgba(255, 255, 255, 0.65),
+    inset 0 -5px 10px rgba(80, 50, 20, 0.24),
+    0 12px 30px rgba(0, 0, 0, 0.5),
+    0 0 0 6px rgba(231, 190, 93, 0.16),
+    0 0 26px rgba(231, 190, 93, 0.4);
   color: #3a2410;
+}
+
+.cp-forward-btn--disabled .cp-forward-btn__ring {
+  background: linear-gradient(155deg, #cfc6b6 0%, #b3a88f 100%);
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.4),
+    0 8px 18px rgba(0, 0, 0, 0.4);
 }
 
 .cp-forward-btn--moving .cp-forward-btn__ring {
@@ -733,8 +772,96 @@ body.cp-battle-immersive .cp-topbar--shell {
 }
 
 .cp-forward-btn__arrow {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
+}
+
+/* —— 次要操作：回到起点（弱化为文字链） —— */
+.cp-reset-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 180, 140, 0.28);
+  background: rgba(12, 16, 28, 0.55);
+  backdrop-filter: blur(6px);
+  color: #f0c2a4;
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.cp-reset-link:hover:not(:disabled) {
+  border-color: rgba(255, 180, 140, 0.55);
+  background: rgba(24, 30, 48, 0.7);
+}
+
+.cp-reset-link:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cp-reset-link__icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* —— 辅助操作：路书（移至右侧边缘，独立呈现） —— */
+.cp-roadbook-side {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 14;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(138, 180, 248, 0.34);
+  background: rgba(12, 16, 28, 0.7);
+  backdrop-filter: blur(10px);
+  color: #c5dbff;
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.cp-roadbook-side:hover {
+  transform: translateY(-50%) translateX(-3px);
+  border-color: rgba(138, 180, 248, 0.7);
+  background: rgba(24, 32, 52, 0.85);
+}
+
+.cp-roadbook-side__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(138, 180, 248, 0.4);
+  background: rgba(40, 56, 96, 0.55);
+}
+
+.cp-roadbook-side__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.cp-roadbook-side__label {
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: #b8d0ff;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
 }
 
 .cp-forward-panel__enter {
@@ -1728,25 +1855,156 @@ body.cp-battle-immersive .cp-topbar--shell {
   box-shadow: 0 0 0 3px rgba(251, 188, 4, 0.55), 0 0 14px rgba(251, 188, 4, 0.35);
 }
 
+/* ── 当前位置：定位锚点 + 人物 ── */
 .cp-map-player-floater {
   position: absolute;
-  transform: translate(-50%, calc(-50% - 24px));
-  z-index: 7;
+  /* 锚点尖端对准节点坐标 */
+  transform: translate(-50%, -100%);
+  z-index: 9;
   pointer-events: none;
-  transition:
-    left 0.38s cubic-bezier(0.4, 0, 0.2, 1),
-    top 0.38s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cp-map-player-floater__flag {
+/* 人物 + 定位针（整体轻微上下浮动） */
+.cp-map-player-marker {
+  position: relative;
   display: block;
-  font-size: 1.25rem;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.65));
-  animation: cp-token-bob 1.6s ease-in-out infinite;
+  animation: cp-token-bob 1.8s ease-in-out infinite;
 }
 
-.cp-map-player-floater--moving .cp-map-player-floater__flag {
-  animation: cp-token-bob-fast 0.45s ease-in-out infinite;
+.cp-map-player-floater--moving .cp-map-player-marker {
+  animation: cp-token-bob-fast 0.42s ease-in-out infinite;
+}
+
+/* 地图锚点（泪滴形定位针） */
+.cp-map-player-marker__pin {
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: linear-gradient(135deg, #fff3cf 0%, #f3c863 46%, #c98e36 100%);
+  border: 3px solid #6b4423;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 6px rgba(255, 255, 255, 0.65),
+    inset 0 -4px 8px rgba(90, 55, 20, 0.3);
+}
+
+/* 人物头像（抵消定位针旋转，保持正向） */
+.cp-map-player-marker__avatar {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform: rotate(45deg);
+  font-size: 1.45rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+/* 地面锚点（精确落点 + 涟漪） */
+.cp-map-player-anchor {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  transform: translateX(-50%);
+}
+
+.cp-map-player-anchor__dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffe9a8;
+  box-shadow: 0 0 8px rgba(251, 188, 4, 0.9);
+}
+
+.cp-map-player-anchor__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(251, 188, 4, 0.7);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.cp-map-player-anchor__ping {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(251, 188, 4, 0.6);
+  animation: cp-anchor-ping 0.85s ease-out infinite;
+}
+
+@keyframes cp-anchor-ping {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+.cp-map-move-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.cp-map-move-trail__dust {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 220, 140, 0.55) 0%, rgba(255, 220, 140, 0) 70%);
+  animation: cp-move-dust 0.68s ease-out infinite;
+}
+
+.cp-map-move-trail__dust--mid {
+  animation-delay: 0.18s;
+  width: 14px;
+  height: 14px;
+}
+
+.cp-map-overlay--moving .cp-forward-btn:not(.cp-forward-btn--disabled) .cp-forward-btn__ring {
+  animation: cp-forward-pulse 0.55s ease-in-out infinite;
+}
+
+@keyframes cp-token-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes cp-move-dust {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -70%) scale(1.4);
+    opacity: 0;
+  }
 }
 
 @keyframes cp-token-bob-fast {
@@ -2505,6 +2763,148 @@ body.cp-battle-immersive .cp-topbar--shell {
   height: 100%;
 }
 
+/* ── 路书底部弹窗 ── */
+.cp-roadbook-sheet__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  border: none;
+  background: rgba(4, 6, 12, 0.55);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  animation: cp-roadbook-fade-in 0.22s ease;
+}
+
+.cp-roadbook-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  max-height: min(72vh, 520px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 12, 20, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+  animation: cp-roadbook-slide-up 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.cp-roadbook-sheet__handle {
+  width: 36px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+}
+
+.cp-roadbook-sheet__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.cp-roadbook-sheet__title {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: #f0dcc0;
+}
+
+.cp-roadbook-sheet__subtitle {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  color: #9aa0a6;
+}
+
+.cp-roadbook-sheet__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #cdd1d6;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cp-roadbook-sheet__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 16px 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes cp-roadbook-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes cp-roadbook-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cp-roadbook__empty {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #9aa0a6;
+}
+
+.cp-roadbook__entry + .cp-roadbook__entry {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.cp-roadbook__entry-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.cp-roadbook__entry-kind {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #8ab4f8;
+}
+
+.cp-roadbook__entry-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #e8eaed;
+}
+
+.cp-roadbook__words {
+  margin: 0;
+  font-size: 0.74rem;
+  line-height: 1.55;
+  color: #cdd1d6;
+  word-break: break-word;
+}
+
+.cp-roadbook__words--empty {
+  color: #6f7378;
+}
+
 @media (max-width: 960px) {
   .cp-map-hud {
     flex-direction: column;
@@ -2522,16 +2922,40 @@ body.cp-battle-immersive .cp-topbar--shell {
   .cp-forward-panel {
     right: 14px;
     bottom: 14px;
+    align-items: center;
+  }
+
+  .cp-forward-panel__hint {
+    max-width: min(220px, 60vw);
+  }
+
+  .cp-roadbook-sheet {
+    max-height: min(78vh, 560px);
   }
 
   .cp-forward-btn {
-    width: 60px;
-    height: 60px;
+    width: 72px;
+    height: 72px;
   }
 
   .cp-forward-btn__arrow {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .cp-roadbook-side {
+    right: 14px;
+    padding: 11px 8px;
+  }
+
+  .cp-roadbook-side__icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .cp-roadbook-side__icon svg {
+    width: 19px;
+    height: 19px;
   }
 
   .cp-world-map__hint--float {

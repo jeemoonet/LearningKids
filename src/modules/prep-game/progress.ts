@@ -1,4 +1,6 @@
 import type { PrepLevelProgress, PrepProgressMap } from './types'
+import { learningApi } from '../learning/api'
+import { emitPlayerStatsDirty } from '../learning/playerStatsEvents'
 
 const STORAGE_KEY = 'learningkids:prep-game-progress'
 
@@ -32,6 +34,17 @@ export function recordPrepResult(
   }
   map[levelId] = next
   savePrepProgress(map)
+  void learningApi
+    .submitGrammarResult({
+      module: 'prep',
+      skillId: levelId,
+      correctCount,
+      totalQuestions,
+    })
+    .then((res) => {
+      if (res.magicGained > 0 || res.levelUp) emitPlayerStatsDirty()
+    })
+    .catch(() => undefined)
   return next
 }
 

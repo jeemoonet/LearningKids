@@ -1,24 +1,27 @@
 import { useEffect, useState } from 'react'
-import type { LearningNav } from './LearningModule'
 import { PrepGameModule } from '../prep-game/PrepGameModule'
 import { SentenceGameModule } from '../sentence-game/SentenceGameModule'
+import { PlanetBrandLogo } from './components/PlanetBrandLogo'
 import { TrainingCampNav } from './components/TrainingCampNav'
 import {
   TRAINING_CAMP_SECTIONS,
   getTrainingSection,
   type TrainingSectionId,
 } from './trainingCampSections'
+import { WorldMapBackground } from './components/WorldMapBackground'
 
 type PrepCampView = 'levels' | 'detail' | 'challenge'
+type SentenceCampView = 'levels' | 'detail' | 'match-detail' | 'challenge' | 'warrior-match'
 
 interface TrainingCampPageProps {
-  nav: LearningNav
   initialSection?: TrainingSectionId
+  onBackToWorld?: () => void
 }
 
-export function TrainingCampPage({ nav, initialSection = 'spirit' }: TrainingCampPageProps) {
+export function TrainingCampPage({ initialSection = 'spirit', onBackToWorld }: TrainingCampPageProps) {
   const [section, setSection] = useState<TrainingSectionId>(initialSection)
   const [prepView, setPrepView] = useState<PrepCampView>('levels')
+  const [sentenceView, setSentenceView] = useState<SentenceCampView>('levels')
 
   useEffect(() => {
     setSection(initialSection)
@@ -26,25 +29,30 @@ export function TrainingCampPage({ nav, initialSection = 'spirit' }: TrainingCam
 
   useEffect(() => {
     setPrepView('levels')
+    setSentenceView('levels')
   }, [section])
 
   const active = getTrainingSection(section)
   const isPrepSubView = active.module === 'prep' && prepView !== 'levels'
+  const isSentenceSubView = active.module === 'sentence' && sentenceView !== 'levels'
+  const hideSectionHead = isPrepSubView || isSentenceSubView
 
   return (
     <div className="tc-camp">
-      <img
-        className="tc-camp__bg"
-        src="/assets/conquer-planet/world-map-bg.png"
-        alt=""
-        aria-hidden="true"
-      />
-      <span className="tc-camp__vignette" aria-hidden="true" />
+      <WorldMapBackground />
+
+      <div className="tc-camp-brand">
+        <PlanetBrandLogo onClick={onBackToWorld} />
+      </div>
+
+      {!hideSectionHead && (
+        <header className="tc-camp-section-head">
+          <h1>{active.title}</h1>
+          <p>{active.summary}</p>
+        </header>
+      )}
 
       <aside className="tc-camp-sidebar">
-        <button type="button" className="tc-camp-btn tc-camp-btn--world" onClick={() => nav.go('my-world-hub')}>
-          ← 返回我的世界
-        </button>
         <TrainingCampNav
           sections={TRAINING_CAMP_SECTIONS}
           active={section}
@@ -52,26 +60,21 @@ export function TrainingCampPage({ nav, initialSection = 'spirit' }: TrainingCam
         />
       </aside>
 
-      <div className="tc-camp-main">
-        {!isPrepSubView && (
-          <header className="tc-camp-section-head lw-mw-glass">
-            <h1>{active.title}</h1>
-            <p>{active.summary}</p>
-          </header>
-        )}
-
+      <div className={`tc-camp-main${hideSectionHead ? ' tc-camp-main--immersive' : ''}`}>
         <div className="tc-camp-section-body">
           {active.module === 'prep' && (
-            <PrepGameModule embedded onViewChange={setPrepView} />
+            <PrepGameModule key={active.id} embedded onViewChange={setPrepView} />
           )}
           {active.module === 'sentence' && (
             <SentenceGameModule
+              key={active.id}
               embedded
               sectionKey={active.id as 'warrior' | 'magic' | 'formation'}
               title={active.title}
               description={active.description}
               tracks={active.tracks ?? []}
               showBoss={active.showBoss ?? false}
+              onViewChange={setSentenceView}
             />
           )}
         </div>

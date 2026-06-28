@@ -4,6 +4,14 @@ import { SentenceChallengeMode } from './SentenceChallengeMode'
 import { ScholarMagicianMode } from './ScholarMagicianMode'
 import { SentenceLevelSelect } from './SentenceLevelSelect'
 import { SentenceStructureMode } from './SentenceStructureMode'
+import { WarriorMagicianMatchMode } from './WarriorMagicianMatchMode'
+import { FormationLevelDetailPage } from './FormationLevelDetailPage'
+import { MagicLevelDetailPage } from './MagicLevelDetailPage'
+import { MatchLevelDetailPage } from './MatchLevelDetailPage'
+import { WarriorLevelDetailPage } from './WarriorLevelDetailPage'
+import { FormationLevelSelect } from './FormationLevelSelect'
+import { MagicLevelSelect } from './MagicLevelSelect'
+import { WarriorLevelSelect } from './WarriorLevelSelect'
 import type { SentenceLevel, SentenceQuestion, SentenceTrack, StructurePuzzle } from './types'
 
 interface SentenceGameModuleProps {
@@ -14,9 +22,10 @@ interface SentenceGameModuleProps {
   description?: string
   tracks?: SentenceTrack[]
   showBoss?: boolean
+  onViewChange?: (view: SentenceView) => void
 }
 
-type SentenceView = 'levels' | 'challenge'
+type SentenceView = 'levels' | 'detail' | 'match-detail' | 'challenge' | 'warrior-match'
 
 const WARRIOR_TRACKS: SentenceTrack[] = ['tense']
 const MAGIC_TRACKS: SentenceTrack[] = ['adj-adv']
@@ -30,6 +39,7 @@ export function SentenceGameModule({
   description = '按主谓宾定状补学句子结构，掌握动词时态、状语与形副用法',
   tracks,
   showBoss = true,
+  onViewChange,
 }: SentenceGameModuleProps) {
   const [levels, setLevels] = useState<SentenceLevel[]>([])
   const [loading, setLoading] = useState(true)
@@ -43,6 +53,7 @@ export function SentenceGameModule({
   const [isStructure, setIsStructure] = useState(false)
   const [isScholarMagician, setIsScholarMagician] = useState(false)
   const [challengeLoading, setChallengeLoading] = useState(false)
+  const [startingTest, setStartingTest] = useState(false)
 
   const trackFilter = useMemo(() => {
     if (tracks?.length) return tracks
@@ -90,6 +101,34 @@ export function SentenceGameModule({
     void loadLevels()
   }, [loadLevels])
 
+  useEffect(() => {
+    setView('levels')
+    setActiveLevel(null)
+    setQuestions([])
+    setStructurePuzzles([])
+    setRuleSummary('')
+    setIsBoss(false)
+    setIsStructure(false)
+    setIsScholarMagician(false)
+    setChallengeLoading(false)
+    setStartingTest(false)
+    setError('')
+  }, [sectionKey])
+
+  useEffect(() => {
+    onViewChange?.(view)
+  }, [view, onViewChange])
+
+  const openDetail = (level: SentenceLevel) => {
+    setActiveLevel(level)
+    setQuestions([])
+    setStructurePuzzles([])
+    setIsBoss(level.track === 'boss')
+    setIsStructure(false)
+    setIsScholarMagician(false)
+    setView('detail')
+  }
+
   const openLevel = async (level: SentenceLevel) => {
     setChallengeLoading(true)
     setError('')
@@ -119,9 +158,83 @@ export function SentenceGameModule({
     }
   }
 
+  const startSectionTest = async () => {
+    if (!activeLevel) return
+    setStartingTest(true)
+    setError('')
+    try {
+      const structureMode =
+        activeLevel.track === 'structure' && activeLevel.id.startsWith('struct-')
+      const scholarMagicianMode = activeLevel.track === 'adj-adv'
+      const bossMode = activeLevel.track === 'boss'
+
+      if (structureMode) {
+        await loadStructurePuzzles(activeLevel)
+        setQuestions([])
+        setIsStructure(true)
+        setIsScholarMagician(false)
+        setIsBoss(false)
+      } else if (scholarMagicianMode) {
+        setQuestions([])
+        setStructurePuzzles([])
+        setRuleSummary(activeLevel.ruleSummary)
+        setIsStructure(false)
+        setIsScholarMagician(true)
+        setIsBoss(false)
+      } else if (bossMode) {
+        await loadQuestions(activeLevel)
+        setStructurePuzzles([])
+        setIsStructure(false)
+        setIsScholarMagician(false)
+        setIsBoss(true)
+      } else {
+        await loadQuestions(activeLevel)
+        setStructurePuzzles([])
+        setIsStructure(false)
+        setIsScholarMagician(false)
+        setIsBoss(activeLevel.track === 'boss')
+      }
+      setView('challenge')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '生成题目失败')
+    } finally {
+      setStartingTest(false)
+    }
+  }
+
+  const startWarriorTest = async () => {
+    if (!activeLevel) return
+    setStartingTest(true)
+    setError('')
+    try {
+      const next = await loadQuestions(activeLevel)
+      if (next.length === 0) {
+        setError('暂无题目，请稍后再试')
+        return
+      }
+      setStructurePuzzles([])
+      setIsBoss(false)
+      setIsStructure(false)
+      setIsScholarMagician(false)
+      setView('challenge')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '生成题目失败')
+    } finally {
+      setStartingTest(false)
+    }
+  }
+
   const handleStartBoss = () => {
     const boss = filteredLevels.find((level) => level.track === 'boss')
-    if (boss) void openLevel(boss)
+    if (boss) openDetail(boss)
+  }
+
+  const handleStartWarriorMatch = () => {
+    setView('match-detail')
+  }
+
+  const handleStartMatchPlay = () => {
+    setView('warrior-match')
   }
 
   const handleBackToLevels = () => {
@@ -133,6 +246,20 @@ export function SentenceGameModule({
     setIsScholarMagician(false)
     void loadLevels()
   }
+
+  const handleBackToDetail = () => {
+    setView('detail')
+    setQuestions([])
+    setStructurePuzzles([])
+    void loadLevels()
+  }
+
+  const handleBackToMatchDetail = () => {
+    setView('match-detail')
+  }
+
+  const useDetailFlow = embedded && (sectionKey === 'warrior' || sectionKey === 'magic' || sectionKey === 'formation')
+  const openLevelFromList = useDetailFlow ? openDetail : (level: SentenceLevel) => void openLevel(level)
 
   const handleRegenerateQuestions = useCallback(async (excludeKeys?: string[]) => {
     if (!activeLevel) return []
@@ -169,18 +296,89 @@ export function SentenceGameModule({
           <main className={`app-main app-main-sentence-pc${embedded ? ' app-main-sentence-embedded' : ''}`}>
             {loading && <p className="sentence-status">正在加载关卡…</p>}
             {error && <p className="sentence-status sentence-status-error">{error}</p>}
-            {!loading && !error && (
+            {!loading && !error && sectionKey === 'warrior' && embedded ? (
+              <WarriorLevelSelect
+                levels={filteredLevels}
+                onSelectLevel={openDetail}
+                onStartWarriorMatch={handleStartWarriorMatch}
+              />
+            ) : !loading && !error && sectionKey === 'magic' && embedded ? (
+              <MagicLevelSelect levels={filteredLevels} onSelectLevel={openDetail} />
+            ) : !loading && !error && sectionKey === 'formation' && embedded ? (
+              <FormationLevelSelect
+                levels={filteredLevels}
+                onSelectLevel={openDetail}
+                showBoss={showBoss}
+              />
+            ) : !loading && !error ? (
               <SentenceLevelSelect
                 levels={filteredLevels}
-                onSelectLevel={(level) => void openLevel(level)}
+                onSelectLevel={openLevelFromList}
                 onStartBoss={handleStartBoss}
+                onStartWarriorMatch={sectionKey === 'warrior' ? handleStartWarriorMatch : undefined}
+                showWarriorMatch={sectionKey === 'warrior'}
                 showBoss={showBoss}
                 layout={embedded ? 'topnav' : 'sidebar'}
               />
-            )}
+            ) : null}
             {challengeLoading && <p className="sentence-status">正在生成题目…</p>}
           </main>
         </>
+      )}
+
+      {view === 'detail' && activeLevel && sectionKey === 'warrior' && (
+        <main className={`app-main app-main-sentence-pc${embedded ? ' app-main-sentence-embedded' : ''}`}>
+          {error && <p className="sentence-status sentence-status-error">{error}</p>}
+          <WarriorLevelDetailPage
+            level={activeLevel}
+            starting={startingTest}
+            onBack={handleBackToLevels}
+            onStartTest={() => void startWarriorTest()}
+          />
+        </main>
+      )}
+
+      {view === 'detail' && activeLevel && sectionKey === 'magic' && (
+        <main className={`app-main app-main-sentence-pc${embedded ? ' app-main-sentence-embedded' : ''}`}>
+          {error && <p className="sentence-status sentence-status-error">{error}</p>}
+          <MagicLevelDetailPage
+            level={activeLevel}
+            starting={startingTest}
+            onBack={handleBackToLevels}
+            onStartTest={() => void startSectionTest()}
+          />
+        </main>
+      )}
+
+      {view === 'detail' && activeLevel && sectionKey === 'formation' && (
+        <main className={`app-main app-main-sentence-pc${embedded ? ' app-main-sentence-embedded' : ''}`}>
+          {error && <p className="sentence-status sentence-status-error">{error}</p>}
+          <FormationLevelDetailPage
+            level={activeLevel}
+            starting={startingTest}
+            onBack={handleBackToLevels}
+            onStartTest={() => void startSectionTest()}
+          />
+        </main>
+      )}
+
+      {view === 'match-detail' && sectionKey === 'warrior' && (
+        <main className={`app-main app-main-sentence-pc${embedded ? ' app-main-sentence-embedded' : ''}`}>
+          <MatchLevelDetailPage
+            onBack={handleBackToLevels}
+            onStart={handleStartMatchPlay}
+          />
+        </main>
+      )}
+
+      {view === 'warrior-match' && (
+        <main className="app-main app-main-sentence-challenge-pc">
+          <WarriorMagicianMatchMode
+            autoStart
+            onBack={handleBackToMatchDetail}
+            onComplete={handleBackToLevels}
+          />
+        </main>
       )}
 
       {view === 'challenge' && activeLevel && isStructure && structurePuzzles.length > 0 && (
@@ -189,8 +387,9 @@ export function SentenceGameModule({
             level={activeLevel}
             puzzles={structurePuzzles}
             ruleSummary={ruleSummary}
-            onBack={handleBackToLevels}
-            onComplete={handleBackToLevels}
+            autoStart={useDetailFlow}
+            onBack={useDetailFlow ? handleBackToDetail : handleBackToLevels}
+            onComplete={useDetailFlow ? handleBackToDetail : handleBackToLevels}
             onRegeneratePuzzles={handleRegeneratePuzzles}
           />
         </main>
@@ -201,8 +400,9 @@ export function SentenceGameModule({
           <ScholarMagicianMode
             level={activeLevel}
             ruleSummary={ruleSummary}
-            onBack={handleBackToLevels}
-            onComplete={handleBackToLevels}
+            autoStart={useDetailFlow}
+            onBack={useDetailFlow ? handleBackToDetail : handleBackToLevels}
+            onComplete={useDetailFlow ? handleBackToDetail : handleBackToLevels}
           />
         </main>
       )}
@@ -214,8 +414,17 @@ export function SentenceGameModule({
             questions={questions}
             ruleSummary={ruleSummary}
             isBoss={isBoss}
-            onBack={handleBackToLevels}
-            onComplete={handleBackToLevels}
+            autoStart={sectionKey === 'warrior' || (useDetailFlow && sectionKey === 'formation' && isBoss)}
+            onBack={
+              sectionKey === 'warrior' || (useDetailFlow && sectionKey === 'formation')
+                ? handleBackToDetail
+                : handleBackToLevels
+            }
+            onComplete={
+              sectionKey === 'warrior' || (useDetailFlow && sectionKey === 'formation')
+                ? handleBackToDetail
+                : handleBackToLevels
+            }
             onRegenerateQuestions={handleRegenerateQuestions}
           />
         </main>

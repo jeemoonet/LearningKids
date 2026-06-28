@@ -12,6 +12,10 @@ export interface PeerLearner {
   displayName: string
   avatar: string
   level: number
+  levelTitle: string
+  combatPower: number
+  magicPower: number
+  totalGrowth: number
   knownCount: number
   conqueredKingdoms: number
   kingdomTotal: number
@@ -47,6 +51,7 @@ export interface KnownWord {
   pos: string
   source: string
   learnedAt: number
+  meaningZh?: string
 }
 
 export interface InitWord {
@@ -133,6 +138,35 @@ export interface SubmitResult {
   setCompleted: boolean
 }
 
+export interface LevelProgress {
+  current: number
+  floor: number
+  ceiling: number
+}
+
+export interface PlayerStats {
+  combatPower: number
+  magicPower: number
+  totalGrowth: number
+  level: number
+  levelTitle: string
+  levelProgress: LevelProgress
+  armySize: number
+  legionBattlePower: number
+}
+
+export interface GrammarResult {
+  passed: boolean
+  familiarity: number
+  magicPower: number
+  magicGained: number
+  combatPower: number
+  totalGrowth: number
+  level: number
+  levelTitle: string
+  levelUp: boolean
+}
+
 export const learningApi = {
   getProfile: () => apiFetch<{ profile: LearningProfile }>('/profile'),
   listPeers: () => apiFetch<PeerBoard>('/profile/peers'),
@@ -191,5 +225,35 @@ export const learningApi = {
     apiFetch<SubmitResult>(`/assessment/section/${id}/submit`, {
       method: 'POST',
       body: JSON.stringify({ correct, total }),
+    }),
+
+  playerStats: () => apiFetch<PlayerStats>('/learning/player-stats'),
+
+  submitGrammarResult: (payload: {
+    module: 'prep' | 'sentence'
+    skillId: string
+    correctCount: number
+    totalQuestions: number
+  }) =>
+    apiFetch<GrammarResult>('/training-camp/grammar-result', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+
+  migrateGrammarProgress: (payload: {
+    entries: Array<{
+      module: 'prep' | 'sentence'
+      skillId: string
+      bestScore: number
+      totalQuestions: number
+      passed: boolean
+      lastPlayedAt?: number
+    }>
+  }) =>
+    apiFetch<
+      PlayerStats & { imported: number; skipped: number; magicAdded: number }
+    >('/training-camp/migrate-progress', {
+      method: 'POST',
+      body: JSON.stringify(payload),
     }),
 }

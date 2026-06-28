@@ -3,6 +3,7 @@ import type { DatabaseSync } from 'node:sqlite'
 import { mapWordRow } from '../gameGroups.js'
 import { addKnownWords } from './knownWords.js'
 import { buildConstrainedPassage } from './contentScope.js'
+import { mergeSectionFamiliarityOnPass } from './planetFamiliarity.js'
 
 export interface ClozePayload {
   sectionId: string
@@ -86,6 +87,7 @@ export function submitAssessment(
     )
     .all(sectionId) as Array<{ word: string; pos: string }>
   const addedToKnown = addKnownWords(db, userId, sectionWords, 'section_pass')
+  mergeSectionFamiliarityOnPass(db, userId, sectionId)
 
   db.prepare("UPDATE learning_sections SET status = 'passed', passed_at = ? WHERE id = ?").run(
     now,

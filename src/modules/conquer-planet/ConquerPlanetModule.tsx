@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
+import type { LearningProfile } from '../learning/api'
 import { ConquerProvider, useConquer } from './ConquerContext'
 
 import type { PlanetKingdomSummary, PlanetLevel } from './types'
 
 import { ContinentalOverviewDrawer } from './components/ContinentalOverviewDrawer'
+import { ConquerUserBarSync } from './components/ConquerUserBarSync'
+import { ArmyPanel } from './components/ArmyPanel'
+import { ArmyInspectModal } from './components/ArmyInspectModal'
 import { ContinentalMapView } from './views/ContinentalMapView'
 
 import { KingdomBattleMapView } from './views/KingdomBattleMapView'
@@ -16,6 +20,8 @@ import { RecruitVillageLevel } from './views/RecruitVillageLevel'
 import { ReviewLevel } from './views/ReviewLevel'
 
 import { installGames } from './games'
+
+import { WorldMapBackground } from '../learning/components/WorldMapBackground'
 
 import './styles/conquer.css'
 
@@ -39,6 +45,9 @@ interface ConquerPlanetModuleProps {
   shellMode?: boolean
   initialKingdomId?: string | null
   onInitialKingdomConsumed?: () => void
+  profile?: LearningProfile | null
+  userDisplayName?: string
+  onLogout?: () => void
 }
 
 
@@ -53,6 +62,7 @@ function ConquerPlanetInner({
   const { loading, error, refresh, session } = useConquer()
   const [view, setView] = useState<View>({ name: 'continent' })
   const [continentDrawerOpen, setContinentDrawerOpen] = useState(false)
+  const [inspectOpen, setInspectOpen] = useState(false)
   /** shellMode 下仅首次进入时跳到当前王国，避免答题更新 session 时把关卡页顶掉 */
   const shellKingdomNavDone = useRef(false)
 
@@ -123,6 +133,8 @@ function ConquerPlanetInner({
 
     <div className={`cp-root${embedded ? ' cp-root--embedded' : ''}${view.name === 'continent' || view.name === 'kingdom' ? ' cp-root--map-mode' : ''}${view.name === 'level' ? ' cp-root--level-mode' : ''}`}>
 
+      <WorldMapBackground />
+
       {!shellMode && (
         <header className="cp-topbar">
           <div className="cp-brand">
@@ -135,11 +147,16 @@ function ConquerPlanetInner({
             <span className="cp-brand-title">征服星球</span>
             <span className="cp-brand-sub">词性军团养成 · 七王国远征</span>
           </div>
-          {view.name !== 'continent' && (
-            <button type="button" className="cp-reset" onClick={openContinentOverview}>
-              大陆全景
-            </button>
-          )}
+          <div className="cp-topbar__aside">
+            {session && (
+              <ArmyPanel variant="compact" onInspectArmy={() => setInspectOpen(true)} />
+            )}
+            {view.name !== 'continent' && (
+              <button type="button" className="cp-reset" onClick={openContinentOverview}>
+                大陆全景
+              </button>
+            )}
+          </div>
         </header>
       )}
 
@@ -234,6 +251,10 @@ function ConquerPlanetInner({
           />
         )}
 
+        {!shellMode && inspectOpen && session && (
+          <ArmyInspectModal open session={session} onClose={() => setInspectOpen(false)} />
+        )}
+
       </main>
 
     </div>
@@ -250,6 +271,7 @@ export function ConquerPlanetModule(props: ConquerPlanetModuleProps) {
 
     <ConquerProvider>
 
+      <ConquerUserBarSync />
       <ConquerPlanetInner {...props} />
 
     </ConquerProvider>

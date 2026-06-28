@@ -19,11 +19,11 @@ const TAB_META: Record<GuideTab, { label: string; desc: string }> = {
   },
   kingdoms: {
     label: '七大王国',
-    desc: '词性星球分为七大王国，由易到难逐一征服，壮大你的军团。',
+    desc: '卡吉姆星球分为七大王国，由易到难逐一征服，壮大你的军团。',
   },
   races: {
     label: '六大种族',
-    desc: '词性星球的居民按语法功能分为六族，相生相克决定远征战术。',
+    desc: '卡吉姆星球的居民按语法功能分为六族，相生相克决定远征战术。',
   },
 }
 

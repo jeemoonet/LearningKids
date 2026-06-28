@@ -10,7 +10,7 @@ import { getKingdomBattleMapLayout } from '../planetMapConfig'
 const STORAGE_KEY = 'conquer-map-progress-v1'
 const STEP_DONE_KEY = 'conquer-map-step-done-v1'
 /** 单格行进耗时 */
-const STEP_MS = 360
+export const MAP_STEP_MS = 680
 
 interface StoredProgress {
   pathIndex: number
@@ -124,6 +124,7 @@ export function useMapProgress(
   const [pathIndex, setPathIndex] = useState(0)
   const [branchId, setBranchId] = useState<string | null>(null)
   const [moving, setMoving] = useState(false)
+  const [moveFromIndex, setMoveFromIndex] = useState<number | null>(null)
   const [pendingArrival, setPendingArrival] = useState<MapArrival | null>(null)
   const [stepDoneNodeIds, setStepDoneNodeIds] = useState<Set<string>>(() => readStepDone(kingdomId))
   const timersRef = useRef<number[]>([])
@@ -225,6 +226,7 @@ export function useMapProgress(
     }
 
     clearTimers()
+    setMoveFromIndex(pathIndex)
     setMoving(true)
 
     const target = pathIndex + 1
@@ -233,8 +235,9 @@ export function useMapProgress(
 
     const stepTimer = window.setTimeout(() => {
       setPathIndex(target)
+      setMoveFromIndex(null)
       persist(target, branchId)
-    }, STEP_MS)
+    }, MAP_STEP_MS)
     timersRef.current.push(stepTimer)
 
     const finalizeTimer = window.setTimeout(() => {
@@ -244,7 +247,7 @@ export function useMapProgress(
       } else {
         setPendingArrival({ nodeId: nextNodeId, kind: 'move' })
       }
-    }, STEP_MS + 80)
+    }, MAP_STEP_MS + 80)
     timersRef.current.push(finalizeTimer)
   }, [
     layout,
@@ -284,6 +287,7 @@ export function useMapProgress(
     clearKingdomStepProgress(kingdomId)
     setPathIndex(0)
     setBranchId(null)
+    setMoveFromIndex(null)
     setMoving(false)
     setPendingArrival(null)
     setStepDoneNodeIds(new Set())
@@ -294,6 +298,12 @@ export function useMapProgress(
     canAdvance && pathIndex < pathIds.length - 1 ? pathIds[pathIndex + 1] : null
   const playerNodeId = pathIds[pathIndex] ?? ''
   const playerPos = playerNode
+  const moveFromNode =
+    moveFromIndex !== null && layout ? layout.nodes[pathIds[moveFromIndex]] : undefined
+  const moveToNode =
+    moveFromIndex !== null && layout
+      ? layout.nodes[pathIds[moveFromIndex + 1]]
+      : undefined
 
   return {
     layout,
@@ -310,6 +320,9 @@ export function useMapProgress(
     nextNodeId,
     playerPos,
     playerNodeId,
+    moveFromIndex,
+    moveFromNode,
+    moveToNode,
     pendingArrival,
     clearArrival,
     advanceOneStep,

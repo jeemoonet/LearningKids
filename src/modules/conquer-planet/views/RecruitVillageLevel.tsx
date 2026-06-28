@@ -15,7 +15,7 @@ interface RecruitVillageLevelProps {
 type Phase = 'loading' | 'intro' | 'play' | 'done' | 'empty'
 
 export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProps) {
-  const { setSession } = useConquer()
+  const { session, setSession } = useConquer()
   const [level, setLevel] = useState<PlanetLevel | null>(null)
   const [candidates, setCandidates] = useState<PlanetWord[]>([])
   const [pool, setPool] = useState<PlanetWord[]>([])
@@ -122,7 +122,9 @@ export function RecruitVillageLevel({ levelId, onBack }: RecruitVillageLevelProp
               }
               setPlayError('')
               try {
-                const outcome = await settleLevel('recruit', levelId, results)
+                const outcome = await settleLevel('recruit', levelId, results, {
+                  previousSession: session,
+                })
                 setSession(outcome.session)
                 setRecruited(outcome.recruited ?? [])
                 setPhase('done')

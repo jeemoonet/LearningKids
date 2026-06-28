@@ -10,16 +10,26 @@ export const APP_ROUTE_PATHS = {
 
 const ADVENTURE_PATHS = new Set(['/adventure', '/conquer'])
 
+/** 去掉末尾斜杠，避免 /adventure/ 无法匹配路由 */
+export function normalizeAppPathname(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    return pathname.slice(0, -1)
+  }
+  return pathname
+}
+
 export function isAppHubPath(pathname: string): boolean {
-  if (pathname === '/' || pathname === APP_ROUTE_PATHS.myWorld) return true
-  if (pathname === APP_ROUTE_PATHS.training) return true
-  if (ADVENTURE_PATHS.has(pathname)) return true
+  const path = normalizeAppPathname(pathname)
+  if (path === '/' || path === APP_ROUTE_PATHS.myWorld) return true
+  if (path === APP_ROUTE_PATHS.training) return true
+  if (ADVENTURE_PATHS.has(path)) return true
   return false
 }
 
 export function resolveHubPage(pathname: string): HubPageName {
-  if (pathname === APP_ROUTE_PATHS.training) return 'training-hub'
-  if (ADVENTURE_PATHS.has(pathname)) return 'conquer-planet'
+  const path = normalizeAppPathname(pathname)
+  if (path === APP_ROUTE_PATHS.training) return 'training-hub'
+  if (ADVENTURE_PATHS.has(path)) return 'conquer-planet'
   return 'my-world-hub'
 }
 

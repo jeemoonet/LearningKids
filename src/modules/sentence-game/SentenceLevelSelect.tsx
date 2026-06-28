@@ -13,8 +13,10 @@ interface SentenceLevelSelectProps {
   levels: SentenceLevel[]
   onSelectLevel: (level: SentenceLevel) => void
   onStartBoss: () => void
+  onStartWarriorMatch?: () => void
   trackSections?: TrackSectionMeta[]
   showBoss?: boolean
+  showWarriorMatch?: boolean
   layout?: 'sidebar' | 'topnav'
 }
 
@@ -27,8 +29,8 @@ const ALL_TRACK_SECTIONS: TrackSectionMeta[] = [
   },
   {
     track: 'tense',
-    shortTitle: '动词时态',
-    title: '动词与时态',
+    shortTitle: '魔法时空',
+    title: '时空转移',
     description: '一般时、进行时、完成时，以及动词形式变化',
   },
   {
@@ -179,8 +181,10 @@ export function SentenceLevelSelect({
   levels,
   onSelectLevel,
   onStartBoss,
+  onStartWarriorMatch,
   trackSections = ALL_TRACK_SECTIONS,
   showBoss = true,
+  showWarriorMatch = false,
   layout = 'sidebar',
 }: SentenceLevelSelectProps) {
   const progressMap = loadSentenceProgress()
@@ -286,6 +290,23 @@ export function SentenceLevelSelect({
               onSelect={() => onSelectLevel(level)}
             />
           ))}
+          {showWarriorMatch && activeSection.track === 'tense' && onStartWarriorMatch && (
+            <button
+              type="button"
+              className={`sentence-level-card wm-match-level-card${progressMap['warrior-match']?.passed ? ' is-passed' : ''}`}
+              data-track="tense"
+              onClick={onStartWarriorMatch}
+            >
+              <span className="sentence-level-card-scene">武士 ⚔ 魔法师</span>
+              <span className="sentence-level-card-title">魔法连线</span>
+              <span className="sentence-level-card-roles">动词 · 副词 · 形容词</span>
+              <span className="sentence-level-card-meta">
+                {progressMap['warrior-match']?.passed
+                  ? `${progressMap['warrior-match'].bestScore}/${progressMap['warrior-match'].totalQuestions} ★`
+                  : '6 组连线'}
+              </span>
+            </button>
+          )}
         </div>
       </section>
     ) : null

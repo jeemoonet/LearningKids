@@ -72,6 +72,8 @@ export interface PlanetSession {
   conqueredLevelIds: string[]
   armySize: number
   armyExp: number
+  /** 战斗力 = 全词熟悉度之和 */
+  combatPower: number
   totalPower: number
   dueReviewCount: number
   soldiers: PlanetSoldier[]

@@ -37,11 +37,11 @@ export function ArmyPanel({ variant = 'compact', onInspectArmy }: ArmyPanelProps
       <div className="cp-stats cp-stats--compact">
         <div className="cp-stat cp-stat--compact">
           <span className="cp-stat-num">{session.armySize}</span>
-          <span className="cp-stat-label">战斗力</span>
+          <span className="cp-stat-label">军团人数</span>
         </div>
         <div className="cp-stat cp-stat--compact">
-          <span className="cp-stat-num">{session.armyExp}</span>
-          <span className="cp-stat-label">经验值</span>
+          <span className="cp-stat-num">{session.combatPower ?? session.armyExp}</span>
+          <span className="cp-stat-label">战斗力</span>
         </div>
         <div className="cp-stat cp-stat--compact">
           <span className="cp-stat-num">{session.totalPower}</span>

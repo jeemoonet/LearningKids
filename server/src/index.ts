@@ -22,6 +22,7 @@ import { assessmentRoutes } from './routes/assessment.js'
 import { adminLibrariesRoutes } from './routes/adminLibraries.js'
 import { adminPlanetRoutes } from './routes/adminPlanet.js'
 import { conquerPlanetRoutes } from './routes/conquerPlanet.js'
+import { trainingCampRoutes } from './routes/trainingCamp.js'
 
 const app = new Hono()
 
@@ -61,6 +62,7 @@ app.route('/api/learning', learningRoutes)
 app.route('/api/courseware', coursewareRoutes)
 app.route('/api/assessment', assessmentRoutes)
 app.route('/api/conquer-planet', conquerPlanetRoutes)
+app.route('/api/training-camp', trainingCampRoutes)
 
 const port = Number(process.env.PORT ?? 3001)
 

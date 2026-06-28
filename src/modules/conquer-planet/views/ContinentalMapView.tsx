@@ -1,10 +1,13 @@
 import type { ReactNode } from 'react'
+import { PLANET_NAME } from '../../learning/planetBrand'
 import { MapHud } from '../components/MapHud'
 import { ContinentalMapScene } from '../components/ContinentalMapScene'
 import { MonsterSprite } from '../components/monsters/MonsterIllustrations'
 import { getKingdomMapPosition } from '../planetMapConfig'
 import { useConquer } from '../ConquerContext'
 import type { PlanetKingdomSummary } from '../types'
+
+const CONTINENT_HUD_TITLE = `${PLANET_NAME} · 七王国全景`
 
 interface ContinentalMapViewProps {
   onEnterKingdom: (kingdom: PlanetKingdomSummary) => void
@@ -13,7 +16,6 @@ interface ContinentalMapViewProps {
   hudLeading?: ReactNode
   hudTrailing?: ReactNode
   hudContent?: ReactNode
-  showArmy?: boolean
 }
 
 function statusLabel(status: PlanetKingdomSummary['status']): string {
@@ -24,12 +26,11 @@ function statusLabel(status: PlanetKingdomSummary['status']): string {
 
 export function ContinentalMapView({
   onEnterKingdom,
-  hudTitle = '词性星球 · 七王国全景',
+  hudTitle = CONTINENT_HUD_TITLE,
   hudSubtitle,
   hudLeading,
   hudTrailing,
   hudContent,
-  showArmy = true,
 }: ContinentalMapViewProps) {
   const { session } = useConquer()
   if (!session) return null
@@ -49,7 +50,6 @@ export function ContinentalMapView({
               subtitle={hudSubtitle ?? defaultSubtitle}
               leading={hudLeading}
               trailing={hudTrailing}
-              showArmy={showArmy}
             />
           )}
 

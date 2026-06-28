@@ -2,8 +2,7 @@ import { Hono } from 'hono'
 import type { AuthUser } from '../auth.js'
 import { requireAuth } from '../auth.js'
 import { getDb } from '../db.js'
-import {
-  applyPlanetReview,
+import { applyPlanetReview,
   buildBossLevel,
   buildPlanetSession,
   buildRecruitLevel,
@@ -13,6 +12,7 @@ import {
   completeReviewLevel,
   resetKingdomProgress,
 } from '../lib/learning/conquerPlanet.js'
+import { applyBossMicroGain } from '../lib/learning/planetFamiliarity.js'
 import { aiNameMapNodes, aiNameSingleMapNode } from '../lib/learning/mapNodeNaming.js'
 import { buildPlanetConfigPayload } from '../lib/learning/planetKingdomSettings.js'
 
@@ -86,6 +86,16 @@ conquerPlanetRoutes.post('/review', async (c) => {
     return c.json({ error: '缺少 word 或 correct' }, 400)
   }
   const result = applyPlanetReview(getDb(), userId, body.word, body.correct)
+  return c.json(result)
+})
+
+conquerPlanetRoutes.post('/boss-micro-gain', async (c) => {
+  const userId = c.get('user').id
+  const body = (await c.req.json().catch(() => ({}))) as { word?: string }
+  if (!body.word?.trim()) {
+    return c.json({ error: '缺少 word' }, 400)
+  }
+  const result = applyBossMicroGain(getDb(), userId, body.word)
   return c.json(result)
 })
 
