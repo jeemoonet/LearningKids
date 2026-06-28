@@ -3,7 +3,6 @@ import { learningApi, type LearningLibrary, type LearningProfile, type PeerLearn
 import { migrateGrammarProgressOnce } from './migrateGrammarProgress'
 import { useConquer } from '../conquer-planet/ConquerContext'
 import { MyWorldKingdomOverview } from './components/MyWorldKingdomOverview'
-import { MyWorldRightRail } from './components/MyWorldRightRail'
 import {
   needsRecruitOnboarding,
   RecruitArmyOnboardingModal,
@@ -80,7 +79,7 @@ function FellowRow({
 
 /**
  * 「我的世界」个人成长基地 · 沉浸式羊皮纸 HUD。
- * 右上：统一命令面板（资料 + 军团 / 目标 / 任务 / 小伙伴 / 成就墙）。
+ * 右上：玩家资料；顶部 head：军团 / 征服目标；中部：七王国地图；底部：任务 / 小伙伴 / 成就墙。
  * 中央展示七王国全景（未解锁可见），选中王国可查看详情并进入。
  */
 export function MyWorldDashboard({
@@ -227,11 +226,11 @@ export function MyWorldDashboard({
         ? `我 · ${selfPeer.conqueredKingdoms}/${kingdomTotal} 国`
         : `${peers.length + 1} 位 · 我第 ${selfRank}`
 
-  const sideRail = (
-    <>
+  const bottomDock = (
+    <div className="lw-mw-foot__dock">
       <button
         type="button"
-        className="lw-mw-glass lw-mw-chip"
+        className="lw-mw-glass lw-mw-chip lw-mw-foot__chip"
         onClick={() => setExpanded('quests')}
       >
         <span className="lw-mw-chip__icon" aria-hidden="true">📜</span>
@@ -243,7 +242,7 @@ export function MyWorldDashboard({
 
       <button
         type="button"
-        className="lw-mw-glass lw-mw-chip"
+        className="lw-mw-glass lw-mw-chip lw-mw-foot__chip"
         onClick={() => setExpanded('fellows')}
       >
         <span className="lw-mw-chip__icon" aria-hidden="true">🤝</span>
@@ -260,7 +259,7 @@ export function MyWorldDashboard({
 
       <button
         type="button"
-        className="lw-mw-glass lw-mw-chip"
+        className="lw-mw-glass lw-mw-chip lw-mw-foot__chip"
         onClick={() => setExpanded('achievements')}
       >
         <span className="lw-mw-chip__icon" aria-hidden="true">🏆</span>
@@ -269,7 +268,7 @@ export function MyWorldDashboard({
           <span className="lw-mw-chip__summary">已点亮 {unlockedCount}/{achievements.length}</span>
         </span>
       </button>
-    </>
+    </div>
   )
 
   return (
@@ -281,15 +280,16 @@ export function MyWorldDashboard({
           <div id="lw-top-actions-slot" className="lw-mw-head__slot" />
         </header>
         <div className="lw-mw-center">
-          <MyWorldKingdomOverview
-            kingdoms={session?.kingdoms ?? []}
-            loading={loading}
-            onEnterKingdom={onEnterKingdom}
-          />
+          <div className="lw-mw-stage">
+            <MyWorldKingdomOverview
+              kingdoms={session?.kingdoms ?? []}
+              loading={loading}
+              onEnterKingdom={onEnterKingdom}
+            />
+            <footer className="lw-mw-foot">{bottomDock}</footer>
+          </div>
         </div>
       </div>
-
-      <MyWorldRightRail>{sideRail}</MyWorldRightRail>
 
       {/* 展开浮层 */}
       {expanded && (

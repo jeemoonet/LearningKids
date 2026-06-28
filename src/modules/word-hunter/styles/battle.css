@@ -29,6 +29,11 @@
   flex-shrink: 0;
 }
 
+.meaning-peek-tip {
+  color: #b8d9e8;
+  font-size: 0.75rem;
+}
+
 /* ========== 左 · 中 · 右 三栏 ========== */
 .battle-layout {
   flex: 1;
@@ -426,6 +431,20 @@
   border-radius: 6px;
   padding: 5px 8px;
   cursor: pointer;
+}
+
+.ammo-card__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.ammo-meaning {
+  margin: 0;
+  font-size: 0.7rem;
+  color: #ffdca6;
+  line-height: 1.2;
 }
 
 .ammo-card--compact.captured {
@@ -997,6 +1016,14 @@
   animation: arena-shake 0.45s ease 0.62s;
 }
 
+.battle-arena--artillery-heavy {
+  animation: arena-shake-heavy 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) 0.56s;
+}
+
+.battle-arena--artillery-super {
+  animation: arena-shake-super 0.75s cubic-bezier(0.2, 0.9, 0.3, 1) 0.52s;
+}
+
 .battle-arena--resolve-synergy {
   --hit-color: #ffe66d;
   --hit-glow: rgba(255, 230, 109, 0.55);
@@ -1091,6 +1118,21 @@
     0 0 20px rgba(162, 155, 254, 0.65),
     0 0 40px rgba(108, 92, 231, 0.35);
   animation: seal-banner-pop 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) 0.95s both;
+}
+
+.artillery-banner {
+  margin: 8px 0 0;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff2bf;
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.45), rgba(233, 69, 96, 0.4));
+  border: 1px solid rgba(255, 230, 109, 0.8);
+  border-radius: 999px;
+  box-shadow:
+    0 0 18px rgba(245, 166, 35, 0.65),
+    inset 0 0 12px rgba(255, 255, 255, 0.15);
+  animation: artillery-banner-pop 0.45s cubic-bezier(0.2, 1.2, 0.4, 1) 0.76s both;
 }
 
 .arena-countdown {
@@ -1256,6 +1298,52 @@
   background: linear-gradient(90deg, transparent, #4ecca3, #2d9a78);
 }
 
+.projectile--artillery-heavy {
+  width: 170px;
+  height: 36px;
+  animation-duration: 0.78s;
+}
+
+.projectile--artillery-heavy .projectile-core {
+  width: 46px;
+  height: 46px;
+  box-shadow:
+    0 0 28px currentColor,
+    0 0 52px color-mix(in oklab, currentColor 65%, white 35%);
+  filter: saturate(1.25);
+}
+
+.projectile--artillery-heavy .projectile-trail {
+  left: -96px;
+  width: 148px;
+  height: 10px;
+  margin-top: -5px;
+  filter: blur(1.8px);
+}
+
+.projectile--artillery-super {
+  width: 220px;
+  height: 44px;
+  animation-duration: 0.84s;
+}
+
+.projectile--artillery-super .projectile-core {
+  width: 58px;
+  height: 58px;
+  box-shadow:
+    0 0 32px currentColor,
+    0 0 64px color-mix(in oklab, currentColor 70%, white 30%);
+  filter: saturate(1.4) brightness(1.08);
+}
+
+.projectile--artillery-super .projectile-trail {
+  left: -128px;
+  width: 190px;
+  height: 12px;
+  margin-top: -6px;
+  filter: blur(2.2px);
+}
+
 .projectile--miss {
   color: #888;
   animation: projectile-fizzle 0.65s ease-out forwards;
@@ -1318,6 +1406,36 @@
   box-shadow: 0 0 36px rgba(78, 204, 163, 0.75);
 }
 
+.impact-burst--artillery-heavy {
+  width: 124px;
+  height: 124px;
+  margin: -62px 0 0 -62px;
+  animation: impact-burst-heavy 0.72s ease-out 0.5s forwards;
+}
+
+.impact-burst--artillery-super {
+  width: 158px;
+  height: 158px;
+  margin: -79px 0 0 -79px;
+  animation: impact-burst-super 0.86s ease-out 0.45s forwards;
+}
+
+.artillery-shockwave {
+  position: absolute;
+  left: 74%;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 24px rgba(255, 210, 120, 0.55);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: artillery-shockwave 0.78s ease-out 0.56s forwards;
+}
+
 .seal-shards {
   position: absolute;
   left: 74%;
@@ -1348,6 +1466,30 @@
   45% { transform: translateX(-5px); }
   60% { transform: translateX(5px); }
   75% { transform: translateX(-2px); }
+}
+
+@keyframes arena-shake-heavy {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-12px); }
+  22% { transform: translateX(12px); }
+  34% { transform: translateX(-9px); }
+  46% { transform: translateX(9px); }
+  58% { transform: translateX(-6px); }
+  70% { transform: translateX(6px); }
+  82% { transform: translateX(-3px); }
+}
+
+@keyframes arena-shake-super {
+  0%, 100% { transform: translateX(0) scale(1); }
+  8% { transform: translateX(-15px) scale(1.01); }
+  18% { transform: translateX(15px) scale(1.01); }
+  28% { transform: translateX(-12px) scale(1.015); }
+  38% { transform: translateX(12px) scale(1.015); }
+  48% { transform: translateX(-9px) scale(1.01); }
+  58% { transform: translateX(9px) scale(1.01); }
+  68% { transform: translateX(-6px) scale(1.005); }
+  78% { transform: translateX(6px) scale(1.005); }
+  88% { transform: translateX(-3px); }
 }
 
 @keyframes arena-flash {
@@ -1405,6 +1547,50 @@
   }
 }
 
+@keyframes impact-burst-heavy {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  32% {
+    opacity: 1;
+    transform: scale(1.9);
+  }
+  100% {
+    transform: scale(3.9);
+    opacity: 0;
+  }
+}
+
+@keyframes impact-burst-super {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    transform: scale(2.1);
+  }
+  100% {
+    transform: scale(4.6);
+    opacity: 0;
+  }
+}
+
+@keyframes artillery-shockwave {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  24% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(6.8);
+  }
+}
+
 @keyframes message-pop {
   0% {
     opacity: 0;
@@ -1441,6 +1627,21 @@
   100% {
     opacity: 1;
     transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes artillery-banner-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.65) translateY(10px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.08) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 

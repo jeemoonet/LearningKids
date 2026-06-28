@@ -13,6 +13,7 @@ export interface LevelIntroContent {
 function kindIcon(kind: PlanetLevelKind): string {
   if (kind === 'boss') return '🏯'
   if (kind === 'review') return '🌫️'
+  if (kind === 'forest') return '🌲'
   return '🏘️'
 }
 
@@ -58,5 +59,17 @@ export function buildBossIntro(
     body: `「${foe}」盘踞在王宫深处。你率领 ${armySize} 名士兵前来决战——选相生词性出战，拼写击破封印，并在怪兽回合认词闪避，才能攻陷此关。`,
     note: formatLearningMethodsNote('boss'),
     primaryLabel: '开始决战',
+  }
+}
+
+export function buildForestIntro(level: PlanetLevel, pairCount: number): LevelIntroContent {
+  const profile = getLevelLearningProfile('forest')
+  return {
+    icon: kindIcon('forest'),
+    title: level.name,
+    location: `${profile.nodeLabel} · ${level.name}`,
+    body: `动词猎手封锁了前路。须完成 ${pairCount} 组「副词 + 动词」搭配试炼，迷雾才会为你让道。`,
+    note: formatLearningMethodsNote('forest'),
+    primaryLabel: '开始试炼',
   }
 }

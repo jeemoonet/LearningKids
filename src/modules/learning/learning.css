@@ -80,81 +80,9 @@
   align-items: stretch;
 }
 
-/* 我的世界：右上角命令面板（资料 + 任务 / 小伙伴 / 成就墙） */
-.lk-mw-command-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.lk-mw-user-mount .lk-user-bar,
+.lk-mw-user-mount .lk-player-hero {
   width: min(320px, calc(100vw - 28px));
-  padding: 10px;
-  border-radius: 18px;
-  background: linear-gradient(160deg, rgba(20, 16, 30, 0.62), rgba(8, 10, 22, 0.5));
-  border: 1px solid rgba(231, 190, 93, 0.16);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.32);
-}
-
-.lk-mw-command-panel__hero {
-  min-width: 0;
-}
-
-.lk-mw-command-panel__hero .lk-user-bar,
-.lk-mw-command-panel__hero .lk-player-hero {
-  width: 100%;
-}
-
-.lk-mw-command-panel__rail-slot {
-  display: contents;
-}
-
-/* 面板内统一为整齐的卡片单元 */
-.lk-mw-command-panel .lw-mw-chip {
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-  flex: none;
-  align-items: center;
-  padding: 9px 11px;
-  gap: 9px;
-  border-radius: 12px;
-}
-
-.lk-mw-command-panel .lw-mw-chip__icon {
-  width: 30px;
-  height: 30px;
-  font-size: 0.95rem;
-}
-
-.lk-mw-command-panel .lw-mw-chip__body {
-  flex: 1;
-  min-width: 0;
-}
-
-.lk-mw-command-panel .lw-mw-chip__title {
-  font-size: 0.82rem;
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.lk-mw-command-panel .lw-mw-chip__summary {
-  font-size: 0.68rem;
-  max-width: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.lk-mw-command-panel .lw-mw-chip__avatars {
-  flex: none;
-  margin-left: 6px;
-}
-
-.lk-mw-command-panel .lw-mw-chip__mini {
-  width: 24px;
-  height: 24px;
-  font-size: 0.78rem;
 }
 
 /* 中间区域顶部 head：我的军团 / 征服目标 */
@@ -171,6 +99,8 @@
 
 .lw-mw-head__row {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -273,25 +203,71 @@
 }
 
 .lk-player-hero .lw-mw-hero__title {
-  margin: 0 0 2px;
-  font-size: 0.62rem;
+  display: block;
+  margin: 0 0 3px;
+  padding-right: 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: var(--mw-gold-bright, #e7be5d);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .lk-player-hero .lw-mw-hero__stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
   margin-bottom: 0;
   font-size: 0.6rem;
 }
 
-.lk-player-hero .lk-player-hero__xp {
-  height: 5px;
-  margin-top: 4px;
-  border-radius: 4px;
+.lk-player-hero .lw-mw-hero__stats-metrics {
+  display: flex;
+  gap: 8px;
+  flex: none;
 }
 
-.lk-player-hero .lk-player-hero__xp .lw-mw-hero__xp-fill {
+.lk-player-hero .lk-player-hero__word-progress {
+  position: relative;
+  flex: none;
+  width: 72px;
+  height: 14px;
+  margin-left: auto;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 230, 180, 0.22);
+  overflow: hidden;
+}
+
+.lk-player-hero .lw-mw-hero__word-progress-fill {
+  position: absolute;
   inset: 1px auto 1px 1px;
-  border-radius: 3px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #ffb347, #ff8c42);
+  box-shadow: 0 0 6px rgba(255, 140, 66, 0.7);
+  transition: width 0.4s ease;
+}
+
+.lk-player-hero .lw-mw-hero__word-progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff6e0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+
+.lk-player-hero .lk-player-hero__xp {
+  display: none;
 }
 
 .lk-player-hero .lw-mw-hero__menu-wrap {
@@ -407,8 +383,8 @@
   position: absolute;
   inset: 2px auto 2px 2px;
   border-radius: 6px;
-  background: linear-gradient(180deg, var(--mw-gold-bright, #e7be5d), #c9962f);
-  box-shadow: 0 0 8px rgba(231, 190, 93, 0.8);
+  background: linear-gradient(180deg, #ffb347, #ff8c42);
+  box-shadow: 0 0 8px rgba(255, 140, 66, 0.75);
   transition: width 0.4s ease;
 }
 
@@ -1290,7 +1266,7 @@
   gap: 16px;
 }
 
-/* ---- 卡吉姆星球品牌 Logo（各主页面左上角） ---- */
+/* ---- 卡伊姆星球品牌 Logo（各主页面左上角） ---- */
 .lk-planet-brand {
   display: flex;
   align-items: center;
@@ -1415,13 +1391,22 @@ body.cp-battle-immersive .lk-planet-brand--fixed {
   padding: 0 8px;
 }
 
-.lw-mw-kingdoms {
+.lw-mw-stage {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: min(920px, 100%);
   max-height: 100%;
   min-height: 0;
+}
+
+.lw-mw-kingdoms {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
 }
 
 .lw-mw-kingdom-strip-wrap {
@@ -1586,9 +1571,62 @@ body.cp-battle-immersive .lk-planet-brand--fixed {
   display: none;
 }
 
+/* 王国地图底部：今日任务 / 小伙伴 / 成就墙 */
+.lw-mw-foot {
+  flex: none;
+}
+
+.lw-mw-foot__dock {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lw-mw-foot__chip {
+  min-width: 0;
+  width: 100%;
+  padding: 10px 12px;
+  gap: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: transform 0.14s ease, border-color 0.14s ease;
+}
+
+.lw-mw-foot__chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--mw-gold-bright);
+}
+
+.lw-mw-foot__chip .lw-mw-chip__title {
+  font-size: 0.84rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lw-mw-foot__chip .lw-mw-chip__summary {
+  font-size: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lw-mw-foot__chip .lw-mw-chip__avatars {
+  flex: none;
+  margin-left: auto;
+}
+
+.lw-mw-foot__chip .lw-mw-chip__mini {
+  width: 22px;
+  height: 22px;
+  font-size: 0.72rem;
+}
+
 .lw-mw-hud--map-focus {
-  padding: 88px 24px 16px;
+  padding: 14px 24px 16px;
   gap: 12px;
+  justify-content: flex-start;
 }
 
 .lw-mw-hud--map-focus .lw-mw-center {
@@ -1810,12 +1848,56 @@ body.cp-battle-immersive .lk-planet-brand--fixed {
 
 .lw-mw-hero__stats {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   font-size: 0.68rem;
   font-weight: 700;
   color: #ffe8c8;
   letter-spacing: 0.02em;
+}
+
+.lw-mw-hero__stats-metrics {
+  display: flex;
+  gap: 10px;
+  flex: none;
+}
+
+.lw-mw-hero__word-progress {
+  position: relative;
+  flex: none;
+  width: 88px;
+  height: 16px;
+  margin-left: auto;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 230, 180, 0.25);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.lw-mw-hero__word-progress-fill {
+  position: absolute;
+  inset: 2px auto 2px 2px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #ffb347, #ff8c42);
+  box-shadow: 0 0 8px rgba(255, 140, 66, 0.75);
+  transition: width 0.4s ease;
+}
+
+.lw-mw-hero__word-progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #fff6e0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  font-variant-numeric: tabular-nums;
 }
 
 .lw-mw-hero__xp {
@@ -2367,6 +2449,224 @@ body.cp-battle-immersive .lk-planet-brand--fixed {
 
 .lw-mw-sheet__body {
   overflow-y: auto;
+}
+
+.lw-mw-wordcards {
+  width: min(720px, 96vw);
+}
+
+.lw-mw-wordcards__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lw-mw-wordcards__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(120, 92, 48, 0.3);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--mw-ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lw-mw-wordcards__filter.is-active {
+  background: linear-gradient(180deg, var(--mw-gold-bright), #d39b36);
+  color: #2a1807;
+  border-color: rgba(120, 92, 48, 0.55);
+}
+
+.lw-mw-wordcards__filter-count {
+  min-width: 1.4em;
+  text-align: center;
+  font-size: 0.74rem;
+  color: rgba(74, 45, 14, 0.82);
+}
+
+.lw-mw-wordcards__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lw-mw-wordcards__counter {
+  font-size: 0.82rem;
+  color: rgba(80, 52, 20, 0.86);
+}
+
+.lw-mw-wordcards__card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(120, 92, 48, 0.26);
+  background: linear-gradient(180deg, rgba(255, 250, 240, 0.95), rgba(248, 235, 207, 0.92));
+}
+
+.lw-mw-wordcards__label {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(120, 86, 42, 0.92);
+}
+
+.lw-mw-wordcards__meaning {
+  margin: 0;
+  font-size: 1.52rem;
+  font-weight: 700;
+  color: #3d250a;
+}
+
+.lw-mw-wordcards__example {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(82, 53, 23, 0.88);
+}
+
+.lw-mw-wordcards__hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(108, 73, 32, 0.9);
+}
+
+.lw-mw-wordcards__fam {
+  margin: 0;
+  font-size: 0.86rem;
+  color: #4d3010;
+}
+
+.lw-mw-wordcards__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lw-mw-wordcards__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lw-mw-wordcards__primary,
+.lw-mw-wordcards__secondary {
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(120, 92, 48, 0.35);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lw-mw-wordcards__primary {
+  color: #2d1b08;
+  background: linear-gradient(180deg, var(--mw-gold-bright), #ca912f);
+}
+
+.lw-mw-wordcards__secondary {
+  color: #4a2e0f;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.lw-mw-wordcards__secondary.is-added {
+  color: #4e5e1c;
+  border-color: rgba(81, 109, 25, 0.45);
+  background: rgba(220, 239, 173, 0.65);
+}
+
+.lw-mw-wordcards__primary:disabled,
+.lw-mw-wordcards__secondary:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+}
+
+.lw-mw-wordcards__msg {
+  margin: 12px 0 0;
+  font-size: 0.82rem;
+  color: #6a3f10;
+}
+
+.lw-mw-wordbook {
+  width: min(760px, 96vw);
+}
+
+.lw-mw-wordbook__error {
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: rgba(180, 45, 45, 0.12);
+  color: #8f2016;
+  font-size: 0.84rem;
+}
+
+.lw-mw-wordbook__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.lw-mw-wordbook__card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 92, 48, 0.24);
+  background: linear-gradient(180deg, rgba(255, 251, 243, 0.95), rgba(247, 234, 203, 0.92));
+}
+
+.lw-mw-wordbook__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lw-mw-wordbook__word {
+  font-size: 1rem;
+  color: #31200d;
+}
+
+.lw-mw-wordbook__remove {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(140, 73, 44, 0.35);
+  background: rgba(255, 255, 255, 0.76);
+  color: #7b2f18;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lw-mw-wordbook__remove:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.lw-mw-wordbook__meaning {
+  margin: 0;
+  font-size: 0.86rem;
+  color: #5a3712;
+}
+
+.lw-mw-wordbook__example {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #5f4a2f;
+}
+
+.lw-mw-wordbook__example-zh {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #7d6034;
 }
 
 /* ---- 新用户招募军队引导 ---- */
@@ -4609,11 +4909,11 @@ body.cp-battle-immersive .lk-planet-brand--fixed {
   }
 
   .lk-top-right-cluster.is-my-world {
-    width: min(360px, calc(100vw - 28px));
+    width: min(320px, calc(100vw - 28px));
   }
 
-  .lk-mw-command-panel {
-    width: min(300px, calc(100vw - 28px));
+  .lw-mw-foot__dock {
+    grid-template-columns: 1fr;
   }
 
   .lw-mw-hud--map-focus {

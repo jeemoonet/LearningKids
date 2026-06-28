@@ -22,6 +22,8 @@ export class BattleEngine {
   private monsterAI: MonsterAI
   private level: LevelConfig
   private wordBank: WordBank
+  private avoidCapturedReattacks: boolean
+  private capturedWordIds = new Set<string>()
 
   constructor(
     level: LevelConfig,
@@ -29,6 +31,7 @@ export class BattleEngine {
     initialClip: ClipSlot[],
     themeWords: WordEntry[],
     learnedWords: WordEntry[],
+    avoidCapturedReattacks = false,
     rng?: () => number,
   ) {
     this.level = level
@@ -36,6 +39,7 @@ export class BattleEngine {
     this.clip = new AmmoClip();
     this.clip.load(initialClip);
     this.monsterAI = new MonsterAI(level, themeWords, learnedWords, rng);
+    this.avoidCapturedReattacks = avoidCapturedReattacks
     this.state = {
       phase: BattlePhase.INIT,
       levelId: level.id,
@@ -70,6 +74,10 @@ export class BattleEngine {
     return this.state;
   }
 
+  getCapturedWordIds(): string[] {
+    return [...this.capturedWordIds];
+  }
+
   start(): void {
     this.startMonsterAttack();
   }
@@ -98,6 +106,9 @@ export class BattleEngine {
       }
 
       const captureResult = this.clip.addCaptured(captured);
+      if (this.avoidCapturedReattacks) {
+        this.capturedWordIds.add(captured.wordId)
+      }
       this.state = {
         ...this.state,
         phase: BattlePhase.PLAYER_SELECT,
@@ -132,6 +143,9 @@ export class BattleEngine {
 
     if (action === 'replace' && replaceIndex !== undefined) {
       this.clip.replace(replaceIndex, this.state.pendingCapture);
+      if (this.avoidCapturedReattacks) {
+        this.capturedWordIds.add(this.state.pendingCapture.wordId)
+      }
     }
 
     this.state = {
@@ -317,7 +331,8 @@ export class BattleEngine {
   }
 
   private startMonsterAttack(): void {
-    const attackWord = this.monsterAI.pickAttackWord();
+    const excludedWordIds = this.avoidCapturedReattacks ? this.capturedWordIds : undefined
+    const attackWord = this.monsterAI.pickAttackWord(excludedWordIds);
     const pool = this.wordBank.getAllEntries();
     const options = DistractorGen.build(attackWord, pool);
     const timer = this.monsterAI.getTimerSeconds(this.level.timerSeconds, this.state.isEnraged);

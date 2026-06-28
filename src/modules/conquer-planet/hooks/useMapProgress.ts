@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
+  activeForkNodeId,
   buildActivePath,
   type BattleMapNode,
   type KingdomBattleMapLayout,
@@ -15,6 +16,7 @@ export const MAP_STEP_MS = 680
 interface StoredProgress {
   pathIndex: number
   branchId: string | null
+  branchId2?: string | null
 }
 
 export type MapArrivalKind = 'move' | 'fork-arrival' | 'fork-choice'
@@ -83,17 +85,37 @@ export function clearKingdomMapProgress(kingdomId: string) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
 }
 
-function forkIndex(layout: KingdomBattleMapLayout): number {
-  return layout.spineBeforeFork.indexOf(layout.fork.nodeId)
+function layoutForkIsActive(layout: KingdomBattleMapLayout): boolean {
+  if (!layout.nodes[layout.fork.nodeId]) return false
+  return layout.fork.branches.some((b) => b.nodeIds.length > 0)
+}
+
+function layoutFork2IsActive(layout: KingdomBattleMapLayout): boolean {
+  if (!layout.fork2) return false
+  if (!layout.nodes[layout.fork2.nodeId]) return false
+  return layout.fork2.branches.some((b) => b.nodeIds.length > 0)
+}
+
+function activeForkBranches(
+  layout: KingdomBattleMapLayout,
+  branchId: string | null,
+  branchId2: string | null,
+) {
+  const pendingForkId = activeForkNodeId(layout, branchId, branchId2)
+  if (!pendingForkId) return null
+  if (pendingForkId === layout.fork.nodeId) return layout.fork.branches
+  if (layout.fork2 && pendingForkId === layout.fork2.nodeId) return layout.fork2.branches
+  return null
 }
 
 function maxAllowedPathIndex(
   layout: KingdomBattleMapLayout,
   branchId: string | null,
+  branchId2: string | null,
   conqueredLevelIds: string[],
   stepDoneNodeIds: Set<string>,
 ): number {
-  const pathIds = buildActivePath(layout, branchId)
+  const pathIds = buildActivePath(layout, branchId, branchId2)
   for (let i = 0; i < pathIds.length; i++) {
     const node = layout.nodes[pathIds[i]]
     if (node?.levelId && !conqueredLevelIds.includes(node.levelId)) {
@@ -123,6 +145,7 @@ export function useMapProgress(
   const layout = layoutOverride ?? fileLayout
   const [pathIndex, setPathIndex] = useState(0)
   const [branchId, setBranchId] = useState<string | null>(null)
+  const [branchId2, setBranchId2] = useState<string | null>(null)
   const [moving, setMoving] = useState(false)
   const [moveFromIndex, setMoveFromIndex] = useState<number | null>(null)
   const [pendingArrival, setPendingArrival] = useState<MapArrival | null>(null)
@@ -140,40 +163,42 @@ export function useMapProgress(
     if (!layout) return
     const stored = readAll()[kingdomId]
     const branch = stored?.branchId ?? null
-    const allowed = maxAllowedPathIndex(layout, branch, conqueredLevelIds, readStepDone(kingdomId))
+    const branch2 = stored?.branchId2 ?? null
+    const allowed = maxAllowedPathIndex(
+      layout,
+      branch,
+      branch2,
+      conqueredLevelIds,
+      readStepDone(kingdomId),
+    )
     const storedIdx = stored?.pathIndex ?? 0
     const clamped = Math.min(storedIdx, allowed)
     setPathIndex(clamped)
     setBranchId(branch)
+    setBranchId2(branch2)
     if (stored && stored.pathIndex !== clamped) {
-      writeKingdom(kingdomId, { pathIndex: clamped, branchId: branch })
+      writeKingdom(kingdomId, { pathIndex: clamped, branchId: branch, branchId2: branch2 })
     }
   }, [kingdomId, layout, conqueredLevelIds.join(',')])
 
-  const pathIds = layout ? buildActivePath(layout, branchId) : []
+  const pathIds = layout ? buildActivePath(layout, branchId, branchId2) : []
+  const pendingForkId = layout ? activeForkNodeId(layout, branchId, branchId2) : null
   const atFork = Boolean(
     layout &&
-      pathIndex === forkIndex(layout) &&
-      branchId === null &&
-      pathIds[pathIndex] === layout.fork.nodeId,
+      pendingForkId &&
+      pathIndex === pathIds.indexOf(pendingForkId) &&
+      pathIds[pathIndex] === pendingForkId,
   )
 
-  // 停在岔路口且无待确认事件时，自动弹出选路（首次加载 / 关闭后重提）
   useEffect(() => {
     if (!layout || moving || pendingArrival) return
-    const ids = buildActivePath(layout, branchId)
-    const onFork =
-      branchId === null &&
-      pathIndex === forkIndex(layout) &&
-      ids[pathIndex] === layout.fork.nodeId
-    if (onFork) {
-      setPendingArrival({ nodeId: layout.fork.nodeId, kind: 'fork-arrival' })
-    }
-  }, [layout, branchId, pathIndex, pendingArrival, moving])
+    if (!atFork || !pendingForkId) return
+    setPendingArrival({ nodeId: pendingForkId, kind: 'fork-arrival' })
+  }, [layout, atFork, pendingForkId, pendingArrival, moving])
 
   const persist = useCallback(
-    (idx: number, branch: string | null) => {
-      writeKingdom(kingdomId, { pathIndex: idx, branchId: branch })
+    (idx: number, branch: string | null, branch2: string | null) => {
+      writeKingdom(kingdomId, { pathIndex: idx, branchId: branch, branchId2: branch2 })
     },
     [kingdomId],
   )
@@ -212,7 +237,6 @@ export function useMapProgress(
     [kingdomId],
   )
 
-  /** 沿路径前进一格，每格必经（关卡/路点试炼未完成则停留） */
   const advanceOneStep = useCallback(() => {
     if (
       !layout ||
@@ -236,13 +260,14 @@ export function useMapProgress(
     const stepTimer = window.setTimeout(() => {
       setPathIndex(target)
       setMoveFromIndex(null)
-      persist(target, branchId)
+      persist(target, branchId, branchId2)
     }, MAP_STEP_MS)
     timersRef.current.push(stepTimer)
 
     const finalizeTimer = window.setTimeout(() => {
       setMoving(false)
-      if (nextNode?.terrain === 'fork' && branchId === null && nextNodeId === layout.fork.nodeId) {
+      const nextForkId = activeForkNodeId(layout, branchId, branchId2)
+      if (nextNode?.terrain === 'fork' && nextNodeId === nextForkId) {
         setPendingArrival({ nodeId: nextNodeId, kind: 'fork-arrival' })
       } else {
         setPendingArrival({ nodeId: nextNodeId, kind: 'move' })
@@ -258,27 +283,35 @@ export function useMapProgress(
     pathIndex,
     pathIds,
     branchId,
+    branchId2,
     persist,
     clearTimers,
   ])
 
   const chooseBranch = useCallback(
     (pickedBranchId: string) => {
-      if (!layout || !atFork) return
+      if (!layout || !atFork || !pendingForkId) return
 
-      const branch = layout.fork.branches.find((b) => b.id === pickedBranchId)
+      const branches = activeForkBranches(layout, branchId, branchId2)
+      const branch = branches?.find((b) => b.id === pickedBranchId)
       if (!branch) return
 
-      setBranchId(pickedBranchId)
-      persist(pathIndex, pickedBranchId)
+      if (pendingForkId === layout.fork.nodeId) {
+        setBranchId(pickedBranchId)
+        persist(pathIndex, pickedBranchId, branchId2)
+      } else if (layout.fork2 && pendingForkId === layout.fork2.nodeId) {
+        setBranchId2(pickedBranchId)
+        persist(pathIndex, branchId, pickedBranchId)
+      }
+
       setPendingArrival({
-        nodeId: layout.fork.nodeId,
+        nodeId: pendingForkId,
         kind: 'fork-choice',
         branchLabel: branch.label,
         branchHint: branch.hint,
       })
     },
-    [layout, atFork, pathIndex, persist],
+    [layout, atFork, pendingForkId, branchId, branchId2, pathIndex, persist],
   )
 
   const resetMapProgress = useCallback(() => {
@@ -287,17 +320,16 @@ export function useMapProgress(
     clearKingdomStepProgress(kingdomId)
     setPathIndex(0)
     setBranchId(null)
+    setBranchId2(null)
     setMoveFromIndex(null)
     setMoving(false)
     setPendingArrival(null)
     setStepDoneNodeIds(new Set())
   }, [kingdomId, clearTimers])
 
-  // 队伍前方的下一格（仅用于方向提示，不可点击）
   const nextNodeId =
     canAdvance && pathIndex < pathIds.length - 1 ? pathIds[pathIndex + 1] : null
   const playerNodeId = pathIds[pathIndex] ?? ''
-  const playerPos = playerNode
   const moveFromNode =
     moveFromIndex !== null && layout ? layout.nodes[pathIds[moveFromIndex]] : undefined
   const moveToNode =
@@ -310,6 +342,7 @@ export function useMapProgress(
     pathIds,
     pathIndex,
     branchId,
+    branchId2,
     atFork,
     atEnd,
     moving,
@@ -318,7 +351,7 @@ export function useMapProgress(
     blockedByStep,
     blockedByChallenge,
     nextNodeId,
-    playerPos,
+    playerPos: playerNode,
     playerNodeId,
     moveFromIndex,
     moveFromNode,
@@ -329,5 +362,10 @@ export function useMapProgress(
     chooseBranch,
     resetMapProgress,
     markStepDone,
+    layoutForkIsActive: layout ? layoutForkIsActive(layout) : false,
+    layoutFork2IsActive: layout ? layoutFork2IsActive(layout) : false,
+    activeForkBranches: layout
+      ? activeForkBranches(layout, branchId, branchId2)
+      : null,
   }
 }

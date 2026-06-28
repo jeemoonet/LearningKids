@@ -38,6 +38,7 @@ const KINGDOM_1_VISUAL: KingdomMapVisualStyle = 'image'
 const KINGDOM_MAP_IMAGES: Record<string, string> = {
   'kingdom-1': '/assets/conquer-planet/kingdom-1-map.png',
   'kingdom-2': '/assets/conquer-planet/kingdom-2-map.png',
+  'kingdom-3': '/assets/conquer-planet/kingdom-3-map.png',
 }
 
 export function getKingdomMapImage(kingdomId: string): string | null {

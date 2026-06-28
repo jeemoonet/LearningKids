@@ -12,11 +12,7 @@ import {
   type KingdomBattleMapLayout,
 } from '../data/kingdomBattleMapLayout'
 import { getKingdomBattleMapLayout } from '../planetMapConfig'
-import {
-  getForkArrivalEvent,
-  getForkChoiceEvent,
-  getWaypointEvent,
-} from '../data/sceneEvents'
+import { getForkArrivalEvent, getForkChoiceEvent, getKingdomRegionLabel, getWaypointEvent } from '../data/sceneEvents'
 import { nodeNeedsArrivalChallenge, nodeRequiresStepChallenge } from '../data/stepChallenge'
 import { BoardGameMapScene } from '../components/BoardGameMapScene'
 import { FantasyTopDownMapScene } from '../components/FantasyTopDownMapScene'
@@ -50,6 +46,7 @@ function nodeIcon(level: PlanetLevel): string {
   if (level.kind === 'boss') return '🏯'
   if (level.kind === 'recruit') return '🏘️'
   if (level.kind === 'review') return '🌫️'
+  if (level.kind === 'forest') return '🌲'
   return level.icon
 }
 
@@ -77,15 +74,22 @@ function buildSceneModal(
   node: BattleMapNode,
   level: PlanetLevel | undefined,
   layout: KingdomBattleMapLayout,
+  kingdomId: string,
 ): SceneModalContent | null {
   if (arrival.kind === 'fork-arrival') {
+    const branches =
+      arrival.nodeId === layout.fork.nodeId
+        ? layout.fork.branches
+        : layout.fork2?.nodeId === arrival.nodeId
+          ? layout.fork2.branches
+          : layout.fork.branches
     return {
       icon: '⑂',
       title: '三岔路口',
       location: node.label,
       body: getForkArrivalEvent(),
       primaryLabel: '选择道路',
-      branchChoices: layout.fork.branches.map((b) => ({
+      branchChoices: branches.map((b) => ({
         id: b.id,
         label: b.label,
         hint: b.hint,
@@ -110,8 +114,8 @@ function buildSceneModal(
   return {
     icon: terrainIcon(node.terrain),
     title: node.label,
-    location: '微光村国 · 远征途中',
-    body: getWaypointEvent(node),
+    location: getKingdomRegionLabel(kingdomId),
+    body: getWaypointEvent(node, kingdomId),
     primaryLabel: '继续探索',
     enterable: false,
   }
@@ -308,6 +312,7 @@ function RichKingdomMap({
     pathIds,
     pathIndex,
     branchId,
+    branchId2,
     moving,
     canAdvance,
     atEnd,
@@ -352,10 +357,10 @@ function RichKingdomMap({
       const ids = [...before, layout.fork.nodeId, ...unchosen.nodeIds, ...after]
       return [buildStraightPathD(pathPointsFromLayout(layout, ids), viewW, viewH)]
     }
-    return buildForkPreviewPaths(layout).map((ids) =>
+    return buildForkPreviewPaths(layout, branchId).map((ids) =>
       buildStraightPathD(pathPointsFromLayout(layout, ids), viewW, viewH),
     )
-  }, [layout, branchId, swayScale, viewW, viewH, usesRealBg])
+  }, [layout, branchId, branchId2, swayScale, viewW, viewH, usesRealBg])
   const playerNodeId = pathIds[pathIndex]
   const playerNode = layout?.nodes[playerNodeId]
   const currentLevel = playerNode?.levelId ? levelById.get(playerNode.levelId) : undefined
@@ -365,7 +370,7 @@ function RichKingdomMap({
     const node = layout.nodes[pendingArrival.nodeId]
     if (!node) return null
     const level = node.levelId ? levelById.get(node.levelId) : undefined
-    return buildSceneModal(pendingArrival, node, level, layout)
+    return buildSceneModal(pendingArrival, node, level, layout, kingdom.id)
   }, [pendingArrival, layout, levelById])
 
   const startStepChallenge = (nodeId: string) => {
@@ -608,6 +613,7 @@ function RichKingdomMap({
           {stepChallengeNodeId && session && layout.nodes[stepChallengeNodeId] && (
             <MapStepChallenge
               session={session}
+              kingdomId={kingdom.id}
               node={layout.nodes[stepChallengeNodeId]}
               level={
                 layout.nodes[stepChallengeNodeId].levelId

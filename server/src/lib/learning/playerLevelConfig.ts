@@ -4,16 +4,16 @@ export const LEVEL_THRESHOLDS: readonly number[] = [
 ] as const
 
 export const LEVEL_TITLES: readonly string[] = [
-  '词条练习生',
-  '认词小敢死队',
-  '精灵蹭课生',
-  '句型杂役兵',
-  '单词撮合师',
-  '介词见习巫',
-  '远征小队长',
-  '王国敲章员',
-  '双轨满级人',
-  '词汇传说本体',
+  '青铜战士',
+  '白银士兵',
+  '黄金勇士',
+  '小队长',
+  '中队长',
+  '大队长',
+  '星尘先锋',
+  '传说将军',
+  '王者元帅',
+  '至尊星主',
 ] as const
 
 export const MAX_LEVEL = LEVEL_TITLES.length

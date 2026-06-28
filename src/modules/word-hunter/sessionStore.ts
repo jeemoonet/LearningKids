@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import type {
   BattleState,
+  ClipSlot,
   LevelConfig,
   PrefillResult,
   SaveData,
@@ -36,6 +37,7 @@ interface SessionStore {
     wordMastery: Record<string, WordMastery>
   }) => void
   getWord: (id: string) => WordEntry | undefined
+  getCapturedWords: () => string[]
   getLevel: () => LevelConfig | undefined
   prepareBattle: () => PrefillResult | null
   startBattle: () => void
@@ -82,6 +84,60 @@ function reportBossMicroGain(
       patchMessage(`${word} 熟悉度 +1`)
     })
     .catch(() => undefined)
+}
+
+function buildBossOwnedPrefill(wordBank: WordBank): PrefillResult {
+  const used = new Set<string>()
+  const recentIds: string[] = []
+  const recommendedIds: string[] = []
+
+  for (const id of wordBank.getRecentLearnedWordIds(5)) {
+    if (recentIds.length >= 5) break
+    if (!wordBank.isOwned(id) || used.has(id)) continue
+    recentIds.push(id)
+    used.add(id)
+  }
+
+  for (const id of wordBank.getMediumFamiliarityWordIds(used)) {
+    if (recommendedIds.length >= 5) break
+    if (!wordBank.isOwned(id) || used.has(id)) continue
+    recommendedIds.push(id)
+    used.add(id)
+  }
+
+  const ownedFallback = wordBank
+    .getOwnedEntries()
+    .map((w) => w.id)
+    .filter((id) => !used.has(id))
+
+  for (const id of ownedFallback) {
+    if (recentIds.length < 5) {
+      recentIds.push(id)
+      used.add(id)
+      continue
+    }
+    if (recommendedIds.length < 5) {
+      recommendedIds.push(id)
+      used.add(id)
+      continue
+    }
+    break
+  }
+
+  const slots: ClipSlot[] = [
+    ...recentIds.map((wordId) => ({
+      wordId,
+      source: 'owned' as const,
+      prefillTag: 'recent' as const,
+    })),
+    ...recommendedIds.map((wordId) => ({
+      wordId,
+      source: 'owned' as const,
+      prefillTag: 'recommended' as const,
+    })),
+  ]
+
+  return { slots, recentIds, recommendedIds }
 }
 
 export const useSessionStore = create<SessionStore>((set, get) => ({
@@ -146,26 +202,50 @@ export const useSessionStore = create<SessionStore>((set, get) => ({
 
   getWord: (id) => get().wordBank?.getEntry(id),
 
+  getCapturedWords: () => {
+    const { engine, wordBank } = get()
+    if (!engine || !wordBank) return []
+    return engine
+      .getCapturedWordIds()
+      .map((id) => wordBank.getEntry(id)?.word)
+      .filter((w): w is string => Boolean(w))
+  },
+
   getLevel: () => get().level ?? undefined,
 
   prepareBattle: () => {
-    const { wordBank, level } = get()
+    const { wordBank, level, battleMode } = get()
     if (!wordBank || !level) return null
-    const prefill = AutoLoadout.build(wordBank, level)
+    const prefill =
+      battleMode === 'boss'
+        ? buildBossOwnedPrefill(wordBank)
+        : AutoLoadout.build(wordBank, level)
     set({ prefill })
     return prefill
   },
 
   startBattle: () => {
-    const { wordBank, level, prefill } = get()
+    const { wordBank, level, prefill, battleMode } = get()
     if (!wordBank || !level || !prefill) return
 
-    const themeWords = level.themeWordIds
+    const themeWordsAll = level.themeWordIds
       .map((id) => wordBank.getEntry(id))
       .filter((w): w is WordEntry => Boolean(w))
+    const themeWords =
+      battleMode === 'boss'
+        ? themeWordsAll.filter((w) => !wordBank.isOwned(w.id))
+        : themeWordsAll
     const learnedWords = wordBank.getOwnedEntries()
+    const monsterLearnedWords = battleMode === 'boss' ? [] : learnedWords
 
-    const engine = new BattleEngine(level, wordBank, prefill.slots, themeWords, learnedWords)
+    const engine = new BattleEngine(
+      level,
+      wordBank,
+      prefill.slots,
+      themeWords,
+      monsterLearnedWords,
+      battleMode === 'boss',
+    )
     engine.start()
     set({ engine, battle: { ...engine.getState() } })
   },

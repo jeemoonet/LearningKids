@@ -12,6 +12,7 @@
 | DOC-PROD-004 | [学习闭环系统设计](DOC-PROD-004-学习闭环系统设计.md) | 学员-centered 单词学习闭环（我的库 / 学习集 / 小节 / 测评） |
 | DOC-PROD-005 | [征服星球玩法设计](DOC-PROD-005-征服星球玩法设计文档.md) | **扩展游戏**：词性军团养成，Word Hunter 战略层升级（`/conquer`） |
 | DOC-PROD-006 | [征服星球过关游戏插件设计](DOC-PROD-006-征服星球过关游戏插件设计.md) | 地图关卡内可插拔过关游戏（GamePlugin / GameRunner / settleLevel） |
+| DOC-PROD-008 | [迷雾森林国地图设计](DOC-PROD-008-迷雾森林国地图设计.md) | 第三王国战斗地图：路点、岔路、底图美术与关卡配置 |
 
 **熟词池**（纯单词，供例句/短文生成）：`server/data/中考高频词-初级组.md` · 中级组 · 高级组  
 重新导出：`python scripts/export_high_freq_words.py`

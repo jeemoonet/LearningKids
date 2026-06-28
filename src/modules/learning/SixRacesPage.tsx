@@ -5,6 +5,7 @@ import { RaceGuidePanel } from './components/RaceGuidePanel'
 import { KingdomGuidePanel } from './components/KingdomGuidePanel'
 import { GameplayGuidePanel } from './components/GameplayGuidePanel'
 import '../conquer-planet/styles/conquer.css'
+import { PLANET_NAME } from './planetBrand'
 
 interface SixRacesPageProps {
   nav: LearningNav
@@ -19,11 +20,11 @@ const TAB_META: Record<GuideTab, { label: string; desc: string }> = {
   },
   kingdoms: {
     label: '七大王国',
-    desc: '卡吉姆星球分为七大王国，由易到难逐一征服，壮大你的军团。',
+    desc: `${PLANET_NAME}分为七大王国，由易到难逐一征服，壮大你的军团。`,
   },
   races: {
     label: '六大种族',
-    desc: '卡吉姆星球的居民按语法功能分为六族，相生相克决定远征战术。',
+    desc: `${PLANET_NAME}的居民按语法功能分为六族，相生相克决定远征战术。`,
   },
 }
 

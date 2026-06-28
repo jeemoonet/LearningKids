@@ -18,11 +18,22 @@ export class MonsterAI {
     this.rng = rng
   }
 
-  pickAttackWord(): WordEntry {
-    const themePool = this.themeWords.length > 0 ? this.themeWords : this.learnedWords;
-    const learnedPool = this.learnedWords.length > 0 ? this.learnedWords : themePool;
+  pickAttackWord(excludedWordIds?: Set<string>): WordEntry {
+    const themeBase = this.themeWords.length > 0 ? this.themeWords : this.learnedWords
+    const learnedBase = this.learnedWords.length > 0 ? this.learnedWords : themeBase
+    const filterPool = (pool: WordEntry[]) =>
+      excludedWordIds && excludedWordIds.size > 0
+        ? pool.filter((w) => !excludedWordIds.has(w.id))
+        : pool
+
+    const themePool = filterPool(themeBase)
+    const learnedPool = filterPool(learnedBase)
+    const safeThemePool = themePool.length > 0 ? themePool : themeBase
+    const safeLearnedPool = learnedPool.length > 0 ? learnedPool : learnedBase
     const useTheme = this.rng() < this.level.attackPoolWeights.theme;
-    const pool = useTheme ? themePool : learnedPool;
+    let pool = useTheme ? safeThemePool : safeLearnedPool
+    if (pool.length === 0) pool = safeThemePool.length > 0 ? safeThemePool : safeLearnedPool
+    if (pool.length === 0) pool = this.themeWords.length > 0 ? this.themeWords : this.learnedWords
     const idx = Math.floor(this.rng() * pool.length);
     return pool[Math.min(idx, pool.length - 1)];
   }

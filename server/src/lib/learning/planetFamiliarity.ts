@@ -49,6 +49,11 @@ export interface BossMicroGainResult {
   session: PlanetSession
 }
 
+export interface SetPlanetFamiliarityResult {
+  familiarity: number
+  session: PlanetSession
+}
+
 /** Boss 战：已入团词拼写/认义答对时 +1 熟悉度（同日同词最多一次，答错不扣） */
 export function applyBossMicroGain(
   db: DatabaseSync,
@@ -96,6 +101,31 @@ export function applyBossMicroGain(
   ).run(userId, key, gainDay, Date.now())
 
   return { gained: true, familiarity: fam, session: buildPlanetSession(db, userId) }
+}
+
+/** 手动设置单词熟悉度（用于闪卡自评） */
+export function setPlanetWordFamiliarity(
+  db: DatabaseSync,
+  userId: string,
+  word: string,
+  familiarity: number,
+): SetPlanetFamiliarityResult {
+  const key = word.trim().toLowerCase()
+  if (!key) {
+    throw new Error('缺少单词')
+  }
+
+  const known = db
+    .prepare('SELECT 1 FROM user_known_words WHERE user_id = ? AND lower(word) = ?')
+    .get(userId, key)
+  if (!known) {
+    throw new Error('单词不在我的军团中')
+  }
+
+  ensureFamiliarityRows(db, userId)
+  const value = Math.max(0, Math.min(FAMILIARITY_MAX, Math.round(familiarity)))
+  setPlanetFamiliarityExact(db, userId, key, value)
+  return { familiarity: value, session: buildPlanetSession(db, userId) }
 }
 
 /** 小节测评通过后，将 section_words 熟悉度合并进 planet 表 */

@@ -11,6 +11,7 @@ const KIND_LABEL: Record<PlanetLevelKind, string> = {
   recruit: '招募',
   review: '复习',
   boss: '决战',
+  forest: '迷林',
 }
 
 function subscribeRoadbook(onStoreChange: () => void) {

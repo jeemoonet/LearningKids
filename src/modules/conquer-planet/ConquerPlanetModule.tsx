@@ -19,6 +19,8 @@ import { RecruitVillageLevel } from './views/RecruitVillageLevel'
 
 import { ReviewLevel } from './views/ReviewLevel'
 
+import { ForestPathLevel } from './views/ForestPathLevel'
+
 import { installGames } from './games'
 
 import { WorldMapBackground } from '../learning/components/WorldMapBackground'
@@ -234,6 +236,12 @@ function ConquerPlanetInner({
         {!loading && !error && view.name === 'level' && view.level.kind === 'review' && (
 
           <ReviewLevel levelId={view.level.id} onBack={backToKingdom} />
+
+        )}
+
+        {!loading && !error && view.name === 'level' && view.level.kind === 'forest' && (
+
+          <ForestPathLevel levelId={view.level.id} onBack={backToKingdom} />
 
         )}
 

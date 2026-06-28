@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import type { LevelProgress } from '../api'
 import { AnimatedMetricNum } from './AnimatedMetricNum'
 const HERO_AVATARS = ['🦊', '🦉', '🐻', '🐼', '🦁', '🐯', '🐸', '🦋']
 
@@ -29,9 +28,14 @@ function HeroStat({ value, animate }: HeroStatProps) {
   return <span className="lw-mw-hero__stat-num">{value}</span>
 }
 
-function xpPercentFromProgress(progress: LevelProgress): number {
-  const span = Math.max(1, progress.ceiling - progress.floor)
-  return Math.min(100, Math.round(((progress.current - progress.floor) / span) * 100))
+function wordPercent(done: number, total: number): number {
+  if (total <= 0) return 0
+  return Math.min(100, Math.round((done / total) * 100))
+}
+
+export interface WordProgress {
+  done: number
+  total: number
 }
 
 export interface PlayerHeroCardProps {
@@ -41,7 +45,7 @@ export interface PlayerHeroCardProps {
   armySize?: number
   combatPower?: number
   magicPower?: number
-  levelProgress?: LevelProgress | null
+  wordProgress?: WordProgress | null
   animateStats?: boolean
   menuOpen: boolean
   onMenuToggle: () => void
@@ -56,7 +60,7 @@ export function PlayerHeroCard({
   armySize,
   combatPower,
   magicPower,
-  levelProgress,
+  wordProgress,
   animateStats = false,
   menuOpen,
   onMenuToggle,
@@ -64,10 +68,13 @@ export function PlayerHeroCard({
   className,
 }: PlayerHeroCardProps) {
   const avatar = heroAvatarFor(displayName)
-  const title = levelTitle ?? '词条练习生'
+  const title = levelTitle?.trim() || '青铜战士'
   const showStats =
     armySize !== undefined || combatPower !== undefined || magicPower !== undefined
-  const xpPercent = levelProgress ? xpPercentFromProgress(levelProgress) : 0
+  const wordPercentValue = wordProgress
+    ? wordPercent(wordProgress.done, wordProgress.total)
+    : 0
+  const showWordProgress = Boolean(wordProgress && wordProgress.total > 0)
 
   return (
     <section
@@ -80,41 +87,48 @@ export function PlayerHeroCard({
 
       <div className="lw-mw-hero__main">
         <span className="lw-mw-hero__name">{displayName}</span>
-        <span className="lw-mw-hero__title">✦ {title} ✦</span>
+        <span className="lw-mw-hero__title">{title}</span>
 
         {showStats && (
           <div
             className="lw-mw-hero__stats"
-            aria-label={`军团 ${armySize ?? 0}，战斗力 ${combatPower ?? 0}，魔法值 ${magicPower ?? 0}`}
+            aria-label={`军团 ${armySize ?? 0}，战斗力 ${combatPower ?? 0}，魔法值 ${magicPower ?? 0}${showWordProgress ? `，掌握单词 ${wordProgress!.done} / ${wordProgress!.total}` : ''}`}
           >
-            {armySize !== undefined && (
-              <span>
-                🛡️ <HeroStat value={armySize} animate={animateStats} />
-              </span>
+            <div className="lw-mw-hero__stats-metrics">
+              {armySize !== undefined && (
+                <span>
+                  🛡️ <HeroStat value={armySize} animate={animateStats} />
+                </span>
+              )}
+              {combatPower !== undefined && (
+                <span>
+                  ⚔️ <HeroStat value={combatPower} animate={animateStats} />
+                </span>
+              )}
+              {magicPower !== undefined && (
+                <span>
+                  ✨ <HeroStat value={magicPower} animate={animateStats} />
+                </span>
+              )}
+            </div>
+            {showWordProgress && (
+              <div
+                className="lw-mw-hero__word-progress lk-player-hero__word-progress"
+                role="progressbar"
+                aria-valuenow={wordProgress!.done}
+                aria-valuemin={0}
+                aria-valuemax={wordProgress!.total}
+                aria-label={`掌握单词 ${wordProgress!.done} / ${wordProgress!.total}`}
+              >
+                <span
+                  className="lw-mw-hero__word-progress-fill"
+                  style={{ width: `${wordPercentValue}%` }}
+                />
+                <span className="lw-mw-hero__word-progress-text">
+                  {wordProgress!.done}/{wordProgress!.total}
+                </span>
+              </div>
             )}
-            {combatPower !== undefined && (
-              <span>
-                ⚔️ <HeroStat value={combatPower} animate={animateStats} />
-              </span>
-            )}
-            {magicPower !== undefined && (
-              <span>
-                ✨ <HeroStat value={magicPower} animate={animateStats} />
-              </span>
-            )}
-          </div>
-        )}
-
-        {levelProgress && (
-          <div
-            className="lw-mw-hero__xp lk-player-hero__xp"
-            role="progressbar"
-            aria-valuenow={levelProgress.current}
-            aria-valuemin={levelProgress.floor}
-            aria-valuemax={levelProgress.ceiling}
-            aria-label={`成长进度 ${xpPercent}%`}
-          >
-            <span className="lw-mw-hero__xp-fill" style={{ width: `${xpPercent}%` }} />
           </div>
         )}
       </div>

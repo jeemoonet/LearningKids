@@ -1,4 +1,5 @@
 import type { AuthUser } from '../modules/auth/authApi'
+import { PLANET_NAME } from '../modules/learning/planetBrand'
 
 interface HomePageProps {
   user: AuthUser | null
@@ -22,7 +23,7 @@ export function HomePage({
   return (
     <div className="home-page">
       <header className="home-header">
-        <h1>LearningKids</h1>
+        <h1>{PLANET_NAME}</h1>
         <p>少儿互动学习平台，选择一个模块开始练习</p>
         <div className="home-auth-bar">
           {authLoading ? (

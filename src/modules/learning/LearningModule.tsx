@@ -201,21 +201,14 @@ export function LearningModule() {
       )}
       <div className={`lk-top-right-cluster${page === 'my-world-hub' ? ' is-my-world' : ''}`}>
         {page === 'my-world-hub' ? (
-          <div className="lk-mw-command-panel">
-            <div id="lk-user-bar-mount" className="lk-mw-command-panel__hero">
-              {user && (
-                <PlayerStatsUserBar
-                  userDisplayName={user.displayName}
-                  profile={profile}
-                  onLogout={() => void logout()}
-                />
-              )}
-            </div>
-            <div
-              id="lw-mw-rail-slot"
-              className="lk-mw-command-panel__rail-slot"
-              aria-label="我的世界快捷入口"
-            />
+          <div id="lk-user-bar-mount" className="lk-mw-user-mount">
+            {user && (
+              <PlayerStatsUserBar
+                userDisplayName={user.displayName}
+                profile={profile}
+                onLogout={() => void logout()}
+              />
+            )}
           </div>
         ) : (
           <div className="lk-top-right-cluster__head">

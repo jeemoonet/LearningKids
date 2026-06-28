@@ -22,6 +22,10 @@ export const DEFAULT_LEVEL_GAME: Record<PlanetLevelKind, LevelGameSpec> = {
     mode: 'fixed',
     steps: [{ gameId: 'enemy-duel' }],
   },
+  forest: {
+    mode: 'fixed',
+    steps: [{ gameId: 'adv-verb-pair', config: { rounds: 4 } }],
+  },
 }
 
 export function getLevelGameSpec(kind: PlanetLevelKind): LevelGameSpec {

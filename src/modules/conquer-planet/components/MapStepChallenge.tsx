@@ -13,6 +13,7 @@ import { LevelIntroModal } from './LevelIntroModal'
 interface MapStepChallengeProps {
   session: PlanetSession
   node: BattleMapNode
+  kingdomId?: string
   level?: PlanetLevel
   variant?: 'waypoint' | 'consolidate'
   onComplete: () => void
@@ -25,6 +26,7 @@ type Phase = 'intro' | 'play'
 export function MapStepChallenge({
   session,
   node,
+  kingdomId = 'kingdom-1',
   level,
   variant = 'waypoint',
   onComplete,
@@ -39,8 +41,8 @@ export function MapStepChallenge({
   }, [node.id, variant])
 
   const intro = useMemo(
-    () => buildStepChallengeIntro(node, variant, level),
-    [node, variant, level],
+    () => buildStepChallengeIntro(node, variant, level, kingdomId),
+    [node, variant, level, kingdomId],
   )
 
   const context = useMemo(

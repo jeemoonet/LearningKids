@@ -1,6 +1,7 @@
 import { apiFetch } from '../../lib/api'
 import type {
   BossLevelPayload,
+  ForestLevelPayload,
   PlanetSession,
   RecruitLevelPayload,
   ReviewLevelPayload,
@@ -31,10 +32,10 @@ export function fetchBossLevel(levelId: string) {
   return apiFetch<BossLevelPayload>(`/conquer-planet/levels/${levelId}/boss`)
 }
 
-export function completeBossLevel(levelId: string) {
+export function completeBossLevel(levelId: string, words?: string[]) {
   return apiFetch<{ added: number; session: PlanetSession }>(
     `/conquer-planet/levels/${levelId}/boss`,
-    { method: 'POST' },
+    { method: 'POST', body: JSON.stringify({ words }) },
   )
 }
 
@@ -56,9 +57,27 @@ export function submitBossMicroGain(word: string) {
   )
 }
 
+export function setPlanetWordFamiliarity(word: string, familiarity: number) {
+  return apiFetch<{ familiarity: number; session: PlanetSession }>('/conquer-planet/familiarity', {
+    method: 'POST',
+    body: JSON.stringify({ word, familiarity }),
+  })
+}
+
 export function completeReviewLevel(levelId: string) {
   return apiFetch<{ session: PlanetSession }>(
     `/conquer-planet/levels/${levelId}/review-complete`,
+    { method: 'POST' },
+  )
+}
+
+export function fetchForestLevel(levelId: string) {
+  return apiFetch<ForestLevelPayload>(`/conquer-planet/levels/${levelId}/forest`)
+}
+
+export function completeForestLevel(levelId: string) {
+  return apiFetch<{ session: PlanetSession }>(
+    `/conquer-planet/levels/${levelId}/forest-complete`,
     { method: 'POST' },
   )
 }

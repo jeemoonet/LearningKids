@@ -304,7 +304,8 @@ function kingdomLevelsDone(levels: PlanetLevelConfig[], conquered: string[]): nu
 }
 
 function isKingdomCleared(levels: PlanetLevelConfig[], conquered: string[]): boolean {
-  return levels.length > 0 && levels.every((l) => conquered.includes(l.id))
+  const required = levels.filter((l) => l.kind !== 'forest')
+  return required.length > 0 && required.every((l) => conquered.includes(l.id))
 }
 
 function buildKingdomSummaries(db: DatabaseSync, conquered: string[]): PlanetKingdomSummary[] {
@@ -552,17 +553,26 @@ export function completeBossLevel(
   db: DatabaseSync,
   userId: string,
   levelId: string,
+  words?: string[],
 ): { added: number; session: PlanetSession } {
   const payload = buildBossLevel(db, userId, levelId)
   if (!payload) throw new Error('关卡不存在')
 
-  const toAdd = payload.rewardPreview.map((w) => ({
-    word: w.word,
-    pos: w.partOfSpeech === 'other' ? 'other' : w.partOfSpeech,
+  const posLookup = new Map<string, string>()
+  for (const w of [...payload.rewardPreview, ...payload.army, ...payload.distractorPool]) {
+    posLookup.set(w.word.toLowerCase(), w.partOfSpeech === 'other' ? 'other' : w.partOfSpeech)
+  }
+  const fallbackWords = payload.rewardPreview.map((w) => w.word)
+  const finalWords = Array.from(
+    new Set((Array.isArray(words) && words.length > 0 ? words : fallbackWords).map((w) => w.trim())),
+  ).filter(Boolean)
+  const toAdd = finalWords.map((word) => ({
+    word,
+    pos: posLookup.get(word.toLowerCase()) ?? 'other',
   }))
   const added = addKnownWords(db, userId, toAdd, 'planet_boss')
-  for (const w of payload.rewardPreview) {
-    setFamiliarity(db, userId, w.word, 1)
+  for (const word of finalWords) {
+    setFamiliarity(db, userId, word, 1)
   }
 
   markLevelDone(db, userId, levelId)
@@ -690,6 +700,55 @@ export function completeReviewLevel(
 ): PlanetSession {
   const level = getPlanetLevel(levelId)
   if (!level || level.kind !== 'review') throw new Error('关卡不存在')
+  markLevelDone(db, userId, levelId)
+  return buildPlanetSession(db, userId)
+}
+
+const FOREST_ADV_VERB_PAIRS: Array<{
+  verb: string
+  adverb: string
+  verbHint?: string
+  adverbHint?: string
+}> = [
+  { verb: 'run', adverb: 'quickly', verbHint: '跑', adverbHint: '快速地' },
+  { verb: 'eat', adverb: 'well', verbHint: '吃', adverbHint: '好地' },
+  { verb: 'listen', adverb: 'carefully', verbHint: '听', adverbHint: '仔细地' },
+  { verb: 'walk', adverb: 'slowly', verbHint: '走', adverbHint: '慢慢地' },
+  { verb: 'speak', adverb: 'loudly', verbHint: '说', adverbHint: '大声地' },
+  { verb: 'work', adverb: 'hard', verbHint: '工作', adverbHint: '努力地' },
+]
+
+export interface ForestLevelPayload {
+  level: PlanetLevelConfig
+  pairs: typeof FOREST_ADV_VERB_PAIRS
+  distractorPool: PlanetWordEntry[]
+}
+
+export function buildForestLevel(
+  db: DatabaseSync,
+  userId: string,
+  levelId: string,
+): ForestLevelPayload | null {
+  const level = getPlanetLevel(levelId)
+  if (!level || level.kind !== 'forest') return null
+
+  const offset = levelId === 'special-2' ? 2 : 0
+  const pairs = FOREST_ADV_VERB_PAIRS.slice(offset, offset + 4)
+
+  return {
+    level,
+    pairs,
+    distractorPool: buildDistractorPool(db, userId),
+  }
+}
+
+export function completeForestLevel(
+  db: DatabaseSync,
+  userId: string,
+  levelId: string,
+): PlanetSession {
+  const level = getPlanetLevel(levelId)
+  if (!level || level.kind !== 'forest') throw new Error('关卡不存在')
   markLevelDone(db, userId, levelId)
   return buildPlanetSession(db, userId)
 }

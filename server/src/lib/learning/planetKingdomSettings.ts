@@ -22,8 +22,19 @@ export interface BattleMapNodeConfig {
 export interface BattleMapLayoutConfig {
   kingdomId: string
   spineBeforeFork: string[]
+  spineMid?: string[]
   spineAfterFork: string[]
   fork: {
+    nodeId: string
+    branches: Array<{
+      id: string
+      label: string
+      hint: string
+      nodeIds: string[]
+    }>
+    mergeNodeId: string
+  }
+  fork2?: {
     nodeId: string
     branches: Array<{
       id: string
@@ -205,9 +216,129 @@ const KINGDOM_2_BATTLE_MAP: BattleMapLayoutConfig = {
   },
 }
 
+const KINGDOM_3_BATTLE_MAP: BattleMapLayoutConfig = {
+  kingdomId: 'kingdom-3',
+  spineBeforeFork: ['start', 'wp-cliff'],
+  fork: {
+    nodeId: 'fork-1',
+    branches: [
+      {
+        id: 'sunlit',
+        label: '日光林径',
+        hint: '向东穿光斑台地，经树屋瞭望台俯瞰林海',
+        nodeIds: ['wp-sun-1', 'wp-sun-2', 'wp-sun-3'],
+      },
+      {
+        id: 'mist-deep',
+        label: '迷雾深径',
+        hint: '向西沉入磷光迷沼，动词猎手只认副词之光',
+        nodeIds: ['wp-mist-1', 'special-1', 'wp-mist-2'],
+      },
+    ],
+    mergeNodeId: 'wp-merge-1',
+  },
+  spineMid: ['recruit-1', 'wp-outpost', 'recruit-2', 'review-1', 'review-2'],
+  fork2: {
+    nodeId: 'fork-2',
+    branches: [
+      {
+        id: 'ridge',
+        label: '树脊险道',
+        hint: '沿悬根栈道北上，猎手迷局横在路中',
+        nodeIds: ['wp-ridge-1', 'special-2', 'wp-ridge-2'],
+      },
+      {
+        id: 'root',
+        label: '根拱秘道',
+        hint: '绕巨根而行，雾中可听见根须的低语',
+        nodeIds: ['wp-root-1', 'wp-root-2', 'wp-root-3'],
+      },
+    ],
+    mergeNodeId: 'wp-add-3',
+  },
+  spineAfterFork: ['wp-final', 'wp-add-1'],
+  nodes: {
+    start: { id: 'start', x: 52, y: 93, label: '猎手营地', terrain: 'camp' },
+    'wp-cliff': { id: 'wp-cliff', x: 42, y: 84, label: '苔石渡桥', terrain: 'waypoint' },
+    'fork-1': { id: 'fork-1', x: 38, y: 78, label: '林缘雾口', terrain: 'fork' },
+    'wp-sun-1': { id: 'wp-sun-1', x: 58, y: 76, label: '光斑台地', terrain: 'waypoint' },
+    'wp-sun-2': { id: 'wp-sun-2', x: 72, y: 68, label: '树屋瞭望', terrain: 'tower' },
+    'wp-sun-3': { id: 'wp-sun-3', x: 62, y: 62, label: '林冠边缘', terrain: 'waypoint' },
+    'wp-mist-1': { id: 'wp-mist-1', x: 18, y: 72, label: '磷光入口', terrain: 'waypoint' },
+    'special-1': {
+      id: 'special-1',
+      x: 14,
+      y: 64,
+      label: '磷光迷沼',
+      terrain: 'forest',
+      levelId: 'special-1',
+    },
+    'wp-mist-2': { id: 'wp-mist-2', x: 22, y: 58, label: '根须隘口', terrain: 'waypoint' },
+    'wp-merge-1': { id: 'wp-merge-1', x: 48, y: 56, label: '汇合营地', terrain: 'waypoint' },
+    'recruit-1': {
+      id: 'recruit-1',
+      x: 52,
+      y: 50,
+      label: '林间聚落',
+      terrain: 'village',
+      levelId: 'recruit-1',
+    },
+    'wp-outpost': { id: 'wp-outpost', x: 55, y: 44, label: '瞭望树屋', terrain: 'tower' },
+    'recruit-2': {
+      id: 'recruit-2',
+      x: 58,
+      y: 38,
+      label: '追猎营地',
+      terrain: 'village',
+      levelId: 'recruit-2',
+    },
+    'review-1': {
+      id: 'review-1',
+      x: 42,
+      y: 34,
+      label: '迷途幽谷',
+      terrain: 'valley',
+      levelId: 'review-1',
+    },
+    'review-2': {
+      id: 'review-2',
+      x: 50,
+      y: 28,
+      label: '低语根林',
+      terrain: 'forest',
+      levelId: 'review-2',
+    },
+    'fork-2': { id: 'fork-2', x: 48, y: 24, label: '三岔雾口', terrain: 'fork' },
+    'wp-ridge-1': { id: 'wp-ridge-1', x: 30, y: 22, label: '树脊栈道', terrain: 'waypoint' },
+    'special-2': {
+      id: 'special-2',
+      x: 24,
+      y: 18,
+      label: '猎手迷局',
+      terrain: 'forest',
+      levelId: 'special-2',
+    },
+    'wp-ridge-2': { id: 'wp-ridge-2', x: 36, y: 16, label: '悬根平台', terrain: 'waypoint' },
+    'wp-root-1': { id: 'wp-root-1', x: 64, y: 22, label: '根拱狭道', terrain: 'waypoint' },
+    'wp-root-2': { id: 'wp-root-2', x: 70, y: 18, label: '根须深廊', terrain: 'waypoint' },
+    'wp-root-3': { id: 'wp-root-3', x: 58, y: 16, label: '雾根出口', terrain: 'waypoint' },
+    'wp-add-3': { id: 'wp-add-3', x: 50, y: 14, label: '古树拱门', terrain: 'waypoint' },
+    'wp-final': { id: 'wp-final', x: 50, y: 12, label: '王座前庭', terrain: 'waypoint' },
+    'wp-add-1': {
+      id: 'wp-add-1',
+      x: 50,
+      y: 9,
+      label: '林心王座',
+      terrain: 'castle',
+      levelId: 'boss-1',
+    },
+  },
+}
+
 export const DEFAULT_BATTLE_MAP_LAYOUTS: Record<string, BattleMapLayoutConfig> = {
   'kingdom-1': KINGDOM_1_BATTLE_MAP,
   'kingdom-2': KINGDOM_2_BATTLE_MAP,
+  'kingdom-3': KINGDOM_3_BATTLE_MAP,
 }
 
 interface KingdomOverrideRow {

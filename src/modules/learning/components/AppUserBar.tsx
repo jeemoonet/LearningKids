@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { LearningProfile, LevelProgress } from '../api'
 import { emptyRaceBreakdown } from '../userBarExtrasStore'
-import { PlayerHeroCard } from './PlayerHeroCard'
+import { PlayerHeroCard, type WordProgress } from './PlayerHeroCard'
 
 export interface PlayerBarMetrics {
   armySize: number
@@ -33,6 +33,7 @@ interface AppUserBarProps {
     total: number
     percent: number
   }
+  wordProgress?: WordProgress | null
 }
 
 function formatTotalPower(value: number): string {
@@ -47,6 +48,7 @@ export function AppUserBar({
   raceBreakdown,
   onInspectArmy,
   conquestProgress,
+  wordProgress,
 }: AppUserBarProps) {
   const [open, setOpen] = useState(false)
   const name = profile?.displayName ?? userDisplayName ?? '学员'
@@ -134,22 +136,43 @@ export function AppUserBar({
           <p className="lk-user-bar__conquest-label">
             {conquestProgress?.label ?? profile?.currentLibraryName ?? '未选择'}
           </p>
-          <div
-            className="lk-user-bar__conquest-bar"
-            role="progressbar"
-            aria-valuenow={conquestProgress?.done ?? 0}
-            aria-valuemin={0}
-            aria-valuemax={conquestProgress?.total ?? 0}
-            aria-label={`征服进度 ${conquestProgress?.done ?? 0} / ${conquestProgress?.total ?? 0}`}
-          >
-            <span
-              className="lk-user-bar__conquest-bar-fill"
-              style={{ width: `${conquestProgress?.percent ?? 0}%` }}
-            />
-            <span className="lk-user-bar__conquest-bar-text">
-              {conquestProgress?.done ?? 0} / {conquestProgress?.total ?? 0}
-            </span>
-          </div>
+          {wordProgress && wordProgress.total > 0 ? (
+            <div
+              className="lk-user-bar__conquest-bar"
+              role="progressbar"
+              aria-valuenow={wordProgress.done}
+              aria-valuemin={0}
+              aria-valuemax={wordProgress.total}
+              aria-label={`掌握单词 ${wordProgress.done} / ${wordProgress.total}`}
+            >
+              <span
+                className="lk-user-bar__conquest-bar-fill"
+                style={{
+                  width: `${Math.min(100, Math.round((wordProgress.done / wordProgress.total) * 100))}%`,
+                }}
+              />
+              <span className="lk-user-bar__conquest-bar-text">
+                {wordProgress.done} / {wordProgress.total} 词
+              </span>
+            </div>
+          ) : (
+            <div
+              className="lk-user-bar__conquest-bar"
+              role="progressbar"
+              aria-valuenow={conquestProgress?.done ?? 0}
+              aria-valuemin={0}
+              aria-valuemax={conquestProgress?.total ?? 0}
+              aria-label={`征服进度 ${conquestProgress?.done ?? 0} / ${conquestProgress?.total ?? 0}`}
+            >
+              <span
+                className="lk-user-bar__conquest-bar-fill"
+                style={{ width: `${conquestProgress?.percent ?? 0}%` }}
+              />
+              <span className="lk-user-bar__conquest-bar-text">
+                {conquestProgress?.done ?? 0} / {conquestProgress?.total ?? 0}
+              </span>
+            </div>
+          )}
         </div>
 
         <button
@@ -172,7 +195,7 @@ export function AppUserBar({
         armySize={playerMetrics?.armySize}
         combatPower={playerMetrics?.combatPower}
         magicPower={playerMetrics?.magicPower}
-        levelProgress={playerMetrics?.levelProgress}
+        wordProgress={wordProgress}
         animateStats={Boolean(playerMetrics)}
         menuOpen={open}
         onMenuToggle={() => setOpen((v) => !v)}

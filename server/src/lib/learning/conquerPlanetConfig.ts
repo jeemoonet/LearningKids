@@ -1,6 +1,6 @@
 import type { WhPartOfSpeech } from './wordHunter.js'
 
-export type PlanetLevelKind = 'recruit' | 'boss' | 'review'
+export type PlanetLevelKind = 'recruit' | 'boss' | 'review' | 'forest'
 
 export interface PlanetLevelConfig {
   id: string
@@ -97,7 +97,7 @@ export const PLANET_KINGDOMS: PlanetKingdomConfig[] = [
     id: 'kingdom-7',
     order: 7,
     name: '暗影王座国',
-    subtitle: '邪恶军团的心脏，征服卡吉姆星球的最终决战',
+    subtitle: '邪恶军团的心脏，征服卡伊姆星球的最终决战',
     difficulty: '★★★★★',
     theme: 'throne',
     monster: { id: 'shadow-crown', name: '暗影王座', epithet: '词性至尊', partOfSpeech: 'noun' },
@@ -145,6 +145,62 @@ export const KINGDOM_LEVELS: Record<string, PlanetLevelConfig[]> = {
       monsterName: '迷雾石像',
       bossRecruitCount: 5,
       bossPreferPos: 'noun',
+      seals: 6,
+    },
+  ],
+  'kingdom-3': [
+    {
+      id: 'recruit-1',
+      kind: 'recruit',
+      name: '林间聚落',
+      desc: '林缘村民以动作动词自报家门，完成认词与造句后收编入伍',
+      icon: '🏘️',
+    },
+    {
+      id: 'recruit-2',
+      kind: 'recruit',
+      name: '追猎营地',
+      desc: '动词猎手营地，叫对追猎类动词并完成造句，方能加入远征军',
+      icon: '🏹',
+    },
+    {
+      id: 'review-1',
+      kind: 'review',
+      name: '迷途幽谷',
+      desc: '雾谷回声重叠，走散的动词武士徘徊其间，须及时叫出名字召回',
+      icon: '🌫️',
+    },
+    {
+      id: 'review-2',
+      kind: 'review',
+      name: '低语根林',
+      desc: '巨树根须低语干扰记忆，走散士兵藏身在林影中，需快速认义留住',
+      icon: '🌲',
+    },
+    {
+      id: 'special-1',
+      kind: 'forest',
+      name: '磷光迷沼',
+      desc: '动词猎手不愿带路。为动词匹配副词，配对成功才能通行',
+      icon: '🍄',
+    },
+    {
+      id: 'special-2',
+      kind: 'forest',
+      name: '猎手迷局',
+      desc: '浓雾中的动词陷阱，须用副词点亮正确的行动方式',
+      icon: '🌫️',
+    },
+    {
+      id: 'boss-1',
+      kind: 'boss',
+      name: '林心王座',
+      desc: '动词之影林影追猎者盘踞巨木王座。派出魔法师(副词)相生克制，拼写击破封印',
+      icon: '🌳',
+      monsterPos: 'verb',
+      monsterName: '林影追猎者',
+      bossRecruitCount: 5,
+      bossPreferPos: 'verb',
       seals: 6,
     },
   ],

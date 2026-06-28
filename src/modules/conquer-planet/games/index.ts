@@ -4,6 +4,7 @@ import { flashcardGame } from './flashcard'
 import { sentenceClozeGame } from './sentence-cloze'
 import { spellFillGame } from './spell-fill'
 import { wordMatchGame } from './word-match'
+import { advVerbPairGame } from './adv-verb-pair'
 import { enemyDuelGame } from './enemy-duel'
 
 let installed = false
@@ -14,6 +15,7 @@ const BUILTIN_GAMES: AnyGamePlugin[] = [
   spellFillGame,
   wordMatchGame,
   enemyDuelGame,
+  advVerbPairGame,
 ]
 
 /** 安装内置游戏插件（幂等，可在模块入口处调用一次） */
@@ -40,4 +42,5 @@ export { sentenceClozeGame } from './sentence-cloze'
 export { spellFillGame } from './spell-fill'
 export { wordMatchGame } from './word-match'
 export { enemyDuelGame } from './enemy-duel'
+export { advVerbPairGame } from './adv-verb-pair'
 export type { EnemyDuelMeta } from './enemy-duel'

@@ -31,6 +31,9 @@ export function BattleView({ onVictory, onDefeat, embedded }: BattleViewProps) {
   const timeoutFired = useRef(false)
   const [spellInputs, setSpellInputs] = useState<Record<number, string>>({})
   const [firePulse, setFirePulse] = useState(false)
+  const [meaningPeekLeft, setMeaningPeekLeft] = useState(3)
+  const [peekWordId, setPeekWordId] = useState<string | null>(null)
+  const meaningTimerRef = useRef<number | null>(null)
 
   const isDefense = battle?.phase === BattlePhase.DEFENSE_QUIZ
 
@@ -50,6 +53,13 @@ export function BattleView({ onVictory, onDefeat, embedded }: BattleViewProps) {
   useEffect(() => {
     setSpellInputs({})
   }, [battle?.selectedWordId, battle?.turn])
+
+  useEffect(
+    () => () => {
+      if (meaningTimerRef.current) window.clearTimeout(meaningTimerRef.current)
+    },
+    [],
+  )
 
   useEffect(() => {
     const defenseFeedbackActive =
@@ -114,6 +124,20 @@ export function BattleView({ onVictory, onDefeat, embedded }: BattleViewProps) {
       clipPrompt &&
       clipPrompt.blankIndices.every((idx) => (spellInputs[idx] ?? '').length === 1),
   )
+  const canPeekMeanings =
+    meaningPeekLeft > 0 &&
+    (battle?.phase === BattlePhase.PLAYER_SELECT || battle?.phase === BattlePhase.PLAYER_SPELL)
+
+  const handlePeekWordMeaning = useCallback((wordId: string) => {
+    if (!canPeekMeanings) return
+    setMeaningPeekLeft((left) => Math.max(0, left - 1))
+    setPeekWordId(wordId)
+    if (meaningTimerRef.current) window.clearTimeout(meaningTimerRef.current)
+    meaningTimerRef.current = window.setTimeout(() => {
+      setPeekWordId(null)
+      meaningTimerRef.current = null
+    }, 6000)
+  }, [canPeekMeanings])
 
   const handleFire = useCallback(() => {
     if (!selectedId || !clipPrompt) return
@@ -166,6 +190,7 @@ export function BattleView({ onVictory, onDefeat, embedded }: BattleViewProps) {
         <span>{level.name}</span>
         <span>回合 {battle.turn}</span>
         <span>弹药 {battle.clip.length}</span>
+        <span className="meaning-peek-tip">释义机会 {meaningPeekLeft}/3（点已选单词查看）</span>
         {battle.isEnraged && <span className="tag resist">狂暴</span>}
       </header>
 
@@ -197,6 +222,9 @@ export function BattleView({ onVictory, onDefeat, embedded }: BattleViewProps) {
                     onInputChange={(i, v) => setSpellInputs((prev) => ({ ...prev, [i]: v }))}
                     onEnterFire={selectedId === slot.wordId && canFire ? handleFire : undefined}
                     onReplace={() => captureReplace(index)}
+                    isMeaningVisible={peekWordId === slot.wordId}
+                    canPeekMeaning={canPeekMeanings && !defenseFeedbackActive}
+                    onPeekMeaning={handlePeekWordMeaning}
                   />
                 )
               })}

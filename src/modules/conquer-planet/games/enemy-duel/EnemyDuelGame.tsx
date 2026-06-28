@@ -31,6 +31,7 @@ export function EnemyDuelGame({ context, onComplete, onExit }: GameProps) {
   const startBattle = useSessionStore((s) => s.startBattle)
   const resetBattle = useSessionStore((s) => s.resetBattle)
   const clear = useSessionStore((s) => s.clear)
+  const getCapturedWords = useSessionStore((s) => s.getCapturedWords)
   const [phase, setPhase] = useState<Phase>('intro')
 
   const monsterId = meta?.monsterId ?? context.monster?.id ?? 'mist-golem'
@@ -70,12 +71,15 @@ export function EnemyDuelGame({ context, onComplete, onExit }: GameProps) {
   }, [prepareBattle, startBattle])
 
   const handleVictory = useCallback(() => {
+    const rewardWords = meta?.bossPayload?.rewardPreview.map((w) => w.word) ?? []
+    const capturedWords = getCapturedWords()
+    const merged = [...new Set([...rewardWords, ...capturedWords])]
     onComplete({
       cleared: true,
-      correctWords: meta?.bossPayload?.rewardPreview.map((w) => w.word) ?? [],
+      correctWords: merged,
       wrongWords: [],
     })
-  }, [onComplete, meta])
+  }, [onComplete, meta, getCapturedWords])
 
   const handleDefeat = useCallback(() => setPhase('lose'), [])
 

@@ -1,4 +1,5 @@
 import { AuthProvider, useAuth } from './modules/auth/AuthContext'
+import { PLANET_NAME } from './modules/learning/planetBrand'
 import { LearningModule } from './modules/learning/LearningModule'
 import { LoginPage } from './pages/LoginPage'
 import './App.css'
@@ -22,7 +23,7 @@ function AppContent() {
     return (
       <div className="app">
         <LoginPage
-          title="LearningKids"
+          title={PLANET_NAME}
           subtitle="我的世界建军团 · 冒险星球远征 · 训练营专项"
         />
       </div>

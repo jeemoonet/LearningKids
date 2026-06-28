@@ -1,7 +1,7 @@
 import type { PartOfSpeech } from '../word-hunter/domain/battle/battleTypes'
 import { RACE_LABEL } from '../word-hunter/domain/element/Element'
 
-export type PlanetLevelKind = 'recruit' | 'boss' | 'review'
+export type PlanetLevelKind = 'recruit' | 'boss' | 'review' | 'forest'
 
 export interface PlanetLevel {
   id: string
@@ -99,6 +99,12 @@ export interface ReviewLevelPayload {
   distractorPool: PlanetWord[]
 }
 
+export interface ForestLevelPayload {
+  level: PlanetLevel
+  pairs: Array<{ verb: string; adverb: string; verbHint?: string; adverbHint?: string }>
+  distractorPool: PlanetWord[]
+}
+
 /** 六大战斗种族（UI 编队顺序） */
 export const SIX_RACES: Array<Exclude<PartOfSpeech, 'other'>> = [
   'verb',
@@ -127,6 +133,7 @@ export function toWordEntry(w: PlanetWord) {
     word: w.word,
     meaning: w.meaning,
     phonetic: w.phonetic,
+    syllables: w.syllables,
     partOfSpeech: w.partOfSpeech,
     keySlots: w.keySlots,
     clozeSentence: w.sentence,

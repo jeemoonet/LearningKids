@@ -4,15 +4,17 @@ import { requireAuth } from '../auth.js'
 import { getDb } from '../db.js'
 import { applyPlanetReview,
   buildBossLevel,
+  buildForestLevel,
   buildPlanetSession,
   buildRecruitLevel,
   buildReviewLevel,
   completeBossLevel,
+  completeForestLevel,
   completeRecruitLevel,
   completeReviewLevel,
   resetKingdomProgress,
 } from '../lib/learning/conquerPlanet.js'
-import { applyBossMicroGain } from '../lib/learning/planetFamiliarity.js'
+import { applyBossMicroGain, setPlanetWordFamiliarity } from '../lib/learning/planetFamiliarity.js'
 import { aiNameMapNodes, aiNameSingleMapNode } from '../lib/learning/mapNodeNaming.js'
 import { buildPlanetConfigPayload } from '../lib/learning/planetKingdomSettings.js'
 
@@ -61,11 +63,12 @@ conquerPlanetRoutes.get('/levels/:id/boss', (c) => {
   return c.json(payload)
 })
 
-conquerPlanetRoutes.post('/levels/:id/boss', (c) => {
+conquerPlanetRoutes.post('/levels/:id/boss', async (c) => {
   const userId = c.get('user').id
   const levelId = c.req.param('id')
+  const body = (await c.req.json().catch(() => ({}))) as { words?: string[] }
   try {
-    const result = completeBossLevel(getDb(), userId, levelId)
+    const result = completeBossLevel(getDb(), userId, levelId, body.words)
     return c.json(result)
   } catch (err) {
     return c.json({ error: err instanceof Error ? err.message : '保存失败' }, 400)
@@ -99,11 +102,46 @@ conquerPlanetRoutes.post('/boss-micro-gain', async (c) => {
   return c.json(result)
 })
 
+conquerPlanetRoutes.post('/familiarity', async (c) => {
+  const userId = c.get('user').id
+  const body = (await c.req.json().catch(() => ({}))) as { word?: string; familiarity?: number }
+  if (!body.word?.trim()) {
+    return c.json({ error: '缺少 word' }, 400)
+  }
+  if (typeof body.familiarity !== 'number') {
+    return c.json({ error: '缺少 familiarity' }, 400)
+  }
+  try {
+    const result = setPlanetWordFamiliarity(getDb(), userId, body.word, body.familiarity)
+    return c.json(result)
+  } catch (err) {
+    return c.json({ error: err instanceof Error ? err.message : '设置熟悉度失败' }, 400)
+  }
+})
+
 conquerPlanetRoutes.post('/levels/:id/review-complete', (c) => {
   const userId = c.get('user').id
   const levelId = c.req.param('id')
   try {
     const session = completeReviewLevel(getDb(), userId, levelId)
+    return c.json({ session })
+  } catch (err) {
+    return c.json({ error: err instanceof Error ? err.message : '保存失败' }, 400)
+  }
+})
+
+conquerPlanetRoutes.get('/levels/:id/forest', (c) => {
+  const userId = c.get('user').id
+  const payload = buildForestLevel(getDb(), userId, c.req.param('id'))
+  if (!payload) return c.json({ error: '关卡不存在' }, 404)
+  return c.json(payload)
+})
+
+conquerPlanetRoutes.post('/levels/:id/forest-complete', (c) => {
+  const userId = c.get('user').id
+  const levelId = c.req.param('id')
+  try {
+    const session = completeForestLevel(getDb(), userId, levelId)
     return c.json({ session })
   } catch (err) {
     return c.json({ error: err instanceof Error ? err.message : '保存失败' }, 400)

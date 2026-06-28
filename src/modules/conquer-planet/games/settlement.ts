@@ -1,5 +1,6 @@
 import {
   completeBossLevel,
+  completeForestLevel,
   completeRecruitLevel,
   completeReviewLevel,
   submitPlanetReview,
@@ -98,10 +99,19 @@ export async function settleLevel(
       }
     }
     case 'boss': {
-      const { session } = await completeBossLevel(levelId)
+      const { session } = await completeBossLevel(levelId, correctWords)
       const addedWords = soldierWordsAdded(previousSession, session)
       recordRoadbook(session, levelId, addedWords, previousSession)
       return { kind, session, summary: '城堡攻陷，关卡通关！' }
+    }
+    case 'forest': {
+      const { session } = await completeForestLevel(levelId)
+      recordRoadbook(session, levelId, correctWords, previousSession)
+      return {
+        kind,
+        session,
+        summary: `迷林试炼通过，成功配对 ${correctWords.length} 组动词`,
+      }
     }
     default: {
       // 穷尽性保护

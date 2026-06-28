@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { fetchPlanetSession } from '../../conquer-planet/api'
 import type { PlanetSession } from '../../conquer-planet/types'
 import { ArmyInspectModal } from '../../conquer-planet/components/ArmyInspectModal'
-import { learningApi, type LearningProfile } from '../api'
+import { learningApi, type LearningLibrary, type LearningProfile } from '../api'
 import { PLAYER_STATS_DIRTY } from '../playerStatsEvents'
 import { raceBreakdownFromSession, useUserBarExtrasStore } from '../userBarExtrasStore'
 import { AppUserBar, type PlayerBarMetrics, type RaceBreakdownItem } from './AppUserBar'
@@ -20,6 +20,7 @@ export function PlayerStatsUserBar({
 }: PlayerStatsUserBarProps) {
   const [metrics, setMetrics] = useState<PlayerBarMetrics | null>(null)
   const [session, setSession] = useState<PlanetSession | null>(null)
+  const [libraries, setLibraries] = useState<LearningLibrary[]>([])
   const [inspectOpen, setInspectOpen] = useState(false)
   const storeSession = useUserBarExtrasStore((s) => s.planetSession)
 
@@ -42,6 +43,11 @@ export function PlayerStatsUserBar({
     fetchPlanetSession()
       .then(({ session: nextSession }) => setSession(nextSession))
       .catch(() => setSession(null))
+
+    learningApi
+      .listLibraries()
+      .then(({ libraries: list }) => setLibraries(list))
+      .catch(() => setLibraries([]))
   }, [])
 
   useEffect(() => {
@@ -69,6 +75,14 @@ export function PlayerStatsUserBar({
     return { label, done, total, percent }
   }, [profile?.currentLibraryName, effectiveSession])
 
+  const wordProgress = useMemo(() => {
+    const done = profile?.knownCount ?? metrics?.armySize ?? 0
+    const currentLibrary = libraries.find((lib) => lib.id === profile?.currentLibraryId)
+    const total = currentLibrary?.wordCount ?? 0
+    if (total <= 0) return null
+    return { done, total }
+  }, [profile?.knownCount, profile?.currentLibraryId, metrics?.armySize, libraries])
+
   return (
     <>
       <AppUserBar
@@ -79,6 +93,7 @@ export function PlayerStatsUserBar({
         raceBreakdown={raceBreakdown}
         onInspectArmy={effectiveSession ? () => setInspectOpen(true) : undefined}
         conquestProgress={conquestProgress}
+        wordProgress={wordProgress}
       />
       {inspectOpen && effectiveSession && (
         <ArmyInspectModal

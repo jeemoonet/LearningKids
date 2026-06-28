@@ -98,6 +98,14 @@ export const LEVEL_KIND_LEARNING: Record<PlanetLevelKind, LevelKindLearningProfi
     enterCta: '进入决战',
     sceneHint: '选相生武士出战 → 拼写发射击破封印 → 怪兽回合认词闪避。',
   },
+  forest: {
+    kind: 'forest',
+    nodeLabel: '森林·迷路',
+    teachingGoal: '副词修饰动词 · 固定搭配',
+    methodIds: ['adv-verb-pair'],
+    enterCta: '进入迷林',
+    sceneHint: '动词猎手封锁道路，为每个动词选出合适副词，全部配对正确方可通行。',
+  },
 }
 
 /** 地图地形与关卡类型的默认对应（无 levelId 的路点仅作叙事参考） */
@@ -105,7 +113,7 @@ export const TERRAIN_LEVEL_KIND: Partial<Record<MapTerrain, PlanetLevelKind>> = 
   village: 'recruit',
   valley: 'review',
   castle: 'boss',
-  forest: 'recruit',
+  forest: 'forest',
 }
 
 export function getLevelLearningProfile(kind: PlanetLevelKind): LevelKindLearningProfile {

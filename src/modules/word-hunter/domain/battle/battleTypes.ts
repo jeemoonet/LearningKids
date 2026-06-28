@@ -22,6 +22,8 @@ export interface WordEntry {
   word: string;
   meaning: string;
   phonetic?: string;
+  /** 音节数（用于伤害加成）。缺失时由前端按拼写估算。 */
+  syllables?: number;
   theme?: string;
   difficulty?: 1 | 2 | 3;
   partOfSpeech: PartOfSpeech;
@@ -126,6 +128,10 @@ export interface HitResult {
   wordPos: PartOfSpeech;
   monsterPos: PartOfSpeech;
   affinity: PosAffinity;
+  /** 本次命中使用的音节数（缺失时按词面估算） */
+  syllables: number;
+  /** 0=普通，1=重炮(3音节)，2=超重炮(4+音节) */
+  artilleryTier: 0 | 1 | 2;
   damageMultiplier: number;
   rawDamage: number;
   sealsBrokenThisHit: number;

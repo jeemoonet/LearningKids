@@ -143,20 +143,40 @@ export function BattleArena({ level, battle, attackWord, remaining, onDefense }:
   if (battle.phase === BattlePhase.RESOLVE && battle.lastHitResult) {
     const hit = battle.lastHitResult;
     const broken = hit.sealsBrokenThisHit;
+    const artilleryTier = hit.artilleryTier ?? 0;
+    const artilleryClass =
+      artilleryTier === 2
+        ? 'battle-arena--artillery-super'
+        : artilleryTier === 1
+          ? 'battle-arena--artillery-heavy'
+          : '';
+    const projectileArtilleryClass =
+      artilleryTier === 2
+        ? 'projectile--artillery-super'
+        : artilleryTier === 1
+          ? 'projectile--artillery-heavy'
+          : '';
+    const impactArtilleryClass =
+      artilleryTier === 2
+        ? 'impact-burst--artillery-super'
+        : artilleryTier === 1
+          ? 'impact-burst--artillery-heavy'
+          : '';
 
     return (
       <section
-        className={`battle-arena battle-arena--resolve battle-arena--resolve-hit battle-arena--resolve-${hit.affinity}`}
+        className={`battle-arena battle-arena--resolve battle-arena--resolve-hit battle-arena--resolve-${hit.affinity} ${artilleryClass}`}
         style={{ backgroundImage: `url(${bgUrl})` }}
       >
         <div className="arena-flash arena-flash--hit" aria-hidden />
         <div className="projectile-wrap" aria-hidden>
-          <div className={`projectile projectile--${hit.affinity}`}>
+          <div className={`projectile projectile--${hit.affinity} ${projectileArtilleryClass}`}>
             <span className="projectile-trail" />
             <span className="projectile-core" />
           </div>
         </div>
-        <div className={`impact-burst impact-burst--${hit.affinity}`} aria-hidden />
+        <div className={`impact-burst impact-burst--${hit.affinity} ${impactArtilleryClass}`} aria-hidden />
+        {artilleryTier > 0 && <div className="artillery-shockwave" aria-hidden />}
         {broken > 0 && (
           <div className="seal-shards" aria-hidden>
             {Array.from({ length: broken * 4 }).map((_, i) => (
@@ -169,6 +189,11 @@ export function BattleArena({ level, battle, attackWord, remaining, onDefense }:
           <p className="arena-damage arena-damage--pop">
             {DamageResolver.affinityLabel(hit.affinity)} · {hit.rawDamage.toFixed(1)} 伤害
           </p>
+          {artilleryTier > 0 && (
+            <p className="artillery-banner">
+              {artilleryTier === 2 ? '超重炮发射！' : '重炮发射！'}（{hit.syllables} 音节）
+            </p>
+          )}
           {broken > 0 && (
             <p className="seal-break-banner">击破 {broken} 格封印！</p>
           )}

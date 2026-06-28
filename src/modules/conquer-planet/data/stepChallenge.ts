@@ -2,7 +2,7 @@ import type { BattleMapNode } from './kingdomBattleMapLayout'
 import { terrainIcon } from './kingdomBattleMapLayout'
 import { shuffle } from '../domain/quiz'
 import type { LevelIntroContent } from './levelIntro'
-import { getWaypointEvent } from './sceneEvents'
+import { getKingdomRegionLabel, getWaypointEvent } from './sceneEvents'
 import type { GameContext, LevelGameSpec } from '../games/types'
 import type { PlanetSession, PlanetSoldier, PlanetWord, PlanetLevel } from '../types'
 
@@ -87,8 +87,9 @@ export function buildStepChallengeIntro(
   node: BattleMapNode,
   variant: 'waypoint' | 'consolidate',
   level?: PlanetLevel,
+  kingdomId = 'kingdom-1',
 ): LevelIntroContent {
-  const scene = getWaypointEvent(node)
+  const scene = getWaypointEvent(node, kingdomId)
   const wordCount = STEP_WORD_COUNT
 
   if (variant === 'consolidate' && level) {
@@ -105,7 +106,7 @@ export function buildStepChallengeIntro(
   return {
     icon: terrainIcon(node.terrain),
     title: node.label,
-    location: '微光村国 · 远征途中',
+    location: getKingdomRegionLabel(kingdomId),
     body: `你遇到了${node.label}上的盘查。${scene} 请准备好，完成 ${wordCount} 道认词试炼才能继续北上。`,
     note: '题目每次随机抽取，全对才能继续前进。',
     primaryLabel: '准备好了',
