@@ -64,6 +64,13 @@ export function setPlanetWordFamiliarity(word: string, familiarity: number) {
   })
 }
 
+export function importTargetWords(limit = 30, familiarity = 2) {
+  return apiFetch<{ imported: number; session: PlanetSession }>('/conquer-planet/import-target', {
+    method: 'POST',
+    body: JSON.stringify({ limit, familiarity }),
+  })
+}
+
 export function completeReviewLevel(levelId: string) {
   return apiFetch<{ session: PlanetSession }>(
     `/conquer-planet/levels/${levelId}/review-complete`,

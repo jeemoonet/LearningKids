@@ -12,10 +12,11 @@ import { TrainingCampPage } from './TrainingCampPage'
 import { ConquerPlanetModule } from '../conquer-planet/ConquerPlanetModule'
 import { ConquerProvider } from '../conquer-planet/ConquerContext'
 import { ConquerUserBarSync } from '../conquer-planet/components/ConquerUserBarSync'
-import { FloatingNav, hubFromPage, hubLandingPage, type AppHub } from './components/FloatingNav'
+import { FloatingNav, hubFromPage, type AppHub } from './components/FloatingNav'
 import { PlayerStatsUserBar } from './components/PlayerStatsUserBar'
 import { PlanetBrandLogo } from './components/PlanetBrandLogo'
 import { SixRacesPage } from './SixRacesPage'
+import { MyWordListPage } from './MyWordListPage'
 import {
   normalizeAppPathname,
   pathForAppHub,
@@ -30,6 +31,7 @@ import './training-camp-mc.css'
 
 export type LearningPageName =
   | 'my-world-hub'
+  | 'wordbook'
   | 'conquer-planet'
   | 'training-hub'
   | 'init'
@@ -63,6 +65,7 @@ function trainingSectionFromPage(page: LearningPageName): TrainingSectionId | un
 
 const HUB_LOGO_PAGES: LearningPageName[] = [
   'my-world-hub',
+  'wordbook',
   'conquer-planet',
   'training-hub',
   'prep-game',
@@ -70,11 +73,12 @@ const HUB_LOGO_PAGES: LearningPageName[] = [
   'six-races',
 ]
 
-const HUB_PAGES: HubPageName[] = ['my-world-hub', 'conquer-planet', 'training-hub']
+const HUB_PAGES: HubPageName[] = ['my-world-hub', 'wordbook', 'conquer-planet', 'training-hub']
 
 /** 各 Hub 页自行拉取数据，不应被 profile 加载挡住 */
 const PROFILE_INDEPENDENT_PAGES: LearningPageName[] = [
   'my-world-hub',
+  'wordbook',
   'conquer-planet',
   'training-hub',
   'prep-game',
@@ -171,7 +175,14 @@ export function LearningModule() {
     if (hub === 'adventure') {
       setConquerInitialKingdomId(null)
     }
-    const next = hubLandingPage(hub) as LearningPageName
+    const next: LearningPageName =
+      hub === 'my-world'
+        ? 'my-world-hub'
+        : hub === 'wordbook'
+          ? 'wordbook'
+          : hub === 'adventure'
+            ? 'conquer-planet'
+            : 'training-hub'
     setPage(next)
     const path = pathForAppHub(hub)
     if (normalizeAppPathname(window.location.pathname) !== path) {
@@ -188,7 +199,7 @@ export function LearningModule() {
 
   return (
     <div
-      className={`learning-app${isImmersive && page === 'conquer-planet' ? ' is-conquer-page' : ''}${page === 'my-world-hub' ? ' is-world-map-page' : ''}${page === 'six-races' ? ' is-six-races-page' : ''}${isTrainingCamp ? ' is-training-camp' : ''}${isImmersive ? ' is-immersive-page' : ''}${showPlanetLogo ? ' has-planet-logo' : ''}`}
+      className={`learning-app${isImmersive && page === 'conquer-planet' ? ' is-conquer-page' : ''}${page === 'my-world-hub' ? ' is-world-map-page' : ''}${page === 'wordbook' ? ' is-wordlist-page' : ''}${page === 'six-races' ? ' is-six-races-page' : ''}${isTrainingCamp ? ' is-training-camp' : ''}${isImmersive ? ' is-immersive-page' : ''}${showPlanetLogo ? ' has-planet-logo' : ''}`}
     >
       {showPlanetLogo && !isTrainingCamp && <PlanetBrandLogo fixed />}
       {!isTrainingCamp && (
@@ -248,6 +259,12 @@ export function LearningModule() {
               </ConquerProvider>
             )}
             {page === 'six-races' && <SixRacesPage nav={nav} />}
+            {page === 'wordbook' && (
+              <ConquerProvider>
+                <ConquerUserBarSync />
+                <MyWordListPage />
+              </ConquerProvider>
+            )}
             {(page === 'training-hub' || page === 'prep-game' || page === 'sentence-game') && (
               <TrainingCampPage
                 initialSection={trainingSectionFromPage(page) ?? 'spirit'}

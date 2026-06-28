@@ -753,6 +753,39 @@ export function completeForestLevel(
   return buildPlanetSession(db, userId)
 }
 
+/** 从当前挑战目标（当前学习库）批量导入新词到我的单词表 */
+export function importCurrentTargetWords(
+  db: DatabaseSync,
+  userId: string,
+  limit = 30,
+  defaultFamiliarity = 2,
+): { imported: number; session: PlanetSession } {
+  const batch = Math.max(1, Math.min(100, Math.floor(limit)))
+  const fam = Math.max(1, Math.min(FAMILIARITY_MAX, Math.round(defaultFamiliarity)))
+  const knownSet = getKnownWordSet(db, userId)
+  const libraryId = getUserLibraryId(db, userId)
+  const rows = fetchLibraryWordRows(db, libraryId, {
+    excludeKnown: knownSet,
+    limit: batch,
+  })
+
+  const seen = new Set<string>()
+  const toAdd: Array<{ word: string; pos?: string }> = []
+  for (const row of rows) {
+    const mapped = mapWordRow(row)
+    const key = mapped.word.trim().toLowerCase()
+    if (!key || seen.has(key)) continue
+    seen.add(key)
+    toAdd.push({ word: mapped.word, pos: mapped.pos })
+  }
+
+  const imported = addKnownWords(db, userId, toAdd, 'target_import')
+  for (const item of toAdd) {
+    setFamiliarity(db, userId, item.word, fam)
+  }
+  return { imported, session: buildPlanetSession(db, userId) }
+}
+
 export interface PlanetProgressSummary {
   kingdomTotal: number
   conqueredKingdoms: number

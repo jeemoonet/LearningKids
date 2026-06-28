@@ -3,8 +3,6 @@ import { createPortal } from 'react-dom'
 import { useConquer } from '../../conquer-planet/ConquerContext'
 import { SIX_RACES } from '../../conquer-planet/types'
 import { learningApi, type LearningLibrary, type LearningProfile } from '../api'
-import { MyWordFlashcardPanel } from './MyWordFlashcardPanel'
-import { MyWordbookPanel } from './MyWordbookPanel'
 import { WordBankFloatPanel } from './WordBankFloatPanel'
 
 interface MyWorldTopActionsProps {
@@ -13,11 +11,9 @@ interface MyWorldTopActionsProps {
 }
 
 export function MyWorldTopActions({ profile, onRefresh }: MyWorldTopActionsProps) {
-  const { session, refresh: refreshConquer, setSession } = useConquer()
+  const { session, refresh: refreshConquer } = useConquer()
   const [slot, setSlot] = useState<HTMLElement | null>(null)
   const [legionOpen, setLegionOpen] = useState(false)
-  const [wordListOpen, setWordListOpen] = useState(false)
-  const [wordbookOpen, setWordbookOpen] = useState(false)
   const [targetOpen, setTargetOpen] = useState(false)
   const [libraries, setLibraries] = useState<LearningLibrary[]>([])
   const [targetBusy, setTargetBusy] = useState(false)
@@ -80,32 +76,6 @@ export function MyWorldTopActions({ profile, onRefresh }: MyWorldTopActionsProps
           <span className="lw-mw-action__sub">
             {legionCount} 兵 · {raceCount}/6 族
           </span>
-        </span>
-      </button>
-      <button
-        type="button"
-        className="lw-mw-glass lw-mw-action lw-mw-head__btn"
-        onClick={() => setWordListOpen(true)}
-      >
-        <span className="lw-mw-action__icon" aria-hidden="true">
-          🗂️
-        </span>
-        <span className="lw-mw-action__body">
-          <span className="lw-mw-action__title">我的单词表</span>
-          <span className="lw-mw-action__sub">按熟悉度筛选闪卡复习</span>
-        </span>
-      </button>
-      <button
-        type="button"
-        className="lw-mw-glass lw-mw-action lw-mw-head__btn"
-        onClick={() => setWordbookOpen(true)}
-      >
-        <span className="lw-mw-action__icon" aria-hidden="true">
-          📒
-        </span>
-        <span className="lw-mw-action__body">
-          <span className="lw-mw-action__title">我的单词本</span>
-          <span className="lw-mw-action__sub">重点单词卡片，可移除</span>
         </span>
       </button>
       <button
@@ -183,15 +153,6 @@ export function MyWorldTopActions({ profile, onRefresh }: MyWorldTopActionsProps
         />
       )}
 
-      {wordListOpen && (
-        <MyWordFlashcardPanel
-          soldiers={session?.soldiers ?? []}
-          onSessionUpdate={(nextSession) => setSession(nextSession)}
-          onClose={() => setWordListOpen(false)}
-        />
-      )}
-
-      {wordbookOpen && <MyWordbookPanel onClose={() => setWordbookOpen(false)} />}
     </>
   )
 }

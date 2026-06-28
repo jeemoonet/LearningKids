@@ -10,6 +10,7 @@ import { applyPlanetReview,
   buildReviewLevel,
   completeBossLevel,
   completeForestLevel,
+  importCurrentTargetWords,
   completeRecruitLevel,
   completeReviewLevel,
   resetKingdomProgress,
@@ -116,6 +117,19 @@ conquerPlanetRoutes.post('/familiarity', async (c) => {
     return c.json(result)
   } catch (err) {
     return c.json({ error: err instanceof Error ? err.message : '设置熟悉度失败' }, 400)
+  }
+})
+
+conquerPlanetRoutes.post('/import-target', async (c) => {
+  const userId = c.get('user').id
+  const body = (await c.req.json().catch(() => ({}))) as { limit?: number; familiarity?: number }
+  const limit = typeof body.limit === 'number' ? body.limit : 30
+  const familiarity = typeof body.familiarity === 'number' ? body.familiarity : 2
+  try {
+    const result = importCurrentTargetWords(getDb(), userId, limit, familiarity)
+    return c.json(result)
+  } catch (err) {
+    return c.json({ error: err instanceof Error ? err.message : '导入失败' }, 400)
   }
 })
 
