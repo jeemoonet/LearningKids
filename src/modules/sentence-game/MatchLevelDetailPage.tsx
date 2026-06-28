@@ -64,7 +64,7 @@ export function MatchLevelDetailPage({
   return (
     <div className="prep-spirit-detail-page">
       <CampLevelDetailHeading
-        backLabel="武士的力量"
+        backLabel="武士之战"
         onBack={onBack}
         title={title}
         summary={summary}

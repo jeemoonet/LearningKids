@@ -16,6 +16,8 @@ export interface GrammarResultPayload {
   levelUp: boolean
 }
 
+const MAGIC_REWARD_PER_PASS = 3
+
 interface GrammarRow {
   familiarity: number
   pass_count: number
@@ -71,10 +73,10 @@ export function submitGrammarResult(
   let magicGained = 0
 
   if (passed) {
-    magicGained = 1
+    magicGained = MAGIC_REWARD_PER_PASS
     db.prepare(
-      'UPDATE user_profiles SET magic_power = magic_power + 1, updated_at = ? WHERE user_id = ?',
-    ).run(now, userId)
+      'UPDATE user_profiles SET magic_power = magic_power + ?, updated_at = ? WHERE user_id = ?',
+    ).run(MAGIC_REWARD_PER_PASS, now, userId)
 
     if (passCount === 0) {
       familiarity = 3
@@ -203,9 +205,9 @@ export function migrateGrammarProgress(
       passCount = 1
       lastFamGainAt = playedAt
       db.prepare(
-        'UPDATE user_profiles SET magic_power = magic_power + 1, updated_at = ? WHERE user_id = ?',
-      ).run(now, userId)
-      magicAdded += 1
+        'UPDATE user_profiles SET magic_power = magic_power + ?, updated_at = ? WHERE user_id = ?',
+      ).run(MAGIC_REWARD_PER_PASS, now, userId)
+      magicAdded += MAGIC_REWARD_PER_PASS
       db.prepare(
         `INSERT INTO user_grammar_pass_log (id, user_id, skill_id, module, correct_count, total_questions, created_at)
          VALUES (?, ?, ?, ?, ?, ?, ?)`,

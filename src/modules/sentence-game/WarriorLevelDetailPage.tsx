@@ -25,7 +25,7 @@ export function WarriorLevelDetailPage({
   return (
     <div className="prep-spirit-detail-page">
       <CampLevelDetailHeading
-        backLabel="武士的力量"
+        backLabel="武士之战"
         onBack={onBack}
         title={heading.title}
         summary={heading.summary}

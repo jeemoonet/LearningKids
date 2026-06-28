@@ -59,6 +59,32 @@
   white-space: nowrap;
 }
 
+/* 主页面导航：参考训练营左侧导航的玻璃质感 */
+.lk-float-nav--main {
+  background: linear-gradient(160deg, rgba(58, 38, 17, 0.62), rgba(34, 22, 9, 0.74));
+  border: 1.5px solid rgba(231, 190, 93, 0.5);
+  box-shadow:
+    0 8px 20px rgba(18, 10, 3, 0.35),
+    inset 0 1px 0 rgba(255, 245, 220, 0.12);
+  backdrop-filter: blur(9px) saturate(1.05);
+  -webkit-backdrop-filter: blur(9px) saturate(1.05);
+}
+
+.lk-float-nav--main .lk-float-nav__item {
+  color: rgba(246, 234, 208, 0.74);
+}
+
+.lk-float-nav--main .lk-float-nav__item:hover {
+  background: rgba(231, 190, 93, 0.1);
+  color: #f6ead0;
+}
+
+.lk-float-nav--main .lk-float-nav__item.is-active {
+  background: rgba(231, 190, 93, 0.18);
+  border: 1px solid rgba(231, 190, 93, 0.45);
+  color: #f6ead0;
+}
+
 /* 右上角用户栏 */
 .lk-top-right-cluster {
   position: fixed;

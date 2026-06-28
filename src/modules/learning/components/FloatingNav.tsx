@@ -11,7 +11,7 @@ interface FloatingNavProps {
 
 export function FloatingNav({ active, onChange, onOpenGuide, guideActive }: FloatingNavProps) {
   return (
-    <nav className="lk-float-nav" aria-label="主导航">
+    <nav className="lk-float-nav lk-float-nav--main" aria-label="主导航">
       {HUB_NAV_ITEMS.map((item) => (
         <button
           key={item.id}

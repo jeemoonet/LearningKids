@@ -26,12 +26,12 @@ export const TRAINING_CAMP_SECTIONS: TrainingCampSection[] = [
   },
   {
     id: 'warrior',
-    label: '武士的力量',
+    label: '武士之战',
     icon: '⚔️',
     summary: '介绍动词的使用、动词组合与时态变化',
     module: 'sentence',
     tracks: ['tense'],
-    title: '武士的力量',
+    title: '武士之战',
     description: '一般时、完成时与动词形式变化，练就语法直觉',
   },
   {
