@@ -158,6 +158,8 @@ export function MyWordListPage() {
     try {
       const { imported, session: nextSession } = await importTargetWords(30, 2)
       setSession(nextSession)
+      // 导入后统一回到普通库，避免停留在重点单词本视图造成“被导入到重点库”的误解。
+      setFilter('all')
       if (imported === 30) {
         setMessage('成功导入30个')
       } else if (imported > 0) {
