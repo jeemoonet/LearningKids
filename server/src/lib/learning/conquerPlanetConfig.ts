@@ -148,6 +148,48 @@ export const KINGDOM_LEVELS: Record<string, PlanetLevelConfig[]> = {
       seals: 6,
     },
   ],
+  'kingdom-2': [
+    {
+      id: 'recruit-1',
+      kind: 'recruit',
+      name: '麦穗村庄',
+      desc: '说出村民的名字与特点，并完成造句训练，收编饮食类名词入伍',
+      icon: '🌾',
+    },
+    {
+      id: 'recruit-2',
+      kind: 'recruit',
+      name: '果园聚落',
+      desc: '果岭深处的聚落，完成认词与造句即可招募新的义勇',
+      icon: '🍎',
+    },
+    {
+      id: 'review-1',
+      kind: 'review',
+      name: '香料集市',
+      desc: '走散的老兵在集市徘徊，叫出他们的名字才能留住，否则会叛逃',
+      icon: '🧂',
+    },
+    {
+      id: 'review-2',
+      kind: 'review',
+      name: '发酵窖场',
+      desc: '窖场深处回声不断，走散士兵在此徘徊，需及时复习召回',
+      icon: '🫙',
+    },
+    {
+      id: 'boss-1',
+      kind: 'boss',
+      name: '御膳王城',
+      desc: '名词怪兽饕餮锅灵盘踞王城。派出学者(形容词)相生克制，拼写发射击破封印',
+      icon: '🏯',
+      monsterPos: 'noun',
+      monsterName: '饕餮锅灵',
+      bossRecruitCount: 5,
+      bossPreferPos: 'noun',
+      seals: 6,
+    },
+  ],
   'kingdom-3': [
     {
       id: 'recruit-1',

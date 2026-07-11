@@ -181,6 +181,7 @@ const KINGDOM_2_BATTLE_MAP: BattleMapLayoutConfig = {
       y: 78,
       label: '麦穗村庄',
       terrain: 'village',
+      levelId: 'recruit-1',
     },
     'review-2': {
       id: 'review-2',
@@ -188,6 +189,7 @@ const KINGDOM_2_BATTLE_MAP: BattleMapLayoutConfig = {
       y: 67.6,
       label: '发酵窖场',
       terrain: 'valley',
+      levelId: 'review-2',
     },
     'wp-outpost': { id: 'wp-outpost', x: 50.1, y: 70.7, label: '磨坊哨塔', terrain: 'tower' },
     'recruit-2': {
@@ -196,6 +198,7 @@ const KINGDOM_2_BATTLE_MAP: BattleMapLayoutConfig = {
       y: 66,
       label: '果园聚落',
       terrain: 'village',
+      levelId: 'recruit-2',
     },
     'wp-add-2': { id: 'wp-add-2', x: 56.9, y: 61.3, label: '灶火路口', terrain: 'fork' },
     'review-1': {
@@ -204,6 +207,7 @@ const KINGDOM_2_BATTLE_MAP: BattleMapLayoutConfig = {
       y: 56,
       label: '香料集市',
       terrain: 'valley',
+      levelId: 'review-1',
     },
     'wp-add-3': { id: 'wp-add-3', x: 46.8, y: 30.7, label: '石窑关隘', terrain: 'waypoint' },
     'wp-add-1': {
@@ -212,6 +216,7 @@ const KINGDOM_2_BATTLE_MAP: BattleMapLayoutConfig = {
       y: 17.8,
       label: '御膳王城',
       terrain: 'castle',
+      levelId: 'boss-1',
     },
   },
 }

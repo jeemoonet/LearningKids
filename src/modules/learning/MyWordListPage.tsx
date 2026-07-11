@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useConquer } from '../conquer-planet/ConquerContext'
 import { importTargetWords, setPlanetWordFamiliarity } from '../conquer-planet/api'
 import { addToWordbook, fetchWordbookIds, removeFromWordbook } from '../vocab-training/wordbookApi'
+import { speakEnglish } from '../vocab-training/speak'
 import { useEffect } from 'react'
 import type { PartOfSpeech } from '../word-hunter/domain/battle/battleTypes'
 
@@ -104,6 +105,36 @@ export function MyWordListPage() {
     }
   }
 
+  const increaseFamiliarity = async (word: string, currentFamiliarity: number) => {
+    if (busyWord || currentFamiliarity >= 5) return
+    const nextFamiliarity = currentFamiliarity + 1
+    setBusyWord(word)
+    try {
+      const { session: nextSession } = await setPlanetWordFamiliarity(word, nextFamiliarity)
+      setSession(nextSession)
+      setMessage(`已将 ${word} 升为 ${nextFamiliarity} 分熟悉度`)
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : '设置失败，请稍后重试')
+    } finally {
+      setBusyWord(null)
+    }
+  }
+
+  const decreaseFamiliarity = async (word: string, currentFamiliarity: number) => {
+    if (busyWord || currentFamiliarity <= 1) return
+    const nextFamiliarity = currentFamiliarity - 1
+    setBusyWord(word)
+    try {
+      const { session: nextSession } = await setPlanetWordFamiliarity(word, nextFamiliarity)
+      setSession(nextSession)
+      setMessage(`已将 ${word} 降为 ${nextFamiliarity} 分熟悉度`)
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : '设置失败，请稍后重试')
+    } finally {
+      setBusyWord(null)
+    }
+  }
+
   const addCurrentToWordbook = async (wordIdText: string, word: string) => {
     if (busyWord) return
     const wordId = parseWordbookWordId(wordIdText)
@@ -158,13 +189,16 @@ export function MyWordListPage() {
     try {
       const { imported, session: nextSession } = await importTargetWords(30, 2)
       setSession(nextSession)
-      // 导入后统一回到普通库，避免停留在重点单词本视图造成“被导入到重点库”的误解。
-      setFilter('all')
       if (imported === 30) {
+        // 导入词默认熟悉度为 2，切到普通库 2 分便于用户立即看见新增词。
+        setFilter(2)
         setMessage('成功导入30个')
       } else if (imported > 0) {
+        setFilter(2)
         setMessage(`成功导入${imported}个`)
       } else {
+        // 没有新增时回到普通库「全部」，避免停留在重点单词本产生误解。
+        setFilter('all')
         setMessage('当前挑战目标没有可导入的新词')
       }
     } catch (err) {
@@ -189,6 +223,7 @@ export function MyWordListPage() {
           </button>
         </div>
         <p className="lw-wordbook-page__sub">按熟悉度筛选，中文闪卡复习</p>
+        {message ? <p className="lw-wordlist-page__import-msg" aria-live="polite">{message}</p> : null}
       </header>
 
       <div className="lw-mw-wordcards__filters" role="tablist" aria-label="按熟悉度筛选">
@@ -217,13 +252,27 @@ export function MyWordListPage() {
               const wordbookId = parseWordbookWordId(item.wordId)
               const inWordbook = wordbookId ? wordbookIds.has(wordbookId) : false
               const isWordbookFilter = filter === 'wordbook'
+              const isMasteredFilter = filter === 5
               const disabled = Boolean(busyWord) || loadingWordbook
               const flipped = flippedIds.has(item.wordId)
               const nodes = [
                 <article key={item.wordId} className="lw-wordlist-card">
-                  <span className="lw-wordlist-card__fam-tag">{item.familiarity}</span>
                   <button
                     type="button"
+                    className="lw-wordlist-card__fam-tag"
+                    title={item.familiarity >= 5 ? '已是最高熟悉度' : '熟悉度 +1'}
+                    aria-label={`熟悉度加一 ${item.word}（当前 ${item.familiarity} 分）`}
+                    disabled={disabled || item.familiarity >= 5}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      void increaseFamiliarity(item.word, item.familiarity)
+                    }}
+                  >
+                    {item.familiarity}
+                  </button>
+                  <div
+                    role="button"
+                    tabIndex={0}
                     className={`lw-wordlist-card__face-toggle${flipped ? ' is-flipped' : ''}`}
                     onClick={() =>
                       setFlippedIds((prev) => {
@@ -233,39 +282,92 @@ export function MyWordListPage() {
                         return next
                       })
                     }
+                    onKeyDown={(e) => {
+                      if (e.key !== 'Enter' && e.key !== ' ') return
+                      e.preventDefault()
+                      setFlippedIds((prev) => {
+                        const next = new Set(prev)
+                        if (next.has(item.wordId)) next.delete(item.wordId)
+                        else next.add(item.wordId)
+                        return next
+                      })
+                    }}
                     aria-label={`${flipped ? '查看中文面' : '翻到英文面'} ${item.word}`}
                   >
-                    <span className="lw-wordlist-card__flip-inner">
-                      <span className="lw-wordlist-card__flip-face lw-wordlist-card__flip-face--front">
+                    {!flipped ? (
+                      <span className="lw-wordlist-card__face lw-wordlist-card__face--zh">
                         <p className="lw-wordlist-card__zh" title={item.meaning}>
-                          {item.meaning}
+                          {item.meaning || '暂无释义'}
                         </p>
                       </span>
-                      <span className="lw-wordlist-card__flip-face lw-wordlist-card__flip-face--back">
+                    ) : (
+                      <span className="lw-wordlist-card__face lw-wordlist-card__face--en">
                         <span className="lw-wordlist-card__back">
                           <span className="lw-wordlist-card__back-head">
-                            <p className="lw-wordlist-card__en" title={item.word}>
-                              {item.word}
-                            </p>
+                            <span className="lw-wordlist-card__en-row">
+                              <p className="lw-wordlist-card__en" title={item.word}>
+                                {item.word}
+                              </p>
+                              <button
+                                type="button"
+                                className="lw-wordlist-card__speak"
+                                title="播放发音"
+                                aria-label={`播放 ${item.word} 发音`}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  speakEnglish(item.word)
+                                }}
+                              >
+                                🔊
+                              </button>
+                            </span>
                             <p className="lw-wordlist-card__pos">{POS_LABEL[item.partOfSpeech]}</p>
                           </span>
-                          <p className="lw-wordlist-card__zh-back" title={item.meaning}>
-                            {item.meaning}
-                          </p>
+                          <span className="lw-wordlist-card__example">
+                            {item.exampleEn?.trim() ? (
+                              <p className="lw-wordlist-card__example-en" title={item.exampleEn}>
+                                {item.exampleEn.trim()}
+                              </p>
+                            ) : null}
+                            {item.exampleZh?.trim() ? (
+                              <p className="lw-wordlist-card__example-zh" title={item.exampleZh}>
+                                {item.exampleZh.trim()}
+                              </p>
+                            ) : null}
+                            {!item.exampleEn?.trim() && !item.exampleZh?.trim() ? (
+                              <p className="lw-wordlist-card__example-empty">暂无例句</p>
+                            ) : null}
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </button>
+                    )}
+                  </div>
                   <div className="lw-wordlist-card__actions">
                     <button
                       type="button"
                       className="lw-wordlist-card__icon-btn lw-wordlist-card__icon-btn--mastered"
-                      title={isWordbookFilter ? '查看非常熟悉列表' : '我非常熟悉'}
-                      aria-label={isWordbookFilter ? `查看非常熟悉列表 ${item.word}` : `我非常熟悉 ${item.word}`}
+                      title={
+                        isMasteredFilter
+                          ? '降低熟悉度'
+                          : isWordbookFilter
+                            ? '查看非常熟悉列表'
+                            : '我非常熟悉'
+                      }
+                      aria-label={
+                        isMasteredFilter
+                          ? `降低熟悉度 ${item.word}`
+                          : isWordbookFilter
+                            ? `查看非常熟悉列表 ${item.word}`
+                            : `我非常熟悉 ${item.word}`
+                      }
                       disabled={disabled}
-                      onClick={() => void markMastered(item.word)}
+                      onClick={() =>
+                        isMasteredFilter
+                          ? void decreaseFamiliarity(item.word, item.familiarity)
+                          : void markMastered(item.word)
+                      }
                     >
-                      ✓
+                      {isMasteredFilter ? '−' : '✓'}
                     </button>
                     <button
                       type="button"
@@ -297,7 +399,6 @@ export function MyWordListPage() {
         ) : null}
       </div>
 
-      {message ? <p className="lw-mw-wordcards__msg">{message}</p> : null}
     </section>
   )
 }

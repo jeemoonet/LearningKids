@@ -57,7 +57,9 @@ export function MapStepChallenge({
       <div className="cp-step-challenge">
         <div className="cp-step-challenge__panel">
           <p className="cp-step-challenge__title">⚠️ 词量不足</p>
-          <p className="cp-level-empty">完成招募关卡后再来挑战此处试炼。</p>
+          <p className="cp-level-empty">
+            暂无可试炼的单词。请完成招募关卡扩充词库，或将重点单词加入单词本。
+          </p>
           <button type="button" className="cp-btn" onClick={onExit}>
             返回
           </button>

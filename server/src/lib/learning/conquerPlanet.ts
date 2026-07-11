@@ -70,6 +70,8 @@ export interface PlanetSession {
   soldiers: PlanetSoldier[]
   /** 认词/造句干扰项词池（我的库 + 当前学习库抽样） */
   distractorPool: PlanetWordEntry[]
+  /** 重点单词本词池（地图路途/巩固试炼出题来源） */
+  wordbookPool: PlanetWordEntry[]
 }
 
 export interface RecruitLevelPayload {
@@ -282,6 +284,18 @@ function setFamiliarity(
   ).run(userId, word.toLowerCase(), familiarity, now)
 }
 
+function buildWordbookPool(db: DatabaseSync, userId: string): PlanetWordEntry[] {
+  const rows = db
+    .prepare(
+      `SELECT w.* FROM user_wordbook ub
+       INNER JOIN words w ON w.id = ub.word_id
+       WHERE ub.user_id = ?
+       ORDER BY ub.created_at DESC`,
+    )
+    .all(userId) as Array<Record<string, unknown>>
+  return rows.map(rowToPlanetEntry)
+}
+
 function buildDistractorPool(db: DatabaseSync, userId: string, limit = 40): PlanetWordEntry[] {
   const libraryId = getUserLibraryId(db, userId)
   const knownRows = fetchKnownWordRows(db, userId)
@@ -431,6 +445,7 @@ export function buildPlanetSession(db: DatabaseSync, userId: string): PlanetSess
     dueReviewCount,
     soldiers,
     distractorPool: buildDistractorPool(db, userId),
+    wordbookPool: buildWordbookPool(db, userId),
   }
 }
 

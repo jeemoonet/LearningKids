@@ -18,6 +18,22 @@ const LEVEL_NODE_EVENTS_K1: Record<string, string> = {
   'review-2': '森林废墟间迷雾未散，需及时叫出走散士兵的名字。',
 }
 
+const WAYPOINT_EVENTS_K2: Record<string, string> = {
+  start: '炊烟营地灶火正旺，麦香与果香交织，远征军在此整装北上。',
+  'wp-cliff': '禾木小桥横跨溪流，桥下流水映着金色麦浪，是进入炊烟国的第一道关口。',
+  'wp-outpost': '磨坊哨塔扼守要道，风车缓缓转动，指向御膳王城方向。',
+  'wp-add-2': '灶火路口人来马往，麦香大道与果岭小径在此分开，主路继续向王城延伸。',
+  'wp-add-3': '石窑关隘巍然耸立，穿过门洞即可望见御膳王城的塔尖。',
+  'wp-add-1': '御膳王城盘踞山巅，饕餮锅灵的封印就在此间深处。',
+}
+
+const LEVEL_NODE_EVENTS_K2: Record<string, string> = {
+  'recruit-1': '麦穗村庄炊烟袅袅，村民以饮食名词自报家门，等待你的招募。',
+  'recruit-2': '果园聚落红果满枝，新的义勇正在此间聚集。',
+  'review-1': '香料集市人声鼎沸，走散的老兵或许就在摊位间徘徊。',
+  'review-2': '发酵窖场回声不断，需及时叫出走散士兵的名字。',
+}
+
 const WAYPOINT_EVENTS_K3: Record<string, string> = {
   start: '猎手营地篝火在雾中明灭，远征军在此整理弓刃，准备深入西侧永雾林。',
   'wp-cliff': '苔石渡桥横跨暗溪，桥下流水几乎无声，林缘的雾从这里开始变浓。',
@@ -51,16 +67,19 @@ const LEVEL_NODE_EVENTS_K3: Record<string, string> = {
 
 const KINGDOM_WAYPOINT_EVENTS: Record<string, Record<string, string>> = {
   'kingdom-1': WAYPOINT_EVENTS_K1,
+  'kingdom-2': WAYPOINT_EVENTS_K2,
   'kingdom-3': WAYPOINT_EVENTS_K3,
 }
 
 const KINGDOM_LEVEL_NODE_EVENTS: Record<string, Record<string, string>> = {
   'kingdom-1': LEVEL_NODE_EVENTS_K1,
+  'kingdom-2': LEVEL_NODE_EVENTS_K2,
   'kingdom-3': LEVEL_NODE_EVENTS_K3,
 }
 
 const KINGDOM_REGION_LABEL: Record<string, string> = {
   'kingdom-1': '微光村国 · 远征途中',
+  'kingdom-2': '食物炊烟国 · 远征途中',
   'kingdom-3': '迷雾森林国 · 远征途中',
 }
 

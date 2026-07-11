@@ -78,6 +78,8 @@ export interface PlanetSession {
   dueReviewCount: number
   soldiers: PlanetSoldier[]
   distractorPool: PlanetWord[]
+  /** 重点单词本词池（地图路途/巩固试炼出题来源） */
+  wordbookPool: PlanetWord[]
 }
 
 export interface RecruitLevelPayload {
