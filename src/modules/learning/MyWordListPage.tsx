@@ -38,13 +38,6 @@ const POS_LABEL: Record<PartOfSpeech, string> = {
   other: '其他',
 }
 
-function filterExportTitle(filter: FamiliarityFilter): string {
-  const label = FILTERS.find((item) => item.id === filter)?.label ?? '全部'
-  if (filter === 'all') return '我的单词表'
-  if (filter === 'wordbook') return '重点单词本'
-  return `我的单词表·${label}`
-}
-
 function parseWordbookWordId(wordId: string): number | null {
   const matched = /^w_(\d+)$/.exec(wordId)
   if (!matched) return null
@@ -259,8 +252,7 @@ export function MyWordListPage() {
     }
   }
 
-  const exportCurrentList = () =>
-    void exportSoldiersPdf(filteredSoldiers, filterExportTitle(filter))
+  const exportAllList = () => void exportSoldiersPdf(sortedSoldiers, '我的单词表')
 
   const exportUnfamiliarList = () =>
     void exportSoldiersPdf(unfamiliarSoldiers, '不熟悉单词')
@@ -283,11 +275,15 @@ export function MyWordListPage() {
             <button
               type="button"
               className="lw-wordlist-page__export-btn"
-              disabled={exporting || filteredSoldiers.length === 0}
-              title={filteredSoldiers.length === 0 ? '当前筛选下暂无单词' : '导出当前列表为 PDF'}
-              onClick={exportCurrentList}
+              disabled={exporting || sortedSoldiers.length === 0}
+              title={
+                sortedSoldiers.length === 0
+                  ? '暂无单词'
+                  : `导出全部单词（${sortedSoldiers.length} 词）`
+              }
+              onClick={exportAllList}
             >
-              {exporting ? '导出中…' : '导出 PDF'}
+              {exporting ? '导出中…' : '导出全部'}
             </button>
             <button
               type="button"

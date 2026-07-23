@@ -19,12 +19,16 @@ export interface WordExportItem {
 }
 
 const CHROME_PATHS = [
+  process.env.CHROME_PATH,
+  process.env.PUPPETEER_EXECUTABLE_PATH,
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  '/usr/bin/google-chrome-stable',
   '/usr/bin/google-chrome',
   '/usr/bin/chromium',
   '/usr/bin/chromium-browser',
-]
+  '/snap/bin/chromium',
+].filter((path): path is string => Boolean(path && path.trim()))
 
 function escapeHtml(text: string): string {
   return text
@@ -123,7 +127,7 @@ export function buildWordListExportHtml(title: string, words: WordExportItem[]):
     * { box-sizing: border-box; }
     @page { size: A4; margin: 12mm; }
     body {
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "WenQuanYi Micro Hei", sans-serif;
       margin: 24px;
       color: #1a1a1a;
       background: #f7f8fa;
@@ -194,7 +198,10 @@ ${tableBody}
 
 export function htmlToPdf(html: string): Buffer | null {
   const chrome = findChrome()
-  if (!chrome) return null
+  if (!chrome) {
+    console.warn('[word-export] Chrome/Chromium not found; falling back to HTML download')
+    return null
+  }
 
   const stamp = `${Date.now()}-${Math.random().toString(36).slice(2)}`
   const htmlPath = join(tmpdir(), `word-export-${stamp}.html`)
@@ -208,11 +215,12 @@ export function htmlToPdf(html: string): Buffer | null {
       '--headless=new',
       '--disable-gpu',
       '--no-sandbox',
+      '--disable-dev-shm-usage',
       '--no-pdf-header-footer',
       `--print-to-pdf=${pdfPath}`,
-      htmlPath,
+      `file://${htmlPath}`,
     ],
-    { timeout: 120000 },
+    { timeout: 120000, encoding: 'utf8' },
   )
 
   try {
@@ -222,6 +230,11 @@ export function htmlToPdf(html: string): Buffer | null {
   }
 
   if (result.status !== 0 || result.error) {
+    console.warn(
+      '[word-export] Chrome print-to-pdf failed',
+      result.error ? String(result.error) : `status=${result.status}`,
+      String(result.stderr ?? '').slice(0, 300),
+    )
     try {
       unlinkSync(pdfPath)
     } catch {
