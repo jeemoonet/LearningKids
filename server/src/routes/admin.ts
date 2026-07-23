@@ -7,13 +7,7 @@ import { buildBeginnerThemeGroups } from '../lib/buildBeginnerThemeGroups.js'
 import { clearGameGroups, mapWordRow, saveGameGroups } from '../lib/gameGroups.js'
 import { generateAllThemePassages, generateThemePassage } from '../lib/generateThemePassage.js'
 import { regenerateWordContent } from '../lib/regenerateWordContent.js'
-import {
-  buildAttachmentContentDisposition,
-  buildWordListExportHtml,
-  htmlToPdf,
-  queryWordsForExport,
-  sanitizeExportFilename,
-} from '../lib/wordListExport.js'
+import { buildWordListExportResponse, queryWordsForExport } from '../lib/wordListExport.js'
 
 type AppEnv = { Variables: { admin: AdminUser } }
 
@@ -103,36 +97,11 @@ adminRoutes.get('/words/export', (c) => {
 
   const db = getDb()
   const words = queryWordsForExport(db, { q, tierId, libraryId })
-
-  if (words.length === 0) {
+  const response = buildWordListExportResponse(title, words)
+  if (!response) {
     return c.json({ error: '没有可导出的单词' }, 400)
   }
-
-  const exportTitle = `${title}（${words.length} 词）`
-  const html = buildWordListExportHtml(exportTitle, words)
-  const pdf = htmlToPdf(html)
-
-  const datePart = new Date().toISOString().slice(0, 10)
-  const baseName = sanitizeExportFilename(title)
-  const downloadName = `${baseName}-${datePart}.pdf`
-  const disposition = buildAttachmentContentDisposition(downloadName)
-
-  if (pdf) {
-    return new Response(new Uint8Array(pdf), {
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': disposition,
-      },
-    })
-  }
-
-  const htmlName = `${baseName}-${datePart}.html`
-  return new Response(html, {
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Content-Disposition': buildAttachmentContentDisposition(htmlName),
-    },
-  })
+  return response
 })
 
 adminRoutes.get('/vocab/tier-groups', (c) => {

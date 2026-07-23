@@ -13,6 +13,7 @@ export interface LevelIntroContent {
 function kindIcon(kind: PlanetLevelKind): string {
   if (kind === 'boss') return '🏯'
   if (kind === 'review') return '🌫️'
+  if (kind === 'reading') return '📖'
   if (kind === 'forest') return '🌲'
   return '🏘️'
 }
@@ -26,6 +27,18 @@ export function buildRecruitIntro(level: PlanetLevel, villagerCount: number): Le
     body: `你遇到了 ${villagerCount} 位迷失的村民，你想把他们招募到队伍中，但他们要求你必须先认识他们，并完成造句考验，才愿意加入军团。`,
     note: formatLearningMethodsNote('recruit'),
     primaryLabel: '开始招募',
+  }
+}
+
+export function buildReadingIntro(level: PlanetLevel, wordCount: number): LevelIntroContent {
+  const profile = getLevelLearningProfile('reading')
+  return {
+    icon: kindIcon('reading'),
+    title: level.name,
+    location: `${profile.nodeLabel} · ${level.name}`,
+    body: `驿站里有一份阅读材料，将用你当前学习的约 ${wordCount} 个单词生成短文。读完并完成 3 道选择题，答对至少 2 题即可通过。`,
+    note: formatLearningMethodsNote('reading'),
+    primaryLabel: '开始阅读',
   }
 }
 

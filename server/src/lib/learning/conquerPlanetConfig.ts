@@ -1,6 +1,6 @@
 import type { WhPartOfSpeech } from './wordHunter.js'
 
-export type PlanetLevelKind = 'recruit' | 'boss' | 'review' | 'forest'
+export type PlanetLevelKind = 'recruit' | 'boss' | 'review' | 'forest' | 'reading'
 
 export interface PlanetLevelConfig {
   id: string

@@ -1,4 +1,4 @@
-import { apiFetch } from '../../lib/api'
+import { apiDownload, apiFetch } from '../../lib/api'
 
 export interface WordbookItem {
   wordId: number
@@ -7,6 +7,13 @@ export interface WordbookItem {
   exampleEn: string
   exampleZh: string
   createdAt: number
+}
+
+export interface WordbookExportWord {
+  word: string
+  posLabel?: string
+  meaningZh: string
+  exampleEn?: string
 }
 
 export async function fetchWordbook(): Promise<WordbookItem[]> {
@@ -28,4 +35,14 @@ export async function addToWordbook(wordId: number): Promise<void> {
 
 export async function removeFromWordbook(wordId: number): Promise<void> {
   await apiFetch(`/wordbook/${wordId}`, { method: 'DELETE' })
+}
+
+export async function exportWordbookPdf(params: {
+  title: string
+  words: WordbookExportWord[]
+}): Promise<{ blob: Blob; filename: string }> {
+  return apiDownload('/wordbook/export', {
+    method: 'POST',
+    body: JSON.stringify(params),
+  })
 }

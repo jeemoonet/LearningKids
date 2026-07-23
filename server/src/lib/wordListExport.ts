@@ -252,3 +252,34 @@ export function buildAttachmentContentDisposition(filename: string): string {
   const encoded = encodeURIComponent(filename)
   return `attachment; filename="${asciiFallback}"; filename*=UTF-8''${encoded}`
 }
+
+/** 生成 PDF（失败则回退 HTML）下载响应；无词时返回 null，由路由自行 400 */
+export function buildWordListExportResponse(title: string, words: WordExportItem[]): Response | null {
+  if (words.length === 0) return null
+
+  const exportTitle = `${title}（${words.length} 词）`
+  const html = buildWordListExportHtml(exportTitle, words)
+  const pdf = htmlToPdf(html)
+
+  const datePart = new Date().toISOString().slice(0, 10)
+  const baseName = sanitizeExportFilename(title)
+  const downloadName = `${baseName}-${datePart}.pdf`
+  const disposition = buildAttachmentContentDisposition(downloadName)
+
+  if (pdf) {
+    return new Response(new Uint8Array(pdf), {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': disposition,
+      },
+    })
+  }
+
+  const htmlName = `${baseName}-${datePart}.html`
+  return new Response(html, {
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Content-Disposition': buildAttachmentContentDisposition(htmlName),
+    },
+  })
+}

@@ -6,12 +6,14 @@ import { spellFillGame } from './spell-fill'
 import { wordMatchGame } from './word-match'
 import { advVerbPairGame } from './adv-verb-pair'
 import { enemyDuelGame } from './enemy-duel'
+import { readingComprehensionGame } from './reading-comprehension'
 
 let installed = false
 
 const BUILTIN_GAMES: AnyGamePlugin[] = [
   flashcardGame,
   sentenceClozeGame,
+  readingComprehensionGame,
   spellFillGame,
   wordMatchGame,
   enemyDuelGame,
@@ -43,4 +45,5 @@ export { spellFillGame } from './spell-fill'
 export { wordMatchGame } from './word-match'
 export { enemyDuelGame } from './enemy-duel'
 export { advVerbPairGame } from './adv-verb-pair'
+export { readingComprehensionGame } from './reading-comprehension'
 export type { EnemyDuelMeta } from './enemy-duel'

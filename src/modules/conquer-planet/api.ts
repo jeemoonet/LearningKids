@@ -3,6 +3,7 @@ import type {
   BossLevelPayload,
   ForestLevelPayload,
   PlanetSession,
+  ReadingLevelPayload,
   RecruitLevelPayload,
   ReviewLevelPayload,
 } from './types'
@@ -78,6 +79,17 @@ export function completeReviewLevel(levelId: string) {
   )
 }
 
+export function fetchReadingLevel(levelId: string) {
+  return apiFetch<ReadingLevelPayload>(`/conquer-planet/levels/${levelId}/reading`)
+}
+
+export function completeReadingLevel(levelId: string, words: string[]) {
+  return apiFetch<{ session: PlanetSession }>(
+    `/conquer-planet/levels/${levelId}/reading-complete`,
+    { method: 'POST', body: JSON.stringify({ words }) },
+  )
+}
+
 export function fetchForestLevel(levelId: string) {
   return apiFetch<ForestLevelPayload>(`/conquer-planet/levels/${levelId}/forest`)
 }
@@ -104,6 +116,47 @@ export function aiNameMapNodes(
     '/conquer-planet/map-nodes/ai-name',
     { method: 'POST', body: JSON.stringify({ kingdomName, nodes }) },
   )
+}
+
+export interface WordlistReadingQuestionOption {
+  id: number
+  label: string
+  isCorrect: boolean
+}
+
+export interface WordlistReadingQuestion {
+  id: number
+  stem: string
+  options: WordlistReadingQuestionOption[]
+}
+
+export interface WordlistReadingPayload {
+  passageEn: string
+  passageZh: string
+  wordCount: number
+  usedWords: string[]
+  questions: WordlistReadingQuestion[]
+  source: 'llm' | 'fallback'
+  meta?: {
+    provider: 'qwen' | 'deepseek'
+    providerLabel: string
+    attemptIndex: number
+  }
+}
+
+export function generateWordlistReading(
+  words: Array<{
+    word: string
+    meaning: string
+    pos?: string
+    exampleEn?: string
+    exampleZh?: string
+  }>,
+) {
+  return apiFetch<{ reading: WordlistReadingPayload }>('/conquer-planet/wordlist-reading/generate', {
+    method: 'POST',
+    body: JSON.stringify({ words }),
+  })
 }
 
 export function aiNameSingleMapNode(

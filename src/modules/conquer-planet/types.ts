@@ -1,7 +1,7 @@
 import type { PartOfSpeech } from '../word-hunter/domain/battle/battleTypes'
 import { RACE_LABEL } from '../word-hunter/domain/element/Element'
 
-export type PlanetLevelKind = 'recruit' | 'boss' | 'review' | 'forest'
+export type PlanetLevelKind = 'recruit' | 'boss' | 'review' | 'forest' | 'reading'
 
 export interface PlanetLevel {
   id: string
@@ -98,6 +98,12 @@ export interface BossLevelPayload {
 export interface ReviewLevelPayload {
   level: PlanetLevel
   queue: PlanetWord[]
+  distractorPool: PlanetWord[]
+}
+
+export interface ReadingLevelPayload {
+  level: PlanetLevel
+  wordPool: PlanetWord[]
   distractorPool: PlanetWord[]
 }
 

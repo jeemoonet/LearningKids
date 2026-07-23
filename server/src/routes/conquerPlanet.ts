@@ -6,10 +6,12 @@ import { applyPlanetReview,
   buildBossLevel,
   buildForestLevel,
   buildPlanetSession,
+  buildReadingLevel,
   buildRecruitLevel,
   buildReviewLevel,
   completeBossLevel,
   completeForestLevel,
+  completeReadingLevel,
   importCurrentTargetWords,
   completeRecruitLevel,
   completeReviewLevel,
@@ -18,6 +20,8 @@ import { applyPlanetReview,
 import { applyBossMicroGain, setPlanetWordFamiliarity } from '../lib/learning/planetFamiliarity.js'
 import { aiNameMapNodes, aiNameSingleMapNode } from '../lib/learning/mapNodeNaming.js'
 import { buildPlanetConfigPayload } from '../lib/learning/planetKingdomSettings.js'
+import { generateWordlistReading } from '../lib/learning/generateWordlistReading.js'
+import { getKnownWordSet } from '../lib/learning/knownWords.js'
 
 type AppEnv = { Variables: { user: AuthUser } }
 
@@ -144,6 +148,30 @@ conquerPlanetRoutes.post('/levels/:id/review-complete', (c) => {
   }
 })
 
+conquerPlanetRoutes.get('/levels/:id/reading', (c) => {
+  const userId = c.get('user').id
+  const payload = buildReadingLevel(getDb(), userId, c.req.param('id'))
+  if (!payload) return c.json({ error: '关卡不存在' }, 404)
+  return c.json(payload)
+})
+
+conquerPlanetRoutes.post('/levels/:id/reading-complete', async (c) => {
+  const userId = c.get('user').id
+  const levelId = c.req.param('id')
+  const body = (await c.req.json().catch(() => ({}))) as { words?: string[] }
+  try {
+    const session = completeReadingLevel(
+      getDb(),
+      userId,
+      levelId,
+      Array.isArray(body.words) ? body.words : undefined,
+    )
+    return c.json({ session })
+  } catch (err) {
+    return c.json({ error: err instanceof Error ? err.message : '保存失败' }, 400)
+  }
+})
+
 conquerPlanetRoutes.get('/levels/:id/forest', (c) => {
   const userId = c.get('user').id
   const payload = buildForestLevel(getDb(), userId, c.req.param('id'))
@@ -170,6 +198,39 @@ conquerPlanetRoutes.post('/kingdoms/:kingdomId/reset', (c) => {
     return c.json({ session })
   } catch (err) {
     return c.json({ error: err instanceof Error ? err.message : '重置失败' }, 400)
+  }
+})
+
+conquerPlanetRoutes.post('/wordlist-reading/generate', async (c) => {
+  const userId = c.get('user').id
+  const body = (await c.req.json().catch(() => ({}))) as {
+    words?: unknown
+  }
+
+  const rawWords = Array.isArray(body.words) ? body.words : []
+  const words = rawWords
+    .map((item) => {
+      const row = item as Record<string, unknown>
+      return {
+        word: String(row.word ?? '').trim(),
+        meaning: String(row.meaning ?? '').trim(),
+        pos: row.pos ? String(row.pos).trim() : undefined,
+        exampleEn: row.exampleEn ? String(row.exampleEn).trim() : undefined,
+        exampleZh: row.exampleZh ? String(row.exampleZh).trim() : undefined,
+      }
+    })
+    .filter((item) => item.word && item.meaning)
+
+  if (words.length < 5) {
+    return c.json({ error: '至少需要 5 个单词才能生成阅读短文' }, 400)
+  }
+
+  try {
+    const allowedVocab = getKnownWordSet(getDb(), userId)
+    const reading = await generateWordlistReading(words, allowedVocab)
+    return c.json({ reading })
+  } catch (err) {
+    return c.json({ error: err instanceof Error ? err.message : '生成失败' }, 502)
   }
 })
 

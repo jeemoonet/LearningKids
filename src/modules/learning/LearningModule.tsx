@@ -27,6 +27,7 @@ import {
 import type { TrainingSectionId } from './trainingCampSections'
 import { migrateGrammarProgressOnce } from './migrateGrammarProgress'
 import './learning.css'
+import './readingPassage.css'
 import './training-camp-mc.css'
 
 export type LearningPageName =

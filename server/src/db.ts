@@ -312,6 +312,7 @@ export function getDb(): DatabaseSync {
   migrateAdminSessions(db)
   migrateFreeVocabTables(db)
   migratePlanetKingdomOverrides(db)
+  migratePlanetLevelAssignments(db)
   migrateWordsDropWordGroupsFk(db)
   migratePlayerStatsTables(db)
   seedDefaultLibraries(db)
@@ -458,6 +459,21 @@ function migrateWordsDropWordGroupsFk(db: DatabaseSync): void {
     ALTER TABLE words_new RENAME TO words;
   `)
   db.exec('PRAGMA foreign_keys = ON')
+}
+
+function migratePlanetLevelAssignments(db: DatabaseSync): void {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS user_planet_level_assignments (
+      user_id TEXT NOT NULL,
+      level_id TEXT NOT NULL,
+      assigned_kind TEXT NOT NULL,
+      created_at INTEGER NOT NULL,
+      PRIMARY KEY (user_id, level_id),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    CREATE INDEX IF NOT EXISTS idx_user_planet_level_assignments_user
+      ON user_planet_level_assignments(user_id);
+  `)
 }
 
 function migratePlanetKingdomOverrides(db: DatabaseSync): void {

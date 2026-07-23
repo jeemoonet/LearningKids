@@ -46,6 +46,7 @@ function nodeIcon(level: PlanetLevel): string {
   if (level.kind === 'boss') return '🏯'
   if (level.kind === 'recruit') return '🏘️'
   if (level.kind === 'review') return '🌫️'
+  if (level.kind === 'reading') return '📖'
   if (level.kind === 'forest') return '🌲'
   return level.icon
 }

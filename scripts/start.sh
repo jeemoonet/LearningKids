@@ -3,10 +3,10 @@
 # Start local dev environment on macOS: API server + Vite frontend.
 #
 # Usage:
-#   ./scripts/start-dev.sh              # 当前终端启动（默认，不弹窗）
-#   ./scripts/start-dev.sh --windows    # 新开 Terminal 窗口
-#   ./scripts/start-dev.sh --no-browser
-#   ./scripts/start-dev.sh --skip-port-cleanup
+#   ./scripts/start.sh              # 当前终端启动（默认，不弹窗）
+#   ./scripts/start.sh --windows    # 新开 Terminal 窗口
+#   ./scripts/start.sh --no-browser
+#   ./scripts/start.sh --skip-port-cleanup
 #
 set -euo pipefail
 
@@ -21,7 +21,7 @@ USE_TERMINAL_WINDOWS=false
 
 usage() {
   cat <<'EOF'
-Usage: ./scripts/start-dev.sh [options]
+Usage: ./scripts/start.sh [options]
 
 Options:
   --windows              Open separate Terminal windows (default: run in current terminal)

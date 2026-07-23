@@ -2,12 +2,52 @@ import { Hono } from 'hono'
 import type { AuthUser } from '../auth.js'
 import { requireAuth } from '../auth.js'
 import { getDb } from '../db.js'
+import {
+  buildWordListExportResponse,
+  type WordExportItem,
+} from '../lib/wordListExport.js'
 
 type AppEnv = { Variables: { user: AuthUser } }
+
+const MAX_EXPORT_WORDS = 2000
 
 export const wordbookRoutes = new Hono<AppEnv>()
 
 wordbookRoutes.use('*', requireAuth)
+
+wordbookRoutes.post('/export', async (c) => {
+  const body = (await c.req.json().catch(() => ({}))) as {
+    title?: string
+    words?: unknown
+  }
+
+  const title = typeof body.title === 'string' && body.title.trim() ? body.title.trim() : '我的单词表'
+  const rawWords = Array.isArray(body.words) ? body.words : []
+  if (rawWords.length === 0) {
+    return c.json({ error: '没有可导出的单词' }, 400)
+  }
+  if (rawWords.length > MAX_EXPORT_WORDS) {
+    return c.json({ error: `一次最多导出 ${MAX_EXPORT_WORDS} 词` }, 400)
+  }
+
+  const words: WordExportItem[] = rawWords
+    .map((item) => {
+      const row = item as Record<string, unknown>
+      return {
+        word: String(row.word ?? '').trim(),
+        posLabel: String(row.posLabel ?? '').trim(),
+        meaningZh: String(row.meaningZh ?? row.meaning ?? '').trim(),
+        exampleEn: String(row.exampleEn ?? '').trim(),
+      }
+    })
+    .filter((item) => item.word)
+
+  const response = buildWordListExportResponse(title, words)
+  if (!response) {
+    return c.json({ error: '没有可导出的单词' }, 400)
+  }
+  return response
+})
 
 wordbookRoutes.get('/', (c) => {
   const userId = c.get('user').id

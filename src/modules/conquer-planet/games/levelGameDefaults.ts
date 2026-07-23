@@ -18,6 +18,10 @@ export const DEFAULT_LEVEL_GAME: Record<PlanetLevelKind, LevelGameSpec> = {
     mode: 'fixed',
     steps: [{ gameId: 'flashcard-recognition' }],
   },
+  reading: {
+    mode: 'fixed',
+    steps: [{ gameId: 'reading-comprehension', config: { passScore: 2 } }],
+  },
   boss: {
     mode: 'fixed',
     steps: [{ gameId: 'enemy-duel' }],

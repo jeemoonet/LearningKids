@@ -5,6 +5,7 @@ import type { PlanetLevelKind } from '../types'
 export type LearningMethodId =
   | 'meaning-choice'
   | 'sentence-cloze'
+  | 'reading-comprehension'
   | 'spelling-fire'
   | 'pos-match-battle'
   | 'meaning-dodge'
@@ -30,6 +31,12 @@ export const LEARNING_METHODS: Record<LearningMethodId, LearningMethodDef> = {
     label: '选词填空造句',
     shortLabel: '造句',
     description: '从候选词中选出正确单词，完成例句填空',
+  },
+  'reading-comprehension': {
+    id: 'reading-comprehension',
+    label: '阅读短文',
+    shortLabel: '阅读',
+    description: '用本关单词生成短文，完成 3 道选择题，答对至少 2 题通过',
   },
   'spelling-fire': {
     id: 'spelling-fire',
@@ -97,6 +104,14 @@ export const LEVEL_KIND_LEARNING: Record<PlanetLevelKind, LevelKindLearningProfi
     methodIds: ['pos-match-battle', 'spelling-fire', 'meaning-dodge'],
     enterCta: '进入决战',
     sceneHint: '选相生武士出战 → 拼写发射击破封印 → 怪兽回合认词闪避。',
+  },
+  reading: {
+    kind: 'reading',
+    nodeLabel: '驿站·阅读',
+    teachingGoal: '阅读理解 · 语境应用',
+    methodIds: ['reading-comprehension'],
+    enterCta: '开始阅读',
+    sceneHint: '用当前学习单词生成短文，完成 3 道选择题，答对至少 2 题即可通过。',
   },
   forest: {
     kind: 'forest',

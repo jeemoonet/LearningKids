@@ -9,6 +9,12 @@ import {
   type PlanetLevelConfig,
 } from './conquerPlanetConfig.js'
 import { getEffectiveKingdomConfig, getEffectiveKingdoms } from './planetKingdomSettings.js'
+import {
+  applyKindPresentation,
+  clearLevelAssignments,
+  getAssignedKind,
+  getEffectiveLevel,
+} from './levelKindAssignment.js'
 import { buildKeySlots, type WhKeySlots, type WhPartOfSpeech } from './wordHunter.js'
 
 export interface PlanetWordEntry {
@@ -90,6 +96,12 @@ export interface BossLevelPayload {
 export interface ReviewLevelPayload {
   level: PlanetLevelConfig
   queue: PlanetWordEntry[]
+  distractorPool: PlanetWordEntry[]
+}
+
+export interface ReadingLevelPayload {
+  level: PlanetLevelConfig
+  wordPool: PlanetWordEntry[]
   distractorPool: PlanetWordEntry[]
 }
 
@@ -322,7 +334,11 @@ function isKingdomCleared(levels: PlanetLevelConfig[], conquered: string[]): boo
   return required.length > 0 && required.every((l) => conquered.includes(l.id))
 }
 
-function buildKingdomSummaries(db: DatabaseSync, conquered: string[]): PlanetKingdomSummary[] {
+function buildKingdomSummaries(
+  db: DatabaseSync,
+  userId: string,
+  conquered: string[],
+): PlanetKingdomSummary[] {
   let prevCleared = true
   const summaries: PlanetKingdomSummary[] = []
 
@@ -346,7 +362,11 @@ function buildKingdomSummaries(db: DatabaseSync, conquered: string[]): PlanetKin
       status,
       levelsTotal: levels.length,
       levelsDone,
-      levels: levels.map((l) => ({ ...l, done: conquered.includes(l.id) })),
+      levels: levels.map((l) => {
+        const kind = getAssignedKind(db, userId, l)
+        const effective = applyKindPresentation(l, kind)
+        return { ...effective, done: conquered.includes(l.id) }
+      }),
     })
 
     prevCleared = cleared
@@ -418,7 +438,7 @@ export function buildPlanetSession(db: DatabaseSync, userId: string): PlanetSess
     if (s.familiarity <= DUE_THRESHOLD) dueReviewCount += 1
   }
 
-  const kingdoms = buildKingdomSummaries(db, conquered)
+  const kingdoms = buildKingdomSummaries(db, userId, conquered)
   const activeKingdomId = resolveActiveKingdomId(kingdoms)
   const activeKingdom = kingdoms.find((k) => k.id === activeKingdomId) ?? kingdoms[0]
   const baseKingdom = getKingdom(activeKingdomId)
@@ -454,7 +474,7 @@ export function buildRecruitLevel(
   userId: string,
   levelId: string,
 ): RecruitLevelPayload | null {
-  const level = getPlanetLevel(levelId)
+  const level = getEffectiveLevel(db, userId, levelId)
   if (!level || level.kind !== 'recruit') return null
 
   const knownSet = getKnownWordSet(db, userId)
@@ -505,7 +525,7 @@ export function completeRecruitLevel(
   levelId: string,
   words: string[],
 ): { added: number; session: PlanetSession } {
-  const level = getPlanetLevel(levelId)
+  const level = getEffectiveLevel(db, userId, levelId)
   if (!level || level.kind !== 'recruit') throw new Error('关卡不存在')
 
   const normalized = [...new Set(words.map((w) => w.trim().toLowerCase()).filter(Boolean))]
@@ -599,7 +619,7 @@ export function buildReviewLevel(
   userId: string,
   levelId: string,
 ): ReviewLevelPayload | null {
-  const level = getPlanetLevel(levelId)
+  const level = getEffectiveLevel(db, userId, levelId)
   if (!level || level.kind !== 'review') return null
 
   ensureFamiliarityRows(db, userId)
@@ -677,6 +697,80 @@ export function buildReviewLevel(
   }
 }
 
+function buildReadingWordPool(db: DatabaseSync, userId: string): PlanetWordEntry[] {
+  const wordbook = buildWordbookPool(db, userId)
+  if (wordbook.length >= 5) return wordbook
+
+  ensureFamiliarityRows(db, userId)
+  const famMap = getFamiliarityMap(db, userId)
+  const knownRows = fetchKnownWordRows(db, userId)
+  const seen = new Set<string>()
+  const pool: PlanetWordEntry[] = []
+
+  for (const row of knownRows) {
+    const entry = rowToPlanetEntry(row)
+    const key = entry.word.toLowerCase()
+    if (seen.has(key)) continue
+    if ((famMap.get(key) ?? 3) >= FAMILIARITY_MAX) continue
+    seen.add(key)
+    pool.push(entry)
+  }
+
+  if (pool.length >= 5) return pool
+
+  for (const entry of buildDistractorPool(db, userId)) {
+    const key = entry.word.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    pool.push(entry)
+    if (pool.length >= 20) break
+  }
+
+  return pool
+}
+
+export function buildReadingLevel(
+  db: DatabaseSync,
+  userId: string,
+  levelId: string,
+): ReadingLevelPayload | null {
+  const level = getEffectiveLevel(db, userId, levelId)
+  if (!level || level.kind !== 'reading') return null
+
+  return {
+    level,
+    wordPool: buildReadingWordPool(db, userId),
+    distractorPool: buildDistractorPool(db, userId),
+  }
+}
+
+export function completeReadingLevel(
+  db: DatabaseSync,
+  userId: string,
+  levelId: string,
+  words?: string[],
+): PlanetSession {
+  const level = getEffectiveLevel(db, userId, levelId)
+  if (!level || level.kind !== 'reading') throw new Error('关卡不存在')
+
+  ensureFamiliarityRows(db, userId)
+  const famMap = getFamiliarityMap(db, userId)
+  const now = Date.now()
+  for (const raw of words ?? []) {
+    const key = raw.trim().toLowerCase()
+    if (!key) continue
+    const fam = famMap.get(key) ?? 3
+    if (fam >= FAMILIARITY_MAX) continue
+    setFamiliarity(db, userId, key, fam + 1)
+    db.prepare(
+      `UPDATE user_planet_familiarity SET last_reviewed_at = ? WHERE user_id = ? AND word = ?`,
+    ).run(now, userId, key)
+  }
+
+  markLevelDone(db, userId, levelId)
+  return buildPlanetSession(db, userId)
+}
+
 export function applyPlanetReview(
   db: DatabaseSync,
   userId: string,
@@ -713,7 +807,7 @@ export function completeReviewLevel(
   userId: string,
   levelId: string,
 ): PlanetSession {
-  const level = getPlanetLevel(levelId)
+  const level = getEffectiveLevel(db, userId, levelId)
   if (!level || level.kind !== 'review') throw new Error('关卡不存在')
   markLevelDone(db, userId, levelId)
   return buildPlanetSession(db, userId)
@@ -811,7 +905,7 @@ export interface PlanetProgressSummary {
 /** 轻量进度摘要，供「我的小伙伴」等社交排行使用 */
 export function getPlanetProgressSummary(db: DatabaseSync, userId: string): PlanetProgressSummary {
   const conquered = getConqueredLevels(db, userId)
-  const kingdoms = buildKingdomSummaries(db, conquered)
+  const kingdoms = buildKingdomSummaries(db, userId, conquered)
   const activeKingdomId = resolveActiveKingdomId(kingdoms)
   const activeKingdom = kingdoms.find((k) => k.id === activeKingdomId)
   const baseKingdom = getKingdom(activeKingdomId)
@@ -840,6 +934,7 @@ export function resetKingdomProgress(
     db.prepare(
       `DELETE FROM user_planet_progress WHERE user_id = ? AND level_id IN (${placeholders})`,
     ).run(userId, ...levelIds)
+    clearLevelAssignments(db, userId, levelIds)
   }
 
   return buildPlanetSession(db, userId)

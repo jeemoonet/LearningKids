@@ -1,6 +1,7 @@
 import {
   completeBossLevel,
   completeForestLevel,
+  completeReadingLevel,
   completeRecruitLevel,
   completeReviewLevel,
   submitPlanetReview,
@@ -30,6 +31,8 @@ export interface SettlementOutcome {
   recruited?: string[]
   /** 复习：留下 / 叛逃 */
   reviewed?: { kept: string[]; deserted: string[] }
+  /** 阅读：巩固的词 */
+  practicedWords?: string[]
 }
 
 /**
@@ -111,6 +114,16 @@ export async function settleLevel(
         kind,
         session,
         summary: `迷林试炼通过，成功配对 ${correctWords.length} 组动词`,
+      }
+    }
+    case 'reading': {
+      const { session } = await completeReadingLevel(levelId, correctWords)
+      recordRoadbook(session, levelId, correctWords, previousSession)
+      return {
+        kind,
+        session,
+        practicedWords: correctWords,
+        summary: `阅读通过，巩固了 ${correctWords.length} 个学习单词`,
       }
     }
     default: {
